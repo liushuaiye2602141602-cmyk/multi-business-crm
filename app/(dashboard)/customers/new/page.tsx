@@ -1,0 +1,18 @@
+import prisma from "@/lib/prisma";
+import CustomerForm from "@/components/CustomerForm";
+import { createCustomer } from "../actions";
+
+export default async function NewCustomerPage() {
+  const businessLines = await prisma.businessLine.findMany({ orderBy: { name: "asc" } });
+
+  return (
+    <div className="max-w-4xl">
+      <h1 className="text-2xl font-bold mb-6">新增客户</h1>
+      <CustomerForm
+        businessLines={businessLines}
+        action={createCustomer}
+        submitLabel="创建"
+      />
+    </div>
+  );
+}
