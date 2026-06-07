@@ -19,10 +19,13 @@ export default async function WorkbenchPage() {
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
   const [
     todayTasks, overdueTasks, recentLeads,
     waitingFeedbackQuotes, activeProjects, recentFollowUps,
     recentAIAnalyses, todayWebhookSuccess, recentWebhookLogs,
+    noFollowUpCustomers,
   ] = await Promise.all([
     prisma.task.findMany({
       where: { status: { in: ["PENDING", "IN_PROGRESS"] }, dueDate: { gte: todayStart, lte: todayEnd } },
@@ -70,6 +73,20 @@ export default async function WorkbenchPage() {
       where: { createdAt: { gte: todayStart, lte: todayEnd } },
       orderBy: { createdAt: "desc" },
       take: 5,
+    }),
+    // 7天未跟进的客户
+    prisma.customer.findMany({
+      where: {
+        customerStatus: { in: ["ACTIVE", "POTENTIAL"] },
+        followUps: {
+          none: {
+            followUpDate: { gte: sevenDaysAgo },
+          },
+        },
+      },
+      orderBy: { updatedAt: "asc" },
+      take: 5,
+      include: { businessLine: true },
     }),
   ]);
 
@@ -369,6 +386,39 @@ export default async function WorkbenchPage() {
           )}
         </Card>
       </div>
+
+      {/* 7天未跟进客户 */}
+      {noFollowUpCustomers.length > 0 && (
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+              <Clock size={18} className="text-yellow-500" />
+              7天未跟进客户
+              <span className="ml-2 px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">
+                {noFollowUpCustomers.length}
+              </span>
+            </h2>
+            <Link href="/customers" className="text-sm text-blue-600 hover:underline flex items-center gap-1">
+              查看全部 <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {noFollowUpCustomers.map((customer) => (
+              <div key={customer.id} className="p-3 rounded-lg bg-yellow-50 border border-yellow-100">
+                <Link href={`/customers/${customer.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-600 block">
+                  {customer.company}
+                </Link>
+                <p className="text-xs text-gray-500 mt-1">
+                  {customer.country || "-"} · {customer.businessLine.name}
+                </p>
+                <Link href={`/follow-ups/new?customerId=${customer.id}`} className="text-xs text-blue-600 hover:underline mt-2 inline-block">
+                  + 新建跟进
+                </Link>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
 
       {/* 智能辅助和外部接入 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
