@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X } from "lucide-react";
+import { Search, X, SlidersHorizontal } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -53,10 +53,10 @@ export default function SearchFilterBar({
   const hasActiveFilters = search || Object.values(filterValues).some((v) => v);
 
   return (
-    <div className="bg-white rounded-lg border p-4 mb-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 mb-5">
       <div className="flex flex-wrap items-center gap-3">
         {/* 搜索框 */}
-        <div className="relative flex-1 min-w-[200px]">
+        <div className="relative flex-1 min-w-[240px]">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
@@ -66,7 +66,7 @@ export default function SearchFilterBar({
               if (e.key === "Enter") applyFilters();
             }}
             placeholder={searchPlaceholder}
-            className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full h-10 pl-9 pr-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
 
@@ -80,7 +80,7 @@ export default function SearchFilterBar({
               setFilterValues(newFilters);
               applyFilters(undefined, newFilters);
             }}
-            className="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="h-10 border border-gray-300 rounded-lg px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white"
           >
             <option value="">{filter.label}</option>
             {filter.options.map((opt) => (
@@ -95,7 +95,7 @@ export default function SearchFilterBar({
         <button
           onClick={() => applyFilters()}
           disabled={isPending}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors disabled:opacity-50"
+          className="h-10 bg-blue-600 text-white px-5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
         >
           搜索
         </button>
@@ -105,7 +105,7 @@ export default function SearchFilterBar({
           <button
             onClick={resetFilters}
             disabled={isPending}
-            className="flex items-center gap-1 text-gray-500 px-3 py-2 rounded-lg text-sm hover:bg-gray-100 transition-colors"
+            className="h-10 flex items-center gap-1.5 text-gray-500 px-3 rounded-lg text-sm hover:bg-gray-100 transition-colors border border-gray-200"
           >
             <X size={14} />
             重置

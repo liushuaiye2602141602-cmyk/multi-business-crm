@@ -5,19 +5,19 @@ interface StatusBadgeProps {
 }
 
 const variantStyles: Record<string, string> = {
-  default: "bg-gray-100 text-gray-700",
-  success: "bg-green-100 text-green-700",
-  warning: "bg-yellow-100 text-yellow-700",
-  danger: "bg-red-100 text-red-700",
-  info: "bg-blue-100 text-blue-700",
-  purple: "bg-purple-100 text-purple-700",
+  default: "bg-gray-100 text-gray-700 border border-gray-200",
+  success: "bg-green-50 text-green-700 border border-green-200",
+  warning: "bg-yellow-50 text-yellow-700 border border-yellow-200",
+  danger: "bg-red-50 text-red-700 border border-red-200",
+  info: "bg-blue-50 text-blue-700 border border-blue-200",
+  purple: "bg-purple-50 text-purple-700 border border-purple-200",
 };
 
 export default function StatusBadge({ label, variant = "default", size = "sm" }: StatusBadgeProps) {
   return (
     <span
-      className={`inline-flex items-center rounded-full font-medium ${
-        size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm"
+      className={`inline-flex items-center rounded-full font-medium whitespace-nowrap ${
+        size === "sm" ? "px-2 py-0.5 text-xs" : "px-2.5 py-1 text-sm"
       } ${variantStyles[variant]}`}
     >
       {label}
@@ -26,8 +26,8 @@ export default function StatusBadge({ label, variant = "default", size = "sm" }:
 }
 
 // 状态颜色映射工具函数
-export function getLeadStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getLeadStatusVariant(status: string): "info" | "purple" | "success" | "danger" | "default" {
+  const map: Record<string, "info" | "purple" | "success" | "danger" | "default"> = {
     NEW: "info",
     CONTACTED: "purple",
     REQUIREMENT_CONFIRMING: "info",
@@ -41,8 +41,8 @@ export function getLeadStatusVariant(status: string): string {
   return map[status] || "default";
 }
 
-export function getLeadGradeVariant(grade: string): string {
-  const map: Record<string, string> = {
+export function getLeadGradeVariant(grade: string): "success" | "info" | "warning" | "default" {
+  const map: Record<string, "success" | "info" | "warning" | "default"> = {
     A: "success",
     B: "info",
     C: "warning",
@@ -51,8 +51,8 @@ export function getLeadGradeVariant(grade: string): string {
   return map[grade] || "default";
 }
 
-export function getProjectStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getProjectStatusVariant(status: string): "info" | "purple" | "warning" | "success" | "danger" | "default" {
+  const map: Record<string, "info" | "purple" | "warning" | "success" | "danger" | "default"> = {
     REQUIREMENT_CONFIRMING: "info",
     QUOTING: "purple",
     SAMPLE_TESTING: "warning",
@@ -65,8 +65,8 @@ export function getProjectStatusVariant(status: string): string {
   return map[status] || "default";
 }
 
-export function getQuoteStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getQuoteStatusVariant(status: string): "default" | "info" | "warning" | "purple" | "success" | "danger" {
+  const map: Record<string, "default" | "info" | "warning" | "purple" | "success" | "danger"> = {
     DRAFT: "default",
     SENT: "info",
     WAITING_FEEDBACK: "warning",
@@ -78,8 +78,8 @@ export function getQuoteStatusVariant(status: string): string {
   return map[status] || "default";
 }
 
-export function getTaskStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getTaskStatusVariant(status: string): "info" | "warning" | "success" | "default" {
+  const map: Record<string, "info" | "warning" | "success" | "default"> = {
     PENDING: "info",
     IN_PROGRESS: "warning",
     COMPLETED: "success",
@@ -88,8 +88,8 @@ export function getTaskStatusVariant(status: string): string {
   return map[status] || "default";
 }
 
-export function getTaskPriorityVariant(priority: string): string {
-  const map: Record<string, string> = {
+export function getTaskPriorityVariant(priority: string): "default" | "info" | "warning" | "danger" {
+  const map: Record<string, "default" | "info" | "warning" | "danger"> = {
     LOW: "default",
     MEDIUM: "info",
     HIGH: "warning",
@@ -98,8 +98,8 @@ export function getTaskPriorityVariant(priority: string): string {
   return map[priority] || "default";
 }
 
-export function getWebhookStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getWebhookStatusVariant(status: string): "success" | "danger" | "warning" | "default" {
+  const map: Record<string, "success" | "danger" | "warning" | "default"> = {
     SUCCESS: "success",
     FAILED: "danger",
     UNAUTHORIZED: "danger",
@@ -109,8 +109,8 @@ export function getWebhookStatusVariant(status: string): string {
   return map[status] || "default";
 }
 
-export function getCustomerStatusVariant(status: string): string {
-  const map: Record<string, string> = {
+export function getCustomerStatusVariant(status: string): "success" | "info" | "default" | "danger" {
+  const map: Record<string, "success" | "info" | "default" | "danger"> = {
     ACTIVE: "success",
     POTENTIAL: "info",
     INACTIVE: "default",

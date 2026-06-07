@@ -1,12 +1,14 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { Eye, Pencil, Download } from "lucide-react";
+import { Eye, Pencil, Plus, Download } from "lucide-react";
 import { deleteCustomer } from "./actions";
 import { CustomerStatusLabel, CustomerTypeLabel, LeadSourceLabel, LeadGradeLabel } from "@/lib/enums";
 import { formatDate } from "@/lib/format";
+import { getCustomerStatusVariant, getLeadGradeVariant } from "@/components/ui/StatusBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import PageHeader from "@/components/PageHeader";
-import Badge from "@/components/Badge";
-import EmptyState from "@/components/EmptyState";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
 import ConfirmDeleteButton from "@/components/ConfirmDeleteButton";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import CsvImportButton from "@/components/CsvImportButton";
@@ -24,7 +26,6 @@ export default async function CustomersPage({
   const customerType = typeof params.customerType === "string" ? params.customerType : "";
   const customerStatus = typeof params.customerStatus === "string" ? params.customerStatus : "";
   const source = typeof params.source === "string" ? params.source : "";
-  const country = typeof params.country === "string" ? params.country : "";
 
   const where: Record<string, unknown> = {};
   if (search) {
@@ -41,7 +42,6 @@ export default async function CustomersPage({
   if (customerType) where.customerType = customerType;
   if (customerStatus) where.customerStatus = customerStatus;
   if (source) where.source = source;
-  if (country) where.country = { contains: country, mode: "insensitive" };
 
   const [customers, businessLines] = await Promise.all([
     prisma.customer.findMany({
@@ -52,29 +52,27 @@ export default async function CustomersPage({
     prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
   ]);
 
-  const hasFilters = search || businessLineId || customerType || customerStatus || source || country;
+  const hasFilters = search || businessLineId || customerType || customerStatus || source;
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">客户管理</h1>
-        <div className="flex items-center gap-3">
-          <CsvImportButton importUrl="/api/import/customers" label="导入客户 CSV" />
-          <a
-            href="/api/export/customers"
-            className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            <Download size={16} />
-            导出 CSV
-          </a>
-          <Link
-            href="/customers/new"
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            新增客户
-          </Link>
-        </div>
-      </div>
+      <PageHeader
+        title="客户库"
+        description="沉淀有效客户资料，查看客户项目、跟进、报价和 AI 复盘"
+        actions={
+          <>
+            <CsvImportButton importUrl="/api/import/customers" label="导入 CSV" />
+            <a href="/api/export/customers" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
+              <Download size={16} />
+              导出 CSV
+            </a>
+            <Link href="/customers/new" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+              <Plus size={16} />
+              新增客户
+            </Link>
+          </>
+        }
+      />
 
       <SearchFilterBar
         searchPlaceholder="搜索公司、联系人、国家、邮箱、WhatsApp..."
@@ -88,67 +86,69 @@ export default async function CustomersPage({
         defaultFilters={{ businessLineId, customerType, customerStatus, source }}
       />
 
-      <div className="bg-white rounded-lg border overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b bg-gray-50">
-              <th className="text-left py-3 px-4 font-medium text-gray-600">公司</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">联系人</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">国家</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">业务线</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">类型</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">状态</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">等级</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">项目数</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">创建时间</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {customers.map((customer) => (
-              <tr key={customer.id} className="border-b last:border-0 hover:bg-gray-50">
-                <td className="py-3 px-4 font-medium">{customer.company}</td>
-                <td className="py-3 px-4">{customer.contactName}</td>
-                <td className="py-3 px-4">{customer.country || "-"}</td>
-                <td className="py-3 px-4">{customer.businessLine.name}</td>
-                <td className="py-3 px-4">{CustomerTypeLabel[customer.customerType] || customer.customerType}</td>
-                <td className="py-3 px-4">
-                  <Badge label={CustomerStatusLabel[customer.customerStatus] || customer.customerStatus}
-                    className={CustomerStatusLabel[customer.customerStatus] === "活跃" ? "bg-green-100 text-green-700" : CustomerStatusLabel[customer.customerStatus] === "潜在" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-700"} />
-                </td>
-                <td className="py-3 px-4">
-                  <Badge label={LeadGradeLabel[customer.leadGrade] || customer.leadGrade}
-                    className={customer.leadGrade === "A" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"} />
-                </td>
-                <td className="py-3 px-4">{customer._count.projects}</td>
-                <td className="py-3 px-4 text-gray-500">{formatDate(customer.createdAt)}</td>
-                <td className="py-3 px-4">
-                  <div className="flex items-center gap-1">
-                    <Link href={`/customers/${customer.id}`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Eye size={16} />
-                    </Link>
-                    <Link href={`/customers/${customer.id}/edit`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Pencil size={16} />
-                    </Link>
-                    <ConfirmDeleteButton action={async () => { "use server"; await deleteCustomer(customer.id); }} />
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {customers.length === 0 && (
-              <tr>
-                <td colSpan={10}>
-                  <EmptyState
-                    message={hasFilters ? "没有找到匹配的客户，请调整筛选条件" : "暂无客户，请点击右上角新增客户开始记录"}
-                    actionLabel={hasFilters ? undefined : "新增客户"}
-                    actionHref={hasFilters ? undefined : "/customers/new"}
-                  />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Card padding="none">
+        {customers.length === 0 ? (
+          <EmptyState
+            message={hasFilters ? "没有找到匹配的客户" : "暂无客户"}
+            description={hasFilters ? "请调整筛选条件" : "点击右上角新增客户开始记录"}
+            actionLabel={hasFilters ? undefined : "新增客户"}
+            actionHref={hasFilters ? undefined : "/customers/new"}
+          />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">公司</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">联系人</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">国家</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">业务线</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">类型</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">状态</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">等级</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">项目数</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">创建时间</th>
+                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {customers.map((customer) => (
+                  <tr key={customer.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4">
+                      <Link href={`/customers/${customer.id}`} className="font-medium text-gray-900 hover:text-blue-600">
+                        {customer.company}
+                      </Link>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600">{customer.contactName}</td>
+                    <td className="py-3 px-4 text-gray-600">{customer.country || "-"}</td>
+                    <td className="py-3 px-4 text-gray-600">{customer.businessLine.name}</td>
+                    <td className="py-3 px-4 text-gray-600">{CustomerTypeLabel[customer.customerType] || customer.customerType}</td>
+                    <td className="py-3 px-4">
+                      <StatusBadge label={CustomerStatusLabel[customer.customerStatus] || customer.customerStatus} variant={getCustomerStatusVariant(customer.customerStatus)} />
+                    </td>
+                    <td className="py-3 px-4">
+                      <StatusBadge label={LeadGradeLabel[customer.leadGrade] || customer.leadGrade} variant={getLeadGradeVariant(customer.leadGrade)} />
+                    </td>
+                    <td className="py-3 px-4 text-gray-600">{customer._count.projects}</td>
+                    <td className="py-3 px-4 text-gray-500">{formatDate(customer.createdAt)}</td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center justify-end gap-1">
+                        <Link href={`/customers/${customer.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Eye size={16} />
+                        </Link>
+                        <Link href={`/customers/${customer.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Pencil size={16} />
+                        </Link>
+                        <ConfirmDeleteButton action={async () => { "use server"; await deleteCustomer(customer.id); }} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
     </div>
   );
 }

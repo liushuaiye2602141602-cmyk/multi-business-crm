@@ -9,20 +9,19 @@ interface Column {
 interface DataTableProps {
   columns: Column[];
   children: ReactNode;
-  emptyMessage?: string;
 }
 
-export default function DataTable({ columns, children, emptyMessage = "暂无数据" }: DataTableProps) {
+export default function DataTable({ columns, children }: DataTableProps) {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
+            <tr className="bg-gray-50/80 border-b border-gray-200">
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`text-left py-3 px-4 font-medium text-gray-600 ${col.className || ""}`}
+                  className={`text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider ${col.className || ""}`}
                 >
                   {col.label}
                 </th>
@@ -42,7 +41,7 @@ interface TableRowProps {
 }
 
 export function TableRow({ children, className = "" }: TableRowProps) {
-  return <tr className={`hover:bg-gray-50 transition-colors ${className}`}>{children}</tr>;
+  return <tr className={`hover:bg-gray-50/50 transition-colors ${className}`}>{children}</tr>;
 }
 
 interface TableCellProps {
@@ -51,5 +50,5 @@ interface TableCellProps {
 }
 
 export function TableCell({ children, className = "" }: TableCellProps) {
-  return <td className={`py-3 px-4 ${className}`}>{children}</td>;
+  return <td className={`py-3.5 px-4 ${className}`}>{children}</td>;
 }

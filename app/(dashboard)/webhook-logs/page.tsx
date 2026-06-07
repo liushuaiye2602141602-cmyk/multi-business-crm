@@ -3,9 +3,11 @@ import prisma from "@/lib/prisma";
 import { Eye } from "lucide-react";
 import { formatDateTime } from "@/lib/format";
 import { WebhookStatusLabel } from "@/lib/enums";
+import { getWebhookStatusVariant } from "@/components/ui/StatusBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import PageHeader from "@/components/PageHeader";
-import Badge from "@/components/Badge";
-import EmptyState from "@/components/EmptyState";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
 import SearchFilterBar from "@/components/SearchFilterBar";
 
 export const dynamic = "force-dynamic";
@@ -43,7 +45,10 @@ export default async function WebhookLogsPage({
 
   return (
     <div>
-      <PageHeader title="Webhook 日志" />
+      <PageHeader
+        title="Webhook 日志"
+        description="查看所有 Webhook 调用记录"
+      />
 
       <SearchFilterBar
         searchPlaceholder="搜索 sourceCode、错误信息..."
@@ -55,36 +60,35 @@ export default async function WebhookLogsPage({
         defaultFilters={{ status, sourceId }}
       />
 
-      <div className="bg-white rounded-lg border">
+      <Card padding="none">
         {logs.length === 0 ? (
-          <EmptyState message={hasFilters ? "没有找到匹配的日志" : "暂无 Webhook 日志"} />
+          <EmptyState
+            message={hasFilters ? "没有找到匹配的日志" : "暂无 Webhook 日志"}
+            description={hasFilters ? "请调整筛选条件" : "Webhook 调用记录将显示在这里"}
+          />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">时间</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">来源</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">状态</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">创建线索</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">错误信息</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">IP</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">操作</th>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">时间</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">来源</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">状态</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">创建线索</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">错误信息</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">IP</th>
+                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {logs.map((log) => (
-                  <tr key={log.id} className="border-b last:border-0 hover:bg-gray-50">
+                  <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                     <td className="py-3 px-4 text-gray-500 whitespace-nowrap">{formatDateTime(log.createdAt)}</td>
-                    <td className="py-3 px-4 font-mono text-xs">{log.sourceCode || "-"}</td>
+                    <td className="py-3 px-4 text-gray-600 font-mono text-xs">{log.sourceCode || "-"}</td>
                     <td className="py-3 px-4">
-                      <Badge
+                      <StatusBadge
                         label={WebhookStatusLabel[log.status] || log.status}
-                        className={
-                          log.status === "SUCCESS" ? "bg-green-100 text-green-700" :
-                          log.status === "DUPLICATE" ? "bg-yellow-100 text-yellow-700" :
-                          "bg-red-100 text-red-700"
-                        }
+                        variant={getWebhookStatusVariant(log.status)}
                       />
                     </td>
                     <td className="py-3 px-4">
@@ -94,12 +98,14 @@ export default async function WebhookLogsPage({
                         </Link>
                       ) : "-"}
                     </td>
-                    <td className="py-3 px-4 text-red-600 max-w-xs truncate">{log.errorMessage || "-"}</td>
+                    <td className="py-3 px-4 text-red-600 max-w-[200px] truncate">{log.errorMessage || "-"}</td>
                     <td className="py-3 px-4 text-gray-500">{log.ipAddress || "-"}</td>
                     <td className="py-3 px-4">
-                      <Link href={`/webhook-logs/${log.id}`} className="p-1 text-gray-400 hover:text-blue-600">
-                        <Eye size={16} />
-                      </Link>
+                      <div className="flex items-center justify-end">
+                        <Link href={`/webhook-logs/${log.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Eye size={16} />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -107,7 +113,7 @@ export default async function WebhookLogsPage({
             </table>
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 }

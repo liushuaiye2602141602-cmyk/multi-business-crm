@@ -15,12 +15,13 @@ export default function ConfirmDeleteButton({
     <form action={action}>
       <button
         type="submit"
-        className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+        className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
         onClick={(e) => {
           if (!confirm(message)) {
             e.preventDefault();
           }
         }}
+        title="删除"
       >
         <Trash2 size={16} />
       </button>

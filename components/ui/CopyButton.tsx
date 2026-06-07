@@ -1,16 +1,15 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 
 interface CopyButtonProps {
   text: string;
   label?: string;
-  icon?: ReactNode;
   size?: "sm" | "md";
 }
 
-export default function CopyButton({ text, label, icon, size = "sm" }: CopyButtonProps) {
+export default function CopyButton({ text, label, size = "sm" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -33,18 +32,20 @@ export default function CopyButton({ text, label, icon, size = "sm" }: CopyButto
   return (
     <button
       onClick={handleCopy}
-      className={`inline-flex items-center gap-1 text-gray-500 hover:text-blue-600 transition-colors ${
-        size === "sm" ? "text-xs" : "text-sm"
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all duration-150 ${
+        copied
+          ? "bg-green-50 text-green-700 border border-green-200"
+          : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 hover:text-gray-900"
       }`}
     >
       {copied ? (
         <>
-          <Check size={size === "sm" ? 14 : 16} />
-          {label && <span>已复制</span>}
+          <Check size={13} className="text-green-600" />
+          <span>已复制</span>
         </>
       ) : (
         <>
-          {icon || <Copy size={size === "sm" ? 14 : 16} />}
+          <Copy size={13} />
           {label && <span>{label}</span>}
         </>
       )}

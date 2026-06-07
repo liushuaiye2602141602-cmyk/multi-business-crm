@@ -19,15 +19,18 @@ import {
   Webhook,
   ClipboardList,
   BookOpen,
-  Workflow,
-  Map,
-  ListChecks,
+  Home,
+  Search,
+  Upload,
+  Download,
+  Activity,
+  BookMarked,
 } from "lucide-react";
 
 interface NavItem {
   href: string;
   label: string;
-  icon: React.ComponentType<{ size?: number }>;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
 }
 
 interface NavGroup {
@@ -37,23 +40,30 @@ interface NavGroup {
 
 const navGroups: NavGroup[] = [
   {
-    title: "核心 CRM",
+    title: "工作台",
     items: [
+      { href: "/workbench", label: "今日工作台", icon: Home },
       { href: "/dashboard", label: "数据看板", icon: LayoutDashboard },
+      { href: "/search", label: "全局搜索", icon: Search },
+    ],
+  },
+  {
+    title: "客户增长",
+    items: [
       { href: "/leads", label: "线索池", icon: Users },
       { href: "/customers", label: "客户库", icon: UserCheck },
-      { href: "/projects", label: "项目管理", icon: FolderKanban },
+      { href: "/projects", label: "商机项目", icon: FolderKanban },
       { href: "/follow-ups", label: "跟进记录", icon: MessageSquare },
-      { href: "/quotes", label: "报价记录", icon: FileText },
       { href: "/tasks", label: "今日任务", icon: CheckSquare },
     ],
   },
   {
-    title: "业务资料",
+    title: "业务管理",
     items: [
-      { href: "/business-lines", label: "业务线管理", icon: Briefcase },
+      { href: "/quotes", label: "报价记录", icon: FileText },
       { href: "/products", label: "产品目录", icon: Package },
       { href: "/templates", label: "跟进模板", icon: FileEdit },
+      { href: "/business-lines", label: "业务线管理", icon: Briefcase },
     ],
   },
   {
@@ -71,14 +81,15 @@ const navGroups: NavGroup[] = [
       { href: "/webhook-test", label: "Webhook 测试", icon: TestTube },
       { href: "/webhook-logs", label: "Webhook 日志", icon: ClipboardList },
       { href: "/integration-guides", label: "接入指南", icon: BookOpen },
-      { href: "/integration-guides/n8n-templates", label: "n8n 模板", icon: Workflow },
-      { href: "/integration-guides/n8n-debug-checklist", label: "n8n 调试清单", icon: ListChecks },
-      { href: "/integration-guides/lead-field-mapping", label: "字段映射规范", icon: Map },
     ],
   },
   {
-    title: "系统",
+    title: "系统工具",
     items: [
+      { href: "/imports", label: "数据导入", icon: Upload },
+      { href: "/exports", label: "数据导出", icon: Download },
+      { href: "/system-health", label: "系统健康检查", icon: Activity },
+      { href: "/maintenance-guide", label: "维护指南", icon: BookMarked },
       { href: "/activity-logs", label: "操作日志", icon: ClipboardList },
     ],
   },
@@ -88,18 +99,18 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-[260px] bg-white border-r border-gray-200 min-h-screen flex flex-col fixed left-0 top-0 bottom-0">
+    <aside className="w-[260px] bg-white border-r border-gray-200 min-h-screen flex flex-col fixed left-0 top-0 bottom-0 z-30">
       {/* Logo */}
       <div className="p-5 border-b border-gray-200">
-        <h1 className="text-lg font-bold text-gray-900">Multi Business CRM</h1>
-        <p className="text-xs text-gray-500 mt-1">个人多业务外贸系统</p>
+        <h1 className="text-lg font-bold text-gray-900 tracking-tight">Multi Business CRM</h1>
+        <p className="text-xs text-gray-500 mt-0.5">个人多业务外贸 CRM 工作台</p>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         {navGroups.map((group) => (
-          <div key={group.title} className="mb-6">
-            <p className="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+          <div key={group.title} className="mb-5">
+            <p className="px-3 mb-2 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
               {group.title}
             </p>
             <div className="space-y-0.5">
@@ -110,13 +121,13 @@ export default function Sidebar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
                       isActive
-                        ? "bg-blue-50 text-blue-700 font-medium"
+                        ? "bg-blue-50 text-blue-700 font-medium shadow-sm"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
-                    <Icon size={18} />
+                    <Icon size={18} className={isActive ? "text-blue-600" : "text-gray-400"} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -129,7 +140,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center gap-2 text-xs text-gray-500">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <div className="w-2 h-2 bg-green-500 rounded-full shadow-sm" />
           <span>Local / Port 3003</span>
         </div>
       </div>

@@ -3,9 +3,10 @@ import prisma from "@/lib/prisma";
 import { Eye, Trash2 } from "lucide-react";
 import { deleteAIAnalysis } from "./actions";
 import { formatDateTime } from "@/lib/format";
+import StatusBadge from "@/components/ui/StatusBadge";
 import PageHeader from "@/components/PageHeader";
-import Badge from "@/components/Badge";
-import EmptyState from "@/components/EmptyState";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
 import SearchFilterBar from "@/components/SearchFilterBar";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,14 @@ const targetTypeLabels: Record<string, string> = {
   PROJECT: "项目",
   FOLLOW_UP: "跟进",
   TEMPLATE: "模板",
+};
+
+const targetTypeVariants: Record<string, "info" | "success" | "warning" | "purple" | "default"> = {
+  LEAD: "info",
+  CUSTOMER: "success",
+  PROJECT: "purple",
+  FOLLOW_UP: "warning",
+  TEMPLATE: "default",
 };
 
 export default async function AIAnalysesPage({
@@ -49,86 +58,81 @@ export default async function AIAnalysesPage({
 
   const hasFilters = search || targetType || qualificationLevel || intentLevel;
 
-  const qualificationColors: Record<string, string> = {
-    A: "bg-red-100 text-red-700",
-    B: "bg-orange-100 text-orange-700",
-    C: "bg-blue-100 text-blue-700",
-    D: "bg-gray-100 text-gray-700",
-  };
-
-  const intentColors: Record<string, string> = {
-    High: "bg-green-100 text-green-700",
-    Medium: "bg-yellow-100 text-yellow-700",
-    Low: "bg-gray-100 text-gray-700",
-    Unknown: "bg-gray-100 text-gray-700",
-  };
-
   return (
     <div>
-      <PageHeader title="AI 分析记录" />
+      <PageHeader
+        title="AI 分析记录"
+        description="查看所有 AI 分析结果"
+      />
 
       <SearchFilterBar
         searchPlaceholder="搜索标题、摘要、下一步动作..."
         filters={[
           { name: "targetType", label: "对象类型", options: Object.entries(targetTypeLabels).map(([value, label]) => ({ value, label })) },
           { name: "qualificationLevel", label: "客户等级", options: [{ value: "A", label: "A" }, { value: "B", label: "B" }, { value: "C", label: "C" }, { value: "D", label: "D" }] },
-          { name: "intentLevel", label: "意向程度", options: [{ value: "High", label: "High" }, { value: "Medium", label: "Medium" }, { value: "Low", label: "Low" }] },
+          { name: "intentLevel", label: "意向程度", options: [{ value: "High", label: "高" }, { value: "Medium", label: "中" }, { value: "Low", label: "低" }] },
         ]}
         defaultSearch={search}
         defaultFilters={{ targetType, qualificationLevel, intentLevel }}
       />
 
-      <div className="bg-white rounded-lg border">
+      <Card padding="none">
         {analyses.length === 0 ? (
-          <EmptyState message={hasFilters ? "没有找到匹配的分析记录" : "暂无 AI 分析记录，在线索、客户、项目等详情页可使用 AI 分析功能"} />
+          <EmptyState
+            message={hasFilters ? "没有找到匹配的分析记录" : "暂无 AI 分析记录"}
+            description={hasFilters ? "请调整筛选条件" : "在线索、客户、项目等详情页可使用 AI 分析功能"}
+          />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">时间</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">对象类型</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">标题</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">等级</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">意向</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">摘要</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">下一步</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">操作</th>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">时间</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">对象类型</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">标题</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">等级</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">意向</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">摘要</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">下一步</th>
+                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {analyses.map((analysis) => (
-                  <tr key={analysis.id} className="border-b last:border-0 hover:bg-gray-50">
+                  <tr key={analysis.id} className="hover:bg-gray-50 transition-colors">
                     <td className="py-3 px-4 text-gray-500 whitespace-nowrap">{formatDateTime(analysis.createdAt)}</td>
                     <td className="py-3 px-4">
-                      <Badge label={targetTypeLabels[analysis.targetType] || analysis.targetType} />
+                      <StatusBadge
+                        label={targetTypeLabels[analysis.targetType] || analysis.targetType}
+                        variant={targetTypeVariants[analysis.targetType] || "default"}
+                      />
                     </td>
-                    <td className="py-3 px-4 font-medium max-w-[200px] truncate">{analysis.title || "-"}</td>
+                    <td className="py-3 px-4 font-medium text-gray-900 max-w-[200px] truncate">{analysis.title || "-"}</td>
                     <td className="py-3 px-4">
                       {analysis.qualificationLevel ? (
-                        <Badge
+                        <StatusBadge
                           label={analysis.qualificationLevel}
-                          className={qualificationColors[analysis.qualificationLevel] || "bg-gray-100 text-gray-700"}
+                          variant={analysis.qualificationLevel === "A" ? "success" : analysis.qualificationLevel === "B" ? "info" : analysis.qualificationLevel === "C" ? "warning" : "default"}
                         />
                       ) : "-"}
                     </td>
                     <td className="py-3 px-4">
                       {analysis.intentLevel ? (
-                        <Badge
+                        <StatusBadge
                           label={analysis.intentLevel}
-                          className={intentColors[analysis.intentLevel] || "bg-gray-100 text-gray-700"}
+                          variant={analysis.intentLevel === "High" ? "success" : analysis.intentLevel === "Medium" ? "warning" : "default"}
                         />
                       ) : "-"}
                     </td>
                     <td className="py-3 px-4 text-gray-600 max-w-[200px] truncate">{analysis.summary || "-"}</td>
                     <td className="py-3 px-4 text-gray-600 max-w-[200px] truncate">{analysis.nextAction || "-"}</td>
                     <td className="py-3 px-4">
-                      <div className="flex items-center gap-1">
-                        <Link href={`/ai-analyses/${analysis.id}`} className="p-1 text-gray-400 hover:text-blue-600">
+                      <div className="flex items-center justify-end gap-1">
+                        <Link href={`/ai-analyses/${analysis.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
                           <Eye size={16} />
                         </Link>
                         <form action={async () => { "use server"; await deleteAIAnalysis(analysis.id); }}>
-                          <button type="submit" className="p-1 text-gray-400 hover:text-red-600">
+                          <button type="submit" className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                             <Trash2 size={16} />
                           </button>
                         </form>
@@ -140,7 +144,7 @@ export default async function AIAnalysesPage({
             </table>
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 }

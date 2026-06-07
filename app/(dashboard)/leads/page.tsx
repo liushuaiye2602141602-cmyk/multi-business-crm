@@ -1,12 +1,14 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { Eye, Pencil, Download } from "lucide-react";
+import { Eye, Pencil, Plus, Download, Upload } from "lucide-react";
 import { deleteLead } from "./actions";
 import { LeadStatusLabel, LeadTemperatureLabel, LeadSourceLabel, LeadGradeLabel } from "@/lib/enums";
 import { formatDate } from "@/lib/format";
+import { getLeadStatusVariant, getLeadGradeVariant } from "@/components/ui/StatusBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import PageHeader from "@/components/PageHeader";
-import Badge from "@/components/Badge";
-import EmptyState from "@/components/EmptyState";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
 import ConfirmDeleteButton from "@/components/ConfirmDeleteButton";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import CsvImportButton from "@/components/CsvImportButton";
@@ -55,25 +57,23 @@ export default async function LeadsPage({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">线索管理</h1>
-        <div className="flex items-center gap-3">
-          <CsvImportButton importUrl="/api/import/leads" label="导入线索 CSV" />
-          <a
-            href="/api/export/leads"
-            className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            <Download size={16} />
-            导出 CSV
-          </a>
-          <Link
-            href="/leads/new"
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            新增线索
-          </Link>
-        </div>
-      </div>
+      <PageHeader
+        title="线索池"
+        description="管理来自独立站、社媒、Webhook、手动开发和外部系统的潜在客户"
+        actions={
+          <>
+            <CsvImportButton importUrl="/api/import/leads" label="导入 CSV" />
+            <a href="/api/export/leads" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
+              <Download size={16} />
+              导出 CSV
+            </a>
+            <Link href="/leads/new" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+              <Plus size={16} />
+              新增线索
+            </Link>
+          </>
+        }
+      />
 
       <SearchFilterBar
         searchPlaceholder="搜索公司、联系人、国家、邮箱、WhatsApp、产品..."
@@ -87,70 +87,74 @@ export default async function LeadsPage({
         defaultFilters={{ businessLineId, source, grade, status }}
       />
 
-      <div className="bg-white rounded-lg border overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b bg-gray-50">
-              <th className="text-left py-3 px-4 font-medium text-gray-600">公司</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">联系人</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">业务线</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">来源</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">等级</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">状态</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">意向</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">下次跟进</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">创建时间</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((lead) => (
-              <tr key={lead.id} className="border-b last:border-0 hover:bg-gray-50">
-                <td className="py-3 px-4 font-medium">{lead.company}</td>
-                <td className="py-3 px-4">{lead.contactName}</td>
-                <td className="py-3 px-4">{lead.businessLine.name}</td>
-                <td className="py-3 px-4">{LeadSourceLabel[lead.source] || lead.source}</td>
-                <td className="py-3 px-4">
-                  <Badge label={LeadGradeLabel[lead.grade] || lead.grade}
-                    className={lead.grade === "A" ? "bg-red-100 text-red-700" : lead.grade === "B" ? "bg-orange-100 text-orange-700" : "bg-gray-100 text-gray-700"} />
-                </td>
-                <td className="py-3 px-4">
-                  <Badge label={LeadStatusLabel[lead.status] || lead.status}
-                    className="bg-blue-100 text-blue-700" />
-                </td>
-                <td className="py-3 px-4">
-                  <Badge label={LeadTemperatureLabel[lead.temperature] || lead.temperature}
-                    className={lead.temperature === "HOT" ? "bg-red-100 text-red-700" : lead.temperature === "WARM" ? "bg-yellow-100 text-yellow-700" : "bg-gray-100 text-gray-700"} />
-                </td>
-                <td className="py-3 px-4 text-gray-500">{formatDate(lead.nextFollowUp)}</td>
-                <td className="py-3 px-4 text-gray-500">{formatDate(lead.createdAt)}</td>
-                <td className="py-3 px-4">
-                  <div className="flex items-center gap-1">
-                    <Link href={`/leads/${lead.id}`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Eye size={16} />
-                    </Link>
-                    <Link href={`/leads/${lead.id}/edit`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Pencil size={16} />
-                    </Link>
-                    <ConfirmDeleteButton action={async () => { "use server"; await deleteLead(lead.id); }} />
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {leads.length === 0 && (
-              <tr>
-                <td colSpan={10}>
-                  <EmptyState
-                    message={hasFilters ? "没有找到匹配的线索，请调整筛选条件" : "暂无线索，请点击右上角新增线索开始记录"}
-                    actionLabel={hasFilters ? undefined : "新增线索"}
-                    actionHref={hasFilters ? undefined : "/leads/new"}
-                  />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Card padding="none">
+        {leads.length === 0 ? (
+          <EmptyState
+            message={hasFilters ? "没有找到匹配的线索" : "暂无线索"}
+            description={hasFilters ? "请调整筛选条件" : "点击右上角新增线索开始记录客户询盘"}
+            actionLabel={hasFilters ? undefined : "新增线索"}
+            actionHref={hasFilters ? undefined : "/leads/new"}
+          />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">公司</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">联系人</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">业务线</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">来源</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">等级</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">状态</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">意向</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">下次跟进</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">创建时间</th>
+                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {leads.map((lead) => (
+                  <tr key={lead.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4">
+                      <Link href={`/leads/${lead.id}`} className="font-medium text-gray-900 hover:text-blue-600">
+                        {lead.company}
+                      </Link>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600">{lead.contactName}</td>
+                    <td className="py-3 px-4 text-gray-600">{lead.businessLine.name}</td>
+                    <td className="py-3 px-4 text-gray-600">{LeadSourceLabel[lead.source] || lead.source}</td>
+                    <td className="py-3 px-4">
+                      <StatusBadge label={LeadGradeLabel[lead.grade] || lead.grade} variant={getLeadGradeVariant(lead.grade)} />
+                    </td>
+                    <td className="py-3 px-4">
+                      <StatusBadge label={LeadStatusLabel[lead.status] || lead.status} variant={getLeadStatusVariant(lead.status)} />
+                    </td>
+                    <td className="py-3 px-4">
+                      <StatusBadge
+                        label={LeadTemperatureLabel[lead.temperature] || lead.temperature}
+                        variant={lead.temperature === "HOT" ? "danger" : lead.temperature === "WARM" ? "warning" : "default"}
+                      />
+                    </td>
+                    <td className="py-3 px-4 text-gray-500">{formatDate(lead.nextFollowUp)}</td>
+                    <td className="py-3 px-4 text-gray-500">{formatDate(lead.createdAt)}</td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center justify-end gap-1">
+                        <Link href={`/leads/${lead.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Eye size={16} />
+                        </Link>
+                        <Link href={`/leads/${lead.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Pencil size={16} />
+                        </Link>
+                        <ConfirmDeleteButton action={async () => { "use server"; await deleteLead(lead.id); }} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
     </div>
   );
 }

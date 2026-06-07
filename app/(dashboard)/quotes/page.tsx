@@ -1,12 +1,14 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { Eye, Pencil, Download } from "lucide-react";
+import { Eye, Pencil, Plus, Download } from "lucide-react";
 import { deleteQuote } from "./actions";
 import { QuoteStatusLabel, CurrencyLabel } from "@/lib/enums";
 import { formatDate, formatMoney, formatEnumLabel } from "@/lib/format";
+import { getQuoteStatusVariant } from "@/components/ui/StatusBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import PageHeader from "@/components/PageHeader";
-import Badge from "@/components/Badge";
-import EmptyState from "@/components/EmptyState";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
 import ConfirmDeleteButton from "@/components/ConfirmDeleteButton";
 import SearchFilterBar from "@/components/SearchFilterBar";
 
@@ -49,24 +51,22 @@ export default async function QuotesPage({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">报价管理</h1>
-        <div className="flex items-center gap-3">
-          <a
-            href="/api/export/quotes"
-            className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            <Download size={16} />
-            导出 CSV
-          </a>
-          <Link
-            href="/quotes/new"
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            新增报价
-          </Link>
-        </div>
-      </div>
+      <PageHeader
+        title="报价记录"
+        description="管理报价信息、金额、状态和反馈进度"
+        actions={
+          <>
+            <a href="/api/export/quotes" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
+              <Download size={16} />
+              导出 CSV
+            </a>
+            <Link href="/quotes/new" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+              <Plus size={16} />
+              新增报价
+            </Link>
+          </>
+        }
+      />
 
       <SearchFilterBar
         searchPlaceholder="搜索报价编号、产品名称、规格..."
@@ -79,66 +79,65 @@ export default async function QuotesPage({
         defaultFilters={{ status, currency, customerId }}
       />
 
-      <div className="bg-white rounded-lg border overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b bg-gray-50">
-              <th className="text-left py-3 px-4 font-medium text-gray-600">报价编号</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">客户</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">产品</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">总价</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">状态</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">创建时间</th>
-              <th className="text-left py-3 px-4 font-medium text-gray-600">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {quotes.map((quote) => (
-              <tr key={quote.id} className="border-b last:border-0 hover:bg-gray-50">
-                <td className="py-3 px-4 font-medium">
-                  <Link href={`/quotes/${quote.id}`} className="hover:text-blue-600">{quote.quoteNo}</Link>
-                </td>
-                <td className="py-3 px-4">
-                  {quote.customer ? (
-                    <Link href={`/customers/${quote.customerId}`} className="hover:text-blue-600">{quote.customer.company}</Link>
-                  ) : quote.lead ? (
-                    <Link href={`/leads/${quote.leadId}`} className="hover:text-blue-600">{quote.lead.company}</Link>
-                  ) : "-"}
-                </td>
-                <td className="py-3 px-4">{quote.productName || "-"}</td>
-                <td className="py-3 px-4 font-medium">{formatMoney(quote.totalPrice ? Number(quote.totalPrice) : null, quote.currency)}</td>
-                <td className="py-3 px-4">
-                  <Badge label={formatEnumLabel(quote.status, QuoteStatusLabel)}
-                    className={quote.status === "ACCEPTED" ? "bg-green-100 text-green-700" : quote.status === "REJECTED" ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"} />
-                </td>
-                <td className="py-3 px-4 text-gray-500">{formatDate(quote.createdAt)}</td>
-                <td className="py-3 px-4">
-                  <div className="flex items-center gap-1">
-                    <Link href={`/quotes/${quote.id}`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Eye size={16} />
-                    </Link>
-                    <Link href={`/quotes/${quote.id}/edit`} className="p-1 text-gray-400 hover:text-blue-600">
-                      <Pencil size={16} />
-                    </Link>
-                    <ConfirmDeleteButton action={async () => { "use server"; await deleteQuote(quote.id); }} />
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {quotes.length === 0 && (
-              <tr>
-                <td colSpan={7}>
-                  <EmptyState
-                    message={hasFilters ? "没有找到匹配的报价" : "暂无报价，请点击右上角新增报价开始记录"}
-                    actionLabel={hasFilters ? undefined : "新增报价"}
-                    actionHref={hasFilters ? undefined : "/quotes/new"}
-                  />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Card padding="none">
+        {quotes.length === 0 ? (
+          <EmptyState
+            message={hasFilters ? "没有找到匹配的报价" : "暂无报价"}
+            description={hasFilters ? "请调整筛选条件" : "点击右上角新增报价开始记录"}
+            actionLabel={hasFilters ? undefined : "新增报价"}
+            actionHref={hasFilters ? undefined : "/quotes/new"}
+          />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">报价编号</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">客户</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">产品</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">总价</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">状态</th>
+                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">创建时间</th>
+                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {quotes.map((quote) => (
+                  <tr key={quote.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4">
+                      <Link href={`/quotes/${quote.id}`} className="font-medium text-gray-900 hover:text-blue-600">
+                        {quote.quoteNo}
+                      </Link>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600">
+                      {quote.customer?.company || quote.lead?.company || "-"}
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 max-w-[200px] truncate">{quote.productName || "-"}</td>
+                    <td className="py-3 px-4 font-medium text-gray-900">
+                      {formatMoney(quote.totalPrice ? Number(quote.totalPrice) : null, quote.currency)}
+                    </td>
+                    <td className="py-3 px-4">
+                      <StatusBadge label={QuoteStatusLabel[quote.status] || quote.status} variant={getQuoteStatusVariant(quote.status)} />
+                    </td>
+                    <td className="py-3 px-4 text-gray-500">{formatDate(quote.createdAt)}</td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center justify-end gap-1">
+                        <Link href={`/quotes/${quote.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Eye size={16} />
+                        </Link>
+                        <Link href={`/quotes/${quote.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                          <Pencil size={16} />
+                        </Link>
+                        <ConfirmDeleteButton action={async () => { "use server"; await deleteQuote(quote.id); }} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
     </div>
   );
 }
