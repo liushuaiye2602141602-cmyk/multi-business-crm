@@ -366,6 +366,7 @@ export type ProjectWhereInput = {
   followUps?: Prisma.FollowUpListRelationFilter
   quotes?: Prisma.QuoteListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -396,6 +397,7 @@ export type ProjectOrderByWithRelationInput = {
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
   quotes?: Prisma.QuoteOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -429,6 +431,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.FollowUpListRelationFilter
   quotes?: Prisma.QuoteListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -511,6 +514,7 @@ export type ProjectCreateInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -538,6 +542,7 @@ export type ProjectUncheckedCreateInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -564,6 +569,7 @@ export type ProjectUpdateInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -591,6 +597,7 @@ export type ProjectUncheckedUpdateInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -942,6 +949,22 @@ export type ProjectUpdateOneWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTasksInput, Prisma.ProjectUpdateWithoutTasksInput>, Prisma.ProjectUncheckedUpdateWithoutTasksInput>
 }
 
+export type ProjectCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrdersInput, Prisma.ProjectUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrdersInput, Prisma.ProjectUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.ProjectUpsertWithoutOrdersInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutOrdersInput, Prisma.ProjectUpdateWithoutOrdersInput>, Prisma.ProjectUncheckedUpdateWithoutOrdersInput>
+}
+
 export type ProjectCreateWithoutBusinessLineInput = {
   name: string
   description?: string | null
@@ -965,6 +988,7 @@ export type ProjectCreateWithoutBusinessLineInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutBusinessLineInput = {
@@ -991,6 +1015,7 @@ export type ProjectUncheckedCreateWithoutBusinessLineInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutBusinessLineInput = {
@@ -1069,6 +1094,7 @@ export type ProjectCreateWithoutLeadInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutLeadInput = {
@@ -1095,6 +1121,7 @@ export type ProjectUncheckedCreateWithoutLeadInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutLeadInput = {
@@ -1146,6 +1173,7 @@ export type ProjectCreateWithoutCustomerInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCustomerInput = {
@@ -1172,6 +1200,7 @@ export type ProjectUncheckedCreateWithoutCustomerInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCustomerInput = {
@@ -1223,6 +1252,7 @@ export type ProjectCreateWithoutFollowUpsInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutProjectsInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutFollowUpsInput = {
@@ -1249,6 +1279,7 @@ export type ProjectUncheckedCreateWithoutFollowUpsInput = {
   updatedAt?: Date | string
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutFollowUpsInput = {
@@ -1290,6 +1321,7 @@ export type ProjectUpdateWithoutFollowUpsInput = {
   lead?: Prisma.LeadUpdateOneWithoutProjectsNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutFollowUpsInput = {
@@ -1316,6 +1348,7 @@ export type ProjectUncheckedUpdateWithoutFollowUpsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutQuotesInput = {
@@ -1341,6 +1374,7 @@ export type ProjectCreateWithoutQuotesInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutProjectsInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutQuotesInput = {
@@ -1367,6 +1401,7 @@ export type ProjectUncheckedCreateWithoutQuotesInput = {
   updatedAt?: Date | string
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutQuotesInput = {
@@ -1408,6 +1443,7 @@ export type ProjectUpdateWithoutQuotesInput = {
   lead?: Prisma.LeadUpdateOneWithoutProjectsNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutQuotesInput = {
@@ -1434,6 +1470,7 @@ export type ProjectUncheckedUpdateWithoutQuotesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutTasksInput = {
@@ -1459,6 +1496,7 @@ export type ProjectCreateWithoutTasksInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutProjectsInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTasksInput = {
@@ -1485,6 +1523,7 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   updatedAt?: Date | string
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTasksInput = {
@@ -1526,6 +1565,7 @@ export type ProjectUpdateWithoutTasksInput = {
   lead?: Prisma.LeadUpdateOneWithoutProjectsNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTasksInput = {
@@ -1552,6 +1592,129 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutOrdersInput = {
+  name: string
+  description?: string | null
+  status?: $Enums.ProjectStatus
+  productCategory?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  usage?: string | null
+  targetMarket?: string | null
+  specialRequirements?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  remark?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  businessLine: Prisma.BusinessLineCreateNestedOneWithoutProjectsInput
+  customer: Prisma.CustomerCreateNestedOneWithoutProjectsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutProjectsInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutProjectInput
+  quotes?: Prisma.QuoteCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutOrdersInput = {
+  id?: number
+  name: string
+  description?: string | null
+  status?: $Enums.ProjectStatus
+  productCategory?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  usage?: string | null
+  targetMarket?: string | null
+  specialRequirements?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  remark?: string | null
+  businessLineId: number
+  customerId: number
+  leadId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProjectInput
+  quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutOrdersInput, Prisma.ProjectUncheckedCreateWithoutOrdersInput>
+}
+
+export type ProjectUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutOrdersInput, Prisma.ProjectUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutOrdersInput, Prisma.ProjectUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutOrdersInput, Prisma.ProjectUncheckedUpdateWithoutOrdersInput>
+}
+
+export type ProjectUpdateWithoutOrdersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  productCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetMarket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specialRequirements?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutProjectsNestedInput
+  customer?: Prisma.CustomerUpdateOneRequiredWithoutProjectsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutProjectsNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
+  quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  productCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetMarket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specialRequirements?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
+  quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyBusinessLineInput = {
@@ -1600,6 +1763,7 @@ export type ProjectUpdateWithoutBusinessLineInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutBusinessLineInput = {
@@ -1626,6 +1790,7 @@ export type ProjectUncheckedUpdateWithoutBusinessLineInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutBusinessLineInput = {
@@ -1697,6 +1862,7 @@ export type ProjectUpdateWithoutLeadInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutLeadInput = {
@@ -1723,6 +1889,7 @@ export type ProjectUncheckedUpdateWithoutLeadInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutLeadInput = {
@@ -1794,6 +1961,7 @@ export type ProjectUpdateWithoutCustomerInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCustomerInput = {
@@ -1820,6 +1988,7 @@ export type ProjectUncheckedUpdateWithoutCustomerInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProjectNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutCustomerInput = {
@@ -1854,12 +2023,14 @@ export type ProjectCountOutputType = {
   followUps: number
   quotes: number
   tasks: number
+  orders: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   followUps?: boolean | ProjectCountOutputTypeCountFollowUpsArgs
   quotes?: boolean | ProjectCountOutputTypeCountQuotesArgs
   tasks?: boolean | ProjectCountOutputTypeCountTasksArgs
+  orders?: boolean | ProjectCountOutputTypeCountOrdersArgs
 }
 
 /**
@@ -1893,6 +2064,13 @@ export type ProjectCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1922,6 +2100,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   followUps?: boolean | Prisma.Project$followUpsArgs<ExtArgs>
   quotes?: boolean | Prisma.Project$quotesArgs<ExtArgs>
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
+  orders?: boolean | Prisma.Project$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -2011,6 +2190,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   followUps?: boolean | Prisma.Project$followUpsArgs<ExtArgs>
   quotes?: boolean | Prisma.Project$quotesArgs<ExtArgs>
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
+  orders?: boolean | Prisma.Project$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2033,6 +2213,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
     quotes: Prisma.$QuotePayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
+    orders: Prisma.$OrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2456,6 +2637,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   followUps<T extends Prisma.Project$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotes<T extends Prisma.Project$quotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Project$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.Project$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2995,6 +3177,30 @@ export type Project$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Project.orders
+ */
+export type Project$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
 }
 
 /**

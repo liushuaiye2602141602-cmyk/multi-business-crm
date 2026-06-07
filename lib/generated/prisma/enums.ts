@@ -221,3 +221,39 @@ export const WebhookStatus = {
 } as const
 
 export type WebhookStatus = (typeof WebhookStatus)[keyof typeof WebhookStatus]
+
+
+export const OrderStatus = {
+  DRAFT: 'DRAFT',
+  CONFIRMED: 'CONFIRMED',
+  PRODUCTION: 'PRODUCTION',
+  READY_TO_SHIP: 'READY_TO_SHIP',
+  SHIPPED: 'SHIPPED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const DocumentType = {
+  QUOTE: 'QUOTE',
+  CONTRACT: 'CONTRACT',
+  ARTWORK: 'ARTWORK',
+  SAMPLE_PHOTO: 'SAMPLE_PHOTO',
+  PRODUCT_SPEC: 'PRODUCT_SPEC',
+  PACKING_REQUIREMENT: 'PACKING_REQUIREMENT',
+  OTHER: 'OTHER'
+} as const
+
+export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
+
+
+export const DocumentRelatedType = {
+  CUSTOMER: 'CUSTOMER',
+  PROJECT: 'PROJECT',
+  QUOTE: 'QUOTE',
+  ORDER: 'ORDER'
+} as const
+
+export type DocumentRelatedType = (typeof DocumentRelatedType)[keyof typeof DocumentRelatedType]

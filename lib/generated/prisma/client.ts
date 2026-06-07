@@ -57,6 +57,11 @@ export type Lead = Prisma.LeadModel
  */
 export type Customer = Prisma.CustomerModel
 /**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
  * Model Project
  * 
  */
@@ -106,3 +111,23 @@ export type ExternalSource = Prisma.ExternalSourceModel
  * 
  */
 export type WebhookLog = Prisma.WebhookLogModel
+/**
+ * Model QuoteItem
+ * 
+ */
+export type QuoteItem = Prisma.QuoteItemModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel

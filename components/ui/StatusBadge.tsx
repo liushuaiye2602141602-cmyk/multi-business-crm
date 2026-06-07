@@ -120,3 +120,16 @@ export function getCustomerStatusVariant(status: string): "success" | "info" | "
   };
   return map[status] || "default";
 }
+
+export function getOrderStatusVariant(status: string): "default" | "info" | "warning" | "success" | "danger" {
+  const map: Record<string, "default" | "info" | "warning" | "success" | "danger"> = {
+    DRAFT: "default",
+    CONFIRMED: "info",
+    PRODUCTION: "warning",
+    READY_TO_SHIP: "warning",
+    SHIPPED: "info",
+    COMPLETED: "success",
+    CANCELLED: "danger",
+  };
+  return map[status] || "default";
+}

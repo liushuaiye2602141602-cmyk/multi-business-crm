@@ -174,6 +174,37 @@ export const WebhookStatusLabel: Record<string, string> = {
 export const ExternalSourceTypeOptions = Object.entries(ExternalSourceTypeLabel).map(([value, label]) => ({ value, label }));
 export const WebhookStatusOptions = Object.entries(WebhookStatusLabel).map(([value, label]) => ({ value, label }));
 
+export const OrderStatusLabel: Record<string, string> = {
+  DRAFT: "草稿",
+  CONFIRMED: "已确认",
+  PRODUCTION: "生产中",
+  READY_TO_SHIP: "待发货",
+  SHIPPED: "已发货",
+  COMPLETED: "已完成",
+  CANCELLED: "已取消",
+};
+
+export const DocumentTypeLabel: Record<string, string> = {
+  QUOTE: "报价单",
+  CONTRACT: "合同",
+  ARTWORK: "设计稿",
+  SAMPLE_PHOTO: "样品照片",
+  PRODUCT_SPEC: "产品规格",
+  PACKING_REQUIREMENT: "包装要求",
+  OTHER: "其他",
+};
+
+export const DocumentRelatedTypeLabel: Record<string, string> = {
+  CUSTOMER: "客户",
+  PROJECT: "项目",
+  QUOTE: "报价",
+  ORDER: "订单",
+};
+
+export const OrderStatusOptions = Object.entries(OrderStatusLabel).map(([value, label]) => ({ value, label }));
+export const DocumentTypeOptions = Object.entries(DocumentTypeLabel).map(([value, label]) => ({ value, label }));
+export const DocumentRelatedTypeOptions = Object.entries(DocumentRelatedTypeLabel).map(([value, label]) => ({ value, label }));
+
 // ==================== 状态颜色 ====================
 
 export const CustomerStatusColor: Record<string, string> = {

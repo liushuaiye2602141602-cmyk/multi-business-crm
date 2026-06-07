@@ -25,6 +25,9 @@ import {
   Download,
   Activity,
   BookMarked,
+  UserCog,
+  ShoppingCart,
+  FolderOpen,
 } from "lucide-react";
 
 interface NavItem {
@@ -52,6 +55,7 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/leads", label: "线索池", icon: Users },
       { href: "/customers", label: "客户库", icon: UserCheck },
+      { href: "/contacts", label: "联系人", icon: UserCog },
       { href: "/projects", label: "商机项目", icon: FolderKanban },
       { href: "/follow-ups", label: "跟进记录", icon: MessageSquare },
       { href: "/tasks", label: "今日任务", icon: CheckSquare },
@@ -61,7 +65,9 @@ const navGroups: NavGroup[] = [
     title: "业务管理",
     items: [
       { href: "/quotes", label: "报价记录", icon: FileText },
+      { href: "/orders", label: "订单管理", icon: ShoppingCart },
       { href: "/products", label: "产品目录", icon: Package },
+      { href: "/documents", label: "文档资料", icon: FolderOpen },
       { href: "/templates", label: "跟进模板", icon: FileEdit },
       { href: "/business-lines", label: "业务线管理", icon: Briefcase },
     ],
