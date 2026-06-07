@@ -394,7 +394,9 @@ export const ModelName = {
   Product: 'Product',
   FollowUpTemplate: 'FollowUpTemplate',
   ActivityLog: 'ActivityLog',
-  AIAnalysis: 'AIAnalysis'
+  AIAnalysis: 'AIAnalysis',
+  ExternalSource: 'ExternalSource',
+  WebhookLog: 'WebhookLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "businessLine" | "lead" | "customer" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis"
+    modelProps: "businessLine" | "lead" | "customer" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis" | "externalSource" | "webhookLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1228,6 +1230,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ExternalSource: {
+      payload: Prisma.$ExternalSourcePayload<ExtArgs>
+      fields: Prisma.ExternalSourceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExternalSourceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExternalSourceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        findFirst: {
+          args: Prisma.ExternalSourceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExternalSourceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        findMany: {
+          args: Prisma.ExternalSourceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>[]
+        }
+        create: {
+          args: Prisma.ExternalSourceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        createMany: {
+          args: Prisma.ExternalSourceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExternalSourceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>[]
+        }
+        delete: {
+          args: Prisma.ExternalSourceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        update: {
+          args: Prisma.ExternalSourceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        deleteMany: {
+          args: Prisma.ExternalSourceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExternalSourceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExternalSourceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>[]
+        }
+        upsert: {
+          args: Prisma.ExternalSourceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalSourcePayload>
+        }
+        aggregate: {
+          args: Prisma.ExternalSourceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExternalSource>
+        }
+        groupBy: {
+          args: Prisma.ExternalSourceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalSourceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExternalSourceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalSourceCountAggregateOutputType> | number
+        }
+      }
+    }
+    WebhookLog: {
+      payload: Prisma.$WebhookLogPayload<ExtArgs>
+      fields: Prisma.WebhookLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WebhookLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WebhookLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        findFirst: {
+          args: Prisma.WebhookLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WebhookLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        findMany: {
+          args: Prisma.WebhookLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>[]
+        }
+        create: {
+          args: Prisma.WebhookLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        createMany: {
+          args: Prisma.WebhookLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WebhookLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>[]
+        }
+        delete: {
+          args: Prisma.WebhookLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        update: {
+          args: Prisma.WebhookLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.WebhookLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WebhookLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WebhookLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.WebhookLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebhookLogPayload>
+        }
+        aggregate: {
+          args: Prisma.WebhookLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWebhookLog>
+        }
+        groupBy: {
+          args: Prisma.WebhookLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WebhookLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WebhookLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WebhookLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1499,6 +1649,43 @@ export const AIAnalysisScalarFieldEnum = {
 } as const
 
 export type AIAnalysisScalarFieldEnum = (typeof AIAnalysisScalarFieldEnum)[keyof typeof AIAnalysisScalarFieldEnum]
+
+
+export const ExternalSourceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  sourceType: 'sourceType',
+  businessLineId: 'businessLineId',
+  defaultSource: 'defaultSource',
+  defaultLeadGrade: 'defaultLeadGrade',
+  defaultPriority: 'defaultPriority',
+  apiKeyHash: 'apiKeyHash',
+  isActive: 'isActive',
+  autoAnalyze: 'autoAnalyze',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExternalSourceScalarFieldEnum = (typeof ExternalSourceScalarFieldEnum)[keyof typeof ExternalSourceScalarFieldEnum]
+
+
+export const WebhookLogScalarFieldEnum = {
+  id: 'id',
+  externalSourceId: 'externalSourceId',
+  sourceCode: 'sourceCode',
+  status: 'status',
+  requestBody: 'requestBody',
+  responseBody: 'responseBody',
+  errorMessage: 'errorMessage',
+  createdLeadId: 'createdLeadId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+} as const
+
+export type WebhookLogScalarFieldEnum = (typeof WebhookLogScalarFieldEnum)[keyof typeof WebhookLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1819,6 +2006,34 @@ export type ListEnumAIAnalysisTargetTypeFieldRefInput<$PrismaModel> = FieldRefIn
 
 
 /**
+ * Reference to a field of type 'ExternalSourceType'
+ */
+export type EnumExternalSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalSourceType'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalSourceType[]'
+ */
+export type ListEnumExternalSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalSourceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WebhookStatus'
+ */
+export type EnumWebhookStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WebhookStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'WebhookStatus[]'
+ */
+export type ListEnumWebhookStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WebhookStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1952,6 +2167,8 @@ export type GlobalOmitConfig = {
   followUpTemplate?: Prisma.FollowUpTemplateOmit
   activityLog?: Prisma.ActivityLogOmit
   aIAnalysis?: Prisma.AIAnalysisOmit
+  externalSource?: Prisma.ExternalSourceOmit
+  webhookLog?: Prisma.WebhookLogOmit
 }
 
 /* Types for Logging */

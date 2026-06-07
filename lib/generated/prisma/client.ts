@@ -96,3 +96,13 @@ export type ActivityLog = Prisma.ActivityLogModel
  * 
  */
 export type AIAnalysis = Prisma.AIAnalysisModel
+/**
+ * Model ExternalSource
+ * 
+ */
+export type ExternalSource = Prisma.ExternalSourceModel
+/**
+ * Model WebhookLog
+ * 
+ */
+export type WebhookLog = Prisma.WebhookLogModel

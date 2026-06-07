@@ -150,6 +150,25 @@ enum AIAnalysisTargetType {
   TEMPLATE
 }
 
+enum ExternalSourceType {
+  WEBSITE_FORM
+  FACEBOOK_FORM
+  TIKTOK_MANUAL
+  N8N
+  AI_MARKETING_SYSTEM
+  OPENCLAW
+  WHATSAPP_MANUAL
+  OTHER
+}
+
+enum WebhookStatus {
+  SUCCESS
+  FAILED
+  UNAUTHORIZED
+  DUPLICATE
+  VALIDATION_ERROR
+}
+
 // ==================== 模型 ====================
 
 model BusinessLine {
@@ -162,11 +181,12 @@ model BusinessLine {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  leads      Lead[]
-  customers  Customer[]
-  projects   Project[]
-  products   Product[]
-  templates  FollowUpTemplate[]
+  leads            Lead[]
+  customers        Customer[]
+  projects         Project[]
+  products         Product[]
+  templates        FollowUpTemplate[]
+  externalSources  ExternalSource[]
 }
 
 model Lead {
@@ -442,4 +462,46 @@ model AIAnalysis {
   @@index([createdAt])
   @@index([qualificationLevel])
   @@index([intentLevel])
+}
+
+model ExternalSource {
+  id               Int                @id @default(autoincrement())
+  name             String
+  code             String             @unique
+  sourceType       ExternalSourceType
+  businessLineId   Int?
+  defaultSource    LeadSource         @default(WEBSITE)
+  defaultLeadGrade LeadGrade          @default(C)
+  defaultPriority  TaskPriority       @default(MEDIUM)
+  apiKeyHash       String?
+  isActive         Boolean            @default(true)
+  autoAnalyze      Boolean            @default(false)
+  notes            String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  businessLine BusinessLine? @relation(fields: [businessLineId], references: [id])
+  webhookLogs  WebhookLog[]
+
+  @@index([code])
+  @@index([isActive])
+}
+
+model WebhookLog {
+  id               Int           @id @default(autoincrement())
+  externalSourceId  Int?
+  externalSource   ExternalSource? @relation(fields: [externalSourceId], references: [id])
+  sourceCode       String?
+  status           WebhookStatus
+  requestBody      String?
+  responseBody     String?
+  errorMessage     String?
+  createdLeadId    Int?
+  ipAddress        String?
+  userAgent        String?
+  createdAt        DateTime      @default(now())
+
+  @@index([externalSourceId])
+  @@index([status])
+  @@index([createdAt])
 }

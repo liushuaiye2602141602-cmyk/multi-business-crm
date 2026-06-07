@@ -196,3 +196,28 @@ export const AIAnalysisTargetType = {
 } as const
 
 export type AIAnalysisTargetType = (typeof AIAnalysisTargetType)[keyof typeof AIAnalysisTargetType]
+
+
+export const ExternalSourceType = {
+  WEBSITE_FORM: 'WEBSITE_FORM',
+  FACEBOOK_FORM: 'FACEBOOK_FORM',
+  TIKTOK_MANUAL: 'TIKTOK_MANUAL',
+  N8N: 'N8N',
+  AI_MARKETING_SYSTEM: 'AI_MARKETING_SYSTEM',
+  OPENCLAW: 'OPENCLAW',
+  WHATSAPP_MANUAL: 'WHATSAPP_MANUAL',
+  OTHER: 'OTHER'
+} as const
+
+export type ExternalSourceType = (typeof ExternalSourceType)[keyof typeof ExternalSourceType]
+
+
+export const WebhookStatus = {
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  DUPLICATE: 'DUPLICATE',
+  VALIDATION_ERROR: 'VALIDATION_ERROR'
+} as const
+
+export type WebhookStatus = (typeof WebhookStatus)[keyof typeof WebhookStatus]

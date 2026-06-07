@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import QuoteForm from "@/components/QuoteForm";
 import { createQuote } from "../actions";
 

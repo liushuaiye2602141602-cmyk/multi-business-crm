@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import LeadForm from "@/components/LeadForm";
 import { createLead } from "../actions";
 

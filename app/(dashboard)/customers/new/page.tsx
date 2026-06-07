@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import CustomerForm from "@/components/CustomerForm";
 import { createCustomer } from "../actions";
 

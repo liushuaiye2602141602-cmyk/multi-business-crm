@@ -1,4 +1,5 @@
 import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 
 export default function DashboardGroupLayout({
   children,
@@ -6,9 +7,12 @@ export default function DashboardGroupLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <Sidebar />
-      <main className="flex-1 p-6 overflow-auto">{children}</main>
+      <div className="ml-[260px]">
+        <Header />
+        <main className="p-6">{children}</main>
+      </div>
     </div>
   );
 }

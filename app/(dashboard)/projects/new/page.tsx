@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import ProjectForm from "@/components/ProjectForm";
 import { createProject } from "../actions";
 

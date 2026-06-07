@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import TemplateForm from "@/components/TemplateForm";
 import { createTemplate } from "../actions";
 

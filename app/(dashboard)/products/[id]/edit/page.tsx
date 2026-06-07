@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import ProductForm from "@/components/ProductForm";
 import { updateProduct } from "../../actions";

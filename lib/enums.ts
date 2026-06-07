@@ -152,6 +152,28 @@ export const TemplateLanguageLabel: Record<string, string> = {
 export const TemplateSceneOptions = Object.entries(TemplateSceneLabel).map(([value, label]) => ({ value, label }));
 export const TemplateLanguageOptions = Object.entries(TemplateLanguageLabel).map(([value, label]) => ({ value, label }));
 
+export const ExternalSourceTypeLabel: Record<string, string> = {
+  WEBSITE_FORM: "官网表单",
+  FACEBOOK_FORM: "Facebook 表单",
+  TIKTOK_MANUAL: "TikTok 手动",
+  N8N: "n8n 工作流",
+  AI_MARKETING_SYSTEM: "AI 营销系统",
+  OPENCLAW: "OpenClaw",
+  WHATSAPP_MANUAL: "WhatsApp 手动",
+  OTHER: "其他",
+};
+
+export const WebhookStatusLabel: Record<string, string> = {
+  SUCCESS: "成功",
+  FAILED: "失败",
+  UNAUTHORIZED: "未授权",
+  DUPLICATE: "重复",
+  VALIDATION_ERROR: "参数错误",
+};
+
+export const ExternalSourceTypeOptions = Object.entries(ExternalSourceTypeLabel).map(([value, label]) => ({ value, label }));
+export const WebhookStatusOptions = Object.entries(WebhookStatusLabel).map(([value, label]) => ({ value, label }));
+
 // ==================== 状态颜色 ====================
 
 export const CustomerStatusColor: Record<string, string> = {

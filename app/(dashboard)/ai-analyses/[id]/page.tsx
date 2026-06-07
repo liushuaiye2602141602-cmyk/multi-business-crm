@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatDateTime } from "@/lib/format";
 import PageHeader from "@/components/PageHeader";

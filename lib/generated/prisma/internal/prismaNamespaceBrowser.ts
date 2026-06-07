@@ -61,7 +61,9 @@ export const ModelName = {
   Product: 'Product',
   FollowUpTemplate: 'FollowUpTemplate',
   ActivityLog: 'ActivityLog',
-  AIAnalysis: 'AIAnalysis'
+  AIAnalysis: 'AIAnalysis',
+  ExternalSource: 'ExternalSource',
+  WebhookLog: 'WebhookLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -312,6 +314,43 @@ export const AIAnalysisScalarFieldEnum = {
 } as const
 
 export type AIAnalysisScalarFieldEnum = (typeof AIAnalysisScalarFieldEnum)[keyof typeof AIAnalysisScalarFieldEnum]
+
+
+export const ExternalSourceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  sourceType: 'sourceType',
+  businessLineId: 'businessLineId',
+  defaultSource: 'defaultSource',
+  defaultLeadGrade: 'defaultLeadGrade',
+  defaultPriority: 'defaultPriority',
+  apiKeyHash: 'apiKeyHash',
+  isActive: 'isActive',
+  autoAnalyze: 'autoAnalyze',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExternalSourceScalarFieldEnum = (typeof ExternalSourceScalarFieldEnum)[keyof typeof ExternalSourceScalarFieldEnum]
+
+
+export const WebhookLogScalarFieldEnum = {
+  id: 'id',
+  externalSourceId: 'externalSourceId',
+  sourceCode: 'sourceCode',
+  status: 'status',
+  requestBody: 'requestBody',
+  responseBody: 'responseBody',
+  errorMessage: 'errorMessage',
+  createdLeadId: 'createdLeadId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+} as const
+
+export type WebhookLogScalarFieldEnum = (typeof WebhookLogScalarFieldEnum)[keyof typeof WebhookLogScalarFieldEnum]
 
 
 export const SortOrder = {

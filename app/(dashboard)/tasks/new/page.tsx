@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import TaskForm from "@/components/TaskForm";
 import { createTask } from "../actions";
 

@@ -245,6 +245,7 @@ export type BusinessLineWhereInput = {
   projects?: Prisma.ProjectListRelationFilter
   products?: Prisma.ProductListRelationFilter
   templates?: Prisma.FollowUpTemplateListRelationFilter
+  externalSources?: Prisma.ExternalSourceListRelationFilter
 }
 
 export type BusinessLineOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type BusinessLineOrderByWithRelationInput = {
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   products?: Prisma.ProductOrderByRelationAggregateInput
   templates?: Prisma.FollowUpTemplateOrderByRelationAggregateInput
+  externalSources?: Prisma.ExternalSourceOrderByRelationAggregateInput
 }
 
 export type BusinessLineWhereUniqueInput = Prisma.AtLeast<{
@@ -280,6 +282,7 @@ export type BusinessLineWhereUniqueInput = Prisma.AtLeast<{
   projects?: Prisma.ProjectListRelationFilter
   products?: Prisma.ProductListRelationFilter
   templates?: Prisma.FollowUpTemplateListRelationFilter
+  externalSources?: Prisma.ExternalSourceListRelationFilter
 }, "id" | "name" | "code">
 
 export type BusinessLineOrderByWithAggregationInput = {
@@ -325,6 +328,7 @@ export type BusinessLineCreateInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateInput = {
@@ -341,6 +345,7 @@ export type BusinessLineUncheckedCreateInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUpdateInput = {
@@ -356,6 +361,7 @@ export type BusinessLineUpdateInput = {
   projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateInput = {
@@ -372,6 +378,7 @@ export type BusinessLineUncheckedUpdateInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineCreateManyInput = {
@@ -549,6 +556,22 @@ export type BusinessLineUpdateOneWithoutTemplatesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessLineUpdateToOneWithWhereWithoutTemplatesInput, Prisma.BusinessLineUpdateWithoutTemplatesInput>, Prisma.BusinessLineUncheckedUpdateWithoutTemplatesInput>
 }
 
+export type BusinessLineCreateNestedOneWithoutExternalSourcesInput = {
+  create?: Prisma.XOR<Prisma.BusinessLineCreateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedCreateWithoutExternalSourcesInput>
+  connectOrCreate?: Prisma.BusinessLineCreateOrConnectWithoutExternalSourcesInput
+  connect?: Prisma.BusinessLineWhereUniqueInput
+}
+
+export type BusinessLineUpdateOneWithoutExternalSourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessLineCreateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedCreateWithoutExternalSourcesInput>
+  connectOrCreate?: Prisma.BusinessLineCreateOrConnectWithoutExternalSourcesInput
+  upsert?: Prisma.BusinessLineUpsertWithoutExternalSourcesInput
+  disconnect?: Prisma.BusinessLineWhereInput | boolean
+  delete?: Prisma.BusinessLineWhereInput | boolean
+  connect?: Prisma.BusinessLineWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessLineUpdateToOneWithWhereWithoutExternalSourcesInput, Prisma.BusinessLineUpdateWithoutExternalSourcesInput>, Prisma.BusinessLineUncheckedUpdateWithoutExternalSourcesInput>
+}
+
 export type BusinessLineCreateWithoutLeadsInput = {
   name: string
   code?: string | null
@@ -561,6 +584,7 @@ export type BusinessLineCreateWithoutLeadsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateWithoutLeadsInput = {
@@ -576,6 +600,7 @@ export type BusinessLineUncheckedCreateWithoutLeadsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineCreateOrConnectWithoutLeadsInput = {
@@ -606,6 +631,7 @@ export type BusinessLineUpdateWithoutLeadsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateWithoutLeadsInput = {
@@ -621,6 +647,7 @@ export type BusinessLineUncheckedUpdateWithoutLeadsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineCreateWithoutCustomersInput = {
@@ -635,6 +662,7 @@ export type BusinessLineCreateWithoutCustomersInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateWithoutCustomersInput = {
@@ -650,6 +678,7 @@ export type BusinessLineUncheckedCreateWithoutCustomersInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineCreateOrConnectWithoutCustomersInput = {
@@ -680,6 +709,7 @@ export type BusinessLineUpdateWithoutCustomersInput = {
   projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateWithoutCustomersInput = {
@@ -695,6 +725,7 @@ export type BusinessLineUncheckedUpdateWithoutCustomersInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineCreateWithoutProjectsInput = {
@@ -709,6 +740,7 @@ export type BusinessLineCreateWithoutProjectsInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateWithoutProjectsInput = {
@@ -724,6 +756,7 @@ export type BusinessLineUncheckedCreateWithoutProjectsInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineCreateOrConnectWithoutProjectsInput = {
@@ -754,6 +787,7 @@ export type BusinessLineUpdateWithoutProjectsInput = {
   customers?: Prisma.CustomerUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateWithoutProjectsInput = {
@@ -769,6 +803,7 @@ export type BusinessLineUncheckedUpdateWithoutProjectsInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineCreateWithoutProductsInput = {
@@ -783,6 +818,7 @@ export type BusinessLineCreateWithoutProductsInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutBusinessLineInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateWithoutProductsInput = {
@@ -798,6 +834,7 @@ export type BusinessLineUncheckedCreateWithoutProductsInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBusinessLineInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
   templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineCreateOrConnectWithoutProductsInput = {
@@ -828,6 +865,7 @@ export type BusinessLineUpdateWithoutProductsInput = {
   customers?: Prisma.CustomerUpdateManyWithoutBusinessLineNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateWithoutProductsInput = {
@@ -843,6 +881,7 @@ export type BusinessLineUncheckedUpdateWithoutProductsInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutBusinessLineNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
   templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineCreateWithoutTemplatesInput = {
@@ -857,6 +896,7 @@ export type BusinessLineCreateWithoutTemplatesInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutBusinessLineInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineUncheckedCreateWithoutTemplatesInput = {
@@ -872,6 +912,7 @@ export type BusinessLineUncheckedCreateWithoutTemplatesInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBusinessLineInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
+  externalSources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutBusinessLineInput
 }
 
 export type BusinessLineCreateOrConnectWithoutTemplatesInput = {
@@ -902,6 +943,7 @@ export type BusinessLineUpdateWithoutTemplatesInput = {
   customers?: Prisma.CustomerUpdateManyWithoutBusinessLineNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUpdateManyWithoutBusinessLineNestedInput
 }
 
 export type BusinessLineUncheckedUpdateWithoutTemplatesInput = {
@@ -917,6 +959,85 @@ export type BusinessLineUncheckedUpdateWithoutTemplatesInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutBusinessLineNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
+  externalSources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutBusinessLineNestedInput
+}
+
+export type BusinessLineCreateWithoutExternalSourcesInput = {
+  name: string
+  code?: string | null
+  description?: string | null
+  website?: string | null
+  mainProducts?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  leads?: Prisma.LeadCreateNestedManyWithoutBusinessLineInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutBusinessLineInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutBusinessLineInput
+  products?: Prisma.ProductCreateNestedManyWithoutBusinessLineInput
+  templates?: Prisma.FollowUpTemplateCreateNestedManyWithoutBusinessLineInput
+}
+
+export type BusinessLineUncheckedCreateWithoutExternalSourcesInput = {
+  id?: number
+  name: string
+  code?: string | null
+  description?: string | null
+  website?: string | null
+  mainProducts?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutBusinessLineInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBusinessLineInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBusinessLineInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessLineInput
+  templates?: Prisma.FollowUpTemplateUncheckedCreateNestedManyWithoutBusinessLineInput
+}
+
+export type BusinessLineCreateOrConnectWithoutExternalSourcesInput = {
+  where: Prisma.BusinessLineWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessLineCreateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedCreateWithoutExternalSourcesInput>
+}
+
+export type BusinessLineUpsertWithoutExternalSourcesInput = {
+  update: Prisma.XOR<Prisma.BusinessLineUpdateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedUpdateWithoutExternalSourcesInput>
+  create: Prisma.XOR<Prisma.BusinessLineCreateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedCreateWithoutExternalSourcesInput>
+  where?: Prisma.BusinessLineWhereInput
+}
+
+export type BusinessLineUpdateToOneWithWhereWithoutExternalSourcesInput = {
+  where?: Prisma.BusinessLineWhereInput
+  data: Prisma.XOR<Prisma.BusinessLineUpdateWithoutExternalSourcesInput, Prisma.BusinessLineUncheckedUpdateWithoutExternalSourcesInput>
+}
+
+export type BusinessLineUpdateWithoutExternalSourcesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leads?: Prisma.LeadUpdateManyWithoutBusinessLineNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutBusinessLineNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutBusinessLineNestedInput
+  products?: Prisma.ProductUpdateManyWithoutBusinessLineNestedInput
+  templates?: Prisma.FollowUpTemplateUpdateManyWithoutBusinessLineNestedInput
+}
+
+export type BusinessLineUncheckedUpdateWithoutExternalSourcesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutBusinessLineNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutBusinessLineNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutBusinessLineNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessLineNestedInput
+  templates?: Prisma.FollowUpTemplateUncheckedUpdateManyWithoutBusinessLineNestedInput
 }
 
 
@@ -930,6 +1051,7 @@ export type BusinessLineCountOutputType = {
   projects: number
   products: number
   templates: number
+  externalSources: number
 }
 
 export type BusinessLineCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -938,6 +1060,7 @@ export type BusinessLineCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   projects?: boolean | BusinessLineCountOutputTypeCountProjectsArgs
   products?: boolean | BusinessLineCountOutputTypeCountProductsArgs
   templates?: boolean | BusinessLineCountOutputTypeCountTemplatesArgs
+  externalSources?: boolean | BusinessLineCountOutputTypeCountExternalSourcesArgs
 }
 
 /**
@@ -985,6 +1108,13 @@ export type BusinessLineCountOutputTypeCountTemplatesArgs<ExtArgs extends runtim
   where?: Prisma.FollowUpTemplateWhereInput
 }
 
+/**
+ * BusinessLineCountOutputType without action
+ */
+export type BusinessLineCountOutputTypeCountExternalSourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExternalSourceWhereInput
+}
+
 
 export type BusinessLineSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1000,6 +1130,7 @@ export type BusinessLineSelect<ExtArgs extends runtime.Types.Extensions.Internal
   projects?: boolean | Prisma.BusinessLine$projectsArgs<ExtArgs>
   products?: boolean | Prisma.BusinessLine$productsArgs<ExtArgs>
   templates?: boolean | Prisma.BusinessLine$templatesArgs<ExtArgs>
+  externalSources?: boolean | Prisma.BusinessLine$externalSourcesArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessLineCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["businessLine"]>
 
@@ -1043,6 +1174,7 @@ export type BusinessLineInclude<ExtArgs extends runtime.Types.Extensions.Interna
   projects?: boolean | Prisma.BusinessLine$projectsArgs<ExtArgs>
   products?: boolean | Prisma.BusinessLine$productsArgs<ExtArgs>
   templates?: boolean | Prisma.BusinessLine$templatesArgs<ExtArgs>
+  externalSources?: boolean | Prisma.BusinessLine$externalSourcesArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessLineCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessLineIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1056,6 +1188,7 @@ export type $BusinessLinePayload<ExtArgs extends runtime.Types.Extensions.Intern
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     products: Prisma.$ProductPayload<ExtArgs>[]
     templates: Prisma.$FollowUpTemplatePayload<ExtArgs>[]
+    externalSources: Prisma.$ExternalSourcePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1465,6 +1598,7 @@ export interface Prisma__BusinessLineClient<T, Null = never, ExtArgs extends run
   projects<T extends Prisma.BusinessLine$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessLine$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   products<T extends Prisma.BusinessLine$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessLine$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   templates<T extends Prisma.BusinessLine$templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessLine$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalSources<T extends Prisma.BusinessLine$externalSourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessLine$externalSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2012,6 +2146,30 @@ export type BusinessLine$templatesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpTemplateScalarFieldEnum | Prisma.FollowUpTemplateScalarFieldEnum[]
+}
+
+/**
+ * BusinessLine.externalSources
+ */
+export type BusinessLine$externalSourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExternalSource
+   */
+  select?: Prisma.ExternalSourceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExternalSource
+   */
+  omit?: Prisma.ExternalSourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExternalSourceInclude<ExtArgs> | null
+  where?: Prisma.ExternalSourceWhereInput
+  orderBy?: Prisma.ExternalSourceOrderByWithRelationInput | Prisma.ExternalSourceOrderByWithRelationInput[]
+  cursor?: Prisma.ExternalSourceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExternalSourceScalarFieldEnum | Prisma.ExternalSourceScalarFieldEnum[]
 }
 
 /**

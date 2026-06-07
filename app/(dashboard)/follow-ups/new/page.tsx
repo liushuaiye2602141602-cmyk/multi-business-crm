@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 import FollowUpForm from "@/components/FollowUpForm";
 import { createFollowUp } from "../actions";
 
