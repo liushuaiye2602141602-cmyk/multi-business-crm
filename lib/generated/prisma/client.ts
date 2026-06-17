@@ -131,3 +131,18 @@ export type OrderItem = Prisma.OrderItemModel
  * 
  */
 export type Document = Prisma.DocumentModel
+/**
+ * Model IMPlatform
+ * 
+ */
+export type IMPlatform = Prisma.IMPlatformModel
+/**
+ * Model IMUser
+ * 
+ */
+export type IMUser = Prisma.IMUserModel
+/**
+ * Model IMMessage
+ * 
+ */
+export type IMMessage = Prisma.IMMessageModel

@@ -401,7 +401,10 @@ export const ModelName = {
   QuoteItem: 'QuoteItem',
   Order: 'Order',
   OrderItem: 'OrderItem',
-  Document: 'Document'
+  Document: 'Document',
+  IMPlatform: 'IMPlatform',
+  IMUser: 'IMUser',
+  IMMessage: 'IMMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -417,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "businessLine" | "lead" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document"
+    modelProps: "businessLine" | "lead" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "iMPlatform" | "iMUser" | "iMMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1753,6 +1756,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    IMPlatform: {
+      payload: Prisma.$IMPlatformPayload<ExtArgs>
+      fields: Prisma.IMPlatformFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IMPlatformFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IMPlatformFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        findFirst: {
+          args: Prisma.IMPlatformFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IMPlatformFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        findMany: {
+          args: Prisma.IMPlatformFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>[]
+        }
+        create: {
+          args: Prisma.IMPlatformCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        createMany: {
+          args: Prisma.IMPlatformCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IMPlatformCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>[]
+        }
+        delete: {
+          args: Prisma.IMPlatformDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        update: {
+          args: Prisma.IMPlatformUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        deleteMany: {
+          args: Prisma.IMPlatformDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IMPlatformUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IMPlatformUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>[]
+        }
+        upsert: {
+          args: Prisma.IMPlatformUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMPlatformPayload>
+        }
+        aggregate: {
+          args: Prisma.IMPlatformAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIMPlatform>
+        }
+        groupBy: {
+          args: Prisma.IMPlatformGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMPlatformGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IMPlatformCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMPlatformCountAggregateOutputType> | number
+        }
+      }
+    }
+    IMUser: {
+      payload: Prisma.$IMUserPayload<ExtArgs>
+      fields: Prisma.IMUserFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IMUserFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IMUserFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        findFirst: {
+          args: Prisma.IMUserFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IMUserFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        findMany: {
+          args: Prisma.IMUserFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>[]
+        }
+        create: {
+          args: Prisma.IMUserCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        createMany: {
+          args: Prisma.IMUserCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IMUserCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>[]
+        }
+        delete: {
+          args: Prisma.IMUserDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        update: {
+          args: Prisma.IMUserUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        deleteMany: {
+          args: Prisma.IMUserDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IMUserUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IMUserUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>[]
+        }
+        upsert: {
+          args: Prisma.IMUserUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMUserPayload>
+        }
+        aggregate: {
+          args: Prisma.IMUserAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIMUser>
+        }
+        groupBy: {
+          args: Prisma.IMUserGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMUserGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IMUserCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMUserCountAggregateOutputType> | number
+        }
+      }
+    }
+    IMMessage: {
+      payload: Prisma.$IMMessagePayload<ExtArgs>
+      fields: Prisma.IMMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IMMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IMMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.IMMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IMMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        findMany: {
+          args: Prisma.IMMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>[]
+        }
+        create: {
+          args: Prisma.IMMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        createMany: {
+          args: Prisma.IMMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IMMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.IMMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        update: {
+          args: Prisma.IMMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.IMMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IMMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IMMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.IMMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IMMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.IMMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIMMessage>
+        }
+        groupBy: {
+          args: Prisma.IMMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IMMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IMMessageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2165,12 +2390,64 @@ export const DocumentScalarFieldEnum = {
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
+export const IMPlatformScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  appId: 'appId',
+  appSecret: 'appSecret',
+  encryptKey: 'encryptKey',
+  verifyToken: 'verifyToken',
+  botToken: 'botToken',
+  isActive: 'isActive',
+  extra: 'extra',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IMPlatformScalarFieldEnum = (typeof IMPlatformScalarFieldEnum)[keyof typeof IMPlatformScalarFieldEnum]
+
+
+export const IMUserScalarFieldEnum = {
+  id: 'id',
+  platformId: 'platformId',
+  platformUserId: 'platformUserId',
+  platformName: 'platformName',
+  createdAt: 'createdAt'
+} as const
+
+export type IMUserScalarFieldEnum = (typeof IMUserScalarFieldEnum)[keyof typeof IMUserScalarFieldEnum]
+
+
+export const IMMessageScalarFieldEnum = {
+  id: 'id',
+  platformId: 'platformId',
+  imUserId: 'imUserId',
+  direction: 'direction',
+  content: 'content',
+  intent: 'intent',
+  action: 'action',
+  actionResult: 'actionResult',
+  errorMsg: 'errorMsg',
+  createdAt: 'createdAt'
+} as const
+
+export type IMMessageScalarFieldEnum = (typeof IMMessageScalarFieldEnum)[keyof typeof IMMessageScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -2187,6 +2464,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -2553,6 +2839,20 @@ export type ListEnumDocumentRelatedTypeFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2693,6 +2993,9 @@ export type GlobalOmitConfig = {
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
   document?: Prisma.DocumentOmit
+  iMPlatform?: Prisma.IMPlatformOmit
+  iMUser?: Prisma.IMUserOmit
+  iMMessage?: Prisma.IMMessageOmit
 }
 
 /* Types for Logging */
