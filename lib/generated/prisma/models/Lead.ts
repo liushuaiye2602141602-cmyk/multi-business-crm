@@ -386,6 +386,7 @@ export type LeadWhereInput = {
   quotes?: Prisma.QuoteListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  emails?: Prisma.EmailListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
@@ -419,6 +420,7 @@ export type LeadOrderByWithRelationInput = {
   quotes?: Prisma.QuoteOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
+  emails?: Prisma.EmailOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
@@ -455,6 +457,7 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   quotes?: Prisma.QuoteListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  emails?: Prisma.EmailListRelationFilter
 }, "id">
 
 export type LeadOrderByWithAggregationInput = {
@@ -547,6 +550,7 @@ export type LeadCreateInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
@@ -578,6 +582,7 @@ export type LeadUncheckedCreateInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
@@ -608,6 +613,7 @@ export type LeadUpdateInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
@@ -639,6 +645,7 @@ export type LeadUncheckedUpdateInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
@@ -1017,6 +1024,22 @@ export type LeadUpdateOneWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutTasksInput, Prisma.LeadUpdateWithoutTasksInput>, Prisma.LeadUncheckedUpdateWithoutTasksInput>
 }
 
+export type LeadCreateNestedOneWithoutEmailsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutEmailsInput, Prisma.LeadUncheckedCreateWithoutEmailsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutEmailsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneWithoutEmailsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutEmailsInput, Prisma.LeadUncheckedCreateWithoutEmailsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutEmailsInput
+  upsert?: Prisma.LeadUpsertWithoutEmailsInput
+  disconnect?: Prisma.LeadWhereInput | boolean
+  delete?: Prisma.LeadWhereInput | boolean
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutEmailsInput, Prisma.LeadUpdateWithoutEmailsInput>, Prisma.LeadUncheckedUpdateWithoutEmailsInput>
+}
+
 export type LeadCreateWithoutBusinessLineInput = {
   company: string
   contactName: string
@@ -1044,6 +1067,7 @@ export type LeadCreateWithoutBusinessLineInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutBusinessLineInput = {
@@ -1074,6 +1098,7 @@ export type LeadUncheckedCreateWithoutBusinessLineInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutBusinessLineInput = {
@@ -1159,6 +1184,7 @@ export type LeadCreateWithoutConvertedCustomerInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutConvertedCustomerInput = {
@@ -1189,6 +1215,7 @@ export type LeadUncheckedCreateWithoutConvertedCustomerInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutConvertedCustomerInput = {
@@ -1244,6 +1271,7 @@ export type LeadCreateWithoutProjectsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutProjectsInput = {
@@ -1274,6 +1302,7 @@ export type LeadUncheckedCreateWithoutProjectsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutProjectsInput = {
@@ -1319,6 +1348,7 @@ export type LeadUpdateWithoutProjectsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutProjectsInput = {
@@ -1349,6 +1379,7 @@ export type LeadUncheckedUpdateWithoutProjectsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutFollowUpsInput = {
@@ -1378,6 +1409,7 @@ export type LeadCreateWithoutFollowUpsInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutFollowUpsInput = {
@@ -1408,6 +1440,7 @@ export type LeadUncheckedCreateWithoutFollowUpsInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutFollowUpsInput = {
@@ -1453,6 +1486,7 @@ export type LeadUpdateWithoutFollowUpsInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutFollowUpsInput = {
@@ -1483,6 +1517,7 @@ export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutQuotesInput = {
@@ -1512,6 +1547,7 @@ export type LeadCreateWithoutQuotesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutQuotesInput = {
@@ -1542,6 +1578,7 @@ export type LeadUncheckedCreateWithoutQuotesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutQuotesInput = {
@@ -1587,6 +1624,7 @@ export type LeadUpdateWithoutQuotesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutQuotesInput = {
@@ -1617,6 +1655,7 @@ export type LeadUncheckedUpdateWithoutQuotesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutTasksInput = {
@@ -1646,6 +1685,7 @@ export type LeadCreateWithoutTasksInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutTasksInput = {
@@ -1676,6 +1716,7 @@ export type LeadUncheckedCreateWithoutTasksInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutTasksInput = {
@@ -1721,6 +1762,7 @@ export type LeadUpdateWithoutTasksInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutTasksInput = {
@@ -1750,6 +1792,145 @@ export type LeadUncheckedUpdateWithoutTasksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutEmailsInput = {
+  company: string
+  contactName: string
+  country?: string | null
+  phone?: string | null
+  email?: string | null
+  whatsapp?: string | null
+  source?: $Enums.LeadSource
+  sourceWebsite?: string | null
+  status?: $Enums.LeadStatus
+  temperature?: $Enums.LeadTemperature
+  grade?: $Enums.LeadGrade
+  requirement?: string | null
+  interestProducts?: string | null
+  inquiryContent?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  expectedClosing?: Date | string | null
+  nextFollowUp?: Date | string | null
+  remark?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  businessLine: Prisma.BusinessLineCreateNestedOneWithoutLeadsInput
+  convertedCustomer?: Prisma.CustomerCreateNestedOneWithoutConvertedFromInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  quotes?: Prisma.QuoteCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutEmailsInput = {
+  id?: number
+  company: string
+  contactName: string
+  country?: string | null
+  phone?: string | null
+  email?: string | null
+  whatsapp?: string | null
+  source?: $Enums.LeadSource
+  sourceWebsite?: string | null
+  status?: $Enums.LeadStatus
+  temperature?: $Enums.LeadTemperature
+  grade?: $Enums.LeadGrade
+  requirement?: string | null
+  interestProducts?: string | null
+  inquiryContent?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  expectedClosing?: Date | string | null
+  nextFollowUp?: Date | string | null
+  remark?: string | null
+  businessLineId: number
+  convertedCustomerId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutEmailsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutEmailsInput, Prisma.LeadUncheckedCreateWithoutEmailsInput>
+}
+
+export type LeadUpsertWithoutEmailsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutEmailsInput, Prisma.LeadUncheckedUpdateWithoutEmailsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutEmailsInput, Prisma.LeadUncheckedCreateWithoutEmailsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutEmailsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutEmailsInput, Prisma.LeadUncheckedUpdateWithoutEmailsInput>
+}
+
+export type LeadUpdateWithoutEmailsInput = {
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
+  sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  temperature?: Prisma.EnumLeadTemperatureFieldUpdateOperationsInput | $Enums.LeadTemperature
+  grade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
+  requirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inquiryContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  expectedClosing?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutLeadsNestedInput
+  convertedCustomer?: Prisma.CustomerUpdateOneWithoutConvertedFromNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutEmailsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
+  sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  temperature?: Prisma.EnumLeadTemperatureFieldUpdateOperationsInput | $Enums.LeadTemperature
+  grade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
+  requirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inquiryContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  expectedClosing?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
+  convertedCustomerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
 }
 
@@ -1806,6 +1987,7 @@ export type LeadUpdateWithoutBusinessLineInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutBusinessLineInput = {
@@ -1836,6 +2018,7 @@ export type LeadUncheckedUpdateWithoutBusinessLineInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutBusinessLineInput = {
@@ -1917,6 +2100,7 @@ export type LeadUpdateWithoutConvertedCustomerInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutConvertedCustomerInput = {
@@ -1947,6 +2131,7 @@ export type LeadUncheckedUpdateWithoutConvertedCustomerInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutLeadNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutConvertedCustomerInput = {
@@ -1985,6 +2170,7 @@ export type LeadCountOutputType = {
   quotes: number
   tasks: number
   projects: number
+  emails: number
 }
 
 export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1992,6 +2178,7 @@ export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   quotes?: boolean | LeadCountOutputTypeCountQuotesArgs
   tasks?: boolean | LeadCountOutputTypeCountTasksArgs
   projects?: boolean | LeadCountOutputTypeCountProjectsArgs
+  emails?: boolean | LeadCountOutputTypeCountEmailsArgs
 }
 
 /**
@@ -2032,6 +2219,13 @@ export type LeadCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailWhereInput
+}
+
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2064,6 +2258,7 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   quotes?: boolean | Prisma.Lead$quotesArgs<ExtArgs>
   tasks?: boolean | Prisma.Lead$tasksArgs<ExtArgs>
   projects?: boolean | Prisma.Lead$projectsArgs<ExtArgs>
+  emails?: boolean | Prisma.Lead$emailsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -2160,6 +2355,7 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   quotes?: boolean | Prisma.Lead$quotesArgs<ExtArgs>
   tasks?: boolean | Prisma.Lead$tasksArgs<ExtArgs>
   projects?: boolean | Prisma.Lead$projectsArgs<ExtArgs>
+  emails?: boolean | Prisma.Lead$emailsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2180,6 +2376,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     quotes: Prisma.$QuotePayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
+    emails: Prisma.$EmailPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2606,6 +2803,7 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
   quotes<T extends Prisma.Lead$quotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Lead$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Lead$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emails<T extends Prisma.Lead$emailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$emailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3172,6 +3370,30 @@ export type Lead$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * Lead.emails
+ */
+export type Lead$emailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Email
+   */
+  select?: Prisma.EmailSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Email
+   */
+  omit?: Prisma.EmailOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailInclude<ExtArgs> | null
+  where?: Prisma.EmailWhereInput
+  orderBy?: Prisma.EmailOrderByWithRelationInput | Prisma.EmailOrderByWithRelationInput[]
+  cursor?: Prisma.EmailWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailScalarFieldEnum | Prisma.EmailScalarFieldEnum[]
 }
 
 /**

@@ -71,6 +71,8 @@ export const ModelName = {
   Document: 'Document',
   Invoice: 'Invoice',
   Payment: 'Payment',
+  EmailConfig: 'EmailConfig',
+  Email: 'Email',
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage'
@@ -495,6 +497,49 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const EmailConfigScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  host: 'host',
+  port: 'port',
+  secure: 'secure',
+  username: 'username',
+  password: 'password',
+  fromName: 'fromName',
+  fromEmail: 'fromEmail',
+  imapHost: 'imapHost',
+  imapPort: 'imapPort',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailConfigScalarFieldEnum = (typeof EmailConfigScalarFieldEnum)[keyof typeof EmailConfigScalarFieldEnum]
+
+
+export const EmailScalarFieldEnum = {
+  id: 'id',
+  direction: 'direction',
+  subject: 'subject',
+  body: 'body',
+  bodyHtml: 'bodyHtml',
+  fromAddr: 'fromAddr',
+  toAddr: 'toAddr',
+  ccAddr: 'ccAddr',
+  messageId: 'messageId',
+  inReplyTo: 'inReplyTo',
+  status: 'status',
+  customerId: 'customerId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  sentAt: 'sentAt',
+  receivedAt: 'receivedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
 
 
 export const IMPlatformScalarFieldEnum = {

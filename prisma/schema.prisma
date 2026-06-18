@@ -265,6 +265,7 @@ model Lead {
   quotes             Quote[]
   tasks              Task[]
   projects           Project[]
+  emails             Email[]
 
   @@index([businessLineId])
   @@index([status])
@@ -302,6 +303,7 @@ model Customer {
   tasks         Task[]
   orders        Order[]
   invoices      Invoice[]
+  emails        Email[]
   convertedFrom Lead[]        @relation("ConvertedLead")
 
   @@index([businessLineId])
@@ -327,6 +329,7 @@ model Contact {
   customer Customer @relation(fields: [customerId], references: [id])
   orders   Order[]
   quotes   Quote[]
+  emails   Email[]
 
   @@index([customerId])
 }
@@ -714,6 +717,52 @@ model Payment {
   invoice Invoice @relation(fields: [invoiceId], references: [id])
 
   @@index([invoiceId])
+}
+
+model EmailConfig {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  host        String
+  port        Int
+  secure      Boolean  @default(true)
+  username    String
+  password    String
+  fromName    String
+  fromEmail   String
+  imapHost    String?
+  imapPort    Int?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Email {
+  id          Int      @id @default(autoincrement())
+  direction   String   // in / out
+  subject     String
+  body        String
+  bodyHtml    String?
+  fromAddr    String
+  toAddr      String
+  ccAddr      String?
+  messageId   String?  @unique
+  inReplyTo   String?
+  status      String   @default("sent") // sent / delivered / failed / read
+  customerId  Int?
+  contactId   Int?
+  leadId      Int?
+  sentAt      DateTime?
+  receivedAt  DateTime?
+  createdAt   DateTime @default(now())
+
+  customer Customer? @relation(fields: [customerId], references: [id])
+  contact  Contact?  @relation(fields: [contactId], references: [id])
+  lead     Lead?     @relation(fields: [leadId], references: [id])
+
+  @@index([customerId])
+  @@index([leadId])
+  @@index([direction])
+  @@index([createdAt])
 }
 
 model IMPlatform {
