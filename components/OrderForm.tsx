@@ -1,6 +1,6 @@
 "use client";
 
-import { Customer, Project, Quote, Contact } from "@/lib/generated/prisma/client";
+import { Customer, Project, Quote, Contact, BusinessLine } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { OrderStatusOptions, CurrencyOptions } from "@/lib/enums";
 import FormField from "./ui/FormField";
@@ -11,6 +11,7 @@ interface OrderFormProps {
   projects: Project[];
   quotes: Quote[];
   contacts: Contact[];
+  businessLines: BusinessLine[];
   order?: {
     id?: number;
     orderNo?: string;
@@ -19,6 +20,7 @@ interface OrderFormProps {
     projectId: number | null;
     quoteId: number | null;
     contactId: number | null;
+    businessLineId: number | null;
     orderStatus: string;
     totalAmount: number | null;
     currency: string;
@@ -38,6 +40,7 @@ export default function OrderForm({
   projects,
   quotes,
   contacts,
+  businessLines,
   order,
   defaultCustomerId,
   defaultQuoteId,
@@ -86,6 +89,14 @@ export default function OrderForm({
               options={contacts.map((c) => ({ value: String(c.id), label: c.name }))}
               placeholder="请选择联系人"
               defaultValue={order?.contactId || ""}
+            />
+          </FormField>
+          <FormField label="业务线">
+            <Select
+              name="businessLineId"
+              options={businessLines.map((bl) => ({ value: String(bl.id), label: bl.name }))}
+              placeholder="请选择业务线"
+              defaultValue={order?.businessLineId || ""}
             />
           </FormField>
           <FormField label="订单状态">
