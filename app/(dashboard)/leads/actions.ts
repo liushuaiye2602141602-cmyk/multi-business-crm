@@ -176,3 +176,48 @@ export async function convertLeadToCustomer(leadId: number) {
   revalidatePath("/customers");
   redirect(`/customers/${customer.id}`);
 }
+
+export async function addLeadActivity(leadId: number, formData: FormData) {
+  const type = (formData.get("type") as string) || "note";
+  const content = formData.get("content") as string;
+
+  if (!content) {
+    return { success: false, error: "跟进内容不能为空" };
+  }
+
+  const activity = await prisma.leadActivity.create({
+    data: {
+      leadId,
+      type,
+      content,
+    },
+  });
+
+  revalidatePath(`/leads/${leadId}`);
+  return { success: true, activity };
+}
+
+export async function updateLeadStatus(leadId: number, status: string) {
+  const validStatuses = ["NEW", "CONTACTED", "QUALIFIED", "LOST"];
+  if (!validStatuses.includes(status)) {
+    return { success: false, error: "无效的状态" };
+  }
+
+  await prisma.lead.update({
+    where: { id: leadId },
+    data: { status: status as any },
+  });
+
+  revalidatePath(`/leads/${leadId}`);
+  return { success: true };
+}
+
+export async function updateLeadOwner(leadId: number, ownerName: string) {
+  await prisma.lead.update({
+    where: { id: leadId },
+    data: { ownerName: ownerName || null },
+  });
+
+  revalidatePath(`/leads/${leadId}`);
+  return { success: true };
+}

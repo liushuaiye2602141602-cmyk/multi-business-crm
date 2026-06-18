@@ -225,6 +225,47 @@ Best regards`,
     }
   }
   console.log("✅ 跟进模板已创建（6条）");
+
+  // ==================== 测试线索 ====================
+  const leads = [
+    { company: "Acme Corp", contactName: "John Smith", country: "USA", source: "WEBSITE" as const, status: "NEW" as const, email: "john@acme.com" },
+    { company: "Global Trading Ltd", contactName: "Sarah Chen", country: "UK", source: "FACEBOOK" as const, status: "CONTACTED" as const, email: "sarah@globaltrading.com" },
+    { company: "Tech Solutions GmbH", contactName: "Hans Mueller", country: "Germany", source: "MANUAL_OUTREACH" as const, status: "QUALIFIED" as const, email: "hans@techsol.de" },
+    { company: "Sakura Industries", contactName: "Yuki Tanaka", country: "Japan", source: "TIKTOK" as const, status: "NEW" as const, email: "yuki@sakura.jp" },
+    { company: "Lost Prospect Inc", contactName: "Mike Brown", country: "Canada", source: "EMAIL" as const, status: "LOST" as const, email: "mike@lostprospect.ca" },
+  ];
+
+  for (const l of leads) {
+    await prisma.lead.upsert({
+      where: { id: 0 }, // always fails -> catch below
+      update: {},
+      create: {
+        company: l.company,
+        contactName: l.contactName,
+        country: l.country,
+        source: l.source,
+        status: l.status,
+        email: l.email,
+        businessLineId: blRecords[0].id,
+      },
+    }).catch(async () => {
+      const existing = await prisma.lead.findFirst({ where: { company: l.company } });
+      if (!existing) {
+        await prisma.lead.create({
+          data: {
+            company: l.company,
+            contactName: l.contactName,
+            country: l.country,
+            source: l.source,
+            status: l.status,
+            email: l.email,
+            businessLineId: blRecords[0].id,
+          },
+        });
+      }
+    });
+  }
+  console.log("✅ 测试线索已创建（5条）");
 }
 
 main()

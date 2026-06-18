@@ -10,6 +10,7 @@
  */
 export type * from './models/BusinessLine'
 export type * from './models/Lead'
+export type * from './models/LeadActivity'
 export type * from './models/Customer'
 export type * from './models/Contact'
 export type * from './models/Project'

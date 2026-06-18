@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   BusinessLine: 'BusinessLine',
   Lead: 'Lead',
+  LeadActivity: 'LeadActivity',
   Customer: 'Customer',
   Contact: 'Contact',
   Project: 'Project',
@@ -427,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "businessLine" | "lead" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage"
+    modelProps: "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -576,6 +577,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadActivity: {
+      payload: Prisma.$LeadActivityPayload<ExtArgs>
+      fields: Prisma.LeadActivityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        findMany: {
+          args: Prisma.LeadActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>[]
+        }
+        create: {
+          args: Prisma.LeadActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        createMany: {
+          args: Prisma.LeadActivityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadActivityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        update: {
+          args: Prisma.LeadActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadActivityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadActivityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadActivityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadActivityPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadActivity>
+        }
+        groupBy: {
+          args: Prisma.LeadActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadActivityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadActivityCountAggregateOutputType> | number
         }
       }
     }
@@ -2579,11 +2654,24 @@ export const LeadScalarFieldEnum = {
   remark: 'remark',
   businessLineId: 'businessLineId',
   convertedCustomerId: 'convertedCustomerId',
+  ownerId: 'ownerId',
+  ownerName: 'ownerName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const LeadActivityScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  type: 'type',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadActivityScalarFieldEnum = (typeof LeadActivityScalarFieldEnum)[keyof typeof LeadActivityScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {
@@ -3679,6 +3767,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   businessLine?: Prisma.BusinessLineOmit
   lead?: Prisma.LeadOmit
+  leadActivity?: Prisma.LeadActivityOmit
   customer?: Prisma.CustomerOmit
   contact?: Prisma.ContactOmit
   project?: Prisma.ProjectOmit

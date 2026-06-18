@@ -264,6 +264,8 @@ model Lead {
   remark          String?
   businessLineId  Int
   convertedCustomerId Int?
+  ownerId         Int?
+  ownerName       String?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -274,12 +276,27 @@ model Lead {
   tasks              Task[]
   projects           Project[]
   emails             Email[]
+  leadActivities    LeadActivity[]
 
   @@index([businessLineId])
   @@index([status])
   @@index([temperature])
   @@index([grade])
   @@index([nextFollowUp])
+  @@index([ownerId])
+}
+
+model LeadActivity {
+  id        Int      @id @default(autoincrement())
+  leadId    Int
+  type      String   @default("note") // call / email / whatsapp / note
+  content   String
+  createdAt DateTime @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+  @@index([createdAt])
 }
 
 model Customer {

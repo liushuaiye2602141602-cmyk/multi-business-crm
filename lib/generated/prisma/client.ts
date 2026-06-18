@@ -52,6 +52,11 @@ export type BusinessLine = Prisma.BusinessLineModel
  */
 export type Lead = Prisma.LeadModel
 /**
+ * Model LeadActivity
+ * 
+ */
+export type LeadActivity = Prisma.LeadActivityModel
+/**
  * Model Customer
  * 
  */

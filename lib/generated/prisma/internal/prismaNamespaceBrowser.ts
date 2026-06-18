@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   BusinessLine: 'BusinessLine',
   Lead: 'Lead',
+  LeadActivity: 'LeadActivity',
   Customer: 'Customer',
   Contact: 'Contact',
   Project: 'Project',
@@ -134,11 +135,24 @@ export const LeadScalarFieldEnum = {
   remark: 'remark',
   businessLineId: 'businessLineId',
   convertedCustomerId: 'convertedCustomerId',
+  ownerId: 'ownerId',
+  ownerName: 'ownerName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const LeadActivityScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  type: 'type',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadActivityScalarFieldEnum = (typeof LeadActivityScalarFieldEnum)[keyof typeof LeadActivityScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {

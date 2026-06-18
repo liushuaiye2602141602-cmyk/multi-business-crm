@@ -13,7 +13,7 @@ import Card from "@/components/ui/Card";
 import DetailField from "@/components/ui/DetailField";
 import AIAnalysisButton from "@/components/AIAnalysisButton";
 import AIAnalysisResult from "@/components/AIAnalysisResult";
-import { convertLeadToCustomer } from "../actions";
+import { convertLeadToCustomer, addLeadActivity, updateLeadStatus, updateLeadOwner } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +25,7 @@ export default async function LeadDetailPage({
   const { id } = await params;
   const leadId = parseInt(id);
 
-  const [lead, latestAnalysis] = await Promise.all([
+  const [lead, latestAnalysis, activities] = await Promise.all([
     prisma.lead.findUnique({
       where: { id: leadId },
       include: {
@@ -39,6 +39,10 @@ export default async function LeadDetailPage({
     }),
     prisma.aIAnalysis.findFirst({
       where: { targetType: "LEAD", targetId: leadId },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.leadActivity.findMany({
+      where: { leadId },
       orderBy: { createdAt: "desc" },
     }),
   ]);
@@ -80,6 +84,7 @@ export default async function LeadDetailPage({
                 <StatusBadge label={LeadTemperatureLabel[lead.temperature] || lead.temperature} variant={lead.temperature === "HOT" ? "danger" : lead.temperature === "WARM" ? "warning" : "default"} />
                 <span className="text-sm text-gray-500">{lead.businessLine.name}</span>
                 <span className="text-sm text-gray-500">来源: {LeadSourceLabel[lead.source] || lead.source}</span>
+                {lead.ownerName && <span className="text-sm text-gray-500">负责人: {lead.ownerName}</span>}
               </div>
             </div>
           </div>
@@ -340,6 +345,95 @@ export default async function LeadDetailPage({
               <p className="text-sm text-gray-700">{lead.remark}</p>
             </Card>
           )}
+
+          {/* 状态切换 */}
+          <Card>
+            <h3 className="text-base font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">快速切换状态</h3>
+            <div className="flex flex-wrap gap-2">
+              {["NEW", "CONTACTED", "QUALIFIED", "LOST"].map((s) => (
+                <form key={s} action={async () => { "use server"; await updateLeadStatus(lead.id, s); }}>
+                  <button
+                    type="submit"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                      lead.status === s
+                        ? "bg-blue-600 text-white border-blue-600"
+                        : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    {s === "NEW" ? "新线索" : s === "CONTACTED" ? "已联系" : s === "QUALIFIED" ? "已确认" : "已流失"}
+                  </button>
+                </form>
+              ))}
+            </div>
+          </Card>
+
+          {/* 负责人 */}
+          <Card>
+            <h3 className="text-base font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">负责人</h3>
+            <form action={async (formData: FormData) => { "use server"; await updateLeadOwner(lead.id, formData.get("ownerName") as string); }} className="flex gap-2">
+              <input
+                type="text"
+                name="ownerName"
+                defaultValue={lead.ownerName || ""}
+                placeholder="输入负责人姓名"
+                className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg text-sm"
+              />
+              <button type="submit" className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
+                保存
+              </button>
+            </form>
+          </Card>
+
+          {/* 跟进活动记录 */}
+          <Card>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+              <h3 className="text-base font-semibold text-gray-900">跟进活动 ({activities.length})</h3>
+            </div>
+
+            {/* 添加活动表单 */}
+            <form action={async (formData: FormData) => { "use server"; await addLeadActivity(lead.id, formData); }} className="mb-4 space-y-2">
+              <select name="type" className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm">
+                <option value="note">备注</option>
+                <option value="call">电话</option>
+                <option value="email">邮件</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+              <textarea
+                name="content"
+                rows={2}
+                placeholder="输入跟进内容..."
+                className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm"
+                required
+              />
+              <button type="submit" className="w-full px-3 py-1.5 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700">
+                添加活动
+              </button>
+            </form>
+
+            {/* 活动列表 */}
+            {activities.length === 0 ? (
+              <p className="text-sm text-gray-400 py-4 text-center">暂无活动记录</p>
+            ) : (
+              <div className="space-y-3">
+                {activities.map((a) => (
+                  <div key={a.id} className="p-3 rounded-lg bg-gray-50">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                        a.type === "call" ? "bg-blue-100 text-blue-700" :
+                        a.type === "email" ? "bg-purple-100 text-purple-700" :
+                        a.type === "whatsapp" ? "bg-green-100 text-green-700" :
+                        "bg-gray-100 text-gray-700"
+                      }`}>
+                        {a.type === "call" ? "电话" : a.type === "email" ? "邮件" : a.type === "whatsapp" ? "WhatsApp" : "备注"}
+                      </span>
+                      <span className="text-xs text-gray-400">{formatDateTime(a.createdAt)}</span>
+                    </div>
+                    <p className="text-sm text-gray-900">{a.content}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
         </div>
       </div>
     </div>
