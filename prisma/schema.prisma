@@ -292,6 +292,10 @@ model Customer {
   source         LeadSource?
   sourceWebsite  String?
   remark         String?
+  ownerId         Int?
+  ownerName       String?
+  poolEnteredAt   DateTime?
+  poolReason      String?        // manual / auto_inactive / auto_no_followup
   businessLineId Int
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
@@ -307,6 +311,7 @@ model Customer {
   emails        Email[]
   convertedFrom Lead[]        @relation("ConvertedLead")
 
+  @@index([ownerId])
   @@index([businessLineId])
   @@index([customerStatus])
   @@index([customerType])

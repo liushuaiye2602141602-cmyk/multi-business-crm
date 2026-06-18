@@ -2378,6 +2378,10 @@ export const CustomerScalarFieldEnum = {
   source: 'source',
   sourceWebsite: 'sourceWebsite',
   remark: 'remark',
+  ownerId: 'ownerId',
+  ownerName: 'ownerName',
+  poolEnteredAt: 'poolEnteredAt',
+  poolReason: 'poolReason',
   businessLineId: 'businessLineId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
