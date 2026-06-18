@@ -142,6 +142,16 @@ export type Invoice = Prisma.InvoiceModel
  */
 export type Payment = Prisma.PaymentModel
 /**
+ * Model EmailConfig
+ * 
+ */
+export type EmailConfig = Prisma.EmailConfigModel
+/**
+ * Model Email
+ * 
+ */
+export type Email = Prisma.EmailModel
+/**
  * Model IMPlatform
  * 
  */
