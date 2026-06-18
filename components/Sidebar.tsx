@@ -17,6 +17,7 @@ import {
   TestTube,
   Settings,
   Webhook,
+  Anchor,
   ClipboardList,
   BookOpen,
   Home,
@@ -60,6 +61,7 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/leads", label: "线索池", icon: Users },
       { href: "/customers", label: "客户库", icon: UserCheck },
+      { href: "/customers/pool", label: "客户公海", icon: Anchor },
       { href: "/contacts", label: "联系人", icon: UserCog },
       { href: "/projects", label: "商机项目", icon: FolderKanban },
       { href: "/follow-ups", label: "跟进记录", icon: MessageSquare },

@@ -11,6 +11,9 @@ export type IntentType =
   | "update_customer_grade"
   | "complete_task"
   | "create_quote"
+  | "query_pool"
+  | "claim_customer"
+  | "return_to_pool"
   | "help"
   | "unknown";
 
@@ -243,6 +246,50 @@ export const IM_TOOLS = [
           notes: { type: "string", description: "备注" },
         },
         required: ["customerName"],
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "query_pool",
+      description: "查询公海客户。当用户问到公海、无人负责的客户、可认领的客户时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          country: { type: "string", description: "按国家筛选" },
+          limit: { type: "number", description: "返回数量，默认10" },
+        },
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "claim_customer",
+      description: "从公海认领客户。当用户提到要认领客户、接手客户时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          company: { type: "string", description: "客户公司名称" },
+          ownerName: { type: "string", description: "认领人姓名" },
+        },
+        required: ["company", "ownerName"],
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "return_to_pool",
+      description: "将客户退回公海。当用户提到要退回客户、放弃客户、退回公海时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          company: { type: "string", description: "客户公司名称" },
+          reason: { type: "string", description: "退回原因" },
+        },
+        required: ["company"],
       },
     },
   },

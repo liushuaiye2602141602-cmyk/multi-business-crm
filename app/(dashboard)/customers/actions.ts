@@ -64,6 +64,121 @@ export async function updateCustomer(id: number, formData: FormData) {
   redirect(`/customers/${id}`);
 }
 
+import { createActivityLog } from "@/lib/activity-log";
+
+// ==================== 客户公海操作 ====================
+
+// 认领客户（从公海取出）
+export async function claimCustomer(customerId: number, ownerName: string) {
+  if (!ownerName) {
+    throw new Error("认领人姓名不能为空");
+  }
+
+  const customer = await prisma.customer.findUnique({ where: { id: customerId } });
+  if (!customer) throw new Error("客户不存在");
+  if (customer.ownerId) throw new Error("该客户已被其他人认领");
+
+  await prisma.customer.update({
+    where: { id: customerId },
+    data: {
+      ownerId: 1, // 默认用户ID，待接入认证后替换
+      ownerName,
+      poolEnteredAt: null,
+      poolReason: null,
+    },
+  });
+
+  await createActivityLog({
+    action: "认领客户",
+    entityType: "客户",
+    entityId: customerId,
+    entityName: customer.company,
+    description: `${ownerName} 从公海认领了客户: ${customer.company}`,
+  });
+
+  revalidatePath("/customers/pool");
+  revalidatePath("/customers");
+}
+
+// 退回公海
+export async function returnToPool(customerId: number, reason: string = "manual") {
+  const customer = await prisma.customer.findUnique({ where: { id: customerId } });
+  if (!customer) throw new Error("客户不存在");
+
+  await prisma.customer.update({
+    where: { id: customerId },
+    data: {
+      ownerId: null,
+      ownerName: null,
+      poolEnteredAt: new Date(),
+      poolReason: reason,
+    },
+  });
+
+  await createActivityLog({
+    action: "退回公海",
+    entityType: "客户",
+    entityId: customerId,
+    entityName: customer.company,
+    description: `客户 ${customer.company} 已退回公海，原因: ${reason}`,
+  });
+
+  revalidatePath("/customers/pool");
+  revalidatePath("/customers");
+}
+
+// 批量自动退回（无跟进超过指定天数的客户）
+export async function autoReturnInactiveCustomers(days: number = 30) {
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - days);
+
+  const customers = await prisma.customer.findMany({
+    where: {
+      ownerId: { not: null },
+      followUps: {
+        none: {
+          followUpDate: { gte: cutoffDate },
+        },
+      },
+    },
+    include: {
+      followUps: { orderBy: { followUpDate: "desc" }, take: 1 },
+    },
+  });
+
+  let returnedCount = 0;
+  for (const customer of customers) {
+    // If the customer has no follow-ups at all, or the last follow-up is before the cutoff
+    const lastFollowUp = customer.followUps[0];
+    if (!lastFollowUp || new Date(lastFollowUp.followUpDate) < cutoffDate) {
+      await prisma.customer.update({
+        where: { id: customer.id },
+        data: {
+          ownerId: null,
+          ownerName: null,
+          poolEnteredAt: new Date(),
+          poolReason: "auto_inactive",
+        },
+      });
+
+      await createActivityLog({
+        action: "自动退回公海",
+        entityType: "客户",
+        entityId: customer.id,
+        entityName: customer.company,
+        description: `客户 ${customer.company} 因 ${days} 天无跟进自动退回公海`,
+      });
+
+      returnedCount++;
+    }
+  }
+
+  revalidatePath("/customers/pool");
+  revalidatePath("/customers");
+
+  return returnedCount;
+}
+
 export async function deleteCustomer(id: number) {
   // 检查是否有关联数据
   const customer = await prisma.customer.findUnique({
