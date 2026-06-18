@@ -109,6 +109,14 @@ export async function updateQuoteStatus(quoteId: number, status: string) {
     data: { status: status as any },
   });
 
+  // Auto-create follow-up task when quote is sent
+  if (status === "SENT") {
+    try {
+      const { createFollowUpTaskForQuote } = await import("@/lib/domain/auto-tasks");
+      await createFollowUpTaskForQuote(quoteId);
+    } catch {}
+  }
+
   return { success: true };
 }
 

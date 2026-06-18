@@ -125,6 +125,14 @@ export async function updateOrderStatus(orderId: number, status: string) {
     data: { orderStatus: status as any },
   });
 
+  // Auto-create production task when order is confirmed
+  if (status === "CONFIRMED") {
+    try {
+      const { createProductionTaskForOrder } = await import("@/lib/domain/auto-tasks");
+      await createProductionTaskForOrder(orderId);
+    } catch {}
+  }
+
   return { success: true };
 }
 

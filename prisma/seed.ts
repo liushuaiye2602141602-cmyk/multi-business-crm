@@ -460,6 +460,34 @@ Best regards`,
     }
   }
   console.log("✅ 订单数据已创建（2条）");
+
+  // ==================== Tasks ====================
+  console.log("\n📦 创建任务数据...");
+
+  const leadsForTasks = await prisma.lead.findMany({ take: 2 });
+  const customersForTasks = await prisma.customer.findMany({ take: 2 });
+  const ordersForTasks = await prisma.order.findMany({ take: 1 });
+
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const nextWeek = new Date();
+  nextWeek.setDate(nextWeek.getDate() + 7);
+
+  const tasksData = [
+    { title: "联系 Acme Corp 首次沟通", type: "CALL", status: "PENDING", priority: "HIGH", dueDate: nextWeek, leadId: leadsForTasks[0]?.id },
+    { title: "跟进 European Imports 报价反馈", type: "FOLLOW_UP", status: "PENDING", priority: "MEDIUM", dueDate: nextWeek, customerId: customersForTasks[1]?.id },
+    { title: "发送产品目录给 Pacific Rim", type: "EMAIL", status: "COMPLETED", priority: "LOW", dueDate: yesterday, completedAt: new Date(), customerId: customersForTasks[0]?.id },
+    { title: "检查订单 ORD-2026-001 生产进度", type: "FOLLOW_UP", status: "PENDING", priority: "HIGH", dueDate: nextWeek, orderId: ordersForTasks[0]?.id },
+    { title: "已过期：回电 Middle East Supplies", type: "CALL", status: "PENDING", priority: "URGENT", dueDate: yesterday, customerId: customersForTasks[2]?.id || customersForTasks[0]?.id },
+  ];
+
+  for (const t of tasksData) {
+    if (t.dueDate) {
+      await prisma.task.create({ data: t as any });
+    }
+  }
+  console.log("✅ 任务数据已创建（5条）");
 }
 
 main()

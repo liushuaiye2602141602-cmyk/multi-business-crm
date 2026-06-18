@@ -62,3 +62,19 @@ export async function markTaskComplete(id: number) {
   });
   revalidatePath("/tasks");
 }
+
+export async function getOverdueTasks() {
+  const now = new Date();
+  const tasks = await prisma.task.findMany({
+    where: {
+      status: "PENDING",
+      dueDate: { lt: now },
+    },
+    orderBy: { dueDate: "asc" },
+    include: {
+      lead: { select: { company: true } },
+      customer: { select: { company: true } },
+    },
+  });
+  return tasks;
+}

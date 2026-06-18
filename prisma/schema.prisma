@@ -476,6 +476,7 @@ model Quote {
   customerContact Contact?        @relation(fields: [customerContactId], references: [id])
   items           QuoteItem[]
   orders          Order[]
+  tasks           Task[]
 
   @@index([leadId])
   @@index([customerId])
@@ -496,12 +497,18 @@ model Task {
   leadId      Int?
   customerId  Int?
   projectId   Int?
+  quoteId      Int?
+  orderId      Int?
+  ownerId      Int?
+  ownerName    String?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
   lead     Lead?     @relation(fields: [leadId], references: [id])
   customer Customer? @relation(fields: [customerId], references: [id])
   project  Project?  @relation(fields: [projectId], references: [id])
+  quote Quote? @relation(fields: [quoteId], references: [id])
+  order Order? @relation(fields: [orderId], references: [id])
 
   @@index([leadId])
   @@index([customerId])
@@ -719,6 +726,7 @@ model Order {
   businessLine BusinessLine? @relation(fields: [businessLineId], references: [id])
   items    OrderItem[]
   invoices Invoice[]
+  tasks    Task[]
 
   @@index([customerId])
   @@index([projectId])

@@ -48,6 +48,12 @@ export async function createLead(formData: FormData) {
     description: `创建线索: ${lead.company} - ${lead.contactName}`,
   });
 
+  // Auto-create follow-up task
+  try {
+    const { createFollowUpTaskForLead } = await import("@/lib/domain/auto-tasks");
+    await createFollowUpTaskForLead(lead.id);
+  } catch {}
+
   revalidatePath("/leads");
   redirect(`/leads/${lead.id}`);
 }
