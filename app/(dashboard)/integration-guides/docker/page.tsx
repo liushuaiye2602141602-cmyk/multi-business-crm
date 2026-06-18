@@ -36,7 +36,7 @@ export default function DockerGuidePage() {
           </div>
           <div className="flex justify-between py-2">
             <span className="text-gray-500">DATABASE_URL</span>
-            <span className="font-mono text-xs">postgresql://postgres:123456@localhost:5433/multi_business_crm?schema=public</span>
+            <span className="font-mono text-xs">postgresql://postgres:YOUR_PASSWORD@localhost:5433/multi_business_crm?schema=public</span>
           </div>
         </div>
       </Card>
