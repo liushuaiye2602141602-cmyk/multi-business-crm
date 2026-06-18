@@ -65,6 +65,14 @@ enum CustomerStatus {
   BLACKLIST
 }
 
+enum CustomerLifecycleStage {
+  POTENTIAL
+  INTENT
+  FIRST_DEAL
+  REPEAT_DEAL
+  VIP
+}
+
 enum ProjectStatus {
   REQUIREMENT_CONFIRMING
   QUOTING
@@ -287,6 +295,7 @@ model Customer {
   industry       String?
   customerType   CustomerType   @default(UNKNOWN)
   customerStatus CustomerStatus @default(POTENTIAL)
+  lifecycleStage CustomerLifecycleStage @default(POTENTIAL)
   leadGrade      LeadGrade      @default(C)
   source         LeadSource?
   sourceWebsite  String?
@@ -410,6 +419,8 @@ model Quote {
   quantity           String?
   unitPrice          Decimal?    @db.Decimal(12, 2)
   totalPrice         Decimal?    @db.Decimal(12, 2)
+  exchangeRate       Decimal?    @db.Decimal(12, 6)
+  discountAmount     Decimal     @default(0) @db.Decimal(12, 2)
   currency           Currency    @default(USD)
   paymentTerms       String?
   deliveryTime       String?
@@ -661,6 +672,7 @@ model Order {
   businessLineId        Int?
   orderStatus           OrderStatus @default(DRAFT)
   totalAmount           Decimal?    @db.Decimal(12, 2)
+  exchangeRate          Decimal?    @db.Decimal(12, 6)
   currency              Currency    @default(USD)
   paymentTerm           String?
   deliveryTerm          String?

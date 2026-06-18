@@ -30,6 +30,8 @@ export type QuoteAvgAggregateOutputType = {
   id: number | null
   unitPrice: runtime.Decimal | null
   totalPrice: runtime.Decimal | null
+  exchangeRate: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
   validDays: number | null
   leadId: number | null
   customerId: number | null
@@ -41,6 +43,8 @@ export type QuoteSumAggregateOutputType = {
   id: number | null
   unitPrice: runtime.Decimal | null
   totalPrice: runtime.Decimal | null
+  exchangeRate: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
   validDays: number | null
   leadId: number | null
   customerId: number | null
@@ -57,6 +61,8 @@ export type QuoteMinAggregateOutputType = {
   quantity: string | null
   unitPrice: runtime.Decimal | null
   totalPrice: runtime.Decimal | null
+  exchangeRate: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
   currency: $Enums.Currency | null
   paymentTerms: string | null
   deliveryTime: string | null
@@ -85,6 +91,8 @@ export type QuoteMaxAggregateOutputType = {
   quantity: string | null
   unitPrice: runtime.Decimal | null
   totalPrice: runtime.Decimal | null
+  exchangeRate: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
   currency: $Enums.Currency | null
   paymentTerms: string | null
   deliveryTime: string | null
@@ -113,6 +121,8 @@ export type QuoteCountAggregateOutputType = {
   quantity: number
   unitPrice: number
   totalPrice: number
+  exchangeRate: number
+  discountAmount: number
   currency: number
   paymentTerms: number
   deliveryTime: number
@@ -138,6 +148,8 @@ export type QuoteAvgAggregateInputType = {
   id?: true
   unitPrice?: true
   totalPrice?: true
+  exchangeRate?: true
+  discountAmount?: true
   validDays?: true
   leadId?: true
   customerId?: true
@@ -149,6 +161,8 @@ export type QuoteSumAggregateInputType = {
   id?: true
   unitPrice?: true
   totalPrice?: true
+  exchangeRate?: true
+  discountAmount?: true
   validDays?: true
   leadId?: true
   customerId?: true
@@ -165,6 +179,8 @@ export type QuoteMinAggregateInputType = {
   quantity?: true
   unitPrice?: true
   totalPrice?: true
+  exchangeRate?: true
+  discountAmount?: true
   currency?: true
   paymentTerms?: true
   deliveryTime?: true
@@ -193,6 +209,8 @@ export type QuoteMaxAggregateInputType = {
   quantity?: true
   unitPrice?: true
   totalPrice?: true
+  exchangeRate?: true
+  discountAmount?: true
   currency?: true
   paymentTerms?: true
   deliveryTime?: true
@@ -221,6 +239,8 @@ export type QuoteCountAggregateInputType = {
   quantity?: true
   unitPrice?: true
   totalPrice?: true
+  exchangeRate?: true
+  discountAmount?: true
   currency?: true
   paymentTerms?: true
   deliveryTime?: true
@@ -336,6 +356,8 @@ export type QuoteGroupByOutputType = {
   quantity: string | null
   unitPrice: runtime.Decimal | null
   totalPrice: runtime.Decimal | null
+  exchangeRate: runtime.Decimal | null
+  discountAmount: runtime.Decimal
   currency: $Enums.Currency
   paymentTerms: string | null
   deliveryTime: string | null
@@ -387,6 +409,8 @@ export type QuoteWhereInput = {
   quantity?: Prisma.StringNullableFilter<"Quote"> | string | null
   unitPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFilter<"Quote"> | $Enums.Currency
   paymentTerms?: Prisma.StringNullableFilter<"Quote"> | string | null
   deliveryTime?: Prisma.StringNullableFilter<"Quote"> | string | null
@@ -421,6 +445,8 @@ export type QuoteOrderByWithRelationInput = {
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   unitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   totalPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   paymentTerms?: Prisma.SortOrderInput | Prisma.SortOrder
   deliveryTime?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -458,6 +484,8 @@ export type QuoteWhereUniqueInput = Prisma.AtLeast<{
   quantity?: Prisma.StringNullableFilter<"Quote"> | string | null
   unitPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFilter<"Quote"> | $Enums.Currency
   paymentTerms?: Prisma.StringNullableFilter<"Quote"> | string | null
   deliveryTime?: Prisma.StringNullableFilter<"Quote"> | string | null
@@ -492,6 +520,8 @@ export type QuoteOrderByWithAggregationInput = {
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   unitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   totalPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   paymentTerms?: Prisma.SortOrderInput | Prisma.SortOrder
   deliveryTime?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -528,6 +558,8 @@ export type QuoteScalarWhereWithAggregatesInput = {
   quantity?: Prisma.StringNullableWithAggregatesFilter<"Quote"> | string | null
   unitPrice?: Prisma.DecimalNullableWithAggregatesFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.DecimalNullableWithAggregatesFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.DecimalNullableWithAggregatesFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalWithAggregatesFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Quote"> | $Enums.Currency
   paymentTerms?: Prisma.StringNullableWithAggregatesFilter<"Quote"> | string | null
   deliveryTime?: Prisma.StringNullableWithAggregatesFilter<"Quote"> | string | null
@@ -555,6 +587,8 @@ export type QuoteCreateInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -585,6 +619,8 @@ export type QuoteUncheckedCreateInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -614,6 +650,8 @@ export type QuoteUpdateInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -644,6 +682,8 @@ export type QuoteUncheckedUpdateInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -674,6 +714,8 @@ export type QuoteCreateManyInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -701,6 +743,8 @@ export type QuoteUpdateManyMutationInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -725,6 +769,8 @@ export type QuoteUncheckedUpdateManyInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -763,6 +809,8 @@ export type QuoteCountOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   paymentTerms?: Prisma.SortOrder
   deliveryTime?: Prisma.SortOrder
@@ -786,6 +834,8 @@ export type QuoteAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   validDays?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -802,6 +852,8 @@ export type QuoteMaxOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   paymentTerms?: Prisma.SortOrder
   deliveryTime?: Prisma.SortOrder
@@ -830,6 +882,8 @@ export type QuoteMinOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   paymentTerms?: Prisma.SortOrder
   deliveryTime?: Prisma.SortOrder
@@ -853,6 +907,8 @@ export type QuoteSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  exchangeRate?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
   validDays?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -1038,6 +1094,14 @@ export type QuoteUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
 }
 
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type EnumQuoteStatusFieldUpdateOperationsInput = {
   set?: $Enums.QuoteStatus
 }
@@ -1080,6 +1144,8 @@ export type QuoteCreateWithoutLeadInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1109,6 +1175,8 @@ export type QuoteUncheckedCreateWithoutLeadInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1167,6 +1235,8 @@ export type QuoteScalarWhereInput = {
   quantity?: Prisma.StringNullableFilter<"Quote"> | string | null
   unitPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFilter<"Quote"> | $Enums.Currency
   paymentTerms?: Prisma.StringNullableFilter<"Quote"> | string | null
   deliveryTime?: Prisma.StringNullableFilter<"Quote"> | string | null
@@ -1194,6 +1264,8 @@ export type QuoteCreateWithoutCustomerInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1223,6 +1295,8 @@ export type QuoteUncheckedCreateWithoutCustomerInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1277,6 +1351,8 @@ export type QuoteCreateWithoutCustomerContactInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1306,6 +1382,8 @@ export type QuoteUncheckedCreateWithoutCustomerContactInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1360,6 +1438,8 @@ export type QuoteCreateWithoutProjectInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1389,6 +1469,8 @@ export type QuoteUncheckedCreateWithoutProjectInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1443,6 +1525,8 @@ export type QuoteCreateWithoutItemsInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1472,6 +1556,8 @@ export type QuoteUncheckedCreateWithoutItemsInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1516,6 +1602,8 @@ export type QuoteUpdateWithoutItemsInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1545,6 +1633,8 @@ export type QuoteUncheckedUpdateWithoutItemsInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1573,6 +1663,8 @@ export type QuoteCreateWithoutOrdersInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1602,6 +1694,8 @@ export type QuoteUncheckedCreateWithoutOrdersInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1646,6 +1740,8 @@ export type QuoteUpdateWithoutOrdersInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1675,6 +1771,8 @@ export type QuoteUncheckedUpdateWithoutOrdersInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1704,6 +1802,8 @@ export type QuoteCreateManyLeadInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1730,6 +1830,8 @@ export type QuoteUpdateWithoutLeadInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1759,6 +1861,8 @@ export type QuoteUncheckedUpdateWithoutLeadInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1788,6 +1892,8 @@ export type QuoteUncheckedUpdateManyWithoutLeadInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1815,6 +1921,8 @@ export type QuoteCreateManyCustomerInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1841,6 +1949,8 @@ export type QuoteUpdateWithoutCustomerInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1870,6 +1980,8 @@ export type QuoteUncheckedUpdateWithoutCustomerInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1899,6 +2011,8 @@ export type QuoteUncheckedUpdateManyWithoutCustomerInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1926,6 +2040,8 @@ export type QuoteCreateManyCustomerContactInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -1952,6 +2068,8 @@ export type QuoteUpdateWithoutCustomerContactInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1981,6 +2099,8 @@ export type QuoteUncheckedUpdateWithoutCustomerContactInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2010,6 +2130,8 @@ export type QuoteUncheckedUpdateManyWithoutCustomerContactInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2037,6 +2159,8 @@ export type QuoteCreateManyProjectInput = {
   quantity?: string | null
   unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: $Enums.Currency
   paymentTerms?: string | null
   deliveryTime?: string | null
@@ -2063,6 +2187,8 @@ export type QuoteUpdateWithoutProjectInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2092,6 +2218,8 @@ export type QuoteUncheckedUpdateWithoutProjectInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2121,6 +2249,8 @@ export type QuoteUncheckedUpdateManyWithoutProjectInput = {
   quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2188,6 +2318,8 @@ export type QuoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
+  exchangeRate?: boolean
+  discountAmount?: boolean
   currency?: boolean
   paymentTerms?: boolean
   deliveryTime?: boolean
@@ -2223,6 +2355,8 @@ export type QuoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
+  exchangeRate?: boolean
+  discountAmount?: boolean
   currency?: boolean
   paymentTerms?: boolean
   deliveryTime?: boolean
@@ -2255,6 +2389,8 @@ export type QuoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
+  exchangeRate?: boolean
+  discountAmount?: boolean
   currency?: boolean
   paymentTerms?: boolean
   deliveryTime?: boolean
@@ -2287,6 +2423,8 @@ export type QuoteSelectScalar = {
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
+  exchangeRate?: boolean
+  discountAmount?: boolean
   currency?: boolean
   paymentTerms?: boolean
   deliveryTime?: boolean
@@ -2306,7 +2444,7 @@ export type QuoteSelectScalar = {
   updatedAt?: boolean
 }
 
-export type QuoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quoteNo" | "quoteTitle" | "productName" | "specs" | "quantity" | "unitPrice" | "totalPrice" | "currency" | "paymentTerms" | "deliveryTime" | "validDays" | "deliveryTerm" | "shippingTerm" | "validUntil" | "content" | "remarks" | "terms" | "status" | "leadId" | "customerId" | "projectId" | "customerContactId" | "createdAt" | "updatedAt", ExtArgs["result"]["quote"]>
+export type QuoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quoteNo" | "quoteTitle" | "productName" | "specs" | "quantity" | "unitPrice" | "totalPrice" | "exchangeRate" | "discountAmount" | "currency" | "paymentTerms" | "deliveryTime" | "validDays" | "deliveryTerm" | "shippingTerm" | "validUntil" | "content" | "remarks" | "terms" | "status" | "leadId" | "customerId" | "projectId" | "customerContactId" | "createdAt" | "updatedAt", ExtArgs["result"]["quote"]>
 export type QuoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
@@ -2348,6 +2486,8 @@ export type $QuotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     quantity: string | null
     unitPrice: runtime.Decimal | null
     totalPrice: runtime.Decimal | null
+    exchangeRate: runtime.Decimal | null
+    discountAmount: runtime.Decimal
     currency: $Enums.Currency
     paymentTerms: string | null
     deliveryTime: string | null
@@ -2802,6 +2942,8 @@ export interface QuoteFieldRefs {
   readonly quantity: Prisma.FieldRef<"Quote", 'String'>
   readonly unitPrice: Prisma.FieldRef<"Quote", 'Decimal'>
   readonly totalPrice: Prisma.FieldRef<"Quote", 'Decimal'>
+  readonly exchangeRate: Prisma.FieldRef<"Quote", 'Decimal'>
+  readonly discountAmount: Prisma.FieldRef<"Quote", 'Decimal'>
   readonly currency: Prisma.FieldRef<"Quote", 'Currency'>
   readonly paymentTerms: Prisma.FieldRef<"Quote", 'String'>
   readonly deliveryTime: Prisma.FieldRef<"Quote", 'String'>
