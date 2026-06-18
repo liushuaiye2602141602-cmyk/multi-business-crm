@@ -449,6 +449,7 @@ export type QuoteWhereInput = {
   orders?: Prisma.OrderListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }
 
 export type QuoteOrderByWithRelationInput = {
@@ -489,6 +490,7 @@ export type QuoteOrderByWithRelationInput = {
   orders?: Prisma.OrderOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   emailMessages?: Prisma.EmailMessageOrderByRelationAggregateInput
+  messages?: Prisma.MessageOrderByRelationAggregateInput
 }
 
 export type QuoteWhereUniqueInput = Prisma.AtLeast<{
@@ -532,6 +534,7 @@ export type QuoteWhereUniqueInput = Prisma.AtLeast<{
   orders?: Prisma.OrderListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }, "id" | "quoteNo">
 
 export type QuoteOrderByWithAggregationInput = {
@@ -636,6 +639,7 @@ export type QuoteCreateInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateInput = {
@@ -671,6 +675,7 @@ export type QuoteUncheckedCreateInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUpdateInput = {
@@ -705,6 +710,7 @@ export type QuoteUpdateInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateInput = {
@@ -740,6 +746,7 @@ export type QuoteUncheckedUpdateInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteCreateManyInput = {
@@ -1254,6 +1261,22 @@ export type QuoteUpdateOneWithoutEmailMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuoteUpdateToOneWithWhereWithoutEmailMessagesInput, Prisma.QuoteUpdateWithoutEmailMessagesInput>, Prisma.QuoteUncheckedUpdateWithoutEmailMessagesInput>
 }
 
+export type QuoteCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutMessagesInput, Prisma.QuoteUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.QuoteWhereUniqueInput
+}
+
+export type QuoteUpdateOneWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutMessagesInput, Prisma.QuoteUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.QuoteUpsertWithoutMessagesInput
+  disconnect?: Prisma.QuoteWhereInput | boolean
+  delete?: Prisma.QuoteWhereInput | boolean
+  connect?: Prisma.QuoteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuoteUpdateToOneWithWhereWithoutMessagesInput, Prisma.QuoteUpdateWithoutMessagesInput>, Prisma.QuoteUncheckedUpdateWithoutMessagesInput>
+}
+
 export type QuoteCreateWithoutTenantInput = {
   quoteNo: string
   quoteTitle?: string | null
@@ -1285,6 +1308,7 @@ export type QuoteCreateWithoutTenantInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutTenantInput = {
@@ -1319,6 +1343,7 @@ export type QuoteUncheckedCreateWithoutTenantInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutTenantInput = {
@@ -1412,6 +1437,7 @@ export type QuoteCreateWithoutLeadInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutLeadInput = {
@@ -1446,6 +1472,7 @@ export type QuoteUncheckedCreateWithoutLeadInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutLeadInput = {
@@ -1505,6 +1532,7 @@ export type QuoteCreateWithoutCustomerInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutCustomerInput = {
@@ -1539,6 +1567,7 @@ export type QuoteUncheckedCreateWithoutCustomerInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutCustomerInput = {
@@ -1598,6 +1627,7 @@ export type QuoteCreateWithoutCustomerContactInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutCustomerContactInput = {
@@ -1632,6 +1662,7 @@ export type QuoteUncheckedCreateWithoutCustomerContactInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutCustomerContactInput = {
@@ -1691,6 +1722,7 @@ export type QuoteCreateWithoutProjectInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutProjectInput = {
@@ -1725,6 +1757,7 @@ export type QuoteUncheckedCreateWithoutProjectInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutProjectInput = {
@@ -1784,6 +1817,7 @@ export type QuoteCreateWithoutTasksInput = {
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutTasksInput = {
@@ -1818,6 +1852,7 @@ export type QuoteUncheckedCreateWithoutTasksInput = {
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutTasksInput = {
@@ -1867,6 +1902,7 @@ export type QuoteUpdateWithoutTasksInput = {
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutTasksInput = {
@@ -1901,6 +1937,7 @@ export type QuoteUncheckedUpdateWithoutTasksInput = {
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteCreateWithoutItemsInput = {
@@ -1934,6 +1971,7 @@ export type QuoteCreateWithoutItemsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutItemsInput = {
@@ -1968,6 +2006,7 @@ export type QuoteUncheckedCreateWithoutItemsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutItemsInput = {
@@ -2017,6 +2056,7 @@ export type QuoteUpdateWithoutItemsInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutItemsInput = {
@@ -2051,6 +2091,7 @@ export type QuoteUncheckedUpdateWithoutItemsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteCreateWithoutOrdersInput = {
@@ -2084,6 +2125,7 @@ export type QuoteCreateWithoutOrdersInput = {
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutOrdersInput = {
@@ -2118,6 +2160,7 @@ export type QuoteUncheckedCreateWithoutOrdersInput = {
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutOrdersInput = {
@@ -2167,6 +2210,7 @@ export type QuoteUpdateWithoutOrdersInput = {
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutOrdersInput = {
@@ -2201,6 +2245,7 @@ export type QuoteUncheckedUpdateWithoutOrdersInput = {
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteCreateWithoutEmailMessagesInput = {
@@ -2234,6 +2279,7 @@ export type QuoteCreateWithoutEmailMessagesInput = {
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteUncheckedCreateWithoutEmailMessagesInput = {
@@ -2268,6 +2314,7 @@ export type QuoteUncheckedCreateWithoutEmailMessagesInput = {
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutQuoteInput
 }
 
 export type QuoteCreateOrConnectWithoutEmailMessagesInput = {
@@ -2317,6 +2364,7 @@ export type QuoteUpdateWithoutEmailMessagesInput = {
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutEmailMessagesInput = {
@@ -2351,6 +2399,161 @@ export type QuoteUncheckedUpdateWithoutEmailMessagesInput = {
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
+}
+
+export type QuoteCreateWithoutMessagesInput = {
+  quoteNo: string
+  quoteTitle?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: $Enums.Currency
+  paymentTerms?: string | null
+  deliveryTime?: string | null
+  validDays?: number | null
+  deliveryTerm?: string | null
+  shippingTerm?: string | null
+  validUntil?: Date | string | null
+  content?: string | null
+  remarks?: string | null
+  terms?: string | null
+  status?: $Enums.QuoteStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lead?: Prisma.LeadCreateNestedOneWithoutQuotesInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
+  customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
+  items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
+  orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
+  emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutQuoteInput
+}
+
+export type QuoteUncheckedCreateWithoutMessagesInput = {
+  id?: number
+  quoteNo: string
+  quoteTitle?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: $Enums.Currency
+  paymentTerms?: string | null
+  deliveryTime?: string | null
+  validDays?: number | null
+  deliveryTerm?: string | null
+  shippingTerm?: string | null
+  validUntil?: Date | string | null
+  content?: string | null
+  remarks?: string | null
+  terms?: string | null
+  status?: $Enums.QuoteStatus
+  leadId?: number | null
+  customerId?: number | null
+  projectId?: number | null
+  customerContactId?: number | null
+  tenantId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
+  emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutQuoteInput
+}
+
+export type QuoteCreateOrConnectWithoutMessagesInput = {
+  where: Prisma.QuoteWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuoteCreateWithoutMessagesInput, Prisma.QuoteUncheckedCreateWithoutMessagesInput>
+}
+
+export type QuoteUpsertWithoutMessagesInput = {
+  update: Prisma.XOR<Prisma.QuoteUpdateWithoutMessagesInput, Prisma.QuoteUncheckedUpdateWithoutMessagesInput>
+  create: Prisma.XOR<Prisma.QuoteCreateWithoutMessagesInput, Prisma.QuoteUncheckedCreateWithoutMessagesInput>
+  where?: Prisma.QuoteWhereInput
+}
+
+export type QuoteUpdateToOneWithWhereWithoutMessagesInput = {
+  where?: Prisma.QuoteWhereInput
+  data: Prisma.XOR<Prisma.QuoteUpdateWithoutMessagesInput, Prisma.QuoteUncheckedUpdateWithoutMessagesInput>
+}
+
+export type QuoteUpdateWithoutMessagesInput = {
+  quoteNo?: Prisma.StringFieldUpdateOperationsInput | string
+  quoteTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lead?: Prisma.LeadUpdateOneWithoutQuotesNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
+  customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
+  items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
+  emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+}
+
+export type QuoteUncheckedUpdateWithoutMessagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  quoteNo?: Prisma.StringFieldUpdateOperationsInput | string
+  quoteTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
+  emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteCreateManyTenantInput = {
@@ -2414,6 +2617,7 @@ export type QuoteUpdateWithoutTenantInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutTenantInput = {
@@ -2448,6 +2652,7 @@ export type QuoteUncheckedUpdateWithoutTenantInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateManyWithoutTenantInput = {
@@ -2541,6 +2746,7 @@ export type QuoteUpdateWithoutLeadInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutLeadInput = {
@@ -2575,6 +2781,7 @@ export type QuoteUncheckedUpdateWithoutLeadInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateManyWithoutLeadInput = {
@@ -2668,6 +2875,7 @@ export type QuoteUpdateWithoutCustomerInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutCustomerInput = {
@@ -2702,6 +2910,7 @@ export type QuoteUncheckedUpdateWithoutCustomerInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateManyWithoutCustomerInput = {
@@ -2795,6 +3004,7 @@ export type QuoteUpdateWithoutCustomerContactInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutCustomerContactInput = {
@@ -2829,6 +3039,7 @@ export type QuoteUncheckedUpdateWithoutCustomerContactInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateManyWithoutCustomerContactInput = {
@@ -2922,6 +3133,7 @@ export type QuoteUpdateWithoutProjectInput = {
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateWithoutProjectInput = {
@@ -2956,6 +3168,7 @@ export type QuoteUncheckedUpdateWithoutProjectInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutQuoteNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutQuoteNestedInput
 }
 
 export type QuoteUncheckedUpdateManyWithoutProjectInput = {
@@ -2998,6 +3211,7 @@ export type QuoteCountOutputType = {
   orders: number
   tasks: number
   emailMessages: number
+  messages: number
 }
 
 export type QuoteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3005,6 +3219,7 @@ export type QuoteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   orders?: boolean | QuoteCountOutputTypeCountOrdersArgs
   tasks?: boolean | QuoteCountOutputTypeCountTasksArgs
   emailMessages?: boolean | QuoteCountOutputTypeCountEmailMessagesArgs
+  messages?: boolean | QuoteCountOutputTypeCountMessagesArgs
 }
 
 /**
@@ -3043,6 +3258,13 @@ export type QuoteCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Ext
  */
 export type QuoteCountOutputTypeCountEmailMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailMessageWhereInput
+}
+
+/**
+ * QuoteCountOutputType without action
+ */
+export type QuoteCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
 }
 
 
@@ -3084,6 +3306,7 @@ export type QuoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   orders?: boolean | Prisma.Quote$ordersArgs<ExtArgs>
   tasks?: boolean | Prisma.Quote$tasksArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Quote$emailMessagesArgs<ExtArgs>
+  messages?: boolean | Prisma.Quote$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.QuoteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quote"]>
 
@@ -3201,6 +3424,7 @@ export type QuoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   orders?: boolean | Prisma.Quote$ordersArgs<ExtArgs>
   tasks?: boolean | Prisma.Quote$tasksArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Quote$emailMessagesArgs<ExtArgs>
+  messages?: boolean | Prisma.Quote$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.QuoteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type QuoteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3230,6 +3454,7 @@ export type $QuotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     orders: Prisma.$OrderPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     emailMessages: Prisma.$EmailMessagePayload<ExtArgs>[]
+    messages: Prisma.$MessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3663,6 +3888,7 @@ export interface Prisma__QuoteClient<T, Null = never, ExtArgs extends runtime.Ty
   orders<T extends Prisma.Quote$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Quote$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailMessages<T extends Prisma.Quote$emailMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$emailMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  messages<T extends Prisma.Quote$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4309,6 +4535,30 @@ export type Quote$emailMessagesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.EmailMessageScalarFieldEnum | Prisma.EmailMessageScalarFieldEnum[]
+}
+
+/**
+ * Quote.messages
+ */
+export type Quote$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**

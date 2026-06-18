@@ -221,3 +221,8 @@ export type IMMessage = Prisma.IMMessageModel
  * 
  */
 export type AILog = Prisma.AILogModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel

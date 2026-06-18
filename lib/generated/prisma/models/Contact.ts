@@ -289,6 +289,7 @@ export type ContactWhereInput = {
   quotes?: Prisma.QuoteListRelationFilter
   emails?: Prisma.EmailListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -310,6 +311,7 @@ export type ContactOrderByWithRelationInput = {
   quotes?: Prisma.QuoteOrderByRelationAggregateInput
   emails?: Prisma.EmailOrderByRelationAggregateInput
   emailMessages?: Prisma.EmailMessageOrderByRelationAggregateInput
+  messages?: Prisma.MessageOrderByRelationAggregateInput
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -334,6 +336,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   quotes?: Prisma.QuoteListRelationFilter
   emails?: Prisma.EmailListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }, "id">
 
 export type ContactOrderByWithAggregationInput = {
@@ -393,6 +396,7 @@ export type ContactCreateInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateInput = {
@@ -413,6 +417,7 @@ export type ContactUncheckedCreateInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactUpdateInput = {
@@ -432,6 +437,7 @@ export type ContactUpdateInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -452,6 +458,7 @@ export type ContactUncheckedUpdateInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyInput = {
@@ -679,6 +686,22 @@ export type ContactUpdateOneWithoutEmailMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutEmailMessagesInput, Prisma.ContactUpdateWithoutEmailMessagesInput>, Prisma.ContactUncheckedUpdateWithoutEmailMessagesInput>
 }
 
+export type ContactCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutMessagesInput, Prisma.ContactUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutMessagesInput, Prisma.ContactUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.ContactUpsertWithoutMessagesInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutMessagesInput, Prisma.ContactUpdateWithoutMessagesInput>, Prisma.ContactUncheckedUpdateWithoutMessagesInput>
+}
+
 export type ContactCreateWithoutCustomerInput = {
   name: string
   position?: string | null
@@ -695,6 +718,7 @@ export type ContactCreateWithoutCustomerInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutCustomerInput = {
@@ -714,6 +738,7 @@ export type ContactUncheckedCreateWithoutCustomerInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutCustomerInput = {
@@ -777,6 +802,7 @@ export type ContactCreateWithoutQuotesInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutContactInput
   emails?: Prisma.EmailCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutQuotesInput = {
@@ -796,6 +822,7 @@ export type ContactUncheckedCreateWithoutQuotesInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutContactInput
   emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutQuotesInput = {
@@ -830,6 +857,7 @@ export type ContactUpdateWithoutQuotesInput = {
   orders?: Prisma.OrderUpdateManyWithoutContactNestedInput
   emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutQuotesInput = {
@@ -849,6 +877,7 @@ export type ContactUncheckedUpdateWithoutQuotesInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutContactNestedInput
   emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutOrdersInput = {
@@ -867,6 +896,7 @@ export type ContactCreateWithoutOrdersInput = {
   quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutOrdersInput = {
@@ -886,6 +916,7 @@ export type ContactUncheckedCreateWithoutOrdersInput = {
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutOrdersInput = {
@@ -920,6 +951,7 @@ export type ContactUpdateWithoutOrdersInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutOrdersInput = {
@@ -939,6 +971,7 @@ export type ContactUncheckedUpdateWithoutOrdersInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutEmailsInput = {
@@ -957,6 +990,7 @@ export type ContactCreateWithoutEmailsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutContactInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutEmailsInput = {
@@ -976,6 +1010,7 @@ export type ContactUncheckedCreateWithoutEmailsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutContactInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutEmailsInput = {
@@ -1010,6 +1045,7 @@ export type ContactUpdateWithoutEmailsInput = {
   orders?: Prisma.OrderUpdateManyWithoutContactNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutEmailsInput = {
@@ -1029,6 +1065,7 @@ export type ContactUncheckedUpdateWithoutEmailsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutContactNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutEmailMessagesInput = {
@@ -1047,6 +1084,7 @@ export type ContactCreateWithoutEmailMessagesInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutContactInput
   quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutEmailMessagesInput = {
@@ -1066,6 +1104,7 @@ export type ContactUncheckedCreateWithoutEmailMessagesInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutContactInput
   quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
   emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutEmailMessagesInput = {
@@ -1100,6 +1139,7 @@ export type ContactUpdateWithoutEmailMessagesInput = {
   orders?: Prisma.OrderUpdateManyWithoutContactNestedInput
   quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutEmailMessagesInput = {
@@ -1119,6 +1159,101 @@ export type ContactUncheckedUpdateWithoutEmailMessagesInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutContactNestedInput
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutMessagesInput = {
+  name: string
+  position?: string | null
+  email?: string | null
+  whatsapp?: string | null
+  phone?: string | null
+  wechat?: string | null
+  linkedin?: string | null
+  isPrimary?: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer: Prisma.CustomerCreateNestedOneWithoutContactsInput
+  orders?: Prisma.OrderCreateNestedManyWithoutContactInput
+  quotes?: Prisma.QuoteCreateNestedManyWithoutCustomerContactInput
+  emails?: Prisma.EmailCreateNestedManyWithoutContactInput
+  emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutMessagesInput = {
+  id?: number
+  customerId: number
+  name: string
+  position?: string | null
+  email?: string | null
+  whatsapp?: string | null
+  phone?: string | null
+  wechat?: string | null
+  linkedin?: string | null
+  isPrimary?: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutContactInput
+  quotes?: Prisma.QuoteUncheckedCreateNestedManyWithoutCustomerContactInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutContactInput
+  emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutMessagesInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutMessagesInput, Prisma.ContactUncheckedCreateWithoutMessagesInput>
+}
+
+export type ContactUpsertWithoutMessagesInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutMessagesInput, Prisma.ContactUncheckedUpdateWithoutMessagesInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutMessagesInput, Prisma.ContactUncheckedCreateWithoutMessagesInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutMessagesInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutMessagesInput, Prisma.ContactUncheckedUpdateWithoutMessagesInput>
+}
+
+export type ContactUpdateWithoutMessagesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wechat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUpdateOneRequiredWithoutContactsNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutContactNestedInput
+  quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
+  emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutMessagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wechat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutContactNestedInput
+  quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
+  emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyCustomerInput = {
@@ -1152,6 +1287,7 @@ export type ContactUpdateWithoutCustomerInput = {
   quotes?: Prisma.QuoteUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutCustomerInput = {
@@ -1171,6 +1307,7 @@ export type ContactUncheckedUpdateWithoutCustomerInput = {
   quotes?: Prisma.QuoteUncheckedUpdateManyWithoutCustomerContactNestedInput
   emails?: Prisma.EmailUncheckedUpdateManyWithoutContactNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutContactNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutCustomerInput = {
@@ -1198,6 +1335,7 @@ export type ContactCountOutputType = {
   quotes: number
   emails: number
   emailMessages: number
+  messages: number
 }
 
 export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1205,6 +1343,7 @@ export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   quotes?: boolean | ContactCountOutputTypeCountQuotesArgs
   emails?: boolean | ContactCountOutputTypeCountEmailsArgs
   emailMessages?: boolean | ContactCountOutputTypeCountEmailMessagesArgs
+  messages?: boolean | ContactCountOutputTypeCountMessagesArgs
 }
 
 /**
@@ -1245,6 +1384,13 @@ export type ContactCountOutputTypeCountEmailMessagesArgs<ExtArgs extends runtime
   where?: Prisma.EmailMessageWhereInput
 }
 
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
+
 
 export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1265,6 +1411,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   quotes?: boolean | Prisma.Contact$quotesArgs<ExtArgs>
   emails?: boolean | Prisma.Contact$emailsArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Contact$emailMessagesArgs<ExtArgs>
+  messages?: boolean | Prisma.Contact$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
 
@@ -1325,6 +1472,7 @@ export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   quotes?: boolean | Prisma.Contact$quotesArgs<ExtArgs>
   emails?: boolean | Prisma.Contact$emailsArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Contact$emailMessagesArgs<ExtArgs>
+  messages?: boolean | Prisma.Contact$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1342,6 +1490,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     quotes: Prisma.$QuotePayload<ExtArgs>[]
     emails: Prisma.$EmailPayload<ExtArgs>[]
     emailMessages: Prisma.$EmailMessagePayload<ExtArgs>[]
+    messages: Prisma.$MessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1756,6 +1905,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   quotes<T extends Prisma.Contact$quotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emails<T extends Prisma.Contact$emailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$emailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailMessages<T extends Prisma.Contact$emailMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$emailMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  messages<T extends Prisma.Contact$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2292,6 +2442,30 @@ export type Contact$emailMessagesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.EmailMessageScalarFieldEnum | Prisma.EmailMessageScalarFieldEnum[]
+}
+
+/**
+ * Contact.messages
+ */
+export type Contact$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**

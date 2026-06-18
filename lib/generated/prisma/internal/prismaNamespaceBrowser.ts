@@ -86,7 +86,8 @@ export const ModelName = {
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage',
-  AILog: 'AILog'
+  AILog: 'AILog',
+  Message: 'Message'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -802,6 +803,31 @@ export const AILogScalarFieldEnum = {
 } as const
 
 export type AILogScalarFieldEnum = (typeof AILogScalarFieldEnum)[keyof typeof AILogScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  channel: 'channel',
+  direction: 'direction',
+  fromAddr: 'fromAddr',
+  toAddr: 'toAddr',
+  content: 'content',
+  contentType: 'contentType',
+  customerId: 'customerId',
+  leadId: 'leadId',
+  contactId: 'contactId',
+  quoteId: 'quoteId',
+  orderId: 'orderId',
+  intent: 'intent',
+  sentiment: 'sentiment',
+  urgency: 'urgency',
+  externalId: 'externalId',
+  metadata: 'metadata',
+  tenantId: 'tenantId',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -15,6 +15,7 @@ import { isAIConfigured } from "@/lib/ai/types";
 import AIAnalysisButton from "@/components/AIAnalysisButton";
 import AIAnalysisResult from "@/components/AIAnalysisResult";
 import { addCustomerActivity } from "../actions";
+import CustomerTimeline from "@/components/CustomerTimeline";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +27,7 @@ export default async function CustomerDetailPage({
   const { id } = await params;
   const customerId = parseInt(id);
 
-  const [customer, latestAnalysis, recentActivityLogs, activities] = await Promise.all([
+  const [customer, latestAnalysis, recentActivityLogs, activities, messages] = await Promise.all([
     prisma.customer.findUnique({
       where: { id: customerId },
       include: {
@@ -54,6 +55,11 @@ export default async function CustomerDetailPage({
     prisma.customerActivity.findMany({
       where: { customerId },
       orderBy: { createdAt: "desc" },
+    }),
+    prisma.message.findMany({
+      where: { customerId },
+      orderBy: { createdAt: "desc" },
+      take: 30,
     }),
   ]);
 
@@ -152,6 +158,16 @@ export default async function CustomerDetailPage({
     });
   });
 
+  messages.forEach(m => {
+    const dirLabel = m.direction === "inbound" ? "收" : "发";
+    timeline.push({
+      date: new Date(m.createdAt),
+      type: "消息",
+      title: `[${dirLabel}] ${m.channel}`,
+      content: m.content.slice(0, 100),
+    });
+  });
+
   timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   const typeColors: Record<string, string> = {
@@ -162,6 +178,7 @@ export default async function CustomerDetailPage({
     "AI": "bg-pink-100 text-pink-700",
     "线索": "bg-gray-100 text-gray-700",
     "活动": "bg-teal-100 text-teal-700",
+    "消息": "bg-cyan-100 text-cyan-700",
   };
 
   const activityTypeLabels: Record<string, string> = {
@@ -336,6 +353,21 @@ export default async function CustomerDetailPage({
           </Card>
 
           {/* 跟进活动记录 */}
+          <Card>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+              <h3 className="text-base font-semibold text-gray-900">统一时间线 (消息 + 跟进 + 任务 + 报价 + 订单)</h3>
+            </div>
+            <CustomerTimeline
+              items={[
+                ...messages.map(m => ({ type: "message", date: m.createdAt.toISOString(), data: m })),
+                ...customer.followUps.map(f => ({ type: "followup", date: f.followUpDate.toISOString(), data: f })),
+                ...customer.tasks.map(t => ({ type: "task", date: t.createdAt.toISOString(), data: t })),
+                ...customer.quotes.map(q => ({ type: "quote", date: q.createdAt.toISOString(), data: q })),
+              ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 30)}
+            />
+          </Card>
+
+          {/* 跟进活动记录 (原始) */}
           <Card>
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
               <h3 className="text-base font-semibold text-gray-900">跟进活动 ({activities.length})</h3>
