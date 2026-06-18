@@ -34,6 +34,12 @@ export async function executeIntent(result: IntentResult): Promise<ExecutionResu
       return executeCompleteTask(result.args);
     case "create_quote":
       return executeCreateQuote(result.args);
+    case "query_pool":
+      return executeQueryPool(result.args);
+    case "claim_customer":
+      return executeClaimCustomer(result.args);
+    case "return_to_pool":
+      return executeReturnToPool(result.args);
     case "help":
       return executeHelp();
     default:
@@ -546,6 +552,116 @@ async function executeCreateQuote(args: Record<string, unknown>): Promise<Execut
   }
 }
 
+// ==================== 客户公海操作 ====================
+
+async function executeQueryPool(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const limit = (args.limit as number) || 10;
+  const where: Record<string, unknown> = { ownerId: null };
+  if (args.country) where.country = { contains: args.country as string, mode: "insensitive" };
+  try {
+    const customers = await prisma.customer.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: limit,
+      select: { id: true, company: true, contactName: true, country: true, industry: true, leadGrade: true, customerStatus: true, poolEnteredAt: true },
+    });
+    const total = await prisma.customer.count({ where });
+    if (customers.length === 0) {
+      return { success: true, message: "📋 公海暂无客户。" };
+    }
+    const lines = customers.map((c, i) => `${i + 1}. ${c.company} (${c.contactName}) - ${c.country || "未知"} 行业:${c.industry || "-"} 等级:${c.leadGrade}`);
+    return {
+      success: true,
+      message: `📋 公海客户列表（共 ${total} 条，显示前 ${customers.length} 条）\n\n${lines.join("\n")}`,
+      data: customers,
+    };
+  } catch (error) {
+    return { success: false, message: `查询公海失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
+async function executeClaimCustomer(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const company = args.company as string;
+  const ownerName = args.ownerName as string;
+  if (!company || !ownerName) {
+    return { success: false, message: "认领客户需要公司名称和认领人姓名。示例：认领ABC公司，我是张三" };
+  }
+  try {
+    const customer = await prisma.customer.findFirst({
+      where: { company: { contains: company, mode: "insensitive" }, ownerId: null },
+    });
+    if (!customer) {
+      return { success: false, message: `未找到公海中名为「${company}」的客户。` };
+    }
+    await prisma.customer.update({
+      where: { id: customer.id },
+      data: {
+        ownerId: 1, // 默认用户ID，待接入认证后替换
+        ownerName,
+        poolEnteredAt: null,
+        poolReason: null,
+      },
+    });
+    await createActivityLog({
+      action: "IM 认领",
+      entityType: "客户",
+      entityId: customer.id,
+      entityName: customer.company,
+      description: `${ownerName} 通过 IM 从公海认领了客户: ${customer.company}`,
+    });
+    return {
+      success: true,
+      message: `✅ 客户已认领\n公司：${customer.company}\n认领人：${ownerName}`,
+      data: customer,
+    };
+  } catch (error) {
+    return { success: false, message: `认领客户失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
+async function executeReturnToPool(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const company = args.company as string;
+  const reason = (args.reason as string) || "manual";
+  if (!company) {
+    return { success: false, message: "退回公海需要客户公司名称。示例：把ABC公司退回公海" };
+  }
+  try {
+    const customer = await prisma.customer.findFirst({
+      where: { company: { contains: company, mode: "insensitive" } },
+    });
+    if (!customer) {
+      return { success: false, message: `未找到客户「${company}」。` };
+    }
+    if (!customer.ownerId) {
+      return { success: true, message: `客户「${company}」已在公海中，无需退回。` };
+    }
+    const oldOwner = customer.ownerName;
+    await prisma.customer.update({
+      where: { id: customer.id },
+      data: {
+        ownerId: null,
+        ownerName: null,
+        poolEnteredAt: new Date(),
+        poolReason: reason,
+      },
+    });
+    await createActivityLog({
+      action: "IM 退回公海",
+      entityType: "客户",
+      entityId: customer.id,
+      entityName: customer.company,
+      description: `通过 IM 将客户 ${customer.company} 退回公海（原负责人: ${oldOwner || "未知"}），原因: ${reason}`,
+    });
+    return {
+      success: true,
+      message: `✅ 客户已退回公海\n公司：${customer.company}\n原负责人：${oldOwner || "未知"}\n原因：${reason}`,
+      data: customer,
+    };
+  } catch (error) {
+    return { success: false, message: `退回公海失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
 function executeHelp(): ExecutionResult {
   return {
     success: true,
@@ -570,6 +686,11 @@ function executeHelp(): ExecutionResult {
 • "ABC公司的订单进度怎么样"
 • "我今天有什么任务"
 • "本月新增了多少客户"
+
+🌊 公海类：
+• "查看公海客户"
+• "认领ABC公司，我是张三"
+• "把XYZ公司退回公海"
 
 输入任何问题，我会尽力帮助您！`,
   };
