@@ -1,8 +1,15 @@
 import Link from "next/link";
-import { Search, Settings, Bell, HelpCircle } from "lucide-react";
+import { Search, Settings, HelpCircle } from "lucide-react";
 import { isAIConfigured } from "@/lib/ai/types";
 import CurrencyPopup from "./CurrencyPopup";
 import LogoutButton from "./LogoutButton";
+
+function LiveClock() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString("zh-CN", { hour12: false, timeZone: "Asia/Shanghai" });
+  const dateStr = now.toLocaleDateString("zh-CN", { month: "2-digit", day: "2-digit", timeZone: "Asia/Shanghai" });
+  return <span className="text-sm font-mono text-gray-700">{dateStr} {timeStr}</span>;
+}
 
 export default function Header() {
   const aiConfigured = isAIConfigured();
@@ -20,29 +27,26 @@ export default function Header() {
         </Link>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
+          {/* Live clock */}
+          <LiveClock />
+
+          {/* Currency converter */}
           <CurrencyPopup />
 
-          <Link
-            href="/calendar"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
-          >
-            <Bell size={14} />
-            <span>消息</span>
-          </Link>
-
+          {/* AI status */}
           <span
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
               aiConfigured
                 ? "bg-green-50 text-green-700 border border-green-200"
                 : "bg-yellow-50 text-yellow-700 border border-yellow-200"
             }`}
           >
             <span className={`w-1.5 h-1.5 rounded-full ${aiConfigured ? "bg-green-500" : "bg-yellow-500"}`} />
-            {aiConfigured ? "AI 已配置" : "AI 未配置"}
+            {aiConfigured ? "AI" : "AI"}
           </span>
 
-          <Link href="/ai-settings" className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors" title="设置">
+          <Link href="/settings" className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors" title="设置">
             <Settings size={16} />
           </Link>
 
