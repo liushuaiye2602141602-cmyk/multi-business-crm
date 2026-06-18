@@ -27,6 +27,29 @@ export function getVisionConfig(): VisionConfig | null {
   return { apiKey, baseUrl, model };
 }
 
+export async function getVisionConfigFromDB(): Promise<VisionConfig | null> {
+  try {
+    const { default: prisma } = await import("@/lib/prisma");
+    const config = await prisma.aIConfig.findFirst({ where: { isActive: true } });
+    if (config && config.visionApiKey && config.visionModel) {
+      return {
+        apiKey: config.visionApiKey,
+        baseUrl: config.visionBaseUrl || config.baseUrl,
+        model: config.visionModel,
+      };
+    }
+    // If no dedicated vision config, check if main model might support vision
+    if (config && config.apiKey && config.model) {
+      return {
+        apiKey: config.apiKey,
+        baseUrl: config.baseUrl,
+        model: config.model,
+      };
+    }
+  } catch {}
+  return null;
+}
+
 export interface ExtractedCustomer {
   company: string;
   contactName: string;

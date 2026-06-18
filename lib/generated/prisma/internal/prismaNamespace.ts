@@ -406,6 +406,7 @@ export const ModelName = {
   Payment: 'Payment',
   EmailConfig: 'EmailConfig',
   Email: 'Email',
+  AIConfig: 'AIConfig',
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage'
@@ -424,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "businessLine" | "lead" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "iMPlatform" | "iMUser" | "iMMessage"
+    modelProps: "businessLine" | "lead" | "customer" | "contact" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2056,6 +2057,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AIConfig: {
+      payload: Prisma.$AIConfigPayload<ExtArgs>
+      fields: Prisma.AIConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AIConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AIConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.AIConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AIConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        findMany: {
+          args: Prisma.AIConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>[]
+        }
+        create: {
+          args: Prisma.AIConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        createMany: {
+          args: Prisma.AIConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AIConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.AIConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        update: {
+          args: Prisma.AIConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.AIConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AIConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AIConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.AIConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.AIConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAIConfig>
+        }
+        groupBy: {
+          args: Prisma.AIConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AIConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIConfigCountAggregateOutputType> | number
+        }
+      }
+    }
     IMPlatform: {
       payload: Prisma.$IMPlatformPayload<ExtArgs>
       fields: Prisma.IMPlatformFieldRefs
@@ -2770,6 +2845,23 @@ export const EmailScalarFieldEnum = {
 export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
 
 
+export const AIConfigScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  baseUrl: 'baseUrl',
+  apiKey: 'apiKey',
+  model: 'model',
+  visionBaseUrl: 'visionBaseUrl',
+  visionApiKey: 'visionApiKey',
+  visionModel: 'visionModel',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AIConfigScalarFieldEnum = (typeof AIConfigScalarFieldEnum)[keyof typeof AIConfigScalarFieldEnum]
+
+
 export const IMPlatformScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -3405,6 +3497,7 @@ export type GlobalOmitConfig = {
   payment?: Prisma.PaymentOmit
   emailConfig?: Prisma.EmailConfigOmit
   email?: Prisma.EmailOmit
+  aIConfig?: Prisma.AIConfigOmit
   iMPlatform?: Prisma.IMPlatformOmit
   iMUser?: Prisma.IMUserOmit
   iMMessage?: Prisma.IMMessageOmit
