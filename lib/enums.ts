@@ -174,6 +174,23 @@ export const WebhookStatusLabel: Record<string, string> = {
 export const ExternalSourceTypeOptions = Object.entries(ExternalSourceTypeLabel).map(([value, label]) => ({ value, label }));
 export const WebhookStatusOptions = Object.entries(WebhookStatusLabel).map(([value, label]) => ({ value, label }));
 
+export const InvoiceStatusLabel: Record<string, string> = {
+  DRAFT: "草稿",
+  SENT: "已发送",
+  PAID: "已付款",
+  OVERDUE: "已逾期",
+  CANCELLED: "已取消",
+};
+
+export const PaymentMethodLabel: Record<string, string> = {
+  TT: "电汇",
+  LC: "信用证",
+  PAYPAL: "PayPal",
+  WESTERN_UNION: "西联汇款",
+  CASH: "现金",
+  OTHER: "其他",
+};
+
 export const OrderStatusLabel: Record<string, string> = {
   DRAFT: "草稿",
   CONFIRMED: "已确认",
@@ -201,6 +218,8 @@ export const DocumentRelatedTypeLabel: Record<string, string> = {
   ORDER: "订单",
 };
 
+export const InvoiceStatusOptions = Object.entries(InvoiceStatusLabel).map(([value, label]) => ({ value, label }));
+export const PaymentMethodOptions = Object.entries(PaymentMethodLabel).map(([value, label]) => ({ value, label }));
 export const OrderStatusOptions = Object.entries(OrderStatusLabel).map(([value, label]) => ({ value, label }));
 export const DocumentTypeOptions = Object.entries(DocumentTypeLabel).map(([value, label]) => ({ value, label }));
 export const DocumentRelatedTypeOptions = Object.entries(DocumentRelatedTypeLabel).map(([value, label]) => ({ value, label }));
