@@ -3,19 +3,24 @@
  * 无需公网域名，SDK 主动连接飞书服务器接收消息
  *
  * 使用方式：
- *   npx tsx scripts/feishu-bot.ts
+ *   npm run feishu:bot
  *
  * 前提：
- *   1. 在数据库 IMPlatform 表中配置好飞书 appId 和 appSecret
- *   2. 在飞书开放平台启用「长连接」接收方式（事件与回调 → 接收方式 → 长连接）
+ *   1. 在 CRM 的 IM 设置页面配置好飞书 appId 和 appSecret
+ *   2. 在飞书开放平台「事件与回调」→ 接收方式 → 选择「长连接」
+ *   3. 添加事件：im.message.receive_v1
  */
 
-import { Client, EventDispatcher, WSClient } from "@larksuiteoapi/node-sdk";
-import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
+import { Client, EventDispatcher, WSClient, LoggerLevel } from "@larksuiteoapi/node-sdk";
+import { PrismaClient } from "../lib/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { parseIntent } from "../lib/ai/intent";
 import { executeIntent } from "../lib/ai/executor";
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL!;
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   // 从数据库读取飞书配置
@@ -38,14 +43,13 @@ async function main() {
   const client = new Client({
     appId: platform.appId,
     appSecret: platform.appSecret,
-    loggerLevel: 1,
   });
 
   const eventDispatcher = new EventDispatcher({});
 
   // 处理接收到的消息
   eventDispatcher.register({
-    "im.message.receive_v1": async (data) => {
+    "im.message.receive_v1": async (data: any) => {
       const message = data.message;
       const sender = data.sender;
 
@@ -56,7 +60,7 @@ async function main() {
 
       let content = "";
       try {
-        const contentObj = JSON.parse(message.content!);
+        const contentObj = JSON.parse(message.content);
         content = contentObj.text || "";
       } catch {
         content = message.content || "";
@@ -167,16 +171,16 @@ async function main() {
     },
   });
 
-  // 启动长连接
+  // 启动长连接（eventDispatcher 传给 start，不是构造函数）
   const wsClient = new WSClient({
     appId: platform.appId,
     appSecret: platform.appSecret,
-    eventDispatcher,
-    loggerLevel: 1,
+    loggerLevel: LoggerLevel.info,
   });
 
-  await wsClient.start();
-  console.log("✅ 飞书长连接已建立，等待消息...");
+  wsClient.start({ eventDispatcher });
+
+  console.log("✅ 飞书长连接启动中...");
   console.log("按 Ctrl+C 停止");
 }
 
