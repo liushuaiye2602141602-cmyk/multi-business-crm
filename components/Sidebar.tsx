@@ -116,6 +116,7 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/imports", label: "数据导入", icon: Upload },
       { href: "/exports", label: "数据导出", icon: Download },
+      { href: "/settings", label: "系统设置", icon: Settings },
       { href: "/system-health", label: "系统健康检查", icon: Activity },
       { href: "/maintenance-guide", label: "维护指南", icon: BookMarked },
       { href: "/activity-logs", label: "操作日志", icon: ClipboardList },

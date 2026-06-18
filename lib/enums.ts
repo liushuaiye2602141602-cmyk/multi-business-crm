@@ -56,6 +56,14 @@ export const CustomerStatusLabel: Record<string, string> = {
   BLACKLIST: "黑名单",
 };
 
+export const CustomerLifecycleLabel: Record<string, string> = {
+  POTENTIAL: "潜在客户",
+  INTENT: "意向客户",
+  FIRST_DEAL: "初次成交",
+  REPEAT_DEAL: "多次成交",
+  VIP: "VIP客户",
+};
+
 export const ProjectStatusLabel: Record<string, string> = {
   REQUIREMENT_CONFIRMING: "需求确认中",
   QUOTING: "报价中",
