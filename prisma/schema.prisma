@@ -196,6 +196,23 @@ enum DocumentRelatedType {
   ORDER
 }
 
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentMethod {
+  TT
+  LC
+  PAYPAL
+  WESTERN_UNION
+  CASH
+  OTHER
+}
+
 // ==================== 模型 ====================
 
 model BusinessLine {
@@ -284,6 +301,7 @@ model Customer {
   quotes        Quote[]
   tasks         Task[]
   orders        Order[]
+  invoices      Invoice[]
   convertedFrom Lead[]        @relation("ConvertedLead")
 
   @@index([businessLineId])
@@ -614,6 +632,7 @@ model Order {
   quote    Quote?   @relation(fields: [quoteId], references: [id])
   contact  Contact? @relation(fields: [contactId], references: [id])
   items    OrderItem[]
+  invoices Invoice[]
 
   @@index([customerId])
   @@index([projectId])
@@ -656,6 +675,45 @@ model Document {
   updatedAt    DateTime           @updatedAt
 
   @@index([relatedType, relatedId])
+}
+
+model Invoice {
+  id          Int           @id @default(autoincrement())
+  invoiceNo   String        @unique
+  orderId     Int?
+  customerId  Int
+  amount      Decimal       @db.Decimal(12, 2)
+  currency    Currency      @default(USD)
+  status      InvoiceStatus @default(DRAFT)
+  issuedAt    DateTime?
+  dueDate     DateTime?
+  paidAt      DateTime?
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  order    Order?    @relation(fields: [orderId], references: [id])
+  customer Customer  @relation(fields: [customerId], references: [id])
+  payments Payment[]
+
+  @@index([orderId])
+  @@index([customerId])
+  @@index([status])
+  @@index([invoiceNo])
+}
+
+model Payment {
+  id          Int           @id @default(autoincrement())
+  invoiceId   Int
+  amount      Decimal       @db.Decimal(12, 2)
+  method      PaymentMethod @default(TT)
+  receivedAt  DateTime      @default(now())
+  notes       String?
+  createdAt   DateTime      @default(now())
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@index([invoiceId])
 }
 
 model IMPlatform {

@@ -108,6 +108,16 @@ export type OrderItem = Prisma.OrderItemModel
  */
 export type Document = Prisma.DocumentModel
 /**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
  * Model IMPlatform
  * 
  */

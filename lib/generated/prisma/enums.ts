@@ -257,3 +257,26 @@ export const DocumentRelatedType = {
 } as const
 
 export type DocumentRelatedType = (typeof DocumentRelatedType)[keyof typeof DocumentRelatedType]
+
+
+export const InvoiceStatus = {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
+
+
+export const PaymentMethod = {
+  TT: 'TT',
+  LC: 'LC',
+  PAYPAL: 'PAYPAL',
+  WESTERN_UNION: 'WESTERN_UNION',
+  CASH: 'CASH',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]

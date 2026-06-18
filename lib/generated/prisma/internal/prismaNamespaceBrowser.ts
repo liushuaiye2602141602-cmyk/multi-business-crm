@@ -69,6 +69,8 @@ export const ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   Document: 'Document',
+  Invoice: 'Invoice',
+  Payment: 'Payment',
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage'
@@ -461,6 +463,38 @@ export const DocumentScalarFieldEnum = {
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const InvoiceScalarFieldEnum = {
+  id: 'id',
+  invoiceNo: 'invoiceNo',
+  orderId: 'orderId',
+  customerId: 'customerId',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  issuedAt: 'issuedAt',
+  dueDate: 'dueDate',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  amount: 'amount',
+  method: 'method',
+  receivedAt: 'receivedAt',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const IMPlatformScalarFieldEnum = {
