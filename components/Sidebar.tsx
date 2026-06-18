@@ -31,6 +31,7 @@ import {
   BarChart3,
   Bot,
   DollarSign,
+  Mail,
 } from "lucide-react";
 
 interface NavItem {
@@ -90,6 +91,8 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/im-settings", label: "IM 设置", icon: Bot },
       { href: "/im-messages", label: "IM 消息记录", icon: MessageSquare },
+      { href: "/email", label: "邮件中心", icon: Mail },
+      { href: "/email/settings", label: "邮件设置", icon: Settings },
       { href: "/external-sources", label: "外部来源", icon: Webhook },
       { href: "/webhook-test", label: "Webhook 测试", icon: TestTube },
       { href: "/webhook-logs", label: "Webhook 日志", icon: ClipboardList },
