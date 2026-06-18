@@ -22,7 +22,7 @@ export default async function ExternalSourcesPage() {
     <div>
       <PageHeader
         title="外部来源 / 连接器"
-        description="管理独立站、n8n、AI 营销系统、飞书、OpenClaw 等外部线索入口"
+        description="管理独立站、n8n、AI 营销系统、飞书、其他平台等外部线索入口"
         actions={
           <Link href="/external-sources/new" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors">
             <Plus size={16} />

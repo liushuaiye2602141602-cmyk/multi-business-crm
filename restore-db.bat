@@ -6,7 +6,7 @@ echo ========================================
 echo.
 
 :: 进入项目目录
-cd /d D:\web_project\multi-business-crm
+cd /d "%~dp0"
 
 :: 检查 Docker 是否运行
 echo [1/5] 检查 Docker 状态...
