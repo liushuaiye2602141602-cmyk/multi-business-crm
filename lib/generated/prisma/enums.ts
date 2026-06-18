@@ -83,6 +83,17 @@ export const CustomerStatus = {
 export type CustomerStatus = (typeof CustomerStatus)[keyof typeof CustomerStatus]
 
 
+export const CustomerLifecycleStage = {
+  POTENTIAL: 'POTENTIAL',
+  INTENT: 'INTENT',
+  FIRST_DEAL: 'FIRST_DEAL',
+  REPEAT_DEAL: 'REPEAT_DEAL',
+  VIP: 'VIP'
+} as const
+
+export type CustomerLifecycleStage = (typeof CustomerLifecycleStage)[keyof typeof CustomerLifecycleStage]
+
+
 export const ProjectStatus = {
   REQUIREMENT_CONFIRMING: 'REQUIREMENT_CONFIRMING',
   QUOTING: 'QUOTING',
