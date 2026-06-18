@@ -11,6 +11,7 @@ import { getTaskPriorityVariant, getWebhookStatusVariant, getLeadGradeVariant, g
 import StatusBadge from "@/components/ui/StatusBadge";
 import Card from "@/components/ui/Card";
 import { isAIConfigured } from "@/lib/ai/types";
+import ScheduleWidget from "@/components/ScheduleWidget";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export default async function WorkbenchPage() {
     todayTasks, overdueTasks, recentLeads,
     waitingFeedbackQuotes, activeProjects, recentFollowUps,
     recentAIAnalyses, todayWebhookSuccess, recentWebhookLogs,
-    noFollowUpCustomers,
+    noFollowUpCustomers, calendarEvents,
   ] = await Promise.all([
     prisma.task.findMany({
       where: { status: { in: ["PENDING", "IN_PROGRESS"] }, dueDate: { gte: todayStart, lte: todayEnd } },
@@ -88,6 +89,18 @@ export default async function WorkbenchPage() {
       take: 5,
       include: { businessLine: true },
     }),
+    // Calendar events (next 30 days)
+    prisma.calendarEvent.findMany({
+      where: {
+        startTime: {
+          gte: todayStart,
+          lte: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000),
+        },
+      },
+      orderBy: { startTime: "asc" },
+      take: 20,
+      select: { id: true, title: true, startTime: true, eventType: true },
+    }),
   ]);
 
   const aiConfigured = isAIConfigured();
@@ -123,21 +136,38 @@ export default async function WorkbenchPage() {
         </div>
       </div>
 
-      {/* 快捷操作 */}
-      <div className="grid grid-cols-4 md:grid-cols-7 gap-3">
-        {quickActions.map((action) => {
-          const Icon = action.icon;
-          return (
-            <Link
-              key={action.label}
-              href={action.href}
-              className={`flex flex-col items-center gap-2 p-3 rounded-lg border transition-all hover:shadow-sm ${action.color}`}
-            >
-              <Icon size={20} />
-              <span className="text-xs font-medium">{action.label}</span>
-            </Link>
-          );
-        })}
+      {/* 日程 + 快捷操作 */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 日程模块 */}
+        <div className="lg:col-span-1">
+          <ScheduleWidget
+            events={calendarEvents.map((e) => ({
+              id: e.id,
+              title: e.title,
+              start: e.startTime.toISOString(),
+              type: e.eventType || "default",
+            }))}
+          />
+        </div>
+
+        {/* 快捷操作 */}
+        <div className="lg:col-span-2">
+          <div className="grid grid-cols-4 md:grid-cols-4 gap-3">
+            {quickActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.label}
+                  href={action.href}
+                  className={`flex flex-col items-center gap-2 p-3 rounded-lg border transition-all hover:shadow-sm ${action.color}`}
+                >
+                  <Icon size={20} />
+                  <span className="text-xs font-medium">{action.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* 快捷入口 */}
