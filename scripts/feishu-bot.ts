@@ -17,6 +17,7 @@ import { PrismaClient } from "../lib/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { parseIntent } from "../lib/ai/intent";
 import { executeIntent } from "../lib/ai/executor";
+import { extractCustomerFromImage } from "../lib/ai/vision";
 
 const connectionString = process.env.DATABASE_URL!;
 const adapter = new PrismaPg({ connectionString });
@@ -52,28 +53,8 @@ async function main() {
     "im.message.receive_v1": async (data: any) => {
       const message = data.message;
       const sender = data.sender;
-
-      // 只处理文本消息
-      if (message.message_type !== "text") {
-        return;
-      }
-
-      let content = "";
-      try {
-        const contentObj = JSON.parse(message.content);
-        content = contentObj.text || "";
-      } catch {
-        content = message.content || "";
-      }
-
-      // 去除 @机器人
-      content = content.replace(/@_user_\d+/g, "").trim();
-      if (!content) return;
-
       const senderId = sender?.sender_id?.open_id || "unknown";
       const chatId = message.chat_id;
-
-      console.log(`\n📩 收到消息 [${senderId}]: ${content}`);
 
       // 获取或创建 IM 用户
       let imUser = await prisma.iMUser.findUnique({
@@ -94,6 +75,185 @@ async function main() {
           },
         });
       }
+
+      // 处理图片消息
+      if (message.message_type === "image") {
+        console.log(`\n🖼️ 收到图片消息 [${senderId}]`);
+
+        await prisma.iMMessage.create({
+          data: {
+            platformId: platform.id,
+            imUserId: imUser.id,
+            direction: "in",
+            content: "[图片]",
+          },
+        });
+
+        try {
+          // 下载图片
+          let imageKey = "";
+          try {
+            const contentObj = JSON.parse(message.content);
+            imageKey = contentObj.image_key || "";
+          } catch {}
+
+          if (!imageKey) {
+            throw new Error("无法获取图片 key");
+          }
+
+          console.log(`📥 下载图片: ${imageKey}`);
+          const imageResponse = await client.im.messageResource.get({
+            path: { message_id: message.message_id, file_key: imageKey },
+            params: { type: "image" },
+          });
+
+          // 将 ReadableStream 转为 Buffer 再转 base64
+          const chunks: Buffer[] = [];
+          const readable = imageResponse.getReadableStream();
+          for await (const chunk of readable) {
+            chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+          }
+          const imageBuffer = Buffer.concat(chunks);
+          const imageBase64 = imageBuffer.toString("base64");
+
+          // 调用视觉 AI 提取客户信息
+          console.log(`🧠 识别图片中的客户信息...`);
+          const extracted = await extractCustomerFromImage(imageBase64);
+          console.log(`✅ 提取结果:`, extracted);
+
+          // 自动创建线索
+          const businessLine = await prisma.businessLine.findFirst({
+            orderBy: { id: "asc" },
+          });
+
+          let replyText = "";
+
+          if (businessLine && extracted.company !== "未知") {
+            const lead = await prisma.lead.create({
+              data: {
+                company: extracted.company,
+                contactName: extracted.contactName,
+                country: extracted.country || null,
+                email: extracted.email || null,
+                phone: extracted.phone || null,
+                whatsapp: extracted.whatsapp || null,
+                requirement: extracted.requirement || null,
+                interestProducts: extracted.interestProducts || null,
+                remark: extracted.remark || null,
+                source: "OTHER",
+                status: "NEW",
+                temperature: "WARM",
+                grade: "C",
+                businessLineId: businessLine.id,
+              },
+            });
+
+            replyText = `已从图片识别并创建线索：
+公司: ${extracted.company}
+联系人: ${extracted.contactName}${extracted.country ? `\n国家: ${extracted.country}` : ""}${extracted.email ? `\n邮箱: ${extracted.email}` : ""}${extracted.phone ? `\n电话: ${extracted.phone}` : ""}${extracted.whatsapp ? `\nWhatsApp: ${extracted.whatsapp}` : ""}${extracted.requirement ? `\n需求: ${extracted.requirement}` : ""}${extracted.interestProducts ? `\n感兴趣产品: ${extracted.interestProducts}` : ""}
+
+线索ID: ${lead.id}`;
+          } else if (businessLine) {
+            // company 为 "未知"，仍创建但提示
+            const lead = await prisma.lead.create({
+              data: {
+                company: extracted.company,
+                contactName: extracted.contactName,
+                remark: extracted.remark || "图片识别，信息不完整",
+                source: "OTHER",
+                status: "NEW",
+                temperature: "WARM",
+                grade: "C",
+                businessLineId: businessLine.id,
+              },
+            });
+
+            replyText = `图片已识别但信息不完整，已创建线索待补充：
+公司: ${extracted.company}
+联系人: ${extracted.contactName}
+线索ID: ${lead.id}
+
+请手动补充详细信息。`;
+          } else {
+            replyText = `图片识别结果：
+公司: ${extracted.company}
+联系人: ${extracted.contactName}
+
+⚠️ 未找到业务线，无法自动创建线索。`;
+          }
+
+          await prisma.iMMessage.create({
+            data: {
+              platformId: platform.id,
+              imUserId: imUser.id,
+              direction: "out",
+              content: replyText,
+              intent: "SCREENSHOT_TO_LEAD",
+              action: "image_extract",
+            },
+          });
+
+          if (chatId) {
+            await client.im.message.create({
+              data: {
+                receive_id: chatId,
+                msg_type: "text",
+                content: JSON.stringify({ text: replyText }),
+              },
+              params: { receive_id_type: "chat_id" },
+            });
+            console.log(`📤 已回复图片识别结果`);
+          }
+        } catch (error) {
+          console.error("❌ 图片处理失败:", error);
+          const errorMsg = error instanceof Error ? error.message : "图片处理失败";
+
+          await prisma.iMMessage.create({
+            data: {
+              platformId: platform.id,
+              imUserId: imUser.id,
+              direction: "out",
+              content: `❌ 图片处理出错：${errorMsg}`,
+              errorMsg,
+            },
+          });
+
+          if (chatId) {
+            try {
+              await client.im.message.create({
+                data: {
+                  receive_id: chatId,
+                  msg_type: "text",
+                  content: JSON.stringify({
+                    text: `❌ 图片处理出错：${errorMsg}`,
+                  }),
+                },
+                params: { receive_id_type: "chat_id" },
+              });
+            } catch {}
+          }
+        }
+        return;
+      }
+
+      // 只处理文本消息
+      if (message.message_type !== "text") {
+        return;
+      }
+
+      let content = "";
+      try {
+        const contentObj = JSON.parse(message.content);
+        content = contentObj.text || "";
+      } catch {
+        content = message.content || "";
+      }
+
+      // 去除 @机器人
+      content = content.replace(/@_user_\d+/g, "").trim();
+      if (!content) return;
+
+      console.log(`\n📩 收到消息 [${senderId}]: ${content}`);
 
       // 记录收到的消息
       await prisma.iMMessage.create({
