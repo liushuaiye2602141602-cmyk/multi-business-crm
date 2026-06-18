@@ -15,11 +15,12 @@ export default async function EditOrderPage({
 
   if (!order) return notFound();
 
-  const [customers, projects, quotes, contacts] = await Promise.all([
+  const [customers, projects, quotes, contacts, businessLines] = await Promise.all([
     prisma.customer.findMany({ orderBy: { company: "asc" } }),
     prisma.project.findMany({ orderBy: { name: "asc" } }),
     prisma.quote.findMany({ orderBy: { quoteNo: "asc" } }),
     prisma.contact.findMany({ orderBy: { name: "asc" } }),
+    prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
   ]);
 
   return (
@@ -30,6 +31,7 @@ export default async function EditOrderPage({
         projects={projects}
         quotes={quotes}
         contacts={contacts}
+        businessLines={businessLines}
         order={{
           ...order,
           totalAmount: order.totalAmount ? Number(order.totalAmount) : null,

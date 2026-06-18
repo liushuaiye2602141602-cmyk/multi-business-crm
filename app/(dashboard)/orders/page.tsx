@@ -21,6 +21,7 @@ export default async function OrdersPage({
 }) {
   const params = await searchParams;
   const search = typeof params.search === "string" ? params.search : "";
+  const businessLineId = typeof params.businessLineId === "string" ? params.businessLineId : "";
   const status = typeof params.status === "string" ? params.status : "";
   const customerId = typeof params.customerId === "string" ? params.customerId : "";
 
@@ -34,18 +35,20 @@ export default async function OrdersPage({
     ];
   }
   if (status) where.orderStatus = status;
+  if (businessLineId) where.businessLineId = parseInt(businessLineId);
   if (customerId) where.customerId = parseInt(customerId);
 
-  const [orders, customers] = await Promise.all([
+  const [orders, customers, businessLines] = await Promise.all([
     prisma.order.findMany({
       where,
       orderBy: { createdAt: "desc" },
-      include: { customer: true, project: true, quote: true },
+      include: { customer: true, project: true, quote: true, businessLine: true },
     }),
     prisma.customer.findMany({ orderBy: { company: "asc" } }),
+    prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
   ]);
 
-  const hasFilters = search || status || customerId;
+  const hasFilters = search || status || businessLineId || customerId;
 
   return (
     <div>
@@ -63,11 +66,12 @@ export default async function OrdersPage({
       <SearchFilterBar
         searchPlaceholder="搜索订单号、客户、产品..."
         filters={[
+          { name: "businessLineId", label: "业务线", options: businessLines.map((bl) => ({ value: String(bl.id), label: bl.name })) },
           { name: "status", label: "状态", options: Object.entries(OrderStatusLabel).map(([value, label]) => ({ value, label })) },
           { name: "customerId", label: "客户", options: customers.map((c) => ({ value: String(c.id), label: c.company })) },
         ]}
         defaultSearch={search}
-        defaultFilters={{ status, customerId }}
+        defaultFilters={{ businessLineId, status, customerId }}
       />
 
       <Card padding="none">
@@ -85,6 +89,7 @@ export default async function OrdersPage({
                 <tr className="bg-gray-50/80 border-b border-gray-200">
                   <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">订单号</th>
                   <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">客户</th>
+                  <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">业务线</th>
                   <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">项目</th>
                   <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">状态</th>
                   <th className="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase tracking-wider">金额</th>
@@ -105,6 +110,7 @@ export default async function OrdersPage({
                         {order.customer.company}
                       </Link>
                     </td>
+                    <td className="py-3 px-4 text-gray-600">{order.businessLine?.name || "-"}</td>
                     <td className="py-3 px-4 text-gray-600">{order.project?.name || "-"}</td>
                     <td className="py-3 px-4">
                       <StatusBadge label={OrderStatusLabel[order.orderStatus] || order.orderStatus} variant={getOrderStatusVariant(order.orderStatus)} />
