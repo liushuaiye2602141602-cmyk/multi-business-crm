@@ -51,7 +51,6 @@ export type CustomerMinAggregateOutputType = {
   industry: string | null
   customerType: $Enums.CustomerType | null
   customerStatus: $Enums.CustomerStatus | null
-  lifecycleStage: $Enums.CustomerLifecycleStage | null
   leadGrade: $Enums.LeadGrade | null
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
@@ -78,7 +77,6 @@ export type CustomerMaxAggregateOutputType = {
   industry: string | null
   customerType: $Enums.CustomerType | null
   customerStatus: $Enums.CustomerStatus | null
-  lifecycleStage: $Enums.CustomerLifecycleStage | null
   leadGrade: $Enums.LeadGrade | null
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
@@ -105,7 +103,6 @@ export type CustomerCountAggregateOutputType = {
   industry: number
   customerType: number
   customerStatus: number
-  lifecycleStage: number
   leadGrade: number
   source: number
   sourceWebsite: number
@@ -146,7 +143,6 @@ export type CustomerMinAggregateInputType = {
   industry?: true
   customerType?: true
   customerStatus?: true
-  lifecycleStage?: true
   leadGrade?: true
   source?: true
   sourceWebsite?: true
@@ -173,7 +169,6 @@ export type CustomerMaxAggregateInputType = {
   industry?: true
   customerType?: true
   customerStatus?: true
-  lifecycleStage?: true
   leadGrade?: true
   source?: true
   sourceWebsite?: true
@@ -200,7 +195,6 @@ export type CustomerCountAggregateInputType = {
   industry?: true
   customerType?: true
   customerStatus?: true
-  lifecycleStage?: true
   leadGrade?: true
   source?: true
   sourceWebsite?: true
@@ -314,7 +308,6 @@ export type CustomerGroupByOutputType = {
   industry: string | null
   customerType: $Enums.CustomerType
   customerStatus: $Enums.CustomerStatus
-  lifecycleStage: $Enums.CustomerLifecycleStage
   leadGrade: $Enums.LeadGrade
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
@@ -364,7 +357,6 @@ export type CustomerWhereInput = {
   industry?: Prisma.StringNullableFilter<"Customer"> | string | null
   customerType?: Prisma.EnumCustomerTypeFilter<"Customer"> | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFilter<"Customer"> | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFilter<"Customer"> | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFilter<"Customer"> | $Enums.LeadGrade
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
@@ -401,7 +393,6 @@ export type CustomerOrderByWithRelationInput = {
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
   customerType?: Prisma.SortOrder
   customerStatus?: Prisma.SortOrder
-  lifecycleStage?: Prisma.SortOrder
   leadGrade?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -441,7 +432,6 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   industry?: Prisma.StringNullableFilter<"Customer"> | string | null
   customerType?: Prisma.EnumCustomerTypeFilter<"Customer"> | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFilter<"Customer"> | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFilter<"Customer"> | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFilter<"Customer"> | $Enums.LeadGrade
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
@@ -478,7 +468,6 @@ export type CustomerOrderByWithAggregationInput = {
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
   customerType?: Prisma.SortOrder
   customerStatus?: Prisma.SortOrder
-  lifecycleStage?: Prisma.SortOrder
   leadGrade?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -513,7 +502,6 @@ export type CustomerScalarWhereWithAggregatesInput = {
   industry?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   customerType?: Prisma.EnumCustomerTypeWithAggregatesFilter<"Customer"> | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusWithAggregatesFilter<"Customer"> | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageWithAggregatesFilter<"Customer"> | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeWithAggregatesFilter<"Customer"> | $Enums.LeadGrade
   source?: Prisma.EnumLeadSourceNullableWithAggregatesFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
@@ -539,7 +527,6 @@ export type CustomerCreateInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -575,7 +562,6 @@ export type CustomerUncheckedCreateInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -610,7 +596,6 @@ export type CustomerUpdateInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -646,7 +631,6 @@ export type CustomerUncheckedUpdateInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -682,7 +666,6 @@ export type CustomerCreateManyInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -708,7 +691,6 @@ export type CustomerUpdateManyMutationInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -734,7 +716,6 @@ export type CustomerUncheckedUpdateManyInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -776,7 +757,6 @@ export type CustomerCountOrderByAggregateInput = {
   industry?: Prisma.SortOrder
   customerType?: Prisma.SortOrder
   customerStatus?: Prisma.SortOrder
-  lifecycleStage?: Prisma.SortOrder
   leadGrade?: Prisma.SortOrder
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
@@ -809,7 +789,6 @@ export type CustomerMaxOrderByAggregateInput = {
   industry?: Prisma.SortOrder
   customerType?: Prisma.SortOrder
   customerStatus?: Prisma.SortOrder
-  lifecycleStage?: Prisma.SortOrder
   leadGrade?: Prisma.SortOrder
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
@@ -836,7 +815,6 @@ export type CustomerMinOrderByAggregateInput = {
   industry?: Prisma.SortOrder
   customerType?: Prisma.SortOrder
   customerStatus?: Prisma.SortOrder
-  lifecycleStage?: Prisma.SortOrder
   leadGrade?: Prisma.SortOrder
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
@@ -925,10 +903,6 @@ export type EnumCustomerTypeFieldUpdateOperationsInput = {
 
 export type EnumCustomerStatusFieldUpdateOperationsInput = {
   set?: $Enums.CustomerStatus
-}
-
-export type EnumCustomerLifecycleStageFieldUpdateOperationsInput = {
-  set?: $Enums.CustomerLifecycleStage
 }
 
 export type NullableEnumLeadSourceFieldUpdateOperationsInput = {
@@ -1067,7 +1041,6 @@ export type CustomerCreateWithoutBusinessLineInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1102,7 +1075,6 @@ export type CustomerUncheckedCreateWithoutBusinessLineInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1166,7 +1138,6 @@ export type CustomerScalarWhereInput = {
   industry?: Prisma.StringNullableFilter<"Customer"> | string | null
   customerType?: Prisma.EnumCustomerTypeFilter<"Customer"> | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFilter<"Customer"> | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFilter<"Customer"> | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFilter<"Customer"> | $Enums.LeadGrade
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
@@ -1192,7 +1163,6 @@ export type CustomerCreateWithoutConvertedFromInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1227,7 +1197,6 @@ export type CustomerUncheckedCreateWithoutConvertedFromInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1277,7 +1246,6 @@ export type CustomerUpdateWithoutConvertedFromInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1312,7 +1280,6 @@ export type CustomerUncheckedUpdateWithoutConvertedFromInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1346,7 +1313,6 @@ export type CustomerCreateWithoutContactsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1381,7 +1347,6 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1431,7 +1396,6 @@ export type CustomerUpdateWithoutContactsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1466,7 +1430,6 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1500,7 +1463,6 @@ export type CustomerCreateWithoutProjectsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1535,7 +1497,6 @@ export type CustomerUncheckedCreateWithoutProjectsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1585,7 +1546,6 @@ export type CustomerUpdateWithoutProjectsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1620,7 +1580,6 @@ export type CustomerUncheckedUpdateWithoutProjectsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1654,7 +1613,6 @@ export type CustomerCreateWithoutFollowUpsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1689,7 +1647,6 @@ export type CustomerUncheckedCreateWithoutFollowUpsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1739,7 +1696,6 @@ export type CustomerUpdateWithoutFollowUpsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1774,7 +1730,6 @@ export type CustomerUncheckedUpdateWithoutFollowUpsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1808,7 +1763,6 @@ export type CustomerCreateWithoutQuotesInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1843,7 +1797,6 @@ export type CustomerUncheckedCreateWithoutQuotesInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1893,7 +1846,6 @@ export type CustomerUpdateWithoutQuotesInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1928,7 +1880,6 @@ export type CustomerUncheckedUpdateWithoutQuotesInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1962,7 +1913,6 @@ export type CustomerCreateWithoutTasksInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -1997,7 +1947,6 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2047,7 +1996,6 @@ export type CustomerUpdateWithoutTasksInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2082,7 +2030,6 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2116,7 +2063,6 @@ export type CustomerCreateWithoutOrdersInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2151,7 +2097,6 @@ export type CustomerUncheckedCreateWithoutOrdersInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2201,7 +2146,6 @@ export type CustomerUpdateWithoutOrdersInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2236,7 +2180,6 @@ export type CustomerUncheckedUpdateWithoutOrdersInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2270,7 +2213,6 @@ export type CustomerCreateWithoutInvoicesInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2305,7 +2247,6 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2355,7 +2296,6 @@ export type CustomerUpdateWithoutInvoicesInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2390,7 +2330,6 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2424,7 +2363,6 @@ export type CustomerCreateWithoutEmailsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2459,7 +2397,6 @@ export type CustomerUncheckedCreateWithoutEmailsInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2509,7 +2446,6 @@ export type CustomerUpdateWithoutEmailsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2544,7 +2480,6 @@ export type CustomerUncheckedUpdateWithoutEmailsInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2579,7 +2514,6 @@ export type CustomerCreateManyBusinessLineInput = {
   industry?: string | null
   customerType?: $Enums.CustomerType
   customerStatus?: $Enums.CustomerStatus
-  lifecycleStage?: $Enums.CustomerLifecycleStage
   leadGrade?: $Enums.LeadGrade
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
@@ -2604,7 +2538,6 @@ export type CustomerUpdateWithoutBusinessLineInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2639,7 +2572,6 @@ export type CustomerUncheckedUpdateWithoutBusinessLineInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2674,7 +2606,6 @@ export type CustomerUncheckedUpdateManyWithoutBusinessLineInput = {
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   customerStatus?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
-  lifecycleStage?: Prisma.EnumCustomerLifecycleStageFieldUpdateOperationsInput | $Enums.CustomerLifecycleStage
   leadGrade?: Prisma.EnumLeadGradeFieldUpdateOperationsInput | $Enums.LeadGrade
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2803,7 +2734,6 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   industry?: boolean
   customerType?: boolean
   customerStatus?: boolean
-  lifecycleStage?: boolean
   leadGrade?: boolean
   source?: boolean
   sourceWebsite?: boolean
@@ -2841,7 +2771,6 @@ export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   industry?: boolean
   customerType?: boolean
   customerStatus?: boolean
-  lifecycleStage?: boolean
   leadGrade?: boolean
   source?: boolean
   sourceWebsite?: boolean
@@ -2869,7 +2798,6 @@ export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   industry?: boolean
   customerType?: boolean
   customerStatus?: boolean
-  lifecycleStage?: boolean
   leadGrade?: boolean
   source?: boolean
   sourceWebsite?: boolean
@@ -2897,7 +2825,6 @@ export type CustomerSelectScalar = {
   industry?: boolean
   customerType?: boolean
   customerStatus?: boolean
-  lifecycleStage?: boolean
   leadGrade?: boolean
   source?: boolean
   sourceWebsite?: boolean
@@ -2911,7 +2838,7 @@ export type CustomerSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "lifecycleStage" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
   contacts?: boolean | Prisma.Customer$contactsArgs<ExtArgs>
@@ -2959,7 +2886,6 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     industry: string | null
     customerType: $Enums.CustomerType
     customerStatus: $Enums.CustomerStatus
-    lifecycleStage: $Enums.CustomerLifecycleStage
     leadGrade: $Enums.LeadGrade
     source: $Enums.LeadSource | null
     sourceWebsite: string | null
@@ -3416,7 +3342,6 @@ export interface CustomerFieldRefs {
   readonly industry: Prisma.FieldRef<"Customer", 'String'>
   readonly customerType: Prisma.FieldRef<"Customer", 'CustomerType'>
   readonly customerStatus: Prisma.FieldRef<"Customer", 'CustomerStatus'>
-  readonly lifecycleStage: Prisma.FieldRef<"Customer", 'CustomerLifecycleStage'>
   readonly leadGrade: Prisma.FieldRef<"Customer", 'LeadGrade'>
   readonly source: Prisma.FieldRef<"Customer", 'LeadSource'>
   readonly sourceWebsite: Prisma.FieldRef<"Customer", 'String'>

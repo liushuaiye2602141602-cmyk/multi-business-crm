@@ -2599,7 +2599,6 @@ export const CustomerScalarFieldEnum = {
   industry: 'industry',
   customerType: 'customerType',
   customerStatus: 'customerStatus',
-  lifecycleStage: 'lifecycleStage',
   leadGrade: 'leadGrade',
   source: 'source',
   sourceWebsite: 'sourceWebsite',
@@ -2690,8 +2689,6 @@ export const QuoteScalarFieldEnum = {
   quantity: 'quantity',
   unitPrice: 'unitPrice',
   totalPrice: 'totalPrice',
-  exchangeRate: 'exchangeRate',
-  discountAmount: 'discountAmount',
   currency: 'currency',
   paymentTerms: 'paymentTerms',
   deliveryTime: 'deliveryTime',
@@ -2910,7 +2907,6 @@ export const OrderScalarFieldEnum = {
   businessLineId: 'businessLineId',
   orderStatus: 'orderStatus',
   totalAmount: 'totalAmount',
-  exchangeRate: 'exchangeRate',
   currency: 'currency',
   paymentTerm: 'paymentTerm',
   deliveryTerm: 'deliveryTerm',
@@ -3292,20 +3288,6 @@ export type EnumCustomerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'CustomerStatus[]'
  */
 export type ListEnumCustomerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomerStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'CustomerLifecycleStage'
- */
-export type EnumCustomerLifecycleStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomerLifecycleStage'>
-    
-
-
-/**
- * Reference to a field of type 'CustomerLifecycleStage[]'
- */
-export type ListEnumCustomerLifecycleStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomerLifecycleStage[]'>
     
 
 
