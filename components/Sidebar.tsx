@@ -33,6 +33,8 @@ import {
   Bot,
   DollarSign,
   Mail,
+  Calendar,
+  Target,
 } from "lucide-react";
 
 interface NavItem {
@@ -52,6 +54,8 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/workbench", label: "今日工作台", icon: Home },
       { href: "/dashboard", label: "数据看板", icon: LayoutDashboard },
+      { href: "/calendar", label: "日程管理", icon: Calendar },
+      { href: "/goals", label: "目标追踪", icon: Target },
       { href: "/reports", label: "数据报表", icon: BarChart3 },
       { href: "/search", label: "全局搜索", icon: Search },
     ],
