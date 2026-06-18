@@ -133,3 +133,14 @@ export function getOrderStatusVariant(status: string): "default" | "info" | "war
   };
   return map[status] || "default";
 }
+
+export function getInvoiceStatusVariant(status: string): "default" | "info" | "success" | "warning" | "danger" {
+  const map: Record<string, "default" | "info" | "success" | "warning" | "danger"> = {
+    DRAFT: "default",
+    SENT: "info",
+    PAID: "success",
+    OVERDUE: "danger",
+    CANCELLED: "default",
+  };
+  return map[status] || "default";
+}

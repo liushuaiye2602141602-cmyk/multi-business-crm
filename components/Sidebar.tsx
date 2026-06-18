@@ -30,6 +30,7 @@ import {
   FolderOpen,
   BarChart3,
   Bot,
+  DollarSign,
 } from "lucide-react";
 
 interface NavItem {
@@ -69,6 +70,7 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/quotes", label: "报价记录", icon: FileText },
       { href: "/orders", label: "订单管理", icon: ShoppingCart },
+      { href: "/finance", label: "财务管理", icon: DollarSign },
       { href: "/products", label: "产品目录", icon: Package },
       { href: "/documents", label: "文档资料", icon: FolderOpen },
       { href: "/templates", label: "跟进模板", icon: FileEdit },
