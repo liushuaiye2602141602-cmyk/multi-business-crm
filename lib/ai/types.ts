@@ -38,6 +38,23 @@ export function getAIConfig(): AIConfig {
   };
 }
 
+export async function getAIConfigFromDB(): Promise<AIConfig | null> {
+  try {
+    const { default: prisma } = await import("@/lib/prisma");
+    const config = await prisma.aIConfig.findFirst({ where: { isActive: true } });
+    if (config) {
+      return {
+        provider: config.provider,
+        apiKey: config.apiKey,
+        model: config.model,
+        baseUrl: config.baseUrl,
+        isEnabled: true,
+      };
+    }
+  } catch {}
+  return null;
+}
+
 export function isAIConfigured(): boolean {
   const config = getAIConfig();
   return config.isEnabled && !!config.model;

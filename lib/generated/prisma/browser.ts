@@ -128,6 +128,11 @@ export type EmailConfig = Prisma.EmailConfigModel
  */
 export type Email = Prisma.EmailModel
 /**
+ * Model AIConfig
+ * 
+ */
+export type AIConfig = Prisma.AIConfigModel
+/**
  * Model IMPlatform
  * 
  */

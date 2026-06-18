@@ -774,6 +774,20 @@ model Email {
   @@index([createdAt])
 }
 
+model AIConfig {
+  id            Int      @id @default(autoincrement())
+  provider      String   @default("OPENAI_COMPATIBLE")
+  baseUrl       String
+  apiKey        String
+  model         String
+  visionBaseUrl String?
+  visionApiKey  String?
+  visionModel   String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 model IMPlatform {
   id          Int      @id @default(autoincrement())
   name        String   @unique

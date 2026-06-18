@@ -73,6 +73,7 @@ export const ModelName = {
   Payment: 'Payment',
   EmailConfig: 'EmailConfig',
   Email: 'Email',
+  AIConfig: 'AIConfig',
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage'
@@ -545,6 +546,23 @@ export const EmailScalarFieldEnum = {
 } as const
 
 export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
+
+
+export const AIConfigScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  baseUrl: 'baseUrl',
+  apiKey: 'apiKey',
+  model: 'model',
+  visionBaseUrl: 'visionBaseUrl',
+  visionApiKey: 'visionApiKey',
+  visionModel: 'visionModel',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AIConfigScalarFieldEnum = (typeof AIConfigScalarFieldEnum)[keyof typeof AIConfigScalarFieldEnum]
 
 
 export const IMPlatformScalarFieldEnum = {
