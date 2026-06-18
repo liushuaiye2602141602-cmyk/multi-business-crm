@@ -48,16 +48,21 @@ export async function createLead(formData: FormData) {
     description: `创建线索: ${lead.company} - ${lead.contactName}`,
   });
 
+  // AI Control: check permission before auto-scoring
+  try {
+    const { checkAIPermission, logAIExecution } = await import("@/lib/ai/control/guard");
+    const perm = await checkAIPermission("lead_analyze", "Lead", lead.id);
+    if (perm.allowed) {
+      const { scoreDealProbability } = await import("@/lib/ai/agents");
+      await scoreDealProbability("Lead", lead.id);
+      await logAIExecution("lead_analyze", "Lead", lead.id, true, "Auto-scored on creation", perm.mode);
+    }
+  } catch {}
+
   // Auto-create follow-up task
   try {
     const { createFollowUpTaskForLead } = await import("@/lib/domain/auto-tasks");
     await createFollowUpTaskForLead(lead.id);
-  } catch {}
-
-  // Auto AI scoring
-  try {
-    const { scoreDealProbability } = await import("@/lib/ai/agents");
-    await scoreDealProbability("Lead", lead.id);
   } catch {}
 
   revalidatePath("/leads");

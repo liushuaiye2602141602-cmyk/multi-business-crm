@@ -116,11 +116,14 @@ export async function updateQuoteStatus(quoteId: number, status: string) {
       await createFollowUpTaskForQuote(quoteId);
     } catch {}
 
-    // Auto score deal
+    // AI Control: check permission before auto-scoring
     try {
-      if (quote.customerId) {
+      const { checkAIPermission, logAIExecution } = await import("@/lib/ai/control/guard");
+      const perm = await checkAIPermission("score_deal", "Quote", quoteId);
+      if (perm.allowed && quote.customerId) {
         const { scoreDealProbability } = await import("@/lib/ai/agents");
         await scoreDealProbability("Customer", quote.customerId);
+        await logAIExecution("score_deal", "Quote", quoteId, true, "Auto-scored on status change", perm.mode);
       }
     } catch {}
   }

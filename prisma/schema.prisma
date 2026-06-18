@@ -879,6 +879,7 @@ model Payment {
   @@index([invoiceId])
 }
 
+// DEPRECATED: Use EmailAccount instead. Kept for backward compatibility.
 model EmailConfig {
   id          Int      @id @default(autoincrement())
   name        String   @unique
@@ -896,6 +897,7 @@ model EmailConfig {
   updatedAt   DateTime @updatedAt
 }
 
+// DEPRECATED: Use EmailMessage instead. Kept for backward compatibility.
 model Email {
   id          Int      @id @default(autoincrement())
   direction   String   // in / out
@@ -1165,6 +1167,7 @@ model AIPolicyRule {
   @@index([tenantId])
 }
 
+// Used by AI Control System execution guard
 model AIExecutionLog {
   id          Int      @id @default(autoincrement())
   tenantId    Int?
