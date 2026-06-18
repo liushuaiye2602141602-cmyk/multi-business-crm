@@ -14,6 +14,7 @@ import { reviewCustomer, appendToCustomerNotes, createTaskFromAI } from "@/lib/a
 import { isAIConfigured } from "@/lib/ai/types";
 import AIAnalysisButton from "@/components/AIAnalysisButton";
 import AIAnalysisResult from "@/components/AIAnalysisResult";
+import { addCustomerActivity } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export default async function CustomerDetailPage({
   const { id } = await params;
   const customerId = parseInt(id);
 
-  const [customer, latestAnalysis, recentActivityLogs] = await Promise.all([
+  const [customer, latestAnalysis, recentActivityLogs, activities] = await Promise.all([
     prisma.customer.findUnique({
       where: { id: customerId },
       include: {
@@ -49,6 +50,10 @@ export default async function CustomerDetailPage({
       },
       orderBy: { createdAt: "desc" },
       take: 20,
+    }),
+    prisma.customerActivity.findMany({
+      where: { customerId },
+      orderBy: { createdAt: "desc" },
     }),
   ]);
 
@@ -156,6 +161,20 @@ export default async function CustomerDetailPage({
     "任务": "bg-orange-100 text-orange-700",
     "AI": "bg-pink-100 text-pink-700",
     "线索": "bg-gray-100 text-gray-700",
+    "活动": "bg-teal-100 text-teal-700",
+  };
+
+  const activityTypeLabels: Record<string, string> = {
+    call: "电话",
+    email: "邮件",
+    whatsapp: "WhatsApp",
+    note: "备注",
+  };
+  const activityTypeBadgeColors: Record<string, string> = {
+    call: "bg-green-100 text-green-700",
+    email: "bg-blue-100 text-blue-700",
+    whatsapp: "bg-emerald-100 text-emerald-700",
+    note: "bg-gray-100 text-gray-700",
   };
 
   return (
@@ -174,6 +193,11 @@ export default async function CustomerDetailPage({
                 <StatusBadge label={LeadGradeLabel[customer.leadGrade] || customer.leadGrade} variant={getLeadGradeVariant(customer.leadGrade)} />
                 <span className="text-sm text-gray-500">{customer.businessLine.name}</span>
                 {customer.source && <span className="text-sm text-gray-500">来源: {LeadSourceLabel[customer.source] || customer.source}</span>}
+                {customer.convertedFrom.length > 0 && (
+                  <span className="text-sm text-blue-600">
+                    转化自线索: {customer.convertedFrom.map(l => l.company).join(", ")}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -304,6 +328,54 @@ export default async function CustomerDetailPage({
                         <p className="text-sm font-medium text-gray-900">{item.title}</p>
                       )}
                       <p className="text-xs text-gray-500 mt-0.5 truncate">{item.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+
+          {/* 跟进活动记录 */}
+          <Card>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+              <h3 className="text-base font-semibold text-gray-900">跟进活动 ({activities.length})</h3>
+            </div>
+            {/* 添加活动表单 */}
+            <form action={async (formData) => {
+              "use server";
+              await addCustomerActivity(customerId, formData);
+            }} className="mb-4 p-3 bg-gray-50 rounded-lg space-y-3">
+              <div className="flex gap-2">
+                <select name="type" className="text-sm border border-gray-200 rounded-md px-2 py-1.5 bg-white">
+                  <option value="note">备注</option>
+                  <option value="call">电话</option>
+                  <option value="email">邮件</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+                <input name="content" placeholder="输入跟进内容..." required className="flex-1 text-sm border border-gray-200 rounded-md px-3 py-1.5" />
+              </div>
+              <button type="submit" className="px-3 py-1.5 text-sm font-medium bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors">
+                添加活动
+              </button>
+            </form>
+            {activities.length === 0 ? (
+              <p className="text-sm text-gray-400 py-4 text-center">暂无活动记录</p>
+            ) : (
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {activities.map((activity) => (
+                  <div key={activity.id} className="flex gap-3">
+                    <div className="flex flex-col items-center">
+                      <div className="w-2 h-2 rounded-full mt-2 bg-teal-400" />
+                      <div className="w-px h-full bg-gray-200 mt-1" />
+                    </div>
+                    <div className="flex-1 pb-3">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${activityTypeBadgeColors[activity.type] || "bg-gray-100 text-gray-700"}`}>
+                          {activityTypeLabels[activity.type] || activity.type}
+                        </span>
+                        <span className="text-xs text-gray-400">{formatDate(activity.createdAt)}</span>
+                      </div>
+                      <p className="text-sm text-gray-900 whitespace-pre-wrap">{activity.content}</p>
                     </div>
                   </div>
                 ))}

@@ -181,6 +181,26 @@ export async function autoReturnInactiveCustomers(days: number = 30) {
 
 // ==================== 沉睡客户检测 ====================
 
+export async function addCustomerActivity(customerId: number, formData: FormData) {
+  const type = (formData.get("type") as string) || "note";
+  const content = formData.get("content") as string;
+
+  if (!content) {
+    return { success: false, error: "跟进内容不能为空" };
+  }
+
+  const activity = await prisma.customerActivity.create({
+    data: {
+      customerId,
+      type,
+      content,
+    },
+  });
+
+  revalidatePath(`/customers/${customerId}`);
+  return { success: true, activity };
+}
+
 export async function getDormantCustomers() {
   const customers = await prisma.customer.findMany({
     include: {

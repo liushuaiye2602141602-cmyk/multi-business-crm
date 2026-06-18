@@ -67,6 +67,11 @@ export type Customer = Prisma.CustomerModel
  */
 export type Contact = Prisma.ContactModel
 /**
+ * Model CustomerActivity
+ * 
+ */
+export type CustomerActivity = Prisma.CustomerActivityModel
+/**
  * Model Project
  * 
  */

@@ -335,6 +335,7 @@ model Customer {
   invoices      Invoice[]
   emails        Email[]
   convertedFrom Lead[]        @relation("ConvertedLead")
+  customerActivities CustomerActivity[]
 
   @@index([ownerId])
   @@index([businessLineId])
@@ -363,6 +364,19 @@ model Contact {
   emails   Email[]
 
   @@index([customerId])
+}
+
+model CustomerActivity {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  type       String   @default("note") // call / email / whatsapp / note
+  content    String
+  createdAt  DateTime @default(now())
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@index([createdAt])
 }
 
 model Project {

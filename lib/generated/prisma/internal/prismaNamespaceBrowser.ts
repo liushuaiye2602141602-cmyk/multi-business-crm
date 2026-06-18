@@ -56,6 +56,7 @@ export const ModelName = {
   LeadActivity: 'LeadActivity',
   Customer: 'Customer',
   Contact: 'Contact',
+  CustomerActivity: 'CustomerActivity',
   Project: 'Project',
   FollowUp: 'FollowUp',
   Quote: 'Quote',
@@ -202,6 +203,17 @@ export const ContactScalarFieldEnum = {
 } as const
 
 export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const CustomerActivityScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  type: 'type',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type CustomerActivityScalarFieldEnum = (typeof CustomerActivityScalarFieldEnum)[keyof typeof CustomerActivityScalarFieldEnum]
 
 
 export const ProjectScalarFieldEnum = {

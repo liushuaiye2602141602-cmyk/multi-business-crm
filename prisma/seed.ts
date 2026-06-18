@@ -266,6 +266,68 @@ Best regards`,
     });
   }
   console.log("✅ 测试线索已创建（5条）");
+
+  // ==================== Customers ====================
+  console.log("\n📦 创建客户数据...");
+
+  const customersData = [
+    {
+      company: "Pacific Rim Trading Co",
+      contactName: "David Lee",
+      country: "Singapore",
+      email: "david@pacrim.com",
+      phone: "+65 9123 4567",
+      customerStatus: "ACTIVE" as const,
+      lifecycleStage: "FIRST_DEAL" as const,
+      industry: "Import/Export",
+    },
+    {
+      company: "European Imports GmbH",
+      contactName: "Anna Schmidt",
+      country: "Germany",
+      email: "anna@euimports.de",
+      phone: "+49 30 1234567",
+      customerStatus: "ACTIVE" as const,
+      lifecycleStage: "INTENT" as const,
+      industry: "Retail",
+    },
+    {
+      company: "Middle East Supplies LLC",
+      contactName: "Ahmed Hassan",
+      country: "UAE",
+      email: "ahmed@mesupplies.ae",
+      phone: "+971 50 123 4567",
+      customerStatus: "POTENTIAL" as const,
+      lifecycleStage: "POTENTIAL" as const,
+      industry: "Wholesale",
+    },
+  ];
+
+  const blRecord = await prisma.businessLine.findFirst();
+  const businessLineId = blRecord?.id || 1;
+
+  for (const c of customersData) {
+    const existing = await prisma.customer.findFirst({ where: { company: c.company } });
+    if (!existing) {
+      const customer = await prisma.customer.create({
+        data: {
+          ...c,
+          businessLineId,
+        },
+      });
+      // Create a primary contact for each customer
+      await prisma.contact.create({
+        data: {
+          customerId: customer.id,
+          name: c.contactName,
+          email: c.email,
+          phone: c.phone,
+          isPrimary: true,
+        },
+      });
+    }
+  }
+  console.log("✅ 客户数据已创建（3条）");
 }
 
 main()
