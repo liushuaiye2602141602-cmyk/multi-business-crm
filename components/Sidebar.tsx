@@ -35,6 +35,9 @@ import {
   Mail,
   Calendar,
   Target,
+  Moon,
+  Coins,
+  BarChart2,
 } from "lucide-react";
 
 interface NavItem {
@@ -69,6 +72,7 @@ const navGroups: NavGroup[] = [
       { href: "/contacts", label: "联系人", icon: UserCog },
       { href: "/projects", label: "商机项目", icon: FolderKanban },
       { href: "/follow-ups", label: "跟进记录", icon: MessageSquare },
+      { href: "/customers/dormant", label: "沉睡客户", icon: Moon },
       { href: "/tasks", label: "今日任务", icon: CheckSquare },
     ],
   },
@@ -82,6 +86,7 @@ const navGroups: NavGroup[] = [
       { href: "/documents", label: "文档资料", icon: FolderOpen },
       { href: "/templates", label: "跟进模板", icon: FileEdit },
       { href: "/business-lines", label: "业务线管理", icon: Briefcase },
+      { href: "/currency", label: "汇率计算器", icon: Coins },
     ],
   },
   {
@@ -99,6 +104,7 @@ const navGroups: NavGroup[] = [
       { href: "/im-messages", label: "IM 消息记录", icon: MessageSquare },
       { href: "/email", label: "邮件中心", icon: Mail },
       { href: "/email/settings", label: "邮件设置", icon: Settings },
+      { href: "/email/stats", label: "邮件统计", icon: BarChart2 },
       { href: "/external-sources", label: "外部来源", icon: Webhook },
       { href: "/webhook-test", label: "Webhook 测试", icon: TestTube },
       { href: "/webhook-logs", label: "Webhook 日志", icon: ClipboardList },
