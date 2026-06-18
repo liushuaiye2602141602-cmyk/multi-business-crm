@@ -86,3 +86,51 @@ export async function deleteQuote(id: number) {
   await prisma.quote.delete({ where: { id } });
   revalidatePath("/quotes");
 }
+
+export async function updateQuoteStatus(quoteId: number, status: string) {
+  const validStatuses = ["DRAFT", "SENT", "ACCEPTED", "REJECTED", "EXPIRED"];
+  if (!validStatuses.includes(status)) {
+    return { success: false, error: "无效的状态" };
+  }
+
+  const quote = await prisma.quote.findUnique({ where: { id: quoteId } });
+  if (!quote) {
+    return { success: false, error: "报价不存在" };
+  }
+
+  // Lock check: accepted/rejected/expired cannot change back
+  const lockedStatuses = ["ACCEPTED", "REJECTED", "EXPIRED"];
+  if (lockedStatuses.includes(quote.status)) {
+    return { success: false, error: "该报价状态已锁定，不可修改" };
+  }
+
+  await prisma.quote.update({
+    where: { id: quoteId },
+    data: { status: status as any },
+  });
+
+  return { success: true };
+}
+
+export async function recalculateQuoteTotals(quoteId: number) {
+  const items = await prisma.quoteItem.findMany({
+    where: { quoteId },
+  });
+
+  const subtotal = items.reduce((sum, item) => {
+    return sum + Number(item.totalPrice || 0);
+  }, 0);
+
+  const quote = await prisma.quote.findUnique({ where: { id: quoteId } });
+  const discount = quote ? Number(quote.discountAmount) : 0;
+  const totalAmount = subtotal - discount;
+
+  await prisma.quote.update({
+    where: { id: quoteId },
+    data: {
+      totalPrice: totalAmount,
+    },
+  });
+
+  return { success: true, totalAmount };
+}

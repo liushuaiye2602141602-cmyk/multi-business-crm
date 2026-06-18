@@ -328,6 +328,74 @@ Best regards`,
     }
   }
   console.log("✅ 客户数据已创建（3条）");
+
+  // ==================== Quotes ====================
+  console.log("\n📦 创建报价数据...");
+
+  const customers = await prisma.customer.findMany({ take: 3 });
+  if (customers.length > 0) {
+    const quotesData = [
+      {
+        quoteNo: "QT-2026-001",
+        quoteTitle: "Stand Up Pouch Quote for Pacific Rim",
+        status: "ACCEPTED" as const,
+        currency: "USD" as const,
+        totalPrice: 12500,
+        customerId: customers[0]?.id,
+        validUntil: new Date("2026-07-31"),
+      },
+      {
+        quoteNo: "QT-2026-002",
+        quoteTitle: "Packing Machine Quote for EU Imports",
+        status: "SENT" as const,
+        currency: "EUR" as const,
+        totalPrice: 45000,
+        customerId: customers[1]?.id,
+        validUntil: new Date("2026-08-15"),
+      },
+      {
+        quoteNo: "QT-2026-003",
+        quoteTitle: "Wooden Crafts Sample Order",
+        status: "DRAFT" as const,
+        currency: "USD" as const,
+        totalPrice: 3200,
+        customerId: customers[2]?.id || customers[0]?.id,
+        validUntil: new Date("2026-07-15"),
+      },
+    ];
+
+    for (const q of quotesData) {
+      const existing = await prisma.quote.findUnique({ where: { quoteNo: q.quoteNo } });
+      if (!existing && q.customerId) {
+        const quote = await prisma.quote.create({ data: q });
+
+        // Add items for each quote
+        await prisma.quoteItem.createMany({
+          data: [
+            {
+              quoteId: quote.id,
+              itemName: "Stand Up Pouch 200g",
+              specification: "200g, 130x180mm, matte finish",
+              quantity: 50000,
+              unit: "pcs",
+              unitPrice: 0.15,
+              totalPrice: 7500,
+            },
+            {
+              quoteId: quote.id,
+              itemName: "Spout Pouch 500ml",
+              specification: "500ml, center spout, resealable",
+              quantity: 25000,
+              unit: "pcs",
+              unitPrice: 0.2,
+              totalPrice: 5000,
+            },
+          ],
+        });
+      }
+    }
+  }
+  console.log("✅ 报价数据已创建（3条）");
 }
 
 main()
