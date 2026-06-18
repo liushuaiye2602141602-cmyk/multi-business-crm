@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
     let aiAnalysisId: number | null = null;
     let aiAnalysisError: string | null = null;
 
-    if (externalSource.autoAnalyze && isAIConfigured()) {
+    if (isAIConfigured()) {
       try {
         const aiResult = await analyzeLead(lead.id);
         if (aiResult.success) {
@@ -225,7 +225,7 @@ export async function POST(request: NextRequest) {
       message: "Lead created successfully",
     };
 
-    if (externalSource.autoAnalyze) {
+    if (isAIConfigured()) {
       response.aiAnalysisCreated = aiAnalysisCreated;
       if (aiAnalysisId) response.aiAnalysisId = aiAnalysisId;
       if (aiAnalysisError) response.aiAnalysisError = aiAnalysisError;
