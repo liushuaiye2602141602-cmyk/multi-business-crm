@@ -360,10 +360,13 @@ model Customer {
   source         LeadSource?
   sourceWebsite  String?
   remark         String?
+  aiScore        Int?
+  aiIntentLevel  String?
+  lastAiActionAt DateTime?
   ownerId         Int?
   ownerName       String?
   poolEnteredAt   DateTime?
-  poolReason      String?        // manual / auto_inactive / auto_no_followup
+  poolReason      String?
   businessLineId Int
   tenantId        Int?
   createdAt      DateTime       @default(now())
@@ -974,4 +977,16 @@ model IMMessage {
 
   @@index([createdAt])
   @@index([platformId])
+}
+
+model AILog {
+  id         Int      @id @default(autoincrement())
+  entityType String
+  entityId   Int
+  actionType String
+  aiOutput   String?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
 }

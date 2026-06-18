@@ -115,6 +115,14 @@ export async function updateQuoteStatus(quoteId: number, status: string) {
       const { createFollowUpTaskForQuote } = await import("@/lib/domain/auto-tasks");
       await createFollowUpTaskForQuote(quoteId);
     } catch {}
+
+    // Auto score deal
+    try {
+      if (quote.customerId) {
+        const { scoreDealProbability } = await import("@/lib/ai/agents");
+        await scoreDealProbability("Customer", quote.customerId);
+      }
+    } catch {}
   }
 
   return { success: true };

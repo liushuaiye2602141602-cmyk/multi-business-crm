@@ -28,6 +28,7 @@ export type AggregateCustomer = {
 
 export type CustomerAvgAggregateOutputType = {
   id: number | null
+  aiScore: number | null
   ownerId: number | null
   businessLineId: number | null
   tenantId: number | null
@@ -35,6 +36,7 @@ export type CustomerAvgAggregateOutputType = {
 
 export type CustomerSumAggregateOutputType = {
   id: number | null
+  aiScore: number | null
   ownerId: number | null
   businessLineId: number | null
   tenantId: number | null
@@ -58,6 +60,9 @@ export type CustomerMinAggregateOutputType = {
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
   remark: string | null
+  aiScore: number | null
+  aiIntentLevel: string | null
+  lastAiActionAt: Date | null
   ownerId: number | null
   ownerName: string | null
   poolEnteredAt: Date | null
@@ -86,6 +91,9 @@ export type CustomerMaxAggregateOutputType = {
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
   remark: string | null
+  aiScore: number | null
+  aiIntentLevel: string | null
+  lastAiActionAt: Date | null
   ownerId: number | null
   ownerName: string | null
   poolEnteredAt: Date | null
@@ -114,6 +122,9 @@ export type CustomerCountAggregateOutputType = {
   source: number
   sourceWebsite: number
   remark: number
+  aiScore: number
+  aiIntentLevel: number
+  lastAiActionAt: number
   ownerId: number
   ownerName: number
   poolEnteredAt: number
@@ -128,6 +139,7 @@ export type CustomerCountAggregateOutputType = {
 
 export type CustomerAvgAggregateInputType = {
   id?: true
+  aiScore?: true
   ownerId?: true
   businessLineId?: true
   tenantId?: true
@@ -135,6 +147,7 @@ export type CustomerAvgAggregateInputType = {
 
 export type CustomerSumAggregateInputType = {
   id?: true
+  aiScore?: true
   ownerId?: true
   businessLineId?: true
   tenantId?: true
@@ -158,6 +171,9 @@ export type CustomerMinAggregateInputType = {
   source?: true
   sourceWebsite?: true
   remark?: true
+  aiScore?: true
+  aiIntentLevel?: true
+  lastAiActionAt?: true
   ownerId?: true
   ownerName?: true
   poolEnteredAt?: true
@@ -186,6 +202,9 @@ export type CustomerMaxAggregateInputType = {
   source?: true
   sourceWebsite?: true
   remark?: true
+  aiScore?: true
+  aiIntentLevel?: true
+  lastAiActionAt?: true
   ownerId?: true
   ownerName?: true
   poolEnteredAt?: true
@@ -214,6 +233,9 @@ export type CustomerCountAggregateInputType = {
   source?: true
   sourceWebsite?: true
   remark?: true
+  aiScore?: true
+  aiIntentLevel?: true
+  lastAiActionAt?: true
   ownerId?: true
   ownerName?: true
   poolEnteredAt?: true
@@ -329,6 +351,9 @@ export type CustomerGroupByOutputType = {
   source: $Enums.LeadSource | null
   sourceWebsite: string | null
   remark: string | null
+  aiScore: number | null
+  aiIntentLevel: string | null
+  lastAiActionAt: Date | null
   ownerId: number | null
   ownerName: string | null
   poolEnteredAt: Date | null
@@ -380,6 +405,9 @@ export type CustomerWhereInput = {
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
   remark?: Prisma.StringNullableFilter<"Customer"> | string | null
+  aiScore?: Prisma.IntNullableFilter<"Customer"> | number | null
+  aiIntentLevel?: Prisma.StringNullableFilter<"Customer"> | string | null
+  lastAiActionAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   ownerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   ownerName?: Prisma.StringNullableFilter<"Customer"> | string | null
   poolEnteredAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
@@ -420,6 +448,9 @@ export type CustomerOrderByWithRelationInput = {
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiIntentLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastAiActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
   poolEnteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -463,6 +494,9 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
   remark?: Prisma.StringNullableFilter<"Customer"> | string | null
+  aiScore?: Prisma.IntNullableFilter<"Customer"> | number | null
+  aiIntentLevel?: Prisma.StringNullableFilter<"Customer"> | string | null
+  lastAiActionAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   ownerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   ownerName?: Prisma.StringNullableFilter<"Customer"> | string | null
   poolEnteredAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
@@ -503,6 +537,9 @@ export type CustomerOrderByWithAggregationInput = {
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiIntentLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastAiActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
   poolEnteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -539,6 +576,9 @@ export type CustomerScalarWhereWithAggregatesInput = {
   source?: Prisma.EnumLeadSourceNullableWithAggregatesFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   remark?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  aiScore?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
+  aiIntentLevel?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  lastAiActionAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
   ownerId?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
   ownerName?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   poolEnteredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
@@ -566,6 +606,9 @@ export type CustomerCreateInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -604,6 +647,9 @@ export type CustomerUncheckedCreateInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -641,6 +687,9 @@ export type CustomerUpdateInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -679,6 +728,9 @@ export type CustomerUncheckedUpdateInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -717,6 +769,9 @@ export type CustomerCreateManyInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -744,6 +799,9 @@ export type CustomerUpdateManyMutationInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -770,6 +828,9 @@ export type CustomerUncheckedUpdateManyInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -813,6 +874,9 @@ export type CustomerCountOrderByAggregateInput = {
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
   remark?: Prisma.SortOrder
+  aiScore?: Prisma.SortOrder
+  aiIntentLevel?: Prisma.SortOrder
+  lastAiActionAt?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
   poolEnteredAt?: Prisma.SortOrder
@@ -825,6 +889,7 @@ export type CustomerCountOrderByAggregateInput = {
 
 export type CustomerAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  aiScore?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -848,6 +913,9 @@ export type CustomerMaxOrderByAggregateInput = {
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
   remark?: Prisma.SortOrder
+  aiScore?: Prisma.SortOrder
+  aiIntentLevel?: Prisma.SortOrder
+  lastAiActionAt?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
   poolEnteredAt?: Prisma.SortOrder
@@ -876,6 +944,9 @@ export type CustomerMinOrderByAggregateInput = {
   source?: Prisma.SortOrder
   sourceWebsite?: Prisma.SortOrder
   remark?: Prisma.SortOrder
+  aiScore?: Prisma.SortOrder
+  aiIntentLevel?: Prisma.SortOrder
+  lastAiActionAt?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
   poolEnteredAt?: Prisma.SortOrder
@@ -888,6 +959,7 @@ export type CustomerMinOrderByAggregateInput = {
 
 export type CustomerSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  aiScore?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -1165,6 +1237,9 @@ export type CustomerCreateWithoutTenantInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1202,6 +1277,9 @@ export type CustomerUncheckedCreateWithoutTenantInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1268,6 +1346,9 @@ export type CustomerScalarWhereInput = {
   source?: Prisma.EnumLeadSourceNullableFilter<"Customer"> | $Enums.LeadSource | null
   sourceWebsite?: Prisma.StringNullableFilter<"Customer"> | string | null
   remark?: Prisma.StringNullableFilter<"Customer"> | string | null
+  aiScore?: Prisma.IntNullableFilter<"Customer"> | number | null
+  aiIntentLevel?: Prisma.StringNullableFilter<"Customer"> | string | null
+  lastAiActionAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   ownerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   ownerName?: Prisma.StringNullableFilter<"Customer"> | string | null
   poolEnteredAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
@@ -1295,6 +1376,9 @@ export type CustomerCreateWithoutBusinessLineInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1332,6 +1416,9 @@ export type CustomerUncheckedCreateWithoutBusinessLineInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1394,6 +1481,9 @@ export type CustomerCreateWithoutConvertedFromInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1431,6 +1521,9 @@ export type CustomerUncheckedCreateWithoutConvertedFromInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1483,6 +1576,9 @@ export type CustomerUpdateWithoutConvertedFromInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1520,6 +1616,9 @@ export type CustomerUncheckedUpdateWithoutConvertedFromInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1556,6 +1655,9 @@ export type CustomerCreateWithoutContactsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1593,6 +1695,9 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1645,6 +1750,9 @@ export type CustomerUpdateWithoutContactsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1682,6 +1790,9 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1718,6 +1829,9 @@ export type CustomerCreateWithoutCustomerActivitiesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1755,6 +1869,9 @@ export type CustomerUncheckedCreateWithoutCustomerActivitiesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1807,6 +1924,9 @@ export type CustomerUpdateWithoutCustomerActivitiesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1844,6 +1964,9 @@ export type CustomerUncheckedUpdateWithoutCustomerActivitiesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1880,6 +2003,9 @@ export type CustomerCreateWithoutProjectsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1917,6 +2043,9 @@ export type CustomerUncheckedCreateWithoutProjectsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -1969,6 +2098,9 @@ export type CustomerUpdateWithoutProjectsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2006,6 +2138,9 @@ export type CustomerUncheckedUpdateWithoutProjectsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2042,6 +2177,9 @@ export type CustomerCreateWithoutFollowUpsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2079,6 +2217,9 @@ export type CustomerUncheckedCreateWithoutFollowUpsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2131,6 +2272,9 @@ export type CustomerUpdateWithoutFollowUpsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2168,6 +2312,9 @@ export type CustomerUncheckedUpdateWithoutFollowUpsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2204,6 +2351,9 @@ export type CustomerCreateWithoutQuotesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2241,6 +2391,9 @@ export type CustomerUncheckedCreateWithoutQuotesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2293,6 +2446,9 @@ export type CustomerUpdateWithoutQuotesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2330,6 +2486,9 @@ export type CustomerUncheckedUpdateWithoutQuotesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2366,6 +2525,9 @@ export type CustomerCreateWithoutTasksInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2403,6 +2565,9 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2455,6 +2620,9 @@ export type CustomerUpdateWithoutTasksInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2492,6 +2660,9 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2528,6 +2699,9 @@ export type CustomerCreateWithoutOrdersInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2565,6 +2739,9 @@ export type CustomerUncheckedCreateWithoutOrdersInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2617,6 +2794,9 @@ export type CustomerUpdateWithoutOrdersInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2654,6 +2834,9 @@ export type CustomerUncheckedUpdateWithoutOrdersInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2690,6 +2873,9 @@ export type CustomerCreateWithoutInvoicesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2727,6 +2913,9 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2779,6 +2968,9 @@ export type CustomerUpdateWithoutInvoicesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2816,6 +3008,9 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2852,6 +3047,9 @@ export type CustomerCreateWithoutEmailsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2889,6 +3087,9 @@ export type CustomerUncheckedCreateWithoutEmailsInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -2941,6 +3142,9 @@ export type CustomerUpdateWithoutEmailsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2978,6 +3182,9 @@ export type CustomerUncheckedUpdateWithoutEmailsInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3015,6 +3222,9 @@ export type CustomerCreateManyTenantInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -3041,6 +3251,9 @@ export type CustomerUpdateWithoutTenantInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3078,6 +3291,9 @@ export type CustomerUncheckedUpdateWithoutTenantInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3115,6 +3331,9 @@ export type CustomerUncheckedUpdateManyWithoutTenantInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3142,6 +3361,9 @@ export type CustomerCreateManyBusinessLineInput = {
   source?: $Enums.LeadSource | null
   sourceWebsite?: string | null
   remark?: string | null
+  aiScore?: number | null
+  aiIntentLevel?: string | null
+  lastAiActionAt?: Date | string | null
   ownerId?: number | null
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
@@ -3168,6 +3390,9 @@ export type CustomerUpdateWithoutBusinessLineInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3205,6 +3430,9 @@ export type CustomerUncheckedUpdateWithoutBusinessLineInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3242,6 +3470,9 @@ export type CustomerUncheckedUpdateManyWithoutBusinessLineInput = {
   source?: Prisma.NullableEnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource | null
   sourceWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  aiIntentLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAiActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3381,6 +3612,9 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   source?: boolean
   sourceWebsite?: boolean
   remark?: boolean
+  aiScore?: boolean
+  aiIntentLevel?: boolean
+  lastAiActionAt?: boolean
   ownerId?: boolean
   ownerName?: boolean
   poolEnteredAt?: boolean
@@ -3422,6 +3656,9 @@ export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   source?: boolean
   sourceWebsite?: boolean
   remark?: boolean
+  aiScore?: boolean
+  aiIntentLevel?: boolean
+  lastAiActionAt?: boolean
   ownerId?: boolean
   ownerName?: boolean
   poolEnteredAt?: boolean
@@ -3452,6 +3689,9 @@ export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   source?: boolean
   sourceWebsite?: boolean
   remark?: boolean
+  aiScore?: boolean
+  aiIntentLevel?: boolean
+  lastAiActionAt?: boolean
   ownerId?: boolean
   ownerName?: boolean
   poolEnteredAt?: boolean
@@ -3482,6 +3722,9 @@ export type CustomerSelectScalar = {
   source?: boolean
   sourceWebsite?: boolean
   remark?: boolean
+  aiScore?: boolean
+  aiIntentLevel?: boolean
+  lastAiActionAt?: boolean
   ownerId?: boolean
   ownerName?: boolean
   poolEnteredAt?: boolean
@@ -3492,7 +3735,7 @@ export type CustomerSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "lifecycleStage" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "lifecycleStage" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "aiScore" | "aiIntentLevel" | "lastAiActionAt" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.Customer$tenantArgs<ExtArgs>
@@ -3551,6 +3794,9 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     source: $Enums.LeadSource | null
     sourceWebsite: string | null
     remark: string | null
+    aiScore: number | null
+    aiIntentLevel: string | null
+    lastAiActionAt: Date | null
     ownerId: number | null
     ownerName: string | null
     poolEnteredAt: Date | null
@@ -4011,6 +4257,9 @@ export interface CustomerFieldRefs {
   readonly source: Prisma.FieldRef<"Customer", 'LeadSource'>
   readonly sourceWebsite: Prisma.FieldRef<"Customer", 'String'>
   readonly remark: Prisma.FieldRef<"Customer", 'String'>
+  readonly aiScore: Prisma.FieldRef<"Customer", 'Int'>
+  readonly aiIntentLevel: Prisma.FieldRef<"Customer", 'String'>
+  readonly lastAiActionAt: Prisma.FieldRef<"Customer", 'DateTime'>
   readonly ownerId: Prisma.FieldRef<"Customer", 'Int'>
   readonly ownerName: Prisma.FieldRef<"Customer", 'String'>
   readonly poolEnteredAt: Prisma.FieldRef<"Customer", 'DateTime'>

@@ -54,6 +54,12 @@ export async function createLead(formData: FormData) {
     await createFollowUpTaskForLead(lead.id);
   } catch {}
 
+  // Auto AI scoring
+  try {
+    const { scoreDealProbability } = await import("@/lib/ai/agents");
+    await scoreDealProbability("Lead", lead.id);
+  } catch {}
+
   revalidatePath("/leads");
   redirect(`/leads/${lead.id}`);
 }
