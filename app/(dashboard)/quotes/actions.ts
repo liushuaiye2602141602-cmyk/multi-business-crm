@@ -109,22 +109,11 @@ export async function updateQuoteStatus(quoteId: number, status: string) {
     data: { status: status as any },
   });
 
-  // Auto-create follow-up task when quote is sent
+  // Emit event — all AI processing goes through Event Bus
   if (status === "SENT") {
     try {
-      const { createFollowUpTaskForQuote } = await import("@/lib/domain/auto-tasks");
-      await createFollowUpTaskForQuote(quoteId);
-    } catch {}
-
-    // AI Control: check permission before auto-scoring
-    try {
-      const { checkAIPermission, logAIExecution } = await import("@/lib/ai/control/guard");
-      const perm = await checkAIPermission("score_deal", "Quote", quoteId);
-      if (perm.allowed && quote.customerId) {
-        const { scoreDealProbability } = await import("@/lib/ai/agents");
-        await scoreDealProbability("Customer", quote.customerId);
-        await logAIExecution("score_deal", "Quote", quoteId, true, "Auto-scored on status change", perm.mode);
-      }
+      const { emit } = await import("@/lib/events/bus");
+      await emit({ type: "quote.sent", entityId: quoteId, entityType: "Quote" });
     } catch {}
   }
 

@@ -81,5 +81,9 @@ async function handleQuoteSent(event: EventPayload) {
 }
 
 async function handleOrderConfirmed(event: EventPayload) {
-  // Future: create production tasks, notify customer
+  // Auto-create production follow-up task
+  try {
+    const { createProductionTaskForOrder } = await import("../domain/auto-tasks");
+    await createProductionTaskForOrder(event.entityId);
+  } catch {}
 }

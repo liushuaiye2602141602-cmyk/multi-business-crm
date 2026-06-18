@@ -125,11 +125,11 @@ export async function updateOrderStatus(orderId: number, status: string) {
     data: { orderStatus: status as any },
   });
 
-  // Auto-create production task when order is confirmed
+  // Emit event — all AI processing goes through Event Bus
   if (status === "CONFIRMED") {
     try {
-      const { createProductionTaskForOrder } = await import("@/lib/domain/auto-tasks");
-      await createProductionTaskForOrder(orderId);
+      const { emit } = await import("@/lib/events/bus");
+      await emit({ type: "order.confirmed", entityId: orderId, entityType: "Order" });
     } catch {}
   }
 
