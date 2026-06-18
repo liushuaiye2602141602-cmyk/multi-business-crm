@@ -3,9 +3,10 @@ import Link from "next/link";
 import {
   Users, UserCheck, FolderKanban, Award, TrendingUp,
   FileText, Package, FileEdit, Sparkles, Webhook, ArrowRight,
+  CircleDollarSign, Clock, CheckCircle2, AlertTriangle,
+  ShoppingCart, ArrowUpRight,
 } from "lucide-react";
-import { LeadSourceLabel, ProjectStatusLabel } from "@/lib/enums";
-import { formatEnumLabel } from "@/lib/format";
+import { LeadSourceLabel, LeadStatusLabel, ProjectStatusLabel, QuoteStatusLabel, OrderStatusLabel } from "@/lib/enums";
 import StatusBadge from "@/components/ui/StatusBadge";
 import Card from "@/components/ui/Card";
 import StatCard from "@/components/StatCard";
@@ -23,6 +24,16 @@ export default async function DashboardPage() {
     totalProducts, totalTemplates, totalAIAnalyses, totalExternalSources,
     todayWebhookSuccess,
     leadsBySource, businessLineStats, projectStatusDistribution,
+    // Conversion stats
+    convertedLeads,
+    // Quote stats
+    totalQuotes, sentQuotes, acceptedQuotes,
+    // Order stats
+    totalOrders, completedOrders, revenueResult,
+    // Task stats
+    pendingTasks, overdueTasks, completedTasks,
+    // Recent activities
+    recentLeads, recentQuotes, recentOrders,
   ] = await Promise.all([
     prisma.lead.count(),
     prisma.customer.count(),
@@ -48,6 +59,24 @@ export default async function DashboardPage() {
       })
     ),
     prisma.project.groupBy({ by: ["status"], _count: { id: true } }),
+    // Conversion stats
+    prisma.lead.count({ where: { convertedCustomerId: { not: null } } }),
+    // Quote stats
+    prisma.quote.count(),
+    prisma.quote.count({ where: { status: { in: ["SENT", "WAITING_FEEDBACK"] } } }),
+    prisma.quote.count({ where: { status: "ACCEPTED" } }),
+    // Order stats
+    prisma.order.count(),
+    prisma.order.count({ where: { orderStatus: "COMPLETED" } }),
+    prisma.order.aggregate({ _sum: { totalAmount: true }, where: { orderStatus: { in: ["SHIPPED", "COMPLETED"] } } }),
+    // Task stats
+    prisma.task.count({ where: { status: "PENDING" } }),
+    prisma.task.count({ where: { status: "PENDING", dueDate: { lt: new Date() } } }),
+    prisma.task.count({ where: { status: "COMPLETED" } }),
+    // Recent activities
+    prisma.lead.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, company: true, status: true, createdAt: true } }),
+    prisma.quote.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, quoteNo: true, status: true, totalPrice: true, createdAt: true } }),
+    prisma.order.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, orderNo: true, orderStatus: true, totalAmount: true, createdAt: true } }),
   ]);
 
   const coreStats = [
@@ -66,6 +95,20 @@ export default async function DashboardPage() {
     { label: "模板总数", value: totalTemplates, icon: FileEdit, href: "/templates" },
     { label: "外部来源", value: totalExternalSources, icon: Webhook, href: "/external-sources" },
   ];
+
+  // Derived conversion stats
+  const leadToCustomerRate = totalLeads > 0 ? ((convertedLeads / totalLeads) * 100).toFixed(1) : "0.0";
+  const customerToQuoteRate = totalCustomers > 0 ? ((sentQuotes / totalCustomers) * 100).toFixed(1) : "0.0";
+  const quoteToOrderRate = totalQuotes > 0 ? ((completedOrders / totalQuotes) * 100).toFixed(1) : "0.0";
+  const totalRevenue = Number(revenueResult._sum.totalAmount || 0);
+  const avgOrderValue = completedOrders > 0 ? Math.round(totalRevenue / completedOrders) : 0;
+
+  // Format currency
+  const formatCurrency = (n: number) => `¥${n.toLocaleString("zh-CN")}`;
+  const formatDate = (d: Date) => {
+    const date = new Date(d);
+    return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
+  };
 
   return (
     <div className="space-y-6">
@@ -146,6 +189,168 @@ export default async function DashboardPage() {
               </div>
             ))}
             {projectStatusDistribution.length === 0 && <p className="text-sm text-gray-400">暂无数据</p>}
+          </div>
+        </Card>
+      </div>
+
+      {/* 转化漏斗 */}
+      <Card>
+        <h2 className="text-base font-semibold text-gray-900 mb-4">转化漏斗</h2>
+        <div className="flex items-center justify-between gap-2 overflow-x-auto pb-2">
+          {/* Leads */}
+          <div className="flex-1 min-w-[120px] text-center">
+            <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+              <p className="text-2xl font-bold text-blue-700">{totalLeads}</p>
+              <p className="text-xs text-blue-600 mt-1">线索</p>
+            </div>
+          </div>
+          <ArrowRight size={20} className="text-gray-400 shrink-0" />
+          {/* Customers */}
+          <div className="flex-1 min-w-[120px] text-center">
+            <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+              <p className="text-2xl font-bold text-green-700">{totalCustomers}</p>
+              <p className="text-xs text-green-600 mt-1">客户</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">{leadToCustomerRate}% 转化率</p>
+            </div>
+          </div>
+          <ArrowRight size={20} className="text-gray-400 shrink-0" />
+          {/* Quotes */}
+          <div className="flex-1 min-w-[120px] text-center">
+            <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200">
+              <p className="text-2xl font-bold text-yellow-700">{sentQuotes}</p>
+              <p className="text-xs text-yellow-600 mt-1">报价 (已发送)</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">{customerToQuoteRate}% 转化率</p>
+            </div>
+          </div>
+          <ArrowRight size={20} className="text-gray-400 shrink-0" />
+          {/* Orders */}
+          <div className="flex-1 min-w-[120px] text-center">
+            <div className="bg-purple-50 rounded-lg p-3 border border-purple-200">
+              <p className="text-2xl font-bold text-purple-700">{completedOrders}</p>
+              <p className="text-xs text-purple-600 mt-1">完成订单</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">{quoteToOrderRate}% 转化率</p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* 营收统计 & 任务面板 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 营收统计 */}
+        <Card>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">营收统计</h2>
+          <div className="grid grid-cols-3 gap-3">
+            <Link href="/orders" className="bg-emerald-50 rounded-lg p-3 text-center border border-emerald-200 hover:shadow-md transition-shadow">
+              <CircleDollarSign size={20} className="mx-auto text-emerald-600 mb-1" />
+              <p className="text-lg font-bold text-emerald-700">{formatCurrency(totalRevenue)}</p>
+              <p className="text-[11px] text-emerald-600">总营收</p>
+            </Link>
+            <Link href="/orders?status=COMPLETED" className="bg-blue-50 rounded-lg p-3 text-center border border-blue-200 hover:shadow-md transition-shadow">
+              <ShoppingCart size={20} className="mx-auto text-blue-600 mb-1" />
+              <p className="text-lg font-bold text-blue-700">{completedOrders}</p>
+              <p className="text-[11px] text-blue-600">完成订单</p>
+            </Link>
+            <div className="bg-orange-50 rounded-lg p-3 text-center border border-orange-200">
+              <ArrowUpRight size={20} className="mx-auto text-orange-600 mb-1" />
+              <p className="text-lg font-bold text-orange-700">{formatCurrency(avgOrderValue)}</p>
+              <p className="text-[11px] text-orange-600">平均订单额</p>
+            </div>
+          </div>
+          <div className="mt-3 flex items-center gap-4 text-xs text-gray-500">
+            <span>报价总数: <span className="font-medium text-gray-700">{totalQuotes}</span></span>
+            <span>已接受: <span className="font-medium text-green-600">{acceptedQuotes}</span></span>
+            <span>订单总数: <span className="font-medium text-gray-700">{totalOrders}</span></span>
+          </div>
+        </Card>
+
+        {/* 任务面板 */}
+        <Card>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">任务概览</h2>
+          <div className="grid grid-cols-3 gap-3">
+            <Link href="/tasks?status=PENDING" className="bg-yellow-50 rounded-lg p-3 text-center border border-yellow-200 hover:shadow-md transition-shadow">
+              <Clock size={20} className="mx-auto text-yellow-600 mb-1" />
+              <p className="text-2xl font-bold text-yellow-700">{pendingTasks}</p>
+              <p className="text-[11px] text-yellow-600">待处理</p>
+            </Link>
+            <Link href="/tasks?status=PENDING&overdue=true" className="bg-red-50 rounded-lg p-3 text-center border border-red-200 hover:shadow-md transition-shadow">
+              <AlertTriangle size={20} className="mx-auto text-red-600 mb-1" />
+              <p className="text-2xl font-bold text-red-700">{overdueTasks}</p>
+              <p className="text-[11px] text-red-600">已逾期</p>
+            </Link>
+            <Link href="/tasks?status=COMPLETED" className="bg-green-50 rounded-lg p-3 text-center border border-green-200 hover:shadow-md transition-shadow">
+              <CheckCircle2 size={20} className="mx-auto text-green-600 mb-1" />
+              <p className="text-2xl font-bold text-green-700">{completedTasks}</p>
+              <p className="text-[11px] text-green-600">已完成</p>
+            </Link>
+          </div>
+        </Card>
+      </div>
+
+      {/* 最近活动 */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 最近线索 */}
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900">最近线索</h2>
+            <Link href="/leads" className="text-xs text-blue-600 hover:underline">查看全部</Link>
+          </div>
+          <div className="space-y-2">
+            {recentLeads.map((lead) => (
+              <Link key={lead.id} href={`/leads/${lead.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{lead.company || "未命名"}</p>
+                  <p className="text-[11px] text-gray-500">{formatDate(lead.createdAt)}</p>
+                </div>
+                <StatusBadge label={LeadStatusLabel[lead.status] || lead.status} variant="info" />
+              </Link>
+            ))}
+            {recentLeads.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无数据</p>}
+          </div>
+        </Card>
+
+        {/* 最近报价 */}
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900">最近报价</h2>
+            <Link href="/quotes" className="text-xs text-blue-600 hover:underline">查看全部</Link>
+          </div>
+          <div className="space-y-2">
+            {recentQuotes.map((quote) => (
+              <Link key={quote.id} href={`/quotes/${quote.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{quote.quoteNo}</p>
+                  <p className="text-[11px] text-gray-500">{formatDate(quote.createdAt)}</p>
+                </div>
+                <div className="text-right shrink-0 ml-2">
+                  <StatusBadge label={QuoteStatusLabel[quote.status] || quote.status} variant="info" />
+                  {quote.totalPrice != null && <p className="text-xs text-gray-600 mt-0.5">{formatCurrency(Number(quote.totalPrice))}</p>}
+                </div>
+              </Link>
+            ))}
+            {recentQuotes.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无数据</p>}
+          </div>
+        </Card>
+
+        {/* 最近订单 */}
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900">最近订单</h2>
+            <Link href="/orders" className="text-xs text-blue-600 hover:underline">查看全部</Link>
+          </div>
+          <div className="space-y-2">
+            {recentOrders.map((order) => (
+              <Link key={order.id} href={`/orders/${order.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{order.orderNo}</p>
+                  <p className="text-[11px] text-gray-500">{formatDate(order.createdAt)}</p>
+                </div>
+                <div className="text-right shrink-0 ml-2">
+                  <StatusBadge label={OrderStatusLabel[order.orderStatus] || order.orderStatus} variant="info" />
+                  {order.totalAmount != null && <p className="text-xs text-gray-600 mt-0.5">{formatCurrency(Number(order.totalAmount))}</p>}
+                </div>
+              </Link>
+            ))}
+            {recentOrders.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无数据</p>}
           </div>
         </Card>
       </div>
