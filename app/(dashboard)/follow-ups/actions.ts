@@ -55,6 +55,7 @@ export async function createFollowUp(formData: FormData) {
         leadId: data.leadId,
         customerId: data.customerId,
         projectId: data.projectId,
+        tenantId: 1,
       },
     });
   }

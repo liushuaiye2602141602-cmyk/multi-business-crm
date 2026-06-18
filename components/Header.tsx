@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Search, Settings, Bell, HelpCircle } from "lucide-react";
 import { isAIConfigured } from "@/lib/ai/types";
 import CurrencyPopup from "./CurrencyPopup";
+import LogoutButton from "./LogoutButton";
 
 export default function Header() {
   const aiConfigured = isAIConfigured();
@@ -48,6 +49,8 @@ export default function Header() {
           <Link href="/maintenance-guide" className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors" title="帮助">
             <HelpCircle size={16} />
           </Link>
+
+          <LogoutButton />
         </div>
       </div>
     </header>

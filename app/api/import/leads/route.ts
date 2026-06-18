@@ -83,6 +83,7 @@ export async function POST(request: NextRequest) {
 
         await prisma.lead.create({
           data: {
+            tenantId: 1,
             company: companyName,
             contactName: row.contactName || row.name || companyName,
             country: row.country || null,

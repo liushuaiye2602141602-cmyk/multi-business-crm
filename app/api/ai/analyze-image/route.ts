@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
       if (businessLine) {
         createdLead = await prisma.lead.create({
           data: {
+            tenantId: 1,
             company: extracted.company,
             contactName: extracted.contactName,
             country: extracted.country || null,

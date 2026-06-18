@@ -603,6 +603,7 @@ export async function createTaskFromAI(
 
     await prisma.task.create({
       data: {
+        tenantId: 1,
         title,
         type: "FOLLOW_UP",
         status: "PENDING",

@@ -38,7 +38,7 @@ export async function createLead(formData: FormData) {
     throw new Error("公司名称和联系人姓名不能为空");
   }
 
-  const lead = await prisma.lead.create({ data });
+  const lead = await prisma.lead.create({ data: { ...data, tenantId: 1 } });
 
   await createActivityLog({
     action: "创建",
@@ -158,6 +158,7 @@ export async function convertLeadToCustomer(leadId: number) {
       businessLineId: lead.businessLineId,
       customerStatus: "POTENTIAL",
       customerType: "UNKNOWN",
+      tenantId: 1,
     },
   });
 

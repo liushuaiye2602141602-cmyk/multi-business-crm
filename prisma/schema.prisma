@@ -220,6 +220,43 @@ enum PaymentMethod {
   OTHER
 }
 
+// ==================== 租户与用户 ====================
+
+model Tenant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  plan      String   @default("FREE") // FREE / PRO / ENTERPRISE
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users     User[]
+  leads     Lead[]
+  customers Customer[]
+  quotes    Quote[]
+  orders    Order[]
+  tasks     Task[]
+
+  @@index([isActive])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("SALES") // ADMIN / MANAGER / SALES
+  tenantId  Int?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@index([email])
+}
+
 // ==================== 模型 ====================
 
 model BusinessLine {
@@ -266,11 +303,13 @@ model Lead {
   convertedCustomerId Int?
   ownerId         Int?
   ownerName       String?
+  tenantId        Int?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
   businessLine       BusinessLine @relation(fields: [businessLineId], references: [id])
   convertedCustomer  Customer?    @relation("ConvertedLead", fields: [convertedCustomerId], references: [id])
+  tenant             Tenant?    @relation(fields: [tenantId], references: [id])
   followUps          FollowUp[]
   quotes             Quote[]
   tasks              Task[]
@@ -284,6 +323,7 @@ model Lead {
   @@index([grade])
   @@index([nextFollowUp])
   @@index([ownerId])
+  @@index([tenantId])
 }
 
 model LeadActivity {
@@ -322,10 +362,12 @@ model Customer {
   poolEnteredAt   DateTime?
   poolReason      String?        // manual / auto_inactive / auto_no_followup
   businessLineId Int
+  tenantId        Int?
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
   businessLine  BusinessLine  @relation(fields: [businessLineId], references: [id])
+  tenant        Tenant?     @relation(fields: [tenantId], references: [id])
   contacts      Contact[]
   projects      Project[]
   followUps     FollowUp[]
@@ -341,6 +383,7 @@ model Customer {
   @@index([businessLineId])
   @@index([customerStatus])
   @@index([customerType])
+  @@index([tenantId])
 }
 
 model Contact {
@@ -467,6 +510,7 @@ model Quote {
   customerId         Int?
   projectId          Int?
   customerContactId  Int?
+  tenantId           Int?
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
 
@@ -474,6 +518,7 @@ model Quote {
   customer        Customer?       @relation(fields: [customerId], references: [id])
   project         Project?        @relation(fields: [projectId], references: [id])
   customerContact Contact?        @relation(fields: [customerContactId], references: [id])
+  tenant          Tenant?       @relation(fields: [tenantId], references: [id])
   items           QuoteItem[]
   orders          Order[]
   tasks           Task[]
@@ -483,6 +528,7 @@ model Quote {
   @@index([projectId])
   @@index([status])
   @@index([quoteNo])
+  @@index([tenantId])
 }
 
 model Task {
@@ -501,6 +547,7 @@ model Task {
   orderId      Int?
   ownerId      Int?
   ownerName    String?
+  tenantId     Int?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
@@ -509,12 +556,14 @@ model Task {
   project  Project?  @relation(fields: [projectId], references: [id])
   quote Quote? @relation(fields: [quoteId], references: [id])
   order Order? @relation(fields: [orderId], references: [id])
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 
   @@index([leadId])
   @@index([customerId])
   @@index([projectId])
   @@index([status])
   @@index([dueDate])
+  @@index([tenantId])
 }
 
 model Product {
@@ -715,18 +764,20 @@ model Order {
   paymentTerm           String?
   deliveryTerm          String?
   expectedDeliveryDate  DateTime?
+  tenantId              Int?
   notes                 String?
   createdAt             DateTime    @default(now())
   updatedAt             DateTime    @updatedAt
 
-  customer Customer @relation(fields: [customerId], references: [id])
-  project  Project? @relation(fields: [projectId], references: [id])
-  quote    Quote?   @relation(fields: [quoteId], references: [id])
-  contact  Contact? @relation(fields: [contactId], references: [id])
+  customer     Customer      @relation(fields: [customerId], references: [id])
+  project      Project?      @relation(fields: [projectId], references: [id])
+  quote        Quote?        @relation(fields: [quoteId], references: [id])
+  contact      Contact?      @relation(fields: [contactId], references: [id])
   businessLine BusinessLine? @relation(fields: [businessLineId], references: [id])
-  items    OrderItem[]
-  invoices Invoice[]
-  tasks    Task[]
+  tenant       Tenant?     @relation(fields: [tenantId], references: [id])
+  items        OrderItem[]
+  invoices     Invoice[]
+  tasks        Task[]
 
   @@index([customerId])
   @@index([projectId])
@@ -734,6 +785,7 @@ model Order {
   @@index([orderStatus])
   @@index([orderNo])
   @@index([businessLineId])
+  @@index([tenantId])
 }
 
 model OrderItem {

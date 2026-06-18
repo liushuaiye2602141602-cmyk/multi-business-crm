@@ -1,11 +1,67 @@
 import { PrismaClient } from "../lib/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs";
 
 const connectionString = process.env.DATABASE_URL!;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  // ==================== Tenants & Users ====================
+  console.log("📦 创建租户和用户...");
+
+  const password = await bcrypt.hash("password123", 10);
+
+  const tenant1 = await prisma.tenant.upsert({
+    where: { id: 1 },
+    update: {},
+    create: { name: "Demo Company", plan: "PRO" },
+  });
+
+  const tenant2 = await prisma.tenant.upsert({
+    where: { id: 2 },
+    update: {},
+    create: { name: "Test Trading Co", plan: "FREE" },
+  });
+
+  await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: {},
+    create: {
+      name: "Admin User",
+      email: "admin@example.com",
+      password,
+      role: "ADMIN",
+      tenantId: tenant1.id,
+    },
+  });
+
+  await prisma.user.upsert({
+    where: { email: "sales@example.com" },
+    update: {},
+    create: {
+      name: "Sales User",
+      email: "sales@example.com",
+      password,
+      role: "SALES",
+      tenantId: tenant1.id,
+    },
+  });
+
+  await prisma.user.upsert({
+    where: { email: "user2@example.com" },
+    update: {},
+    create: {
+      name: "User Two",
+      email: "user2@example.com",
+      password,
+      role: "ADMIN",
+      tenantId: tenant2.id,
+    },
+  });
+
+  console.log("✅ 租户和用户已创建");
+
   // ==================== 业务线 ====================
   const businessLines = [
     { name: "软包装", code: "FLEX", description: "软包装业务线", mainProducts: "stand up pouch, spout pouch, flat bottom pouch, quad seal bag, retort pouch, bag in box, rollstock film, pet food packaging, coffee bag, frozen food packaging, snack packaging, beverage pouch, automotive fluid pouch" },
@@ -247,6 +303,7 @@ Best regards`,
         status: l.status,
         email: l.email,
         businessLineId: blRecords[0].id,
+        tenantId: tenant1.id,
       },
     }).catch(async () => {
       const existing = await prisma.lead.findFirst({ where: { company: l.company } });
@@ -260,6 +317,7 @@ Best regards`,
             status: l.status,
             email: l.email,
             businessLineId: blRecords[0].id,
+            tenantId: tenant1.id,
           },
         });
       }
@@ -313,6 +371,7 @@ Best regards`,
         data: {
           ...c,
           businessLineId,
+          tenantId: tenant1.id,
         },
       });
       // Create a primary contact for each customer
@@ -367,7 +426,7 @@ Best regards`,
     for (const q of quotesData) {
       const existing = await prisma.quote.findUnique({ where: { quoteNo: q.quoteNo } });
       if (!existing && q.customerId) {
-        const quote = await prisma.quote.create({ data: q });
+        const quote = await prisma.quote.create({ data: { ...q, tenantId: tenant1.id } });
 
         // Add items for each quote
         await prisma.quoteItem.createMany({
@@ -431,7 +490,7 @@ Best regards`,
     for (const o of ordersData) {
       const existing = await prisma.order.findUnique({ where: { orderNo: o.orderNo } });
       if (!existing) {
-        const order = await prisma.order.create({ data: o });
+        const order = await prisma.order.create({ data: { ...o, tenantId: tenant1.id } });
 
         // Add items
         await prisma.orderItem.createMany({
@@ -484,7 +543,7 @@ Best regards`,
 
   for (const t of tasksData) {
     if (t.dueDate) {
-      await prisma.task.create({ data: t as any });
+      await prisma.task.create({ data: { ...t, tenantId: tenant1.id } as any });
     }
   }
   console.log("✅ 任务数据已创建（5条）");

@@ -10,6 +10,7 @@ export async function createFollowUpTaskForLead(leadId: number) {
 
   await prisma.task.create({
     data: {
+      tenantId: 1,
       title: `跟进新线索: ${lead.company}`,
       description: `新线索 ${lead.company} 需要首次联系`,
       type: "FOLLOW_UP",
@@ -32,6 +33,7 @@ export async function createFollowUpTaskForQuote(quoteId: number) {
 
   await prisma.task.create({
     data: {
+      tenantId: 1,
       title: `跟进报价: ${quote.quoteNo}`,
       description: `报价 ${quote.quoteNo} 已发送，需要跟进客户反馈`,
       type: "FOLLOW_UP",
@@ -53,6 +55,7 @@ export async function createProductionTaskForOrder(orderId: number) {
 
   await prisma.task.create({
     data: {
+      tenantId: 1,
       title: `跟进生产进度: ${order.orderNo}`,
       description: `订单 ${order.orderNo} 已确认，需要跟进生产进度`,
       type: "FOLLOW_UP",

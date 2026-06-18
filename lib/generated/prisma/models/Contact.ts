@@ -608,10 +608,6 @@ export type ContactUncheckedUpdateManyWithoutCustomerNestedInput = {
   deleteMany?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ContactCreateNestedOneWithoutQuotesInput = {
   create?: Prisma.XOR<Prisma.ContactCreateWithoutQuotesInput, Prisma.ContactUncheckedCreateWithoutQuotesInput>
   connectOrCreate?: Prisma.ContactCreateOrConnectWithoutQuotesInput

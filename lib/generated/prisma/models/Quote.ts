@@ -37,6 +37,7 @@ export type QuoteAvgAggregateOutputType = {
   customerId: number | null
   projectId: number | null
   customerContactId: number | null
+  tenantId: number | null
 }
 
 export type QuoteSumAggregateOutputType = {
@@ -50,6 +51,7 @@ export type QuoteSumAggregateOutputType = {
   customerId: number | null
   projectId: number | null
   customerContactId: number | null
+  tenantId: number | null
 }
 
 export type QuoteMinAggregateOutputType = {
@@ -78,6 +80,7 @@ export type QuoteMinAggregateOutputType = {
   customerId: number | null
   projectId: number | null
   customerContactId: number | null
+  tenantId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -108,6 +111,7 @@ export type QuoteMaxAggregateOutputType = {
   customerId: number | null
   projectId: number | null
   customerContactId: number | null
+  tenantId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -138,6 +142,7 @@ export type QuoteCountAggregateOutputType = {
   customerId: number
   projectId: number
   customerContactId: number
+  tenantId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -155,6 +160,7 @@ export type QuoteAvgAggregateInputType = {
   customerId?: true
   projectId?: true
   customerContactId?: true
+  tenantId?: true
 }
 
 export type QuoteSumAggregateInputType = {
@@ -168,6 +174,7 @@ export type QuoteSumAggregateInputType = {
   customerId?: true
   projectId?: true
   customerContactId?: true
+  tenantId?: true
 }
 
 export type QuoteMinAggregateInputType = {
@@ -196,6 +203,7 @@ export type QuoteMinAggregateInputType = {
   customerId?: true
   projectId?: true
   customerContactId?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -226,6 +234,7 @@ export type QuoteMaxAggregateInputType = {
   customerId?: true
   projectId?: true
   customerContactId?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -256,6 +265,7 @@ export type QuoteCountAggregateInputType = {
   customerId?: true
   projectId?: true
   customerContactId?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -373,6 +383,7 @@ export type QuoteGroupByOutputType = {
   customerId: number | null
   projectId: number | null
   customerContactId: number | null
+  tenantId: number | null
   createdAt: Date
   updatedAt: Date
   _count: QuoteCountAggregateOutputType | null
@@ -426,12 +437,14 @@ export type QuoteWhereInput = {
   customerId?: Prisma.IntNullableFilter<"Quote"> | number | null
   projectId?: Prisma.IntNullableFilter<"Quote"> | number | null
   customerContactId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  tenantId?: Prisma.IntNullableFilter<"Quote"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   customerContact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   items?: Prisma.QuoteItemListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
@@ -463,12 +476,14 @@ export type QuoteOrderByWithRelationInput = {
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerContactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lead?: Prisma.LeadOrderByWithRelationInput
   customer?: Prisma.CustomerOrderByWithRelationInput
   project?: Prisma.ProjectOrderByWithRelationInput
   customerContact?: Prisma.ContactOrderByWithRelationInput
+  tenant?: Prisma.TenantOrderByWithRelationInput
   items?: Prisma.QuoteItemOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
@@ -503,12 +518,14 @@ export type QuoteWhereUniqueInput = Prisma.AtLeast<{
   customerId?: Prisma.IntNullableFilter<"Quote"> | number | null
   projectId?: Prisma.IntNullableFilter<"Quote"> | number | null
   customerContactId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  tenantId?: Prisma.IntNullableFilter<"Quote"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   customerContact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   items?: Prisma.QuoteItemListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
@@ -540,6 +557,7 @@ export type QuoteOrderByWithAggregationInput = {
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerContactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.QuoteCountOrderByAggregateInput
@@ -578,6 +596,7 @@ export type QuoteScalarWhereWithAggregatesInput = {
   customerId?: Prisma.IntNullableWithAggregatesFilter<"Quote"> | number | null
   projectId?: Prisma.IntNullableWithAggregatesFilter<"Quote"> | number | null
   customerContactId?: Prisma.IntNullableWithAggregatesFilter<"Quote"> | number | null
+  tenantId?: Prisma.IntNullableWithAggregatesFilter<"Quote"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Quote"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Quote"> | Date | string
 }
@@ -609,6 +628,7 @@ export type QuoteCreateInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
@@ -640,6 +660,7 @@ export type QuoteUncheckedCreateInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -674,6 +695,7 @@ export type QuoteUpdateInput = {
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
@@ -705,6 +727,7 @@ export type QuoteUncheckedUpdateInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -738,6 +761,7 @@ export type QuoteCreateManyInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -793,6 +817,7 @@ export type QuoteUncheckedUpdateManyInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -833,6 +858,7 @@ export type QuoteCountOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   customerContactId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -848,6 +874,7 @@ export type QuoteAvgOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   customerContactId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
 }
 
 export type QuoteMaxOrderByAggregateInput = {
@@ -876,6 +903,7 @@ export type QuoteMaxOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   customerContactId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -906,6 +934,7 @@ export type QuoteMinOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   customerContactId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -921,6 +950,7 @@ export type QuoteSumOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   customerContactId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
 }
 
 export type QuoteNullableScalarRelationFilter = {
@@ -931,6 +961,48 @@ export type QuoteNullableScalarRelationFilter = {
 export type QuoteScalarRelationFilter = {
   is?: Prisma.QuoteWhereInput
   isNot?: Prisma.QuoteWhereInput
+}
+
+export type QuoteCreateNestedManyWithoutTenantInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput> | Prisma.QuoteCreateWithoutTenantInput[] | Prisma.QuoteUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutTenantInput | Prisma.QuoteCreateOrConnectWithoutTenantInput[]
+  createMany?: Prisma.QuoteCreateManyTenantInputEnvelope
+  connect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+}
+
+export type QuoteUncheckedCreateNestedManyWithoutTenantInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput> | Prisma.QuoteCreateWithoutTenantInput[] | Prisma.QuoteUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutTenantInput | Prisma.QuoteCreateOrConnectWithoutTenantInput[]
+  createMany?: Prisma.QuoteCreateManyTenantInputEnvelope
+  connect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+}
+
+export type QuoteUpdateManyWithoutTenantNestedInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput> | Prisma.QuoteCreateWithoutTenantInput[] | Prisma.QuoteUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutTenantInput | Prisma.QuoteCreateOrConnectWithoutTenantInput[]
+  upsert?: Prisma.QuoteUpsertWithWhereUniqueWithoutTenantInput | Prisma.QuoteUpsertWithWhereUniqueWithoutTenantInput[]
+  createMany?: Prisma.QuoteCreateManyTenantInputEnvelope
+  set?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  disconnect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  delete?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  connect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  update?: Prisma.QuoteUpdateWithWhereUniqueWithoutTenantInput | Prisma.QuoteUpdateWithWhereUniqueWithoutTenantInput[]
+  updateMany?: Prisma.QuoteUpdateManyWithWhereWithoutTenantInput | Prisma.QuoteUpdateManyWithWhereWithoutTenantInput[]
+  deleteMany?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
+}
+
+export type QuoteUncheckedUpdateManyWithoutTenantNestedInput = {
+  create?: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput> | Prisma.QuoteCreateWithoutTenantInput[] | Prisma.QuoteUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.QuoteCreateOrConnectWithoutTenantInput | Prisma.QuoteCreateOrConnectWithoutTenantInput[]
+  upsert?: Prisma.QuoteUpsertWithWhereUniqueWithoutTenantInput | Prisma.QuoteUpsertWithWhereUniqueWithoutTenantInput[]
+  createMany?: Prisma.QuoteCreateManyTenantInputEnvelope
+  set?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  disconnect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  delete?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  connect?: Prisma.QuoteWhereUniqueInput | Prisma.QuoteWhereUniqueInput[]
+  update?: Prisma.QuoteUpdateWithWhereUniqueWithoutTenantInput | Prisma.QuoteUpdateWithWhereUniqueWithoutTenantInput[]
+  updateMany?: Prisma.QuoteUpdateManyWithWhereWithoutTenantInput | Prisma.QuoteUpdateManyWithWhereWithoutTenantInput[]
+  deleteMany?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
 }
 
 export type QuoteCreateNestedManyWithoutLeadInput = {
@@ -1159,6 +1231,131 @@ export type QuoteUpdateOneWithoutOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuoteUpdateToOneWithWhereWithoutOrdersInput, Prisma.QuoteUpdateWithoutOrdersInput>, Prisma.QuoteUncheckedUpdateWithoutOrdersInput>
 }
 
+export type QuoteCreateWithoutTenantInput = {
+  quoteNo: string
+  quoteTitle?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: $Enums.Currency
+  paymentTerms?: string | null
+  deliveryTime?: string | null
+  validDays?: number | null
+  deliveryTerm?: string | null
+  shippingTerm?: string | null
+  validUntil?: Date | string | null
+  content?: string | null
+  remarks?: string | null
+  terms?: string | null
+  status?: $Enums.QuoteStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lead?: Prisma.LeadCreateNestedOneWithoutQuotesInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
+  customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
+  orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
+}
+
+export type QuoteUncheckedCreateWithoutTenantInput = {
+  id?: number
+  quoteNo: string
+  quoteTitle?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: $Enums.Currency
+  paymentTerms?: string | null
+  deliveryTime?: string | null
+  validDays?: number | null
+  deliveryTerm?: string | null
+  shippingTerm?: string | null
+  validUntil?: Date | string | null
+  content?: string | null
+  remarks?: string | null
+  terms?: string | null
+  status?: $Enums.QuoteStatus
+  leadId?: number | null
+  customerId?: number | null
+  projectId?: number | null
+  customerContactId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutQuoteInput
+}
+
+export type QuoteCreateOrConnectWithoutTenantInput = {
+  where: Prisma.QuoteWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput>
+}
+
+export type QuoteCreateManyTenantInputEnvelope = {
+  data: Prisma.QuoteCreateManyTenantInput | Prisma.QuoteCreateManyTenantInput[]
+  skipDuplicates?: boolean
+}
+
+export type QuoteUpsertWithWhereUniqueWithoutTenantInput = {
+  where: Prisma.QuoteWhereUniqueInput
+  update: Prisma.XOR<Prisma.QuoteUpdateWithoutTenantInput, Prisma.QuoteUncheckedUpdateWithoutTenantInput>
+  create: Prisma.XOR<Prisma.QuoteCreateWithoutTenantInput, Prisma.QuoteUncheckedCreateWithoutTenantInput>
+}
+
+export type QuoteUpdateWithWhereUniqueWithoutTenantInput = {
+  where: Prisma.QuoteWhereUniqueInput
+  data: Prisma.XOR<Prisma.QuoteUpdateWithoutTenantInput, Prisma.QuoteUncheckedUpdateWithoutTenantInput>
+}
+
+export type QuoteUpdateManyWithWhereWithoutTenantInput = {
+  where: Prisma.QuoteScalarWhereInput
+  data: Prisma.XOR<Prisma.QuoteUpdateManyMutationInput, Prisma.QuoteUncheckedUpdateManyWithoutTenantInput>
+}
+
+export type QuoteScalarWhereInput = {
+  AND?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
+  OR?: Prisma.QuoteScalarWhereInput[]
+  NOT?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
+  id?: Prisma.IntFilter<"Quote"> | number
+  quoteNo?: Prisma.StringFilter<"Quote"> | string
+  quoteTitle?: Prisma.StringNullableFilter<"Quote"> | string | null
+  productName?: Prisma.StringNullableFilter<"Quote"> | string | null
+  specs?: Prisma.StringNullableFilter<"Quote"> | string | null
+  quantity?: Prisma.StringNullableFilter<"Quote"> | string | null
+  unitPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFilter<"Quote"> | $Enums.Currency
+  paymentTerms?: Prisma.StringNullableFilter<"Quote"> | string | null
+  deliveryTime?: Prisma.StringNullableFilter<"Quote"> | string | null
+  validDays?: Prisma.IntNullableFilter<"Quote"> | number | null
+  deliveryTerm?: Prisma.StringNullableFilter<"Quote"> | string | null
+  shippingTerm?: Prisma.StringNullableFilter<"Quote"> | string | null
+  validUntil?: Prisma.DateTimeNullableFilter<"Quote"> | Date | string | null
+  content?: Prisma.StringNullableFilter<"Quote"> | string | null
+  remarks?: Prisma.StringNullableFilter<"Quote"> | string | null
+  terms?: Prisma.StringNullableFilter<"Quote"> | string | null
+  status?: Prisma.EnumQuoteStatusFilter<"Quote"> | $Enums.QuoteStatus
+  leadId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  customerId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  projectId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  customerContactId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  tenantId?: Prisma.IntNullableFilter<"Quote"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
+}
+
 export type QuoteCreateWithoutLeadInput = {
   quoteNo: string
   quoteTitle?: string | null
@@ -1185,6 +1382,7 @@ export type QuoteCreateWithoutLeadInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
@@ -1215,6 +1413,7 @@ export type QuoteUncheckedCreateWithoutLeadInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1248,39 +1447,6 @@ export type QuoteUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.QuoteUpdateManyMutationInput, Prisma.QuoteUncheckedUpdateManyWithoutLeadInput>
 }
 
-export type QuoteScalarWhereInput = {
-  AND?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
-  OR?: Prisma.QuoteScalarWhereInput[]
-  NOT?: Prisma.QuoteScalarWhereInput | Prisma.QuoteScalarWhereInput[]
-  id?: Prisma.IntFilter<"Quote"> | number
-  quoteNo?: Prisma.StringFilter<"Quote"> | string
-  quoteTitle?: Prisma.StringNullableFilter<"Quote"> | string | null
-  productName?: Prisma.StringNullableFilter<"Quote"> | string | null
-  specs?: Prisma.StringNullableFilter<"Quote"> | string | null
-  quantity?: Prisma.StringNullableFilter<"Quote"> | string | null
-  unitPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  exchangeRate?: Prisma.DecimalNullableFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discountAmount?: Prisma.DecimalFilter<"Quote"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currency?: Prisma.EnumCurrencyFilter<"Quote"> | $Enums.Currency
-  paymentTerms?: Prisma.StringNullableFilter<"Quote"> | string | null
-  deliveryTime?: Prisma.StringNullableFilter<"Quote"> | string | null
-  validDays?: Prisma.IntNullableFilter<"Quote"> | number | null
-  deliveryTerm?: Prisma.StringNullableFilter<"Quote"> | string | null
-  shippingTerm?: Prisma.StringNullableFilter<"Quote"> | string | null
-  validUntil?: Prisma.DateTimeNullableFilter<"Quote"> | Date | string | null
-  content?: Prisma.StringNullableFilter<"Quote"> | string | null
-  remarks?: Prisma.StringNullableFilter<"Quote"> | string | null
-  terms?: Prisma.StringNullableFilter<"Quote"> | string | null
-  status?: Prisma.EnumQuoteStatusFilter<"Quote"> | $Enums.QuoteStatus
-  leadId?: Prisma.IntNullableFilter<"Quote"> | number | null
-  customerId?: Prisma.IntNullableFilter<"Quote"> | number | null
-  projectId?: Prisma.IntNullableFilter<"Quote"> | number | null
-  customerContactId?: Prisma.IntNullableFilter<"Quote"> | number | null
-  createdAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Quote"> | Date | string
-}
-
 export type QuoteCreateWithoutCustomerInput = {
   quoteNo: string
   quoteTitle?: string | null
@@ -1307,6 +1473,7 @@ export type QuoteCreateWithoutCustomerInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
@@ -1337,6 +1504,7 @@ export type QuoteUncheckedCreateWithoutCustomerInput = {
   leadId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1396,6 +1564,7 @@ export type QuoteCreateWithoutCustomerContactInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutQuotesInput
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
@@ -1426,6 +1595,7 @@ export type QuoteUncheckedCreateWithoutCustomerContactInput = {
   leadId?: number | null
   customerId?: number | null
   projectId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1485,6 +1655,7 @@ export type QuoteCreateWithoutProjectInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutQuotesInput
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
@@ -1515,6 +1686,7 @@ export type QuoteUncheckedCreateWithoutProjectInput = {
   leadId?: number | null
   customerId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1575,6 +1747,7 @@ export type QuoteCreateWithoutTasksInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
 }
@@ -1605,6 +1778,7 @@ export type QuoteUncheckedCreateWithoutTasksInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1654,6 +1828,7 @@ export type QuoteUpdateWithoutTasksInput = {
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
 }
@@ -1684,6 +1859,7 @@ export type QuoteUncheckedUpdateWithoutTasksInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -1717,6 +1893,7 @@ export type QuoteCreateWithoutItemsInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   orders?: Prisma.OrderCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
 }
@@ -1747,6 +1924,7 @@ export type QuoteUncheckedCreateWithoutItemsInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutQuoteInput
@@ -1796,6 +1974,7 @@ export type QuoteUpdateWithoutItemsInput = {
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
 }
@@ -1826,6 +2005,7 @@ export type QuoteUncheckedUpdateWithoutItemsInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
@@ -1859,6 +2039,7 @@ export type QuoteCreateWithoutOrdersInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutQuotesInput
   project?: Prisma.ProjectCreateNestedOneWithoutQuotesInput
   customerContact?: Prisma.ContactCreateNestedOneWithoutQuotesInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutQuotesInput
   items?: Prisma.QuoteItemCreateNestedManyWithoutQuoteInput
   tasks?: Prisma.TaskCreateNestedManyWithoutQuoteInput
 }
@@ -1889,6 +2070,7 @@ export type QuoteUncheckedCreateWithoutOrdersInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
@@ -1938,6 +2120,7 @@ export type QuoteUpdateWithoutOrdersInput = {
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
 }
@@ -1968,10 +2151,136 @@ export type QuoteUncheckedUpdateWithoutOrdersInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
+}
+
+export type QuoteCreateManyTenantInput = {
+  id?: number
+  quoteNo: string
+  quoteTitle?: string | null
+  productName?: string | null
+  specs?: string | null
+  quantity?: string | null
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: $Enums.Currency
+  paymentTerms?: string | null
+  deliveryTime?: string | null
+  validDays?: number | null
+  deliveryTerm?: string | null
+  shippingTerm?: string | null
+  validUntil?: Date | string | null
+  content?: string | null
+  remarks?: string | null
+  terms?: string | null
+  status?: $Enums.QuoteStatus
+  leadId?: number | null
+  customerId?: number | null
+  projectId?: number | null
+  customerContactId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type QuoteUpdateWithoutTenantInput = {
+  quoteNo?: Prisma.StringFieldUpdateOperationsInput | string
+  quoteTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lead?: Prisma.LeadUpdateOneWithoutQuotesNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
+  customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
+}
+
+export type QuoteUncheckedUpdateWithoutTenantInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  quoteNo?: Prisma.StringFieldUpdateOperationsInput | string
+  quoteTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutQuoteNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutQuoteNestedInput
+}
+
+export type QuoteUncheckedUpdateManyWithoutTenantInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  quoteNo?: Prisma.StringFieldUpdateOperationsInput | string
+  quoteTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuoteCreateManyLeadInput = {
@@ -1999,6 +2308,7 @@ export type QuoteCreateManyLeadInput = {
   customerId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2029,6 +2339,7 @@ export type QuoteUpdateWithoutLeadInput = {
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
@@ -2059,6 +2370,7 @@ export type QuoteUncheckedUpdateWithoutLeadInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -2091,6 +2403,7 @@ export type QuoteUncheckedUpdateManyWithoutLeadInput = {
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2120,6 +2433,7 @@ export type QuoteCreateManyCustomerInput = {
   leadId?: number | null
   projectId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2150,6 +2464,7 @@ export type QuoteUpdateWithoutCustomerInput = {
   lead?: Prisma.LeadUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
@@ -2180,6 +2495,7 @@ export type QuoteUncheckedUpdateWithoutCustomerInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -2212,6 +2528,7 @@ export type QuoteUncheckedUpdateManyWithoutCustomerInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2241,6 +2558,7 @@ export type QuoteCreateManyCustomerContactInput = {
   leadId?: number | null
   customerId?: number | null
   projectId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2271,6 +2589,7 @@ export type QuoteUpdateWithoutCustomerContactInput = {
   lead?: Prisma.LeadUpdateOneWithoutQuotesNestedInput
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
@@ -2301,6 +2620,7 @@ export type QuoteUncheckedUpdateWithoutCustomerContactInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -2333,6 +2653,7 @@ export type QuoteUncheckedUpdateManyWithoutCustomerContactInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2362,6 +2683,7 @@ export type QuoteCreateManyProjectInput = {
   leadId?: number | null
   customerId?: number | null
   customerContactId?: number | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2392,6 +2714,7 @@ export type QuoteUpdateWithoutProjectInput = {
   lead?: Prisma.LeadUpdateOneWithoutQuotesNestedInput
   customer?: Prisma.CustomerUpdateOneWithoutQuotesNestedInput
   customerContact?: Prisma.ContactUpdateOneWithoutQuotesNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutQuotesNestedInput
   items?: Prisma.QuoteItemUpdateManyWithoutQuoteNestedInput
   orders?: Prisma.OrderUpdateManyWithoutQuoteNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutQuoteNestedInput
@@ -2422,6 +2745,7 @@ export type QuoteUncheckedUpdateWithoutProjectInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
@@ -2454,6 +2778,7 @@ export type QuoteUncheckedUpdateManyWithoutProjectInput = {
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerContactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2533,12 +2858,14 @@ export type QuoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   customerId?: boolean
   projectId?: boolean
   customerContactId?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
   items?: boolean | Prisma.Quote$itemsArgs<ExtArgs>
   orders?: boolean | Prisma.Quote$ordersArgs<ExtArgs>
   tasks?: boolean | Prisma.Quote$tasksArgs<ExtArgs>
@@ -2571,12 +2898,14 @@ export type QuoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   customerId?: boolean
   projectId?: boolean
   customerContactId?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
 }, ExtArgs["result"]["quote"]>
 
 export type QuoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2605,12 +2934,14 @@ export type QuoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   customerId?: boolean
   projectId?: boolean
   customerContactId?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
 }, ExtArgs["result"]["quote"]>
 
 export type QuoteSelectScalar = {
@@ -2639,16 +2970,18 @@ export type QuoteSelectScalar = {
   customerId?: boolean
   projectId?: boolean
   customerContactId?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type QuoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quoteNo" | "quoteTitle" | "productName" | "specs" | "quantity" | "unitPrice" | "totalPrice" | "exchangeRate" | "discountAmount" | "currency" | "paymentTerms" | "deliveryTime" | "validDays" | "deliveryTerm" | "shippingTerm" | "validUntil" | "content" | "remarks" | "terms" | "status" | "leadId" | "customerId" | "projectId" | "customerContactId" | "createdAt" | "updatedAt", ExtArgs["result"]["quote"]>
+export type QuoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quoteNo" | "quoteTitle" | "productName" | "specs" | "quantity" | "unitPrice" | "totalPrice" | "exchangeRate" | "discountAmount" | "currency" | "paymentTerms" | "deliveryTime" | "validDays" | "deliveryTerm" | "shippingTerm" | "validUntil" | "content" | "remarks" | "terms" | "status" | "leadId" | "customerId" | "projectId" | "customerContactId" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["quote"]>
 export type QuoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
   items?: boolean | Prisma.Quote$itemsArgs<ExtArgs>
   orders?: boolean | Prisma.Quote$ordersArgs<ExtArgs>
   tasks?: boolean | Prisma.Quote$tasksArgs<ExtArgs>
@@ -2659,12 +2992,14 @@ export type QuoteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
 }
 export type QuoteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Quote$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Quote$customerArgs<ExtArgs>
   project?: boolean | Prisma.Quote$projectArgs<ExtArgs>
   customerContact?: boolean | Prisma.Quote$customerContactArgs<ExtArgs>
+  tenant?: boolean | Prisma.Quote$tenantArgs<ExtArgs>
 }
 
 export type $QuotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2674,6 +3009,7 @@ export type $QuotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     customer: Prisma.$CustomerPayload<ExtArgs> | null
     project: Prisma.$ProjectPayload<ExtArgs> | null
     customerContact: Prisma.$ContactPayload<ExtArgs> | null
+    tenant: Prisma.$TenantPayload<ExtArgs> | null
     items: Prisma.$QuoteItemPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
@@ -2704,6 +3040,7 @@ export type $QuotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     customerId: number | null
     projectId: number | null
     customerContactId: number | null
+    tenantId: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["quote"]>
@@ -3104,6 +3441,7 @@ export interface Prisma__QuoteClient<T, Null = never, ExtArgs extends runtime.Ty
   customer<T extends Prisma.Quote$customerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$customerArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.Quote$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   customerContact<T extends Prisma.Quote$customerContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$customerContactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tenant<T extends Prisma.Quote$tenantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$tenantArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.Quote$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.Quote$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Quote$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Quote$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3161,6 +3499,7 @@ export interface QuoteFieldRefs {
   readonly customerId: Prisma.FieldRef<"Quote", 'Int'>
   readonly projectId: Prisma.FieldRef<"Quote", 'Int'>
   readonly customerContactId: Prisma.FieldRef<"Quote", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Quote", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Quote", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Quote", 'DateTime'>
 }
@@ -3637,6 +3976,25 @@ export type Quote$customerContactArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.ContactInclude<ExtArgs> | null
   where?: Prisma.ContactWhereInput
+}
+
+/**
+ * Quote.tenant
+ */
+export type Quote$tenantArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tenant
+   */
+  select?: Prisma.TenantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tenant
+   */
+  omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  where?: Prisma.TenantWhereInput
 }
 
 /**

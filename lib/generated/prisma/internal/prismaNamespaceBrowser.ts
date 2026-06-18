@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Tenant: 'Tenant',
+  User: 'User',
   BusinessLine: 'BusinessLine',
   Lead: 'Lead',
   LeadActivity: 'LeadActivity',
@@ -99,6 +101,33 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const TenantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  plan: 'plan',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  role: 'role',
+  tenantId: 'tenantId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
 export const BusinessLineScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -138,6 +167,7 @@ export const LeadScalarFieldEnum = {
   convertedCustomerId: 'convertedCustomerId',
   ownerId: 'ownerId',
   ownerName: 'ownerName',
+  tenantId: 'tenantId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -179,6 +209,7 @@ export const CustomerScalarFieldEnum = {
   poolEnteredAt: 'poolEnteredAt',
   poolReason: 'poolReason',
   businessLineId: 'businessLineId',
+  tenantId: 'tenantId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -288,6 +319,7 @@ export const QuoteScalarFieldEnum = {
   customerId: 'customerId',
   projectId: 'projectId',
   customerContactId: 'customerContactId',
+  tenantId: 'tenantId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -311,6 +343,7 @@ export const TaskScalarFieldEnum = {
   orderId: 'orderId',
   ownerId: 'ownerId',
   ownerName: 'ownerName',
+  tenantId: 'tenantId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -500,6 +533,7 @@ export const OrderScalarFieldEnum = {
   paymentTerm: 'paymentTerm',
   deliveryTerm: 'deliveryTerm',
   expectedDeliveryDate: 'expectedDeliveryDate',
+  tenantId: 'tenantId',
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

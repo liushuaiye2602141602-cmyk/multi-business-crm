@@ -37,7 +37,7 @@ export async function createOrder(formData: FormData) {
 
   if (!data.customerId) throw new Error("客户不能为空");
 
-  const order = await prisma.order.create({ data });
+  const order = await prisma.order.create({ data: { ...data, tenantId: 1 } });
 
   await createActivityLog({
     action: "创建",
@@ -184,6 +184,7 @@ export async function createOrderFromQuote(quoteId: number) {
       paymentTerm: quote.paymentTerms,
       deliveryTerm: quote.deliveryTime,
       notes: quote.remarks,
+      tenantId: 1,
     },
   });
 

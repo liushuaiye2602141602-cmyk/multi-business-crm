@@ -34,6 +34,7 @@ export type TaskAvgAggregateOutputType = {
   quoteId: number | null
   orderId: number | null
   ownerId: number | null
+  tenantId: number | null
 }
 
 export type TaskSumAggregateOutputType = {
@@ -44,6 +45,7 @@ export type TaskSumAggregateOutputType = {
   quoteId: number | null
   orderId: number | null
   ownerId: number | null
+  tenantId: number | null
 }
 
 export type TaskMinAggregateOutputType = {
@@ -62,6 +64,7 @@ export type TaskMinAggregateOutputType = {
   orderId: number | null
   ownerId: number | null
   ownerName: string | null
+  tenantId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -82,6 +85,7 @@ export type TaskMaxAggregateOutputType = {
   orderId: number | null
   ownerId: number | null
   ownerName: string | null
+  tenantId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -102,6 +106,7 @@ export type TaskCountAggregateOutputType = {
   orderId: number
   ownerId: number
   ownerName: number
+  tenantId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -116,6 +121,7 @@ export type TaskAvgAggregateInputType = {
   quoteId?: true
   orderId?: true
   ownerId?: true
+  tenantId?: true
 }
 
 export type TaskSumAggregateInputType = {
@@ -126,6 +132,7 @@ export type TaskSumAggregateInputType = {
   quoteId?: true
   orderId?: true
   ownerId?: true
+  tenantId?: true
 }
 
 export type TaskMinAggregateInputType = {
@@ -144,6 +151,7 @@ export type TaskMinAggregateInputType = {
   orderId?: true
   ownerId?: true
   ownerName?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -164,6 +172,7 @@ export type TaskMaxAggregateInputType = {
   orderId?: true
   ownerId?: true
   ownerName?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -184,6 +193,7 @@ export type TaskCountAggregateInputType = {
   orderId?: true
   ownerId?: true
   ownerName?: true
+  tenantId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -291,6 +301,7 @@ export type TaskGroupByOutputType = {
   orderId: number | null
   ownerId: number | null
   ownerName: string | null
+  tenantId: number | null
   createdAt: Date
   updatedAt: Date
   _count: TaskCountAggregateOutputType | null
@@ -334,6 +345,7 @@ export type TaskWhereInput = {
   orderId?: Prisma.IntNullableFilter<"Task"> | number | null
   ownerId?: Prisma.IntNullableFilter<"Task"> | number | null
   ownerName?: Prisma.StringNullableFilter<"Task"> | string | null
+  tenantId?: Prisma.IntNullableFilter<"Task"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
@@ -341,6 +353,7 @@ export type TaskWhereInput = {
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   quote?: Prisma.XOR<Prisma.QuoteNullableScalarRelationFilter, Prisma.QuoteWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderNullableScalarRelationFilter, Prisma.OrderWhereInput> | null
+  tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
 }
 
 export type TaskOrderByWithRelationInput = {
@@ -359,6 +372,7 @@ export type TaskOrderByWithRelationInput = {
   orderId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lead?: Prisma.LeadOrderByWithRelationInput
@@ -366,6 +380,7 @@ export type TaskOrderByWithRelationInput = {
   project?: Prisma.ProjectOrderByWithRelationInput
   quote?: Prisma.QuoteOrderByWithRelationInput
   order?: Prisma.OrderOrderByWithRelationInput
+  tenant?: Prisma.TenantOrderByWithRelationInput
 }
 
 export type TaskWhereUniqueInput = Prisma.AtLeast<{
@@ -387,6 +402,7 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   orderId?: Prisma.IntNullableFilter<"Task"> | number | null
   ownerId?: Prisma.IntNullableFilter<"Task"> | number | null
   ownerName?: Prisma.StringNullableFilter<"Task"> | string | null
+  tenantId?: Prisma.IntNullableFilter<"Task"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
@@ -394,6 +410,7 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   quote?: Prisma.XOR<Prisma.QuoteNullableScalarRelationFilter, Prisma.QuoteWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderNullableScalarRelationFilter, Prisma.OrderWhereInput> | null
+  tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
 }, "id">
 
 export type TaskOrderByWithAggregationInput = {
@@ -412,6 +429,7 @@ export type TaskOrderByWithAggregationInput = {
   orderId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TaskCountOrderByAggregateInput
@@ -440,6 +458,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   orderId?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
   ownerId?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
   ownerName?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
+  tenantId?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Task"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Task"> | Date | string
 }
@@ -461,6 +480,7 @@ export type TaskCreateInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
   order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateInput = {
@@ -479,6 +499,7 @@ export type TaskUncheckedCreateInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -500,6 +521,7 @@ export type TaskUpdateInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
   order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateInput = {
@@ -518,6 +540,7 @@ export type TaskUncheckedUpdateInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -538,6 +561,7 @@ export type TaskCreateManyInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -572,6 +596,7 @@ export type TaskUncheckedUpdateManyInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -602,6 +627,7 @@ export type TaskCountOrderByAggregateInput = {
   orderId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -614,6 +640,7 @@ export type TaskAvgOrderByAggregateInput = {
   quoteId?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
 }
 
 export type TaskMaxOrderByAggregateInput = {
@@ -632,6 +659,7 @@ export type TaskMaxOrderByAggregateInput = {
   orderId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -652,6 +680,7 @@ export type TaskMinOrderByAggregateInput = {
   orderId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   ownerName?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -664,6 +693,49 @@ export type TaskSumOrderByAggregateInput = {
   quoteId?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+}
+
+export type TaskCreateNestedManyWithoutTenantInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput> | Prisma.TaskCreateWithoutTenantInput[] | Prisma.TaskUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTenantInput | Prisma.TaskCreateOrConnectWithoutTenantInput[]
+  createMany?: Prisma.TaskCreateManyTenantInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUncheckedCreateNestedManyWithoutTenantInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput> | Prisma.TaskCreateWithoutTenantInput[] | Prisma.TaskUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTenantInput | Prisma.TaskCreateOrConnectWithoutTenantInput[]
+  createMany?: Prisma.TaskCreateManyTenantInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUpdateManyWithoutTenantNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput> | Prisma.TaskCreateWithoutTenantInput[] | Prisma.TaskUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTenantInput | Prisma.TaskCreateOrConnectWithoutTenantInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutTenantInput | Prisma.TaskUpsertWithWhereUniqueWithoutTenantInput[]
+  createMany?: Prisma.TaskCreateManyTenantInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutTenantInput | Prisma.TaskUpdateWithWhereUniqueWithoutTenantInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutTenantInput | Prisma.TaskUpdateManyWithWhereWithoutTenantInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
+export type TaskUncheckedUpdateManyWithoutTenantNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput> | Prisma.TaskCreateWithoutTenantInput[] | Prisma.TaskUncheckedCreateWithoutTenantInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTenantInput | Prisma.TaskCreateOrConnectWithoutTenantInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutTenantInput | Prisma.TaskUpsertWithWhereUniqueWithoutTenantInput[]
+  createMany?: Prisma.TaskCreateManyTenantInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutTenantInput | Prisma.TaskUpdateWithWhereUniqueWithoutTenantInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutTenantInput | Prisma.TaskUpdateManyWithWhereWithoutTenantInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
 }
 
 export type TaskCreateNestedManyWithoutLeadInput = {
@@ -888,6 +960,95 @@ export type TaskUncheckedUpdateManyWithoutOrderNestedInput = {
   deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
 }
 
+export type TaskCreateWithoutTenantInput = {
+  title: string
+  description?: string | null
+  type?: $Enums.TaskType
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  dueDate?: Date | string | null
+  completedAt?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lead?: Prisma.LeadCreateNestedOneWithoutTasksInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutTasksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
+  order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+}
+
+export type TaskUncheckedCreateWithoutTenantInput = {
+  id?: number
+  title: string
+  description?: string | null
+  type?: $Enums.TaskType
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  dueDate?: Date | string | null
+  completedAt?: Date | string | null
+  leadId?: number | null
+  customerId?: number | null
+  projectId?: number | null
+  quoteId?: number | null
+  orderId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TaskCreateOrConnectWithoutTenantInput = {
+  where: Prisma.TaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput>
+}
+
+export type TaskCreateManyTenantInputEnvelope = {
+  data: Prisma.TaskCreateManyTenantInput | Prisma.TaskCreateManyTenantInput[]
+  skipDuplicates?: boolean
+}
+
+export type TaskUpsertWithWhereUniqueWithoutTenantInput = {
+  where: Prisma.TaskWhereUniqueInput
+  update: Prisma.XOR<Prisma.TaskUpdateWithoutTenantInput, Prisma.TaskUncheckedUpdateWithoutTenantInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutTenantInput, Prisma.TaskUncheckedCreateWithoutTenantInput>
+}
+
+export type TaskUpdateWithWhereUniqueWithoutTenantInput = {
+  where: Prisma.TaskWhereUniqueInput
+  data: Prisma.XOR<Prisma.TaskUpdateWithoutTenantInput, Prisma.TaskUncheckedUpdateWithoutTenantInput>
+}
+
+export type TaskUpdateManyWithWhereWithoutTenantInput = {
+  where: Prisma.TaskScalarWhereInput
+  data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutTenantInput>
+}
+
+export type TaskScalarWhereInput = {
+  AND?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+  OR?: Prisma.TaskScalarWhereInput[]
+  NOT?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+  id?: Prisma.IntFilter<"Task"> | number
+  title?: Prisma.StringFilter<"Task"> | string
+  description?: Prisma.StringNullableFilter<"Task"> | string | null
+  type?: Prisma.EnumTaskTypeFilter<"Task"> | $Enums.TaskType
+  status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+  dueDate?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
+  leadId?: Prisma.IntNullableFilter<"Task"> | number | null
+  customerId?: Prisma.IntNullableFilter<"Task"> | number | null
+  projectId?: Prisma.IntNullableFilter<"Task"> | number | null
+  quoteId?: Prisma.IntNullableFilter<"Task"> | number | null
+  orderId?: Prisma.IntNullableFilter<"Task"> | number | null
+  ownerId?: Prisma.IntNullableFilter<"Task"> | number | null
+  ownerName?: Prisma.StringNullableFilter<"Task"> | string | null
+  tenantId?: Prisma.IntNullableFilter<"Task"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+}
+
 export type TaskCreateWithoutLeadInput = {
   title: string
   description?: string | null
@@ -904,6 +1065,7 @@ export type TaskCreateWithoutLeadInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
   order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateWithoutLeadInput = {
@@ -921,6 +1083,7 @@ export type TaskUncheckedCreateWithoutLeadInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -951,29 +1114,6 @@ export type TaskUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutLeadInput>
 }
 
-export type TaskScalarWhereInput = {
-  AND?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-  OR?: Prisma.TaskScalarWhereInput[]
-  NOT?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-  id?: Prisma.IntFilter<"Task"> | number
-  title?: Prisma.StringFilter<"Task"> | string
-  description?: Prisma.StringNullableFilter<"Task"> | string | null
-  type?: Prisma.EnumTaskTypeFilter<"Task"> | $Enums.TaskType
-  status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
-  priority?: Prisma.EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
-  dueDate?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
-  completedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
-  leadId?: Prisma.IntNullableFilter<"Task"> | number | null
-  customerId?: Prisma.IntNullableFilter<"Task"> | number | null
-  projectId?: Prisma.IntNullableFilter<"Task"> | number | null
-  quoteId?: Prisma.IntNullableFilter<"Task"> | number | null
-  orderId?: Prisma.IntNullableFilter<"Task"> | number | null
-  ownerId?: Prisma.IntNullableFilter<"Task"> | number | null
-  ownerName?: Prisma.StringNullableFilter<"Task"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
-}
-
 export type TaskCreateWithoutCustomerInput = {
   title: string
   description?: string | null
@@ -990,6 +1130,7 @@ export type TaskCreateWithoutCustomerInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
   order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateWithoutCustomerInput = {
@@ -1007,6 +1148,7 @@ export type TaskUncheckedCreateWithoutCustomerInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1053,6 +1195,7 @@ export type TaskCreateWithoutProjectInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutTasksInput
   quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
   order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateWithoutProjectInput = {
@@ -1070,6 +1213,7 @@ export type TaskUncheckedCreateWithoutProjectInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1116,6 +1260,7 @@ export type TaskCreateWithoutQuoteInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutTasksInput
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   order?: Prisma.OrderCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateWithoutQuoteInput = {
@@ -1133,6 +1278,7 @@ export type TaskUncheckedCreateWithoutQuoteInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1179,6 +1325,7 @@ export type TaskCreateWithoutOrderInput = {
   customer?: Prisma.CustomerCreateNestedOneWithoutTasksInput
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   quote?: Prisma.QuoteCreateNestedOneWithoutTasksInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutTasksInput
 }
 
 export type TaskUncheckedCreateWithoutOrderInput = {
@@ -1196,6 +1343,7 @@ export type TaskUncheckedCreateWithoutOrderInput = {
   quoteId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1226,6 +1374,85 @@ export type TaskUpdateManyWithWhereWithoutOrderInput = {
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutOrderInput>
 }
 
+export type TaskCreateManyTenantInput = {
+  id?: number
+  title: string
+  description?: string | null
+  type?: $Enums.TaskType
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  dueDate?: Date | string | null
+  completedAt?: Date | string | null
+  leadId?: number | null
+  customerId?: number | null
+  projectId?: number | null
+  quoteId?: number | null
+  orderId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TaskUpdateWithoutTenantInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lead?: Prisma.LeadUpdateOneWithoutTasksNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutTasksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
+  order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+}
+
+export type TaskUncheckedUpdateWithoutTenantInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TaskUncheckedUpdateManyWithoutTenantInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TaskCreateManyLeadInput = {
   id?: number
   title: string
@@ -1241,6 +1468,7 @@ export type TaskCreateManyLeadInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1261,6 +1489,7 @@ export type TaskUpdateWithoutLeadInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
   order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutLeadInput = {
@@ -1278,6 +1507,7 @@ export type TaskUncheckedUpdateWithoutLeadInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1297,6 +1527,7 @@ export type TaskUncheckedUpdateManyWithoutLeadInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1316,6 +1547,7 @@ export type TaskCreateManyCustomerInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1336,6 +1568,7 @@ export type TaskUpdateWithoutCustomerInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
   order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutCustomerInput = {
@@ -1353,6 +1586,7 @@ export type TaskUncheckedUpdateWithoutCustomerInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1372,6 +1606,7 @@ export type TaskUncheckedUpdateManyWithoutCustomerInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1391,6 +1626,7 @@ export type TaskCreateManyProjectInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1411,6 +1647,7 @@ export type TaskUpdateWithoutProjectInput = {
   customer?: Prisma.CustomerUpdateOneWithoutTasksNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
   order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutProjectInput = {
@@ -1428,6 +1665,7 @@ export type TaskUncheckedUpdateWithoutProjectInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1447,6 +1685,7 @@ export type TaskUncheckedUpdateManyWithoutProjectInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1466,6 +1705,7 @@ export type TaskCreateManyQuoteInput = {
   orderId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1486,6 +1726,7 @@ export type TaskUpdateWithoutQuoteInput = {
   customer?: Prisma.CustomerUpdateOneWithoutTasksNestedInput
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   order?: Prisma.OrderUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutQuoteInput = {
@@ -1503,6 +1744,7 @@ export type TaskUncheckedUpdateWithoutQuoteInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1522,6 +1764,7 @@ export type TaskUncheckedUpdateManyWithoutQuoteInput = {
   orderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1541,6 +1784,7 @@ export type TaskCreateManyOrderInput = {
   quoteId?: number | null
   ownerId?: number | null
   ownerName?: string | null
+  tenantId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1561,6 +1805,7 @@ export type TaskUpdateWithoutOrderInput = {
   customer?: Prisma.CustomerUpdateOneWithoutTasksNestedInput
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutTasksNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutTasksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutOrderInput = {
@@ -1578,6 +1823,7 @@ export type TaskUncheckedUpdateWithoutOrderInput = {
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1597,6 +1843,7 @@ export type TaskUncheckedUpdateManyWithoutOrderInput = {
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1619,6 +1866,7 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   orderId?: boolean
   ownerId?: boolean
   ownerName?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
@@ -1626,6 +1874,7 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1644,6 +1893,7 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   orderId?: boolean
   ownerId?: boolean
   ownerName?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
@@ -1651,6 +1901,7 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1669,6 +1920,7 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   orderId?: boolean
   ownerId?: boolean
   ownerName?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
@@ -1676,6 +1928,7 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectScalar = {
@@ -1694,17 +1947,19 @@ export type TaskSelectScalar = {
   orderId?: boolean
   ownerId?: boolean
   ownerName?: boolean
+  tenantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "type" | "status" | "priority" | "dueDate" | "completedAt" | "leadId" | "customerId" | "projectId" | "quoteId" | "orderId" | "ownerId" | "ownerName" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "type" | "status" | "priority" | "dueDate" | "completedAt" | "leadId" | "customerId" | "projectId" | "quoteId" | "orderId" | "ownerId" | "ownerName" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
   customer?: boolean | Prisma.Task$customerArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }
 export type TaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
@@ -1712,6 +1967,7 @@ export type TaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }
 export type TaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.Task$leadArgs<ExtArgs>
@@ -1719,6 +1975,7 @@ export type TaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Task$quoteArgs<ExtArgs>
   order?: boolean | Prisma.Task$orderArgs<ExtArgs>
+  tenant?: boolean | Prisma.Task$tenantArgs<ExtArgs>
 }
 
 export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1729,6 +1986,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     project: Prisma.$ProjectPayload<ExtArgs> | null
     quote: Prisma.$QuotePayload<ExtArgs> | null
     order: Prisma.$OrderPayload<ExtArgs> | null
+    tenant: Prisma.$TenantPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1746,6 +2004,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     orderId: number | null
     ownerId: number | null
     ownerName: string | null
+    tenantId: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["task"]>
@@ -2147,6 +2406,7 @@ export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Typ
   project<T extends Prisma.Task$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   quote<T extends Prisma.Task$quoteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$quoteArgs<ExtArgs>>): Prisma.Prisma__QuoteClient<runtime.Types.Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   order<T extends Prisma.Task$orderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$orderArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tenant<T extends Prisma.Task$tenantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$tenantArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2191,6 +2451,7 @@ export interface TaskFieldRefs {
   readonly orderId: Prisma.FieldRef<"Task", 'Int'>
   readonly ownerId: Prisma.FieldRef<"Task", 'Int'>
   readonly ownerName: Prisma.FieldRef<"Task", 'String'>
+  readonly tenantId: Prisma.FieldRef<"Task", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Task", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Task", 'DateTime'>
 }
@@ -2686,6 +2947,25 @@ export type Task$orderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   include?: Prisma.OrderInclude<ExtArgs> | null
   where?: Prisma.OrderWhereInput
+}
+
+/**
+ * Task.tenant
+ */
+export type Task$tenantArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tenant
+   */
+  select?: Prisma.TenantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tenant
+   */
+  omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  where?: Prisma.TenantWhereInput
 }
 
 /**

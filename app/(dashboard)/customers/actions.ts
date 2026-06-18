@@ -29,7 +29,7 @@ export async function createCustomer(formData: FormData) {
     throw new Error("公司名称和联系人姓名不能为空");
   }
 
-  const customer = await prisma.customer.create({ data });
+  const customer = await prisma.customer.create({ data: { ...data, tenantId: 1 } });
   revalidatePath("/customers");
   redirect(`/customers/${customer.id}`);
 }

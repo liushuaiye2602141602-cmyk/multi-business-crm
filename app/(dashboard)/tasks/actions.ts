@@ -21,7 +21,7 @@ export async function createTask(formData: FormData) {
   if (!data.title) throw new Error("任务标题不能为空");
   if (!data.dueDate) throw new Error("截止日期不能为空");
 
-  const task = await prisma.task.create({ data });
+  const task = await prisma.task.create({ data: { ...data, tenantId: 1 } });
   revalidatePath("/tasks");
   redirect(`/tasks`);
 }

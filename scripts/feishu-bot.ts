@@ -131,6 +131,7 @@ async function main() {
           if (businessLine && extracted.company !== "未知") {
             const lead = await prisma.lead.create({
               data: {
+                tenantId: 1,
                 company: extracted.company,
                 contactName: extracted.contactName,
                 country: extracted.country || null,
@@ -157,6 +158,7 @@ async function main() {
             // company 为 "未知"，仍创建但提示
             const lead = await prisma.lead.create({
               data: {
+                tenantId: 1,
                 company: extracted.company,
                 contactName: extracted.contactName,
                 remark: extracted.remark || "图片识别，信息不完整",

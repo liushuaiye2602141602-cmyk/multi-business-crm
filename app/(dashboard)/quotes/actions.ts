@@ -39,7 +39,7 @@ export async function createQuote(formData: FormData) {
 
   if (!data.quoteNo) throw new Error("报价编号不能为空");
 
-  const quote = await prisma.quote.create({ data });
+  const quote = await prisma.quote.create({ data: { ...data, tenantId: 1 } });
   revalidatePath("/quotes");
   redirect(`/quotes/${quote.id}`);
 }

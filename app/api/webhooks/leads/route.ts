@@ -166,6 +166,7 @@ export async function POST(request: NextRequest) {
   try {
     const lead = await prisma.lead.create({
       data: {
+        tenantId: 1,
         company: body.companyName,
         contactName: body.name || body.companyName,
         country: body.country || null,
