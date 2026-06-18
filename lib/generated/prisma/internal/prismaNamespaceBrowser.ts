@@ -87,7 +87,10 @@ export const ModelName = {
   IMUser: 'IMUser',
   IMMessage: 'IMMessage',
   AILog: 'AILog',
-  Message: 'Message'
+  Message: 'Message',
+  AIControlSettings: 'AIControlSettings',
+  AIPolicyRule: 'AIPolicyRule',
+  AIExecutionLog: 'AIExecutionLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -828,6 +831,57 @@ export const MessageScalarFieldEnum = {
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const AIControlSettingsScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  aiEnabled: 'aiEnabled',
+  salesAgentEnabled: 'salesAgentEnabled',
+  emailAgentEnabled: 'emailAgentEnabled',
+  whatsappAgentEnabled: 'whatsappAgentEnabled',
+  followUpAgentEnabled: 'followUpAgentEnabled',
+  prospectingEnabled: 'prospectingEnabled',
+  executionMode: 'executionMode',
+  workHoursStart: 'workHoursStart',
+  workHoursEnd: 'workHoursEnd',
+  maxContactsPerDay: 'maxContactsPerDay',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AIControlSettingsScalarFieldEnum = (typeof AIControlSettingsScalarFieldEnum)[keyof typeof AIControlSettingsScalarFieldEnum]
+
+
+export const AIPolicyRuleScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  type: 'type',
+  action: 'action',
+  condition: 'condition',
+  value: 'value',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AIPolicyRuleScalarFieldEnum = (typeof AIPolicyRuleScalarFieldEnum)[keyof typeof AIPolicyRuleScalarFieldEnum]
+
+
+export const AIExecutionLogScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  actionType: 'actionType',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  allowed: 'allowed',
+  reason: 'reason',
+  mode: 'mode',
+  createdAt: 'createdAt'
+} as const
+
+export type AIExecutionLogScalarFieldEnum = (typeof AIExecutionLogScalarFieldEnum)[keyof typeof AIExecutionLogScalarFieldEnum]
 
 
 export const SortOrder = {

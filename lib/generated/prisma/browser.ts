@@ -202,3 +202,18 @@ export type AILog = Prisma.AILogModel
  * 
  */
 export type Message = Prisma.MessageModel
+/**
+ * Model AIControlSettings
+ * 
+ */
+export type AIControlSettings = Prisma.AIControlSettingsModel
+/**
+ * Model AIPolicyRule
+ * 
+ */
+export type AIPolicyRule = Prisma.AIPolicyRuleModel
+/**
+ * Model AIExecutionLog
+ * 
+ */
+export type AIExecutionLog = Prisma.AIExecutionLogModel

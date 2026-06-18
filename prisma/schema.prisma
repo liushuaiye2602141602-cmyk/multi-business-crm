@@ -1128,3 +1128,56 @@ model Message {
   @@index([direction])
   @@index([createdAt])
 }
+
+// ==================== AI Control System ====================
+
+model AIControlSettings {
+  id                  Int      @id @default(autoincrement())
+  tenantId            Int?
+  aiEnabled           Boolean  @default(true)
+  salesAgentEnabled   Boolean  @default(true)
+  emailAgentEnabled   Boolean  @default(true)
+  whatsappAgentEnabled Boolean @default(false)
+  followUpAgentEnabled Boolean @default(true)
+  prospectingEnabled  Boolean  @default(false)
+  executionMode       String   @default("MANUAL") // MANUAL / APPROVAL / AUTO
+  workHoursStart      Int      @default(9)   // 9 AM
+  workHoursEnd        Int      @default(18)  // 6 PM
+  maxContactsPerDay   Int      @default(5)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@unique([tenantId])
+}
+
+model AIPolicyRule {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  name        String
+  type        String   @default("SOFT") // HARD / SOFT
+  action      String   // block_send / limit_rate / block_blacklist / block_discount
+  condition   String   // JSON condition
+  value       String?  // threshold value
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tenantId])
+}
+
+model AIExecutionLog {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  actionType  String   // email_send / whatsapp_send / task_create / lead_analyze
+  entityType  String?  // Lead / Customer / Quote / Order
+  entityId    Int?
+  allowed     Boolean
+  reason      String?
+  mode        String?  // MANUAL / APPROVAL / AUTO
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([actionType])
+  @@index([allowed])
+  @@index([createdAt])
+}

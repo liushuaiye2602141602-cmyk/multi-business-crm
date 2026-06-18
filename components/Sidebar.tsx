@@ -39,6 +39,7 @@ import {
   Coins,
   BarChart2,
   Inbox,
+  Shield,
 } from "lucide-react";
 
 interface NavItem {
@@ -96,6 +97,7 @@ const navGroups: NavGroup[] = [
       { href: "/ai-test", label: "AI 测试", icon: TestTube },
       { href: "/ai-analyses", label: "AI 分析记录", icon: Sparkles },
       { href: "/ai-settings", label: "AI 设置", icon: Settings },
+      { href: "/ai-control-panel", label: "AI 控制面板", icon: Shield },
     ],
   },
   {
