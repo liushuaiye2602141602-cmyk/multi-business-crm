@@ -26,6 +26,14 @@ export async function executeIntent(result: IntentResult): Promise<ExecutionResu
       return executeQueryOrders(result.args);
     case "query_tasks":
       return executeQueryTasks(result.args);
+    case "update_order_status":
+      return executeUpdateOrderStatus(result.args);
+    case "update_customer_grade":
+      return executeUpdateCustomerGrade(result.args);
+    case "complete_task":
+      return executeCompleteTask(result.args);
+    case "create_quote":
+      return executeCreateQuote(result.args);
     case "help":
       return executeHelp();
     default:
@@ -362,6 +370,182 @@ async function executeQueryTasks(args: Record<string, unknown>): Promise<Executi
   }
 }
 
+async function executeUpdateOrderStatus(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const orderNo = args.orderNo as string;
+  const status = args.status as string;
+  if (!orderNo || !status) {
+    return { success: false, message: "更新订单状态需要订单编号和新状态。示例：把 ORD-000001 标记为已发货" };
+  }
+  const validStatuses = ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"];
+  if (!validStatuses.includes(status)) {
+    return { success: false, message: `无效的状态「${status}」，有效状态：${validStatuses.join(", ")}` };
+  }
+  try {
+    const order = await prisma.order.findFirst({
+      where: { orderNo: { equals: orderNo, mode: "insensitive" } },
+      include: { customer: { select: { company: true } } },
+    });
+    if (!order) {
+      return { success: false, message: `未找到订单「${orderNo}」。` };
+    }
+    const oldStatus = order.orderStatus;
+    const updatedOrder = await prisma.order.update({
+      where: { id: order.id },
+      data: { orderStatus: status as any },
+    });
+    await createActivityLog({
+      action: "IM 更新",
+      entityType: "订单",
+      entityId: order.id,
+      entityName: order.orderNo,
+      description: `通过 IM 更新订单状态: ${order.orderNo} ${oldStatus} → ${status}`,
+    });
+    return {
+      success: true,
+      message: `✅ 订单状态已更新\n单号：${order.orderNo}\n客户：${order.customer.company}\n状态：${oldStatus} → ${status}`,
+      data: updatedOrder,
+    };
+  } catch (error) {
+    return { success: false, message: `更新订单状态失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
+async function executeUpdateCustomerGrade(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const company = args.company as string;
+  const grade = args.grade as string;
+  if (!company || !grade) {
+    return { success: false, message: "更新客户等级需要公司名称和新等级。示例：把ABC公司升级为A级" };
+  }
+  const validGrades = ["A", "B", "C", "D"];
+  if (!validGrades.includes(grade)) {
+    return { success: false, message: `无效的等级「${grade}」，有效等级：${validGrades.join(", ")}` };
+  }
+  try {
+    const customer = await prisma.customer.findFirst({
+      where: { company: { contains: company, mode: "insensitive" } },
+    });
+    if (!customer) {
+      return { success: false, message: `未找到客户「${company}」。` };
+    }
+    const oldGrade = customer.leadGrade;
+    const updatedCustomer = await prisma.customer.update({
+      where: { id: customer.id },
+      data: { leadGrade: grade as any },
+    });
+    await createActivityLog({
+      action: "IM 更新",
+      entityType: "客户",
+      entityId: customer.id,
+      entityName: customer.company,
+      description: `通过 IM 更新客户等级: ${customer.company} ${oldGrade} → ${grade}`,
+    });
+    return {
+      success: true,
+      message: `✅ 客户等级已更新\n公司：${customer.company}\n等级：${oldGrade} → ${grade}`,
+      data: updatedCustomer,
+    };
+  } catch (error) {
+    return { success: false, message: `更新客户等级失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
+async function executeCompleteTask(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const taskTitle = args.taskTitle as string;
+  if (!taskTitle) {
+    return { success: false, message: "完成任务需要任务标题。示例：完成任务 回复客户报价" };
+  }
+  try {
+    const task = await prisma.task.findFirst({
+      where: {
+        title: { contains: taskTitle, mode: "insensitive" },
+        status: { in: ["PENDING", "IN_PROGRESS"] },
+      },
+    });
+    if (!task) {
+      return { success: false, message: `未找到匹配「${taskTitle}」的待办任务。` };
+    }
+    const updatedTask = await prisma.task.update({
+      where: { id: task.id },
+      data: { status: "COMPLETED", completedAt: new Date() },
+    });
+    await createActivityLog({
+      action: "IM 完成",
+      entityType: "任务",
+      entityId: task.id,
+      entityName: task.title,
+      description: `通过 IM 标记任务完成: ${task.title}`,
+    });
+    return {
+      success: true,
+      message: `✅ 任务已完成\n标题：${task.title}`,
+      data: updatedTask,
+    };
+  } catch (error) {
+    return { success: false, message: `完成任务失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
+async function executeCreateQuote(args: Record<string, unknown>): Promise<ExecutionResult> {
+  const customerName = args.customerName as string;
+  if (!customerName) {
+    return { success: false, message: "创建报价单需要客户名称。示例：给ABC公司报价，产品XX，数量100，单价50" };
+  }
+  const customer = await prisma.customer.findFirst({
+    where: { company: { contains: customerName, mode: "insensitive" } },
+  });
+  if (!customer) {
+    return { success: false, message: `未找到客户「${customerName}」，请确认客户名称或先创建客户。` };
+  }
+  try {
+    const quoteCount = await prisma.quote.count();
+    const quoteNo = `QUOTE-${String(quoteCount + 1).padStart(6, "0")}`;
+    const items = (args.items as Array<{ itemName: string; quantity?: number; unitPrice?: number; unit?: string }>) || [];
+    const currency = (args.currency as string) || "USD";
+    const validDays = (args.validDays as number) || 30;
+    const totalPrice = items.reduce((sum, item) => sum + (item.quantity || 0) * (item.unitPrice || 0), 0);
+    const quote = await prisma.quote.create({
+      data: {
+        quoteNo,
+        quoteTitle: `${customer.company} 报价`,
+        customerId: customer.id,
+        status: "DRAFT",
+        currency: currency as any,
+        totalPrice: totalPrice || null,
+        validDays,
+        remarks: (args.notes as string) || null,
+        items: {
+          create: items.map((item, index) => ({
+            itemName: item.itemName,
+            quantity: item.quantity || null,
+            unitPrice: item.unitPrice || null,
+            unit: item.unit || null,
+            totalPrice: (item.quantity || 0) * (item.unitPrice || 0) || null,
+            sortOrder: index,
+          })),
+        },
+      },
+      include: { items: true },
+    });
+    await createActivityLog({
+      action: "IM 创建",
+      entityType: "报价",
+      entityId: quote.id,
+      entityName: quote.quoteNo,
+      description: `通过 IM 创建报价: ${quote.quoteNo} (客户: ${customer.company})`,
+    });
+    const itemText = items.length > 0
+      ? `\n明细：${items.map(i => `${i.itemName}${i.quantity ? ` x${i.quantity}` : ""}${i.unitPrice ? ` @${i.unitPrice}` : ""}`).join("、")}`
+      : "";
+    return {
+      success: true,
+      message: `✅ 报价单已创建\n单号：${quote.quoteNo}\n客户：${customer.company}\n金额：${currency} ${totalPrice}\n有效期：${validDays}天${itemText}`,
+      data: quote,
+    };
+  } catch (error) {
+    return { success: false, message: `创建报价单失败：${error instanceof Error ? error.message : "未知错误"}` };
+  }
+}
+
 function executeHelp(): ExecutionResult {
   return {
     success: true,
@@ -374,6 +558,12 @@ function executeHelp(): ExecutionResult {
 • "添加客户，XYZ集团，英国"
 • "建个订单，客户ABC，产品XX，数量100"
 • "给ABC加跟进：今天电话沟通了价格"
+• "给ABC公司报价，产品XX，数量100，单价50"
+
+🔄 更新类：
+• "把 ORD-000001 标记为已发货"
+• "把ABC公司升级为A级"
+• "完成任务 回复客户报价"
 
 🔍 查询类：
 • "查看线索列表"
