@@ -318,6 +318,7 @@ model Lead {
   tasks              Task[]
   projects           Project[]
   emails             Email[]
+  emailMessages      EmailMessage[]
   leadActivities    LeadActivity[]
 
   @@index([businessLineId])
@@ -382,6 +383,7 @@ model Customer {
   orders        Order[]
   invoices      Invoice[]
   emails        Email[]
+  emailMessages EmailMessage[]
   convertedFrom Lead[]        @relation("ConvertedLead")
   customerActivities CustomerActivity[]
 
@@ -411,6 +413,7 @@ model Contact {
   orders   Order[]
   quotes   Quote[]
   emails   Email[]
+  emailMessages EmailMessage[]
 
   @@index([customerId])
 }
@@ -528,6 +531,7 @@ model Quote {
   items           QuoteItem[]
   orders          Order[]
   tasks           Task[]
+  emailMessages   EmailMessage[]
 
   @@index([leadId])
   @@index([customerId])
@@ -784,6 +788,7 @@ model Order {
   items        OrderItem[]
   invoices     Invoice[]
   tasks        Task[]
+  emailMessages EmailMessage[]
 
   @@index([customerId])
   @@index([projectId])
@@ -913,6 +918,97 @@ model Email {
   @@index([leadId])
   @@index([direction])
   @@index([createdAt])
+}
+
+model EmailAccount {
+  id           Int      @id @default(autoincrement())
+  name         String
+  provider     String   @default("CUSTOM") // GMAIL / OUTLOOK / ALIYUN / NETEASE / CUSTOM
+  emailAddress String
+  imapHost     String?
+  imapPort     Int?
+  smtpHost     String?
+  smtpPort     Int?
+  smtpSecure   Boolean  @default(true)
+  username     String
+  password     String   // Will be encrypted in production
+  oauthToken   String?  // For OAuth providers
+  isActive     Boolean  @default(true)
+  lastSyncAt   DateTime?
+  tenantId     Int?
+  userId       Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  messages  EmailMessage[]
+  threads   EmailThread[]
+
+  @@index([tenantId])
+  @@index([userId])
+  @@index([emailAddress])
+}
+
+model EmailMessage {
+  id             Int      @id @default(autoincrement())
+  accountId      Int
+  threadId       Int?
+  direction      String   // in / out
+  messageId      String?  @unique  // RFC 2822 Message-ID
+  inReplyTo      String?  // Parent message ID for threading
+  fromAddr       String
+  toAddr         String
+  ccAddr         String?
+  subject        String
+  body           String
+  bodyHtml       String?
+  status         String   @default("received") // received / sent / draft / failed
+  receivedAt     DateTime?
+  sentAt         DateTime?
+  isRead         Boolean  @default(false)
+  isStarred      Boolean  @default(false)
+  // CRM bindings
+  leadId         Int?
+  customerId     Int?
+  contactId      Int?
+  quoteId        Int?
+  orderId        Int?
+  tenantId       Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  account  EmailAccount @relation(fields: [accountId], references: [id])
+  thread   EmailThread? @relation(fields: [threadId], references: [id])
+  lead     Lead?        @relation(fields: [leadId], references: [id])
+  customer Customer?    @relation(fields: [customerId], references: [id])
+  contact  Contact?     @relation(fields: [contactId], references: [id])
+  quote    Quote?       @relation(fields: [quoteId], references: [id])
+  order    Order?       @relation(fields: [orderId], references: [id])
+
+  @@index([accountId])
+  @@index([threadId])
+  @@index([direction])
+  @@index([leadId])
+  @@index([customerId])
+  @@index([contactId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model EmailThread {
+  id           Int      @id @default(autoincrement())
+  accountId    Int
+  subject      String
+  lastMessageAt DateTime?
+  messageCount Int      @default(0)
+  tenantId     Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  account  EmailAccount  @relation(fields: [accountId], references: [id])
+  messages EmailMessage[]
+
+  @@index([accountId])
+  @@index([lastMessageAt])
 }
 
 model AIConfig {

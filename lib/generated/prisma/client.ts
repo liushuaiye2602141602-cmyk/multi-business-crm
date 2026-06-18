@@ -182,6 +182,21 @@ export type EmailConfig = Prisma.EmailConfigModel
  */
 export type Email = Prisma.EmailModel
 /**
+ * Model EmailAccount
+ * 
+ */
+export type EmailAccount = Prisma.EmailAccountModel
+/**
+ * Model EmailMessage
+ * 
+ */
+export type EmailMessage = Prisma.EmailMessageModel
+/**
+ * Model EmailThread
+ * 
+ */
+export type EmailThread = Prisma.EmailThreadModel
+/**
  * Model AIConfig
  * 
  */

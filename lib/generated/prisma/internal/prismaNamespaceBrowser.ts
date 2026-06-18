@@ -79,6 +79,9 @@ export const ModelName = {
   Payment: 'Payment',
   EmailConfig: 'EmailConfig',
   Email: 'Email',
+  EmailAccount: 'EmailAccount',
+  EmailMessage: 'EmailMessage',
+  EmailThread: 'EmailThread',
   AIConfig: 'AIConfig',
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
@@ -657,6 +660,75 @@ export const EmailScalarFieldEnum = {
 } as const
 
 export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
+
+
+export const EmailAccountScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  provider: 'provider',
+  emailAddress: 'emailAddress',
+  imapHost: 'imapHost',
+  imapPort: 'imapPort',
+  smtpHost: 'smtpHost',
+  smtpPort: 'smtpPort',
+  smtpSecure: 'smtpSecure',
+  username: 'username',
+  password: 'password',
+  oauthToken: 'oauthToken',
+  isActive: 'isActive',
+  lastSyncAt: 'lastSyncAt',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailAccountScalarFieldEnum = (typeof EmailAccountScalarFieldEnum)[keyof typeof EmailAccountScalarFieldEnum]
+
+
+export const EmailMessageScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  threadId: 'threadId',
+  direction: 'direction',
+  messageId: 'messageId',
+  inReplyTo: 'inReplyTo',
+  fromAddr: 'fromAddr',
+  toAddr: 'toAddr',
+  ccAddr: 'ccAddr',
+  subject: 'subject',
+  body: 'body',
+  bodyHtml: 'bodyHtml',
+  status: 'status',
+  receivedAt: 'receivedAt',
+  sentAt: 'sentAt',
+  isRead: 'isRead',
+  isStarred: 'isStarred',
+  leadId: 'leadId',
+  customerId: 'customerId',
+  contactId: 'contactId',
+  quoteId: 'quoteId',
+  orderId: 'orderId',
+  tenantId: 'tenantId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailMessageScalarFieldEnum = (typeof EmailMessageScalarFieldEnum)[keyof typeof EmailMessageScalarFieldEnum]
+
+
+export const EmailThreadScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  subject: 'subject',
+  lastMessageAt: 'lastMessageAt',
+  messageCount: 'messageCount',
+  tenantId: 'tenantId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailThreadScalarFieldEnum = (typeof EmailThreadScalarFieldEnum)[keyof typeof EmailThreadScalarFieldEnum]
 
 
 export const AIConfigScalarFieldEnum = {

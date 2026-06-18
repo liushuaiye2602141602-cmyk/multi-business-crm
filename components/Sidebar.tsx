@@ -38,6 +38,7 @@ import {
   Moon,
   Coins,
   BarChart2,
+  Inbox,
 } from "lucide-react";
 
 interface NavItem {
@@ -103,6 +104,8 @@ const navGroups: NavGroup[] = [
       { href: "/im-settings", label: "IM 设置", icon: Bot },
       { href: "/im-messages", label: "IM 消息记录", icon: MessageSquare },
       { href: "/email", label: "邮件中心", icon: Mail },
+      { href: "/email/accounts", label: "邮箱账号", icon: Mail },
+      { href: "/email/inbox", label: "收件箱", icon: Inbox },
       { href: "/email/settings", label: "邮件设置", icon: Settings },
       { href: "/email/stats", label: "邮件统计", icon: BarChart2 },
       { href: "/external-sources", label: "外部来源", icon: Webhook },
