@@ -115,18 +115,18 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-[260px] bg-white border-r border-gray-200 min-h-screen flex flex-col fixed left-0 top-0 bottom-0 z-30">
+    <aside className="w-[260px] bg-slate-900 min-h-screen flex flex-col fixed left-0 top-0 bottom-0 z-30">
       {/* Logo */}
-      <div className="p-5 border-b border-gray-200">
-        <h1 className="text-lg font-bold text-gray-900 tracking-tight">Multi Business CRM</h1>
-        <p className="text-xs text-gray-500 mt-0.5">个人多业务外贸 CRM 工作台</p>
+      <div className="p-5 border-b border-slate-800">
+        <h1 className="text-lg font-bold text-white tracking-tight">Multi Business CRM</h1>
+        <p className="text-xs text-slate-400 mt-0.5">个人多业务外贸 CRM 工作台</p>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         {navGroups.map((group) => (
           <div key={group.title} className="mb-5">
-            <p className="px-3 mb-2 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
+            <p className="px-3 mb-2 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
               {group.title}
             </p>
             <div className="space-y-0.5">
@@ -139,11 +139,11 @@ export default function Sidebar() {
                     href={item.href}
                     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
                       isActive
-                        ? "bg-blue-50 text-blue-700 font-medium shadow-sm"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        ? "bg-blue-500/10 text-blue-400 font-medium border-l-2 border-blue-500"
+                        : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
                     }`}
                   >
-                    <Icon size={18} className={isActive ? "text-blue-600" : "text-gray-400"} />
+                    <Icon size={18} className={isActive ? "text-blue-400" : "text-slate-500"} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -154,9 +154,9 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <div className="w-2 h-2 bg-green-500 rounded-full shadow-sm" />
+      <div className="p-4 border-t border-slate-800">
+        <div className="flex items-center gap-2 text-xs text-slate-500">
+          <div className="w-2 h-2 bg-green-500 rounded-full pulse-dot" />
           <span>Local / Port 3003</span>
         </div>
       </div>
