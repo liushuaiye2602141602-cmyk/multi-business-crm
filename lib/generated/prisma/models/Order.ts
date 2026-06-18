@@ -32,6 +32,7 @@ export type OrderAvgAggregateOutputType = {
   projectId: number | null
   quoteId: number | null
   contactId: number | null
+  businessLineId: number | null
   totalAmount: runtime.Decimal | null
 }
 
@@ -41,6 +42,7 @@ export type OrderSumAggregateOutputType = {
   projectId: number | null
   quoteId: number | null
   contactId: number | null
+  businessLineId: number | null
   totalAmount: runtime.Decimal | null
 }
 
@@ -52,6 +54,7 @@ export type OrderMinAggregateOutputType = {
   projectId: number | null
   quoteId: number | null
   contactId: number | null
+  businessLineId: number | null
   orderStatus: $Enums.OrderStatus | null
   totalAmount: runtime.Decimal | null
   currency: $Enums.Currency | null
@@ -71,6 +74,7 @@ export type OrderMaxAggregateOutputType = {
   projectId: number | null
   quoteId: number | null
   contactId: number | null
+  businessLineId: number | null
   orderStatus: $Enums.OrderStatus | null
   totalAmount: runtime.Decimal | null
   currency: $Enums.Currency | null
@@ -90,6 +94,7 @@ export type OrderCountAggregateOutputType = {
   projectId: number
   quoteId: number
   contactId: number
+  businessLineId: number
   orderStatus: number
   totalAmount: number
   currency: number
@@ -109,6 +114,7 @@ export type OrderAvgAggregateInputType = {
   projectId?: true
   quoteId?: true
   contactId?: true
+  businessLineId?: true
   totalAmount?: true
 }
 
@@ -118,6 +124,7 @@ export type OrderSumAggregateInputType = {
   projectId?: true
   quoteId?: true
   contactId?: true
+  businessLineId?: true
   totalAmount?: true
 }
 
@@ -129,6 +136,7 @@ export type OrderMinAggregateInputType = {
   projectId?: true
   quoteId?: true
   contactId?: true
+  businessLineId?: true
   orderStatus?: true
   totalAmount?: true
   currency?: true
@@ -148,6 +156,7 @@ export type OrderMaxAggregateInputType = {
   projectId?: true
   quoteId?: true
   contactId?: true
+  businessLineId?: true
   orderStatus?: true
   totalAmount?: true
   currency?: true
@@ -167,6 +176,7 @@ export type OrderCountAggregateInputType = {
   projectId?: true
   quoteId?: true
   contactId?: true
+  businessLineId?: true
   orderStatus?: true
   totalAmount?: true
   currency?: true
@@ -273,6 +283,7 @@ export type OrderGroupByOutputType = {
   projectId: number | null
   quoteId: number | null
   contactId: number | null
+  businessLineId: number | null
   orderStatus: $Enums.OrderStatus
   totalAmount: runtime.Decimal | null
   currency: $Enums.Currency
@@ -315,6 +326,7 @@ export type OrderWhereInput = {
   projectId?: Prisma.IntNullableFilter<"Order"> | number | null
   quoteId?: Prisma.IntNullableFilter<"Order"> | number | null
   contactId?: Prisma.IntNullableFilter<"Order"> | number | null
+  businessLineId?: Prisma.IntNullableFilter<"Order"> | number | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   totalAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFilter<"Order"> | $Enums.Currency
@@ -328,6 +340,7 @@ export type OrderWhereInput = {
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   quote?: Prisma.XOR<Prisma.QuoteNullableScalarRelationFilter, Prisma.QuoteWhereInput> | null
   contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  businessLine?: Prisma.XOR<Prisma.BusinessLineNullableScalarRelationFilter, Prisma.BusinessLineWhereInput> | null
   items?: Prisma.OrderItemListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
 }
@@ -340,6 +353,7 @@ export type OrderOrderByWithRelationInput = {
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   quoteId?: Prisma.SortOrderInput | Prisma.SortOrder
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessLineId?: Prisma.SortOrderInput | Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -353,6 +367,7 @@ export type OrderOrderByWithRelationInput = {
   project?: Prisma.ProjectOrderByWithRelationInput
   quote?: Prisma.QuoteOrderByWithRelationInput
   contact?: Prisma.ContactOrderByWithRelationInput
+  businessLine?: Prisma.BusinessLineOrderByWithRelationInput
   items?: Prisma.OrderItemOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
 }
@@ -368,6 +383,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   projectId?: Prisma.IntNullableFilter<"Order"> | number | null
   quoteId?: Prisma.IntNullableFilter<"Order"> | number | null
   contactId?: Prisma.IntNullableFilter<"Order"> | number | null
+  businessLineId?: Prisma.IntNullableFilter<"Order"> | number | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   totalAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFilter<"Order"> | $Enums.Currency
@@ -381,6 +397,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   quote?: Prisma.XOR<Prisma.QuoteNullableScalarRelationFilter, Prisma.QuoteWhereInput> | null
   contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  businessLine?: Prisma.XOR<Prisma.BusinessLineNullableScalarRelationFilter, Prisma.BusinessLineWhereInput> | null
   items?: Prisma.OrderItemListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
 }, "id" | "orderNo">
@@ -393,6 +410,7 @@ export type OrderOrderByWithAggregationInput = {
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   quoteId?: Prisma.SortOrderInput | Prisma.SortOrder
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessLineId?: Prisma.SortOrderInput | Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -420,6 +438,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   projectId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
   quoteId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
   contactId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
+  businessLineId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
   orderStatus?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
   totalAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Order"> | $Enums.Currency
@@ -447,6 +466,7 @@ export type OrderCreateInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
@@ -459,6 +479,7 @@ export type OrderUncheckedCreateInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -488,6 +509,7 @@ export type OrderUpdateInput = {
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
@@ -500,6 +522,7 @@ export type OrderUncheckedUpdateInput = {
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -521,6 +544,7 @@ export type OrderCreateManyInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -554,6 +578,7 @@ export type OrderUncheckedUpdateManyInput = {
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -583,6 +608,7 @@ export type OrderCountOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
   quoteId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
+  businessLineId?: Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -600,6 +626,7 @@ export type OrderAvgOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
   quoteId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
+  businessLineId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -611,6 +638,7 @@ export type OrderMaxOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
   quoteId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
+  businessLineId?: Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -630,6 +658,7 @@ export type OrderMinOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
   quoteId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
+  businessLineId?: Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -647,6 +676,7 @@ export type OrderSumOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
   quoteId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
+  businessLineId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -658,6 +688,48 @@ export type OrderScalarRelationFilter = {
 export type OrderNullableScalarRelationFilter = {
   is?: Prisma.OrderWhereInput | null
   isNot?: Prisma.OrderWhereInput | null
+}
+
+export type OrderCreateNestedManyWithoutBusinessLineInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput> | Prisma.OrderCreateWithoutBusinessLineInput[] | Prisma.OrderUncheckedCreateWithoutBusinessLineInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutBusinessLineInput | Prisma.OrderCreateOrConnectWithoutBusinessLineInput[]
+  createMany?: Prisma.OrderCreateManyBusinessLineInputEnvelope
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+}
+
+export type OrderUncheckedCreateNestedManyWithoutBusinessLineInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput> | Prisma.OrderCreateWithoutBusinessLineInput[] | Prisma.OrderUncheckedCreateWithoutBusinessLineInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutBusinessLineInput | Prisma.OrderCreateOrConnectWithoutBusinessLineInput[]
+  createMany?: Prisma.OrderCreateManyBusinessLineInputEnvelope
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+}
+
+export type OrderUpdateManyWithoutBusinessLineNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput> | Prisma.OrderCreateWithoutBusinessLineInput[] | Prisma.OrderUncheckedCreateWithoutBusinessLineInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutBusinessLineInput | Prisma.OrderCreateOrConnectWithoutBusinessLineInput[]
+  upsert?: Prisma.OrderUpsertWithWhereUniqueWithoutBusinessLineInput | Prisma.OrderUpsertWithWhereUniqueWithoutBusinessLineInput[]
+  createMany?: Prisma.OrderCreateManyBusinessLineInputEnvelope
+  set?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  disconnect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  delete?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  update?: Prisma.OrderUpdateWithWhereUniqueWithoutBusinessLineInput | Prisma.OrderUpdateWithWhereUniqueWithoutBusinessLineInput[]
+  updateMany?: Prisma.OrderUpdateManyWithWhereWithoutBusinessLineInput | Prisma.OrderUpdateManyWithWhereWithoutBusinessLineInput[]
+  deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+}
+
+export type OrderUncheckedUpdateManyWithoutBusinessLineNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput> | Prisma.OrderCreateWithoutBusinessLineInput[] | Prisma.OrderUncheckedCreateWithoutBusinessLineInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutBusinessLineInput | Prisma.OrderCreateOrConnectWithoutBusinessLineInput[]
+  upsert?: Prisma.OrderUpsertWithWhereUniqueWithoutBusinessLineInput | Prisma.OrderUpsertWithWhereUniqueWithoutBusinessLineInput[]
+  createMany?: Prisma.OrderCreateManyBusinessLineInputEnvelope
+  set?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  disconnect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  delete?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  update?: Prisma.OrderUpdateWithWhereUniqueWithoutBusinessLineInput | Prisma.OrderUpdateWithWhereUniqueWithoutBusinessLineInput[]
+  updateMany?: Prisma.OrderUpdateManyWithWhereWithoutBusinessLineInput | Prisma.OrderUpdateManyWithWhereWithoutBusinessLineInput[]
+  deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
 }
 
 export type OrderCreateNestedManyWithoutCustomerInput = {
@@ -862,6 +934,96 @@ export type OrderUpdateOneWithoutInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutInvoicesInput, Prisma.OrderUpdateWithoutInvoicesInput>, Prisma.OrderUncheckedUpdateWithoutInvoicesInput>
 }
 
+export type OrderCreateWithoutBusinessLineInput = {
+  orderNo: string
+  orderTitle?: string | null
+  orderStatus?: $Enums.OrderStatus
+  totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  paymentTerm?: string | null
+  deliveryTerm?: string | null
+  expectedDeliveryDate?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
+  project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
+  quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
+  contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
+}
+
+export type OrderUncheckedCreateWithoutBusinessLineInput = {
+  id?: number
+  orderNo: string
+  orderTitle?: string | null
+  customerId: number
+  projectId?: number | null
+  quoteId?: number | null
+  contactId?: number | null
+  orderStatus?: $Enums.OrderStatus
+  totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  paymentTerm?: string | null
+  deliveryTerm?: string | null
+  expectedDeliveryDate?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
+}
+
+export type OrderCreateOrConnectWithoutBusinessLineInput = {
+  where: Prisma.OrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput>
+}
+
+export type OrderCreateManyBusinessLineInputEnvelope = {
+  data: Prisma.OrderCreateManyBusinessLineInput | Prisma.OrderCreateManyBusinessLineInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrderUpsertWithWhereUniqueWithoutBusinessLineInput = {
+  where: Prisma.OrderWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrderUpdateWithoutBusinessLineInput, Prisma.OrderUncheckedUpdateWithoutBusinessLineInput>
+  create: Prisma.XOR<Prisma.OrderCreateWithoutBusinessLineInput, Prisma.OrderUncheckedCreateWithoutBusinessLineInput>
+}
+
+export type OrderUpdateWithWhereUniqueWithoutBusinessLineInput = {
+  where: Prisma.OrderWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrderUpdateWithoutBusinessLineInput, Prisma.OrderUncheckedUpdateWithoutBusinessLineInput>
+}
+
+export type OrderUpdateManyWithWhereWithoutBusinessLineInput = {
+  where: Prisma.OrderScalarWhereInput
+  data: Prisma.XOR<Prisma.OrderUpdateManyMutationInput, Prisma.OrderUncheckedUpdateManyWithoutBusinessLineInput>
+}
+
+export type OrderScalarWhereInput = {
+  AND?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+  OR?: Prisma.OrderScalarWhereInput[]
+  NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+  id?: Prisma.IntFilter<"Order"> | number
+  orderNo?: Prisma.StringFilter<"Order"> | string
+  orderTitle?: Prisma.StringNullableFilter<"Order"> | string | null
+  customerId?: Prisma.IntFilter<"Order"> | number
+  projectId?: Prisma.IntNullableFilter<"Order"> | number | null
+  quoteId?: Prisma.IntNullableFilter<"Order"> | number | null
+  contactId?: Prisma.IntNullableFilter<"Order"> | number | null
+  businessLineId?: Prisma.IntNullableFilter<"Order"> | number | null
+  orderStatus?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  totalAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFilter<"Order"> | $Enums.Currency
+  paymentTerm?: Prisma.StringNullableFilter<"Order"> | string | null
+  deliveryTerm?: Prisma.StringNullableFilter<"Order"> | string | null
+  expectedDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  notes?: Prisma.StringNullableFilter<"Order"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
+}
+
 export type OrderCreateWithoutCustomerInput = {
   orderNo: string
   orderTitle?: string | null
@@ -877,6 +1039,7 @@ export type OrderCreateWithoutCustomerInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
@@ -888,6 +1051,7 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -927,28 +1091,6 @@ export type OrderUpdateManyWithWhereWithoutCustomerInput = {
   data: Prisma.XOR<Prisma.OrderUpdateManyMutationInput, Prisma.OrderUncheckedUpdateManyWithoutCustomerInput>
 }
 
-export type OrderScalarWhereInput = {
-  AND?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
-  OR?: Prisma.OrderScalarWhereInput[]
-  NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
-  id?: Prisma.IntFilter<"Order"> | number
-  orderNo?: Prisma.StringFilter<"Order"> | string
-  orderTitle?: Prisma.StringNullableFilter<"Order"> | string | null
-  customerId?: Prisma.IntFilter<"Order"> | number
-  projectId?: Prisma.IntNullableFilter<"Order"> | number | null
-  quoteId?: Prisma.IntNullableFilter<"Order"> | number | null
-  contactId?: Prisma.IntNullableFilter<"Order"> | number | null
-  orderStatus?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-  totalAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  currency?: Prisma.EnumCurrencyFilter<"Order"> | $Enums.Currency
-  paymentTerm?: Prisma.StringNullableFilter<"Order"> | string | null
-  deliveryTerm?: Prisma.StringNullableFilter<"Order"> | string | null
-  expectedDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
-  notes?: Prisma.StringNullableFilter<"Order"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-}
-
 export type OrderCreateWithoutContactInput = {
   orderNo: string
   orderTitle?: string | null
@@ -964,6 +1106,7 @@ export type OrderCreateWithoutContactInput = {
   customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
@@ -975,6 +1118,7 @@ export type OrderUncheckedCreateWithoutContactInput = {
   customerId: number
   projectId?: number | null
   quoteId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1029,6 +1173,7 @@ export type OrderCreateWithoutProjectInput = {
   customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
@@ -1040,6 +1185,7 @@ export type OrderUncheckedCreateWithoutProjectInput = {
   customerId: number
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1094,6 +1240,7 @@ export type OrderCreateWithoutQuoteInput = {
   customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
@@ -1105,6 +1252,7 @@ export type OrderUncheckedCreateWithoutQuoteInput = {
   customerId: number
   projectId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1160,6 +1308,7 @@ export type OrderCreateWithoutItemsInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
 }
 
@@ -1171,6 +1320,7 @@ export type OrderUncheckedCreateWithoutItemsInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1215,6 +1365,7 @@ export type OrderUpdateWithoutItemsInput = {
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
 
@@ -1226,6 +1377,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1254,6 +1406,7 @@ export type OrderCreateWithoutInvoicesInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
   quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
 }
 
@@ -1265,6 +1418,7 @@ export type OrderUncheckedCreateWithoutInvoicesInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1309,10 +1463,71 @@ export type OrderUpdateWithoutInvoicesInput = {
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutInvoicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNo?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderCreateManyBusinessLineInput = {
+  id?: number
+  orderNo: string
+  orderTitle?: string | null
+  customerId: number
+  projectId?: number | null
+  quoteId?: number | null
+  contactId?: number | null
+  orderStatus?: $Enums.OrderStatus
+  totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  paymentTerm?: string | null
+  deliveryTerm?: string | null
+  expectedDeliveryDate?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OrderUpdateWithoutBusinessLineInput = {
+  orderNo?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
+  quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderUncheckedUpdateWithoutBusinessLineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   orderNo?: Prisma.StringFieldUpdateOperationsInput | string
   orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1330,6 +1545,26 @@ export type OrderUncheckedUpdateWithoutInvoicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderUncheckedUpdateManyWithoutBusinessLineInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNo?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderCreateManyCustomerInput = {
@@ -1339,6 +1574,7 @@ export type OrderCreateManyCustomerInput = {
   projectId?: number | null
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1365,6 +1601,7 @@ export type OrderUpdateWithoutCustomerInput = {
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
@@ -1376,6 +1613,7 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1396,6 +1634,7 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1414,6 +1653,7 @@ export type OrderCreateManyContactInput = {
   customerId: number
   projectId?: number | null
   quoteId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1440,6 +1680,7 @@ export type OrderUpdateWithoutContactInput = {
   customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
@@ -1451,6 +1692,7 @@ export type OrderUncheckedUpdateWithoutContactInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1471,6 +1713,7 @@ export type OrderUncheckedUpdateManyWithoutContactInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1489,6 +1732,7 @@ export type OrderCreateManyProjectInput = {
   customerId: number
   quoteId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1515,6 +1759,7 @@ export type OrderUpdateWithoutProjectInput = {
   customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
@@ -1526,6 +1771,7 @@ export type OrderUncheckedUpdateWithoutProjectInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1546,6 +1792,7 @@ export type OrderUncheckedUpdateManyWithoutProjectInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1564,6 +1811,7 @@ export type OrderCreateManyQuoteInput = {
   customerId: number
   projectId?: number | null
   contactId?: number | null
+  businessLineId?: number | null
   orderStatus?: $Enums.OrderStatus
   totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: $Enums.Currency
@@ -1590,6 +1838,7 @@ export type OrderUpdateWithoutQuoteInput = {
   customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
 }
@@ -1601,6 +1850,7 @@ export type OrderUncheckedUpdateWithoutQuoteInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1621,6 +1871,7 @@ export type OrderUncheckedUpdateManyWithoutQuoteInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1680,6 +1931,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   projectId?: boolean
   quoteId?: boolean
   contactId?: boolean
+  businessLineId?: boolean
   orderStatus?: boolean
   totalAmount?: boolean
   currency?: boolean
@@ -1693,6 +1945,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
   items?: boolean | Prisma.Order$itemsArgs<ExtArgs>
   invoices?: boolean | Prisma.Order$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -1706,6 +1959,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   projectId?: boolean
   quoteId?: boolean
   contactId?: boolean
+  businessLineId?: boolean
   orderStatus?: boolean
   totalAmount?: boolean
   currency?: boolean
@@ -1719,6 +1973,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1729,6 +1984,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   projectId?: boolean
   quoteId?: boolean
   contactId?: boolean
+  businessLineId?: boolean
   orderStatus?: boolean
   totalAmount?: boolean
   currency?: boolean
@@ -1742,6 +1998,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectScalar = {
@@ -1752,6 +2009,7 @@ export type OrderSelectScalar = {
   projectId?: boolean
   quoteId?: boolean
   contactId?: boolean
+  businessLineId?: boolean
   orderStatus?: boolean
   totalAmount?: boolean
   currency?: boolean
@@ -1763,12 +2021,13 @@ export type OrderSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderNo" | "orderTitle" | "customerId" | "projectId" | "quoteId" | "contactId" | "orderStatus" | "totalAmount" | "currency" | "paymentTerm" | "deliveryTerm" | "expectedDeliveryDate" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderNo" | "orderTitle" | "customerId" | "projectId" | "quoteId" | "contactId" | "businessLineId" | "orderStatus" | "totalAmount" | "currency" | "paymentTerm" | "deliveryTerm" | "expectedDeliveryDate" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
   items?: boolean | Prisma.Order$itemsArgs<ExtArgs>
   invoices?: boolean | Prisma.Order$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -1778,12 +2037,14 @@ export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
 }
 export type OrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
   quote?: boolean | Prisma.Order$quoteArgs<ExtArgs>
   contact?: boolean | Prisma.Order$contactArgs<ExtArgs>
+  businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
 }
 
 export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1793,6 +2054,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     project: Prisma.$ProjectPayload<ExtArgs> | null
     quote: Prisma.$QuotePayload<ExtArgs> | null
     contact: Prisma.$ContactPayload<ExtArgs> | null
+    businessLine: Prisma.$BusinessLinePayload<ExtArgs> | null
     items: Prisma.$OrderItemPayload<ExtArgs>[]
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
   }
@@ -1804,6 +2066,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     projectId: number | null
     quoteId: number | null
     contactId: number | null
+    businessLineId: number | null
     orderStatus: $Enums.OrderStatus
     totalAmount: runtime.Decimal | null
     currency: $Enums.Currency
@@ -2211,6 +2474,7 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
   project<T extends Prisma.Order$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   quote<T extends Prisma.Order$quoteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$quoteArgs<ExtArgs>>): Prisma.Prisma__QuoteClient<runtime.Types.Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   contact<T extends Prisma.Order$contactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$contactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  businessLine<T extends Prisma.Order$businessLineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$businessLineArgs<ExtArgs>>): Prisma.Prisma__BusinessLineClient<runtime.Types.Result.GetResult<Prisma.$BusinessLinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.Order$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Order$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2249,6 +2513,7 @@ export interface OrderFieldRefs {
   readonly projectId: Prisma.FieldRef<"Order", 'Int'>
   readonly quoteId: Prisma.FieldRef<"Order", 'Int'>
   readonly contactId: Prisma.FieldRef<"Order", 'Int'>
+  readonly businessLineId: Prisma.FieldRef<"Order", 'Int'>
   readonly orderStatus: Prisma.FieldRef<"Order", 'OrderStatus'>
   readonly totalAmount: Prisma.FieldRef<"Order", 'Decimal'>
   readonly currency: Prisma.FieldRef<"Order", 'Currency'>
@@ -2713,6 +2978,25 @@ export type Order$contactArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.ContactInclude<ExtArgs> | null
   where?: Prisma.ContactWhereInput
+}
+
+/**
+ * Order.businessLine
+ */
+export type Order$businessLineArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BusinessLine
+   */
+  select?: Prisma.BusinessLineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BusinessLine
+   */
+  omit?: Prisma.BusinessLineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BusinessLineInclude<ExtArgs> | null
+  where?: Prisma.BusinessLineWhereInput
 }
 
 /**

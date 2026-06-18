@@ -418,6 +418,7 @@ export const OrderScalarFieldEnum = {
   projectId: 'projectId',
   quoteId: 'quoteId',
   contactId: 'contactId',
+  businessLineId: 'businessLineId',
   orderStatus: 'orderStatus',
   totalAmount: 'totalAmount',
   currency: 'currency',

@@ -229,6 +229,7 @@ model BusinessLine {
   customers        Customer[]
   projects         Project[]
   products         Product[]
+  orders           Order[]
   templates        FollowUpTemplate[]
   externalSources  ExternalSource[]
 }
@@ -620,6 +621,7 @@ model Order {
   projectId             Int?
   quoteId               Int?
   contactId             Int?
+  businessLineId        Int?
   orderStatus           OrderStatus @default(DRAFT)
   totalAmount           Decimal?    @db.Decimal(12, 2)
   currency              Currency    @default(USD)
@@ -634,6 +636,7 @@ model Order {
   project  Project? @relation(fields: [projectId], references: [id])
   quote    Quote?   @relation(fields: [quoteId], references: [id])
   contact  Contact? @relation(fields: [contactId], references: [id])
+  businessLine BusinessLine? @relation(fields: [businessLineId], references: [id])
   items    OrderItem[]
   invoices Invoice[]
 
@@ -642,6 +645,7 @@ model Order {
   @@index([quoteId])
   @@index([orderStatus])
   @@index([orderNo])
+  @@index([businessLineId])
 }
 
 model OrderItem {
