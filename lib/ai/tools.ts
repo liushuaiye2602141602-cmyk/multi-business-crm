@@ -7,6 +7,10 @@ export type IntentType =
   | "query_customers"
   | "query_orders"
   | "query_tasks"
+  | "update_order_status"
+  | "update_customer_grade"
+  | "complete_task"
+  | "create_quote"
   | "help"
   | "unknown";
 
@@ -160,6 +164,85 @@ export const IM_TOOLS = [
         properties: {
           status: { type: "string", description: "任务状态：PENDING/IN_PROGRESS/COMPLETED" },
         },
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "update_order_status",
+      description: "更新订单状态。当用户提到要更改订单状态、发货、确认订单时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          orderNo: { type: "string", description: "订单编号" },
+          status: {
+            type: "string",
+            enum: ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"],
+            description: "新状态"
+          },
+        },
+        required: ["orderNo", "status"],
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "update_customer_grade",
+      description: "更新客户等级。当用户提到要升级客户、降级客户、改变客户评级时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          company: { type: "string", description: "客户公司名称" },
+          grade: { type: "string", enum: ["A", "B", "C", "D"], description: "新等级" },
+        },
+        required: ["company", "grade"],
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "complete_task",
+      description: "完成任务。当用户提到要标记任务完成、完成某个待办时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          taskTitle: { type: "string", description: "任务标题（模糊匹配）" },
+        },
+        required: ["taskTitle"],
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "create_quote",
+      description: "创建报价单。当用户提到要报价、生成报价单时使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          customerName: { type: "string", description: "客户公司名称" },
+          items: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                itemName: { type: "string", description: "产品名称" },
+                quantity: { type: "number", description: "数量" },
+                unitPrice: { type: "number", description: "单价" },
+                unit: { type: "string", description: "单位" },
+              },
+              required: ["itemName"],
+            },
+            description: "报价明细",
+          },
+          currency: { type: "string", description: "币种：USD/EUR/CNY" },
+          validDays: { type: "number", description: "报价有效天数" },
+          notes: { type: "string", description: "备注" },
+        },
+        required: ["customerName"],
       },
     },
   },
