@@ -13,6 +13,7 @@ import Card from "@/components/ui/Card";
 import DetailField from "@/components/ui/DetailField";
 import AIAnalysisButton from "@/components/AIAnalysisButton";
 import AIAnalysisResult from "@/components/AIAnalysisResult";
+import AIAnalyzeButton from "@/components/AIAnalyzeButton";
 import { convertLeadToCustomer, addLeadActivity, updateLeadStatus, updateLeadOwner } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -316,6 +317,9 @@ export default async function LeadDetailPage({
                 <AIAnalysisResult analysis={latestAnalysis} />
               </div>
             )}
+            <div className="mt-4 pt-4 border-t border-gray-100">
+              <AIAnalyzeButton leadId={lead.id} />
+            </div>
           </Card>
 
           {/* 关联报价 */}

@@ -34,6 +34,8 @@ export default async function DashboardPage() {
     pendingTasks, overdueTasks, completedTasks,
     // Recent activities
     recentLeads, recentQuotes, recentOrders,
+    // AI insights
+    highScoreLeads, highIntentCustomers,
   ] = await Promise.all([
     prisma.lead.count(),
     prisma.customer.count(),
@@ -77,6 +79,18 @@ export default async function DashboardPage() {
     prisma.lead.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, company: true, status: true, createdAt: true } }),
     prisma.quote.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, quoteNo: true, status: true, totalPrice: true, createdAt: true } }),
     prisma.order.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, orderNo: true, orderStatus: true, totalAmount: true, createdAt: true } }),
+    // AI insights
+    prisma.lead.findMany({
+      where: { aiScore: { gte: 70 } },
+      orderBy: { aiScore: "desc" },
+      take: 5,
+      select: { id: true, company: true, aiScore: true, aiSummary: true },
+    }),
+    prisma.customer.findMany({
+      where: { lifecycleStage: { in: ["INTENT", "FIRST_DEAL"] } },
+      take: 5,
+      select: { id: true, company: true, lifecycleStage: true },
+    }),
   ]);
 
   const coreStats = [
@@ -351,6 +365,54 @@ export default async function DashboardPage() {
               </Link>
             ))}
             {recentOrders.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无数据</p>}
+          </div>
+        </Card>
+      </div>
+
+      {/* AI 洞察 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 高分线索 */}
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900">高意向线索 (AI 评分)</h2>
+            <Link href="/leads" className="text-xs text-blue-600 hover:underline">查看全部</Link>
+          </div>
+          <div className="space-y-2">
+            {highScoreLeads.map((lead) => (
+              <Link key={lead.id} href={`/leads/${lead.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{lead.company}</p>
+                  {lead.aiSummary && <p className="text-[11px] text-gray-500 truncate">{lead.aiSummary}</p>}
+                </div>
+                <div className="shrink-0 ml-2 text-right">
+                  <span className="text-sm font-bold text-purple-600">{lead.aiScore}</span>
+                  <p className="text-[10px] text-gray-500">分</p>
+                </div>
+              </Link>
+            ))}
+            {highScoreLeads.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无高分线索，点击 AI 分析按钮生成评分</p>}
+          </div>
+        </Card>
+
+        {/* 高意向客户 */}
+        <Card>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold text-gray-900">高意向客户</h2>
+            <Link href="/customers" className="text-xs text-blue-600 hover:underline">查看全部</Link>
+          </div>
+          <div className="space-y-2">
+            {highIntentCustomers.map((customer) => (
+              <Link key={customer.id} href={`/customers/${customer.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{customer.company}</p>
+                </div>
+                <StatusBadge
+                  label={customer.lifecycleStage === "INTENT" ? "有意向" : "首单"}
+                  variant={customer.lifecycleStage === "INTENT" ? "warning" : "success"}
+                />
+              </Link>
+            ))}
+            {highIntentCustomers.length === 0 && <p className="text-sm text-gray-400 text-center py-4">暂无高意向客户</p>}
           </div>
         </Card>
       </div>

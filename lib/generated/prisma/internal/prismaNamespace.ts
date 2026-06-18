@@ -2909,6 +2909,9 @@ export const LeadScalarFieldEnum = {
   ownerId: 'ownerId',
   ownerName: 'ownerName',
   tenantId: 'tenantId',
+  aiScore: 'aiScore',
+  aiSummary: 'aiSummary',
+  aiTags: 'aiTags',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

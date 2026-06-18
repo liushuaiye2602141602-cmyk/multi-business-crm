@@ -304,6 +304,9 @@ model Lead {
   ownerId         Int?
   ownerName       String?
   tenantId        Int?
+  aiScore         Int?
+  aiSummary       String?
+  aiTags          String[]  @default([])
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
