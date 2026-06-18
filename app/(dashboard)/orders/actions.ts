@@ -103,6 +103,48 @@ export async function deleteOrder(id: number) {
   revalidatePath("/orders");
 }
 
+export async function updateOrderStatus(orderId: number, status: string) {
+  const validStatuses = ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"];
+  if (!validStatuses.includes(status)) {
+    return { success: false, error: "无效的状态" };
+  }
+
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  if (!order) {
+    return { success: false, error: "订单不存在" };
+  }
+
+  // Lock check: completed/cannot go back
+  const terminalStatuses = ["COMPLETED", "CANCELLED"];
+  if (terminalStatuses.includes(order.orderStatus)) {
+    return { success: false, error: "该订单状态已锁定，不可修改" };
+  }
+
+  await prisma.order.update({
+    where: { id: orderId },
+    data: { orderStatus: status as any },
+  });
+
+  return { success: true };
+}
+
+export async function recalculateOrderTotals(orderId: number) {
+  const items = await prisma.orderItem.findMany({
+    where: { orderId },
+  });
+
+  const totalAmount = items.reduce((sum, item) => {
+    return sum + Number(item.totalPrice || 0);
+  }, 0);
+
+  await prisma.order.update({
+    where: { id: orderId },
+    data: { totalAmount },
+  });
+
+  return { success: true, totalAmount };
+}
+
 export async function createOrderFromQuote(quoteId: number) {
   const quote = await prisma.quote.findUnique({
     where: { id: quoteId },

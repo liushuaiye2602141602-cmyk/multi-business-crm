@@ -396,6 +396,70 @@ Best regards`,
     }
   }
   console.log("✅ 报价数据已创建（3条）");
+
+  // ==================== Orders ====================
+  console.log("\n📦 创建订单数据...");
+
+  const quotes = await prisma.quote.findMany({ where: { status: "ACCEPTED" }, take: 1 });
+  const allCustomers = await prisma.customer.findMany({ take: 3 });
+
+  if (allCustomers.length > 0) {
+    const ordersData = [
+      {
+        orderNo: "ORD-2026-001",
+        orderTitle: "Stand Up Pouch Production Order",
+        orderStatus: "SHIPPED" as const,
+        customerId: allCustomers[0]?.id,
+        quoteId: quotes[0]?.id || null,
+        totalAmount: 12500,
+        currency: "USD" as const,
+        paymentTerm: "T/T 30% deposit, 70% before shipment",
+        deliveryTerm: "FOB Shanghai",
+      },
+      {
+        orderNo: "ORD-2026-002",
+        orderTitle: "Wooden Crafts Sample Order",
+        orderStatus: "COMPLETED" as const,
+        customerId: allCustomers[2]?.id || allCustomers[0]?.id,
+        totalAmount: 3200,
+        currency: "USD" as const,
+        paymentTerm: "PayPal",
+        deliveryTerm: "EXW Factory",
+      },
+    ];
+
+    for (const o of ordersData) {
+      const existing = await prisma.order.findUnique({ where: { orderNo: o.orderNo } });
+      if (!existing) {
+        const order = await prisma.order.create({ data: o });
+
+        // Add items
+        await prisma.orderItem.createMany({
+          data: [
+            {
+              orderId: order.id,
+              itemName: "Stand Up Pouch 200g",
+              specification: "200g, 130x180mm, matte finish",
+              quantity: 50000,
+              unit: "pcs",
+              unitPrice: 0.15,
+              totalPrice: 7500,
+            },
+            {
+              orderId: order.id,
+              itemName: "Spout Pouch 500ml",
+              specification: "500ml, center spout, resealable",
+              quantity: 25000,
+              unit: "pcs",
+              unitPrice: 0.2,
+              totalPrice: 5000,
+            },
+          ],
+        });
+      }
+    }
+  }
+  console.log("✅ 订单数据已创建（2条）");
 }
 
 main()
