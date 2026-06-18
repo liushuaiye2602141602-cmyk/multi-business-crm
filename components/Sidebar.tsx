@@ -28,6 +28,7 @@ import {
   UserCog,
   ShoppingCart,
   FolderOpen,
+  BarChart3,
   Bot,
 } from "lucide-react";
 
@@ -48,6 +49,7 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/workbench", label: "今日工作台", icon: Home },
       { href: "/dashboard", label: "数据看板", icon: LayoutDashboard },
+      { href: "/reports", label: "数据报表", icon: BarChart3 },
       { href: "/search", label: "全局搜索", icon: Search },
     ],
   },
