@@ -23,7 +23,7 @@ const AI_PRESETS = [
   { name: "OpenAI", baseUrl: "https://api.openai.com/v1", model: "gpt-4o-mini", visionModel: "gpt-4o" },
   { name: "DeepSeek", baseUrl: "https://api.deepseek.com/v1", model: "deepseek-chat" },
   { name: "Moonshot", baseUrl: "https://api.moonshot.cn/v1", model: "moonshot-v1-8k" },
-  { name: "小米 MiMo", baseUrl: "https://token-plan-sgp.xiaomimimo.com/v1", model: "mimo-v2.5-pro" },
+  { name: "MiMo", baseUrl: "https://your-mimo-api.com/v1", model: "mimo-v2.5-pro" },
   { name: "智谱 GLM", baseUrl: "https://open.bigmodel.cn/api/paas/v4", model: "glm-4-flash", visionModel: "glm-4v" },
   { name: "通义千问", baseUrl: "https://dashscope.aliyuncs.com/compatible-mode/v1", model: "qwen-turbo", visionModel: "qwen-vl-plus" },
   { name: "自定义", baseUrl: "", model: "" },

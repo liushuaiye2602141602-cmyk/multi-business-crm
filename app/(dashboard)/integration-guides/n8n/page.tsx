@@ -68,7 +68,7 @@ export default function N8nGuidePage() {
         <div className="bg-white rounded-lg border p-6">
           <h2 className="text-lg font-semibold mb-4">用途说明</h2>
           <p className="text-gray-600">
-            用于把网站表单、Facebook 表单、Google Sheet、AI 营销系统、OpenClaw 整理出来的线索推送到 CRM。
+            用于把网站表单、Facebook 表单、Google Sheet、AI 营销系统、其他平台整理出来的线索推送到 CRM。
           </p>
         </div>
 

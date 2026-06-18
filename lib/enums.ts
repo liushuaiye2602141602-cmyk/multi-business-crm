@@ -158,9 +158,8 @@ export const ExternalSourceTypeLabel: Record<string, string> = {
   TIKTOK_MANUAL: "TikTok 手动",
   N8N: "n8n 工作流",
   AI_MARKETING_SYSTEM: "AI 营销系统",
-  OPENCLAW: "OpenClaw",
+  OTHER: "其他平台",
   WHATSAPP_MANUAL: "WhatsApp 手动",
-  OTHER: "其他",
 };
 
 export const WebhookStatusLabel: Record<string, string> = {
