@@ -28,6 +28,7 @@ import {
   UserCog,
   ShoppingCart,
   FolderOpen,
+  Bot,
 } from "lucide-react";
 
 interface NavItem {
@@ -83,6 +84,8 @@ const navGroups: NavGroup[] = [
   {
     title: "外部接入",
     items: [
+      { href: "/im-settings", label: "IM 设置", icon: Bot },
+      { href: "/im-messages", label: "IM 消息记录", icon: MessageSquare },
       { href: "/external-sources", label: "外部来源", icon: Webhook },
       { href: "/webhook-test", label: "Webhook 测试", icon: TestTube },
       { href: "/webhook-logs", label: "Webhook 日志", icon: ClipboardList },

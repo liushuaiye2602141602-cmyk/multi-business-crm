@@ -657,3 +657,53 @@ model Document {
 
   @@index([relatedType, relatedId])
 }
+
+model IMPlatform {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  appId       String?
+  appSecret   String?
+  encryptKey  String?
+  verifyToken String?
+  botToken    String?
+  isActive    Boolean  @default(true)
+  extra       Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  imUsers    IMUser[]
+  imMessages IMMessage[]
+}
+
+model IMUser {
+  id             Int      @id @default(autoincrement())
+  platformId     Int
+  platformUserId String
+  platformName   String?
+  createdAt      DateTime @default(now())
+
+  platform  IMPlatform  @relation(fields: [platformId], references: [id])
+  messages  IMMessage[]
+
+  @@unique([platformId, platformUserId])
+  @@index([platformId])
+}
+
+model IMMessage {
+  id           Int      @id @default(autoincrement())
+  platformId   Int
+  imUserId     Int
+  direction    String
+  content      String
+  intent       String?
+  action       String?
+  actionResult Json?
+  errorMsg     String?
+  createdAt    DateTime @default(now())
+
+  platform IMPlatform @relation(fields: [platformId], references: [id])
+  imUser   IMUser     @relation(fields: [imUserId], references: [id])
+
+  @@index([createdAt])
+  @@index([platformId])
+}
