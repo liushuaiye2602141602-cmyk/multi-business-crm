@@ -524,6 +524,39 @@ model ActivityLog {
   @@index([createdAt])
 }
 
+model CalendarEvent {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  eventType   String    @default("task") // task / meeting / holiday / reminder
+  startTime   DateTime
+  endTime     DateTime?
+  allDay      Boolean   @default(false)
+  isCompleted Boolean   @default(false)
+  customerId  Int?
+  leadId      Int?
+  projectId   Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([startTime])
+  @@index([eventType])
+}
+
+model SalesGoal {
+  id           Int      @id @default(autoincrement())
+  year         Int
+  month        Int
+  metricType   String   // leads_count / customers_count / orders_amount / quotes_count
+  targetValue  Decimal  @db.Decimal(12, 2)
+  currentValue Decimal  @default(0) @db.Decimal(12, 2)
+  currency     Currency @default(USD)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([year, month, metricType])
+}
+
 model AIAnalysis {
   id                    Int                  @id @default(autoincrement())
   targetType            AIAnalysisTargetType

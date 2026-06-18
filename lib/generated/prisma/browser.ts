@@ -73,6 +73,16 @@ export type FollowUpTemplate = Prisma.FollowUpTemplateModel
  */
 export type ActivityLog = Prisma.ActivityLogModel
 /**
+ * Model CalendarEvent
+ * 
+ */
+export type CalendarEvent = Prisma.CalendarEventModel
+/**
+ * Model SalesGoal
+ * 
+ */
+export type SalesGoal = Prisma.SalesGoalModel
+/**
  * Model AIAnalysis
  * 
  */

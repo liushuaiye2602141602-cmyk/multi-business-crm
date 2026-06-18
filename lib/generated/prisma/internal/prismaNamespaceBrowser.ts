@@ -62,6 +62,8 @@ export const ModelName = {
   Product: 'Product',
   FollowUpTemplate: 'FollowUpTemplate',
   ActivityLog: 'ActivityLog',
+  CalendarEvent: 'CalendarEvent',
+  SalesGoal: 'SalesGoal',
   AIAnalysis: 'AIAnalysis',
   ExternalSource: 'ExternalSource',
   WebhookLog: 'WebhookLog',
@@ -329,6 +331,40 @@ export const ActivityLogScalarFieldEnum = {
 } as const
 
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+export const CalendarEventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  eventType: 'eventType',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  allDay: 'allDay',
+  isCompleted: 'isCompleted',
+  customerId: 'customerId',
+  leadId: 'leadId',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalendarEventScalarFieldEnum = (typeof CalendarEventScalarFieldEnum)[keyof typeof CalendarEventScalarFieldEnum]
+
+
+export const SalesGoalScalarFieldEnum = {
+  id: 'id',
+  year: 'year',
+  month: 'month',
+  metricType: 'metricType',
+  targetValue: 'targetValue',
+  currentValue: 'currentValue',
+  currency: 'currency',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SalesGoalScalarFieldEnum = (typeof SalesGoalScalarFieldEnum)[keyof typeof SalesGoalScalarFieldEnum]
 
 
 export const AIAnalysisScalarFieldEnum = {
