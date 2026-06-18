@@ -30,6 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# scripts
+scripts/check-feishu.ts
+
 # env files (can opt-in for committing if needed)
 .env*
 
@@ -41,3 +44,6 @@ yarn-error.log*
 next-env.d.ts
 
 /app/generated/prisma
+backups/
+.env
+.env.local
