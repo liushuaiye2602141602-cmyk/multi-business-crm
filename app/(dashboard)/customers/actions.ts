@@ -254,6 +254,17 @@ export async function archiveCustomer(customerId: number) {
     where: { id: customerId },
     data: { isArchived: true, archivedAt: new Date() },
   });
+
+  await createActivityLog({
+    action: "归档",
+    entityType: "客户",
+    entityId: customerId,
+    entityName: customer.company,
+    description: `归档客户: ${customer.company}`,
+  });
+
+  revalidatePath("/customers");
+  revalidatePath(`/customers/${customerId}`);
   return { success: true, customer };
 }
 
@@ -262,6 +273,17 @@ export async function restoreCustomer(customerId: number) {
     where: { id: customerId },
     data: { isArchived: false, archivedAt: null },
   });
+
+  await createActivityLog({
+    action: "恢复",
+    entityType: "客户",
+    entityId: customerId,
+    entityName: customer.company,
+    description: `恢复归档客户: ${customer.company}`,
+  });
+
+  revalidatePath("/customers");
+  revalidatePath(`/customers/${customerId}`);
   return { success: true, customer };
 }
 

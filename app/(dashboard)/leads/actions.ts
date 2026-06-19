@@ -218,7 +218,7 @@ export async function addLeadActivity(leadId: number, formData: FormData) {
 }
 
 export async function updateLeadStatus(leadId: number, status: string) {
-  const validStatuses = ["NEW", "CONTACTED", "QUALIFIED", "LOST"];
+  const validStatuses = ["NEW", "CONTACTED", "REQUIREMENT_CONFIRMING", "QUOTING", "NEGOTIATING", "QUALIFIED", "CONVERTED", "WON", "LOST", "DORMANT"];
   if (!validStatuses.includes(status)) {
     return { success: false, error: "无效的状态" };
   }

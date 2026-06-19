@@ -40,10 +40,15 @@ export async function emit(event: EventPayload) {
 }
 
 async function handleLeadCreated(event: EventPayload) {
-  // Auto-create follow-up task
+  // Auto-create follow-up task (idempotent: skip if task already exists for this lead)
   try {
-    const { createFollowUpTaskForLead } = await import("../domain/auto-tasks");
-    await createFollowUpTaskForLead(event.entityId);
+    const existingTask = await prisma.task.findFirst({
+      where: { leadId: event.entityId, type: "FOLLOW_UP", status: { notIn: ["COMPLETED", "CANCELLED"] } },
+    });
+    if (!existingTask) {
+      const { createFollowUpTaskForLead } = await import("../domain/auto-tasks");
+      await createFollowUpTaskForLead(event.entityId);
+    }
   } catch {}
 
   // Auto AI scoring
@@ -59,10 +64,15 @@ async function handleLeadCreated(event: EventPayload) {
 }
 
 async function handleQuoteSent(event: EventPayload) {
-  // Auto-create follow-up task for quote
+  // Auto-create follow-up task for quote (idempotent: skip if task already exists)
   try {
-    const { createFollowUpTaskForQuote } = await import("../domain/auto-tasks");
-    await createFollowUpTaskForQuote(event.entityId);
+    const existingTask = await prisma.task.findFirst({
+      where: { quoteId: event.entityId, type: "FOLLOW_UP", status: { notIn: ["COMPLETED", "CANCELLED"] } },
+    });
+    if (!existingTask) {
+      const { createFollowUpTaskForQuote } = await import("../domain/auto-tasks");
+      await createFollowUpTaskForQuote(event.entityId);
+    }
   } catch {}
 
   // Auto score deal
@@ -81,9 +91,14 @@ async function handleQuoteSent(event: EventPayload) {
 }
 
 async function handleOrderConfirmed(event: EventPayload) {
-  // Auto-create production follow-up task
+  // Auto-create production follow-up task (idempotent: skip if task already exists)
   try {
-    const { createProductionTaskForOrder } = await import("../domain/auto-tasks");
-    await createProductionTaskForOrder(event.entityId);
+    const existingTask = await prisma.task.findFirst({
+      where: { orderId: event.entityId, type: "FOLLOW_UP", status: { notIn: ["COMPLETED", "CANCELLED"] } },
+    });
+    if (!existingTask) {
+      const { createProductionTaskForOrder } = await import("../domain/auto-tasks");
+      await createProductionTaskForOrder(event.entityId);
+    }
   } catch {}
 }

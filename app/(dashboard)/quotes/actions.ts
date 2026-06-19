@@ -88,7 +88,7 @@ export async function deleteQuote(id: number) {
 }
 
 export async function updateQuoteStatus(quoteId: number, status: string) {
-  const validStatuses = ["DRAFT", "SENT", "ACCEPTED", "REJECTED", "EXPIRED"];
+  const validStatuses = ["DRAFT", "SENT", "WAITING_FEEDBACK", "REVISED", "ACCEPTED", "REJECTED", "EXPIRED"];
   if (!validStatuses.includes(status)) {
     return { success: false, error: "无效的状态" };
   }

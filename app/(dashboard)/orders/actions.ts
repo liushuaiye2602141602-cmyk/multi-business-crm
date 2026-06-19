@@ -154,67 +154,87 @@ export async function recalculateOrderTotals(orderId: number) {
 }
 
 export async function createOrderFromQuote(quoteId: number) {
-  const quote = await prisma.quote.findUnique({
-    where: { id: quoteId },
-    include: { items: true },
-  });
-
-  if (!quote) throw new Error("报价不存在");
-
-  // 检查是否已经创建过订单
-  const existingOrder = await prisma.order.findFirst({
-    where: { quoteId },
-  });
-
-  if (existingOrder) {
-    throw new Error(`该报价已创建订单: ${existingOrder.orderNo}`);
-  }
-
-  const order = await prisma.order.create({
-    data: {
-      orderNo: generateOrderNo(),
-      orderTitle: quote.quoteTitle || `订单 - ${quote.quoteNo}`,
-      customerId: quote.customerId!,
-      projectId: quote.projectId,
-      quoteId: quote.id,
-      contactId: quote.customerContactId,
-      orderStatus: "DRAFT",
-      totalAmount: quote.totalPrice,
-      currency: quote.currency,
-      paymentTerm: quote.paymentTerms,
-      deliveryTerm: quote.deliveryTime,
-      notes: quote.remarks,
-      tenantId: 1,
-    },
-  });
-
-  // 复制 QuoteItem 到 OrderItem
-  if (quote.items.length > 0) {
-    await prisma.orderItem.createMany({
-      data: quote.items.map((item) => ({
-        orderId: order.id,
-        productId: item.productId,
-        itemName: item.itemName,
-        specification: item.specification,
-        quantity: item.quantity,
-        unit: item.unit,
-        unitPrice: item.unitPrice,
-        totalPrice: item.totalPrice,
-        notes: item.notes,
-        sortOrder: item.sortOrder,
-      })),
+  // Use transaction to ensure atomicity: order + items + quote status update
+  return await prisma.$transaction(async (tx) => {
+    const quote = await tx.quote.findUnique({
+      where: { id: quoteId },
+      include: { items: true, project: { select: { businessLineId: true } } },
     });
-  }
 
-  await createActivityLog({
-    action: "从报价创建",
-    entityType: "订单",
-    entityId: order.id,
-    entityName: order.orderNo,
-    description: `从报价 ${quote.quoteNo} 创建订单 ${order.orderNo}`,
+    if (!quote) throw new Error("报价不存在");
+
+    // Only allow conversion from ACCEPTED quotes
+    if (quote.status !== "ACCEPTED") {
+      throw new Error("只有已接受(ACCEPTED)的报价才能转换为订单");
+    }
+
+    // Check customerId is present
+    if (!quote.customerId) {
+      throw new Error("该报价缺少客户信息，无法创建订单");
+    }
+
+    // Prevent duplicate order creation
+    const existingOrder = await tx.order.findFirst({
+      where: { quoteId },
+    });
+
+    if (existingOrder) {
+      throw new Error(`该报价已创建订单: ${existingOrder.orderNo}`);
+    }
+
+    const order = await tx.order.create({
+      data: {
+        orderNo: generateOrderNo(),
+        orderTitle: quote.quoteTitle || `订单 - ${quote.quoteNo}`,
+        customerId: quote.customerId,
+        projectId: quote.projectId,
+        quoteId: quote.id,
+        contactId: quote.customerContactId,
+        businessLineId: quote.project?.businessLineId ?? null,
+        orderStatus: "DRAFT",
+        totalAmount: quote.totalPrice,
+        currency: quote.currency,
+        paymentTerm: quote.paymentTerms,
+        deliveryTerm: quote.deliveryTime,
+        notes: quote.remarks,
+        tenantId: quote.tenantId,
+      },
+    });
+
+    // Copy QuoteItem to OrderItem
+    if (quote.items.length > 0) {
+      await tx.orderItem.createMany({
+        data: quote.items.map((item) => ({
+          orderId: order.id,
+          productId: item.productId,
+          itemName: item.itemName,
+          specification: item.specification,
+          quantity: item.quantity,
+          unit: item.unit,
+          unitPrice: item.unitPrice,
+          totalPrice: item.totalPrice,
+          notes: item.notes,
+          sortOrder: item.sortOrder,
+        })),
+      });
+    }
+
+    // Mark quote as converted to prevent re-conversion
+    await tx.quote.update({
+      where: { id: quoteId },
+      data: { status: "ACCEPTED" }, // Keep ACCEPTED but the duplicate check + customerId guard prevent re-conversion
+    });
+
+    await createActivityLog({
+      action: "从报价创建",
+      entityType: "订单",
+      entityId: order.id,
+      entityName: order.orderNo,
+      description: `从报价 ${quote.quoteNo} 创建订单 ${order.orderNo}`,
+    });
+
+    revalidatePath("/orders");
+    revalidatePath(`/quotes/${quoteId}`);
+    redirect(`/orders/${order.id}`);
   });
-
-  revalidatePath("/orders");
-  revalidatePath(`/quotes/${quoteId}`);
-  redirect(`/orders/${order.id}`);
 }
