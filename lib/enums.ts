@@ -1,3 +1,23 @@
+// ==================== 新版客户阶段 & 意向 ====================
+
+export const CustomerStageLabel: Record<string, string> = {
+  NEW: "新建",
+  CONTACTED: "已联系",
+  QUALIFIED: "已确认",
+  PROPOSAL: "报价中",
+  NEGOTIATION: "谈判中",
+  WON: "已成交",
+  PAUSED: "暂停",
+  LOST: "已流失",
+};
+
+export const PurchaseIntentLabel: Record<string, string> = {
+  UNKNOWN: "未知",
+  LOW: "低意向",
+  MEDIUM: "中意向",
+  HIGH: "高意向",
+};
+
 // ==================== 标签映射 ====================
 
 export const LeadSourceLabel: Record<string, string> = {

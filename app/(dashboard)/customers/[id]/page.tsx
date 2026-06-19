@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { Pencil, Plus, ArrowLeft, Mail, Phone, Globe, MapPin, Building, Calendar, TrendingUp, FileText, MessageSquare, CheckSquare, Sparkles, Clock } from "lucide-react";
-import { CustomerStatusLabel, CustomerTypeLabel, LeadSourceLabel, LeadGradeLabel, ProjectStatusLabel, QuoteStatusLabel, TaskStatusLabel } from "@/lib/enums";
+import { CustomerStatusLabel, CustomerTypeLabel, LeadSourceLabel, LeadGradeLabel, ProjectStatusLabel, QuoteStatusLabel, TaskStatusLabel, CustomerStageLabel, PurchaseIntentLabel } from "@/lib/enums";
 import { formatDate, formatDateTime, formatMoney, formatEnumLabel } from "@/lib/format";
 import { getCustomerStatusVariant, getLeadGradeVariant, getProjectStatusVariant, getQuoteStatusVariant, getTaskStatusVariant } from "@/components/ui/StatusBadge";
 import StatusBadge from "@/components/ui/StatusBadge";
@@ -27,7 +27,7 @@ export default async function CustomerDetailPage({
   const { id } = await params;
   const customerId = parseInt(id);
 
-  const [customer, latestAnalysis, recentActivityLogs, activities, messages] = await Promise.all([
+  const [customer, latestAnalysis, recentActivityLogs, activities, messages, customFieldDefs, customFieldValues] = await Promise.all([
     prisma.customer.findUnique({
       where: { id: customerId },
       include: {
@@ -60,6 +60,14 @@ export default async function CustomerDetailPage({
       where: { customerId },
       orderBy: { createdAt: "desc" },
       take: 30,
+    }),
+    prisma.customFieldDefinition.findMany({
+      where: { entityType: "CUSTOMER", isActive: true },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.customFieldValue.findMany({
+      where: { entityType: "CUSTOMER", entityId: customerId },
+      include: { fieldDefinition: true },
     }),
   ]);
 
@@ -243,24 +251,48 @@ export default async function CustomerDetailPage({
             <p className="font-medium">{customer.country || "-"}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">客户类型</p>
-            <p className="font-medium">{CustomerTypeLabel[customer.customerType] || customer.customerType}</p>
+            <p className="text-gray-500 text-xs">地区</p>
+            <p className="font-medium">{customer.region || "-"}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">主联系人</p>
-            <p className="font-medium">{customer.contactName}</p>
+            <p className="text-gray-500 text-xs">城市</p>
+            <p className="font-medium">{customer.city || "-"}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">邮箱</p>
-            <p className="font-medium">{customer.email || "-"}</p>
+            <p className="text-gray-500 text-xs">销售阶段</p>
+            <p className="font-medium">{CustomerStageLabel[customer.stage] || customer.stage}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">WhatsApp</p>
-            <p className="font-medium">{customer.whatsapp || "-"}</p>
+            <p className="text-gray-500 text-xs">购买意向</p>
+            <p className="font-medium">{PurchaseIntentLabel[customer.purchaseIntent] || customer.purchaseIntent}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">来源网站</p>
-            <p className="font-medium truncate">{customer.sourceWebsite || "-"}</p>
+            <p className="text-gray-500 text-xs">成交概率</p>
+            <p className="font-medium">{customer.dealProbability != null ? `${customer.dealProbability}%` : "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">预计金额</p>
+            <p className="font-medium">{customer.expectedDealValue != null ? formatMoney(Number(customer.expectedDealValue)) : "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">预计成交日</p>
+            <p className="font-medium">{customer.expectedCloseDate ? formatDate(customer.expectedCloseDate) : "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">评分</p>
+            <p className="font-medium">{customer.rating != null ? `${customer.rating}/5` : "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">公司规模</p>
+            <p className="font-medium">{customer.companySize || "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">邮编</p>
+            <p className="font-medium">{customer.postalCode || "-"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500 text-xs">自定义编码</p>
+            <p className="font-medium">{customer.customCode || "-"}</p>
           </div>
         </div>
       </div>
@@ -318,6 +350,75 @@ export default async function CustomerDetailPage({
               </div>
             </Card>
           </div>
+
+          {/* 自定义字段 */}
+          {customFieldDefs.length > 0 && (
+            <Card>
+              <h3 className="text-base font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">自定义字段</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {customFieldDefs.map((def) => {
+                  const val = customFieldValues.find(v => v.fieldDefinitionId === def.id);
+                  let displayValue: React.ReactNode = null;
+
+                  if (val && val.value) {
+                    switch (def.fieldType) {
+                      case "CHECKBOX":
+                        displayValue = <span className={val.value === "true" ? "text-green-600 font-medium" : "text-gray-400"}>{val.value === "true" ? "是" : "否"}</span>;
+                        break;
+                      case "URL":
+                        displayValue = <a href={val.value} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{val.value}</a>;
+                        break;
+                      case "EMAIL":
+                        displayValue = <a href={`mailto:${val.value}`} className="text-blue-600 hover:underline">{val.value}</a>;
+                        break;
+                      case "PHONE":
+                        displayValue = <a href={`tel:${val.value}`} className="text-blue-600 hover:underline">{val.value}</a>;
+                        break;
+                      case "CURRENCY":
+                        displayValue = <span className="font-medium">{'$'}{Number(val.value).toLocaleString()}</span>;
+                        break;
+                      case "DATE":
+                        displayValue = formatDate(new Date(val.value));
+                        break;
+                      case "DATETIME":
+                        displayValue = <span>{formatDate(new Date(val.value))}</span>;
+                        break;
+                      case "MULTI_SELECT":
+                        try {
+                          const arr = JSON.parse(val.value);
+                          displayValue = (
+                            <div className="flex flex-wrap gap-1">
+                              {arr.map((item: string) => (
+                                <span key={item} className="inline-block px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded">{item}</span>
+                              ))}
+                            </div>
+                          );
+                        } catch {
+                          displayValue = val.value;
+                        }
+                        break;
+                      case "NUMBER":
+                        displayValue = <span className="font-medium">{Number(val.value).toLocaleString()}</span>;
+                        break;
+                      default:
+                        displayValue = val.value;
+                    }
+                  } else if (def.fieldType === "CHECKBOX") {
+                    displayValue = <span className="text-gray-400">否</span>;
+                  } else {
+                    displayValue = <span className="text-gray-400">-</span>;
+                  }
+
+                  return (
+                    <div key={def.id} className="space-y-0.5">
+                      <p className="text-xs text-gray-500">{def.label}</p>
+                      <div className="text-sm">{displayValue}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Card>
+          )}
 
           {/* 客户时间线 */}
           <Card>
