@@ -362,8 +362,8 @@ function extractWriteParams(text: string): ParsedIntent["parameters"] {
   // Split by Chinese/English comma to get segments, then match labels.
   const segments = text.split(/[，,]/).map((s) => s.trim()).filter(Boolean);
 
-  // Extract contact name after "联系人"
-  const contactMatch = text.match(/联系人\s*(.+?)(?:[，,：:]|$)/);
+  // Extract contact name — only match "联系人" preceded by a delimiter, not inside company name
+  const contactMatch = text.match(/(?:^|[，,：:])\s*联系人\s*(.+?)(?:[，,：:]|$)/);
   if (contactMatch) {
     params.contactName = contactMatch[1].trim();
   }
