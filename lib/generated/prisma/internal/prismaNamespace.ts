@@ -419,6 +419,9 @@ export const ModelName = {
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage',
+  ContactSocialProfile: 'ContactSocialProfile',
+  CustomFieldDefinition: 'CustomFieldDefinition',
+  CustomFieldValue: 'CustomFieldValue',
   AILog: 'AILog',
   Message: 'Message',
   AIControlSettings: 'AIControlSettings',
@@ -439,7 +442,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "aILog" | "message" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog"
+    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3033,6 +3036,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ContactSocialProfile: {
+      payload: Prisma.$ContactSocialProfilePayload<ExtArgs>
+      fields: Prisma.ContactSocialProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactSocialProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactSocialProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.ContactSocialProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactSocialProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        findMany: {
+          args: Prisma.ContactSocialProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>[]
+        }
+        create: {
+          args: Prisma.ContactSocialProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        createMany: {
+          args: Prisma.ContactSocialProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactSocialProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.ContactSocialProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        update: {
+          args: Prisma.ContactSocialProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactSocialProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactSocialProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactSocialProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactSocialProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactSocialProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.ContactSocialProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactSocialProfile>
+        }
+        groupBy: {
+          args: Prisma.ContactSocialProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactSocialProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactSocialProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactSocialProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomFieldDefinition: {
+      payload: Prisma.$CustomFieldDefinitionPayload<ExtArgs>
+      fields: Prisma.CustomFieldDefinitionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomFieldDefinitionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomFieldDefinitionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        findFirst: {
+          args: Prisma.CustomFieldDefinitionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomFieldDefinitionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        findMany: {
+          args: Prisma.CustomFieldDefinitionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>[]
+        }
+        create: {
+          args: Prisma.CustomFieldDefinitionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        createMany: {
+          args: Prisma.CustomFieldDefinitionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomFieldDefinitionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>[]
+        }
+        delete: {
+          args: Prisma.CustomFieldDefinitionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        update: {
+          args: Prisma.CustomFieldDefinitionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomFieldDefinitionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomFieldDefinitionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomFieldDefinitionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomFieldDefinitionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldDefinitionPayload>
+        }
+        aggregate: {
+          args: Prisma.CustomFieldDefinitionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomFieldDefinition>
+        }
+        groupBy: {
+          args: Prisma.CustomFieldDefinitionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomFieldDefinitionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomFieldDefinitionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomFieldDefinitionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomFieldValue: {
+      payload: Prisma.$CustomFieldValuePayload<ExtArgs>
+      fields: Prisma.CustomFieldValueFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomFieldValueFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomFieldValueFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        findFirst: {
+          args: Prisma.CustomFieldValueFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomFieldValueFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        findMany: {
+          args: Prisma.CustomFieldValueFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>[]
+        }
+        create: {
+          args: Prisma.CustomFieldValueCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        createMany: {
+          args: Prisma.CustomFieldValueCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomFieldValueCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>[]
+        }
+        delete: {
+          args: Prisma.CustomFieldValueDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        update: {
+          args: Prisma.CustomFieldValueUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomFieldValueDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomFieldValueUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomFieldValueUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomFieldValueUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomFieldValuePayload>
+        }
+        aggregate: {
+          args: Prisma.CustomFieldValueAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomFieldValue>
+        }
+        groupBy: {
+          args: Prisma.CustomFieldValueGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomFieldValueGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomFieldValueCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomFieldValueCountAggregateOutputType> | number
+        }
+      }
+    }
     AILog: {
       payload: Prisma.$AILogPayload<ExtArgs>
       fields: Prisma.AILogFieldRefs
@@ -3557,6 +3782,24 @@ export const CustomerScalarFieldEnum = {
   poolReason: 'poolReason',
   businessLineId: 'businessLineId',
   tenantId: 'tenantId',
+  shortName: 'shortName',
+  region: 'region',
+  city: 'city',
+  postalCode: 'postalCode',
+  companySize: 'companySize',
+  rating: 'rating',
+  tags: 'tags',
+  stage: 'stage',
+  purchaseIntent: 'purchaseIntent',
+  dealProbability: 'dealProbability',
+  expectedDealValue: 'expectedDealValue',
+  expectedCloseDate: 'expectedCloseDate',
+  lastContactAt: 'lastContactAt',
+  nextFollowUpAt: 'nextFollowUpAt',
+  lostReason: 'lostReason',
+  isArchived: 'isArchived',
+  archivedAt: 'archivedAt',
+  customCode: 'customCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3577,7 +3820,19 @@ export const ContactScalarFieldEnum = {
   isPrimary: 'isPrimary',
   notes: 'notes',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  nickname: 'nickname',
+  jobTitle: 'jobTitle',
+  department: 'department',
+  secondaryEmail: 'secondaryEmail',
+  mobile: 'mobile',
+  phoneCountryCode: 'phoneCountryCode',
+  preferredContactMethod: 'preferredContactMethod',
+  preferredLanguage: 'preferredLanguage',
+  timezone: 'timezone'
 } as const
 
 export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -4127,6 +4382,56 @@ export const IMMessageScalarFieldEnum = {
 } as const
 
 export type IMMessageScalarFieldEnum = (typeof IMMessageScalarFieldEnum)[keyof typeof IMMessageScalarFieldEnum]
+
+
+export const ContactSocialProfileScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  platform: 'platform',
+  account: 'account',
+  profileUrl: 'profileUrl',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactSocialProfileScalarFieldEnum = (typeof ContactSocialProfileScalarFieldEnum)[keyof typeof ContactSocialProfileScalarFieldEnum]
+
+
+export const CustomFieldDefinitionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  entityType: 'entityType',
+  key: 'key',
+  label: 'label',
+  fieldType: 'fieldType',
+  description: 'description',
+  placeholder: 'placeholder',
+  isRequired: 'isRequired',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  options: 'options',
+  defaultValue: 'defaultValue',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomFieldDefinitionScalarFieldEnum = (typeof CustomFieldDefinitionScalarFieldEnum)[keyof typeof CustomFieldDefinitionScalarFieldEnum]
+
+
+export const CustomFieldValueScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  fieldDefinitionId: 'fieldDefinitionId',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomFieldValueScalarFieldEnum = (typeof CustomFieldValueScalarFieldEnum)[keyof typeof CustomFieldValueScalarFieldEnum]
 
 
 export const AILogScalarFieldEnum = {
@@ -4835,6 +5140,9 @@ export type GlobalOmitConfig = {
   iMPlatform?: Prisma.IMPlatformOmit
   iMUser?: Prisma.IMUserOmit
   iMMessage?: Prisma.IMMessageOmit
+  contactSocialProfile?: Prisma.ContactSocialProfileOmit
+  customFieldDefinition?: Prisma.CustomFieldDefinitionOmit
+  customFieldValue?: Prisma.CustomFieldValueOmit
   aILog?: Prisma.AILogOmit
   message?: Prisma.MessageOmit
   aIControlSettings?: Prisma.AIControlSettingsOmit

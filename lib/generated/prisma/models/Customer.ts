@@ -32,6 +32,9 @@ export type CustomerAvgAggregateOutputType = {
   ownerId: number | null
   businessLineId: number | null
   tenantId: number | null
+  rating: number | null
+  dealProbability: number | null
+  expectedDealValue: runtime.Decimal | null
 }
 
 export type CustomerSumAggregateOutputType = {
@@ -40,6 +43,9 @@ export type CustomerSumAggregateOutputType = {
   ownerId: number | null
   businessLineId: number | null
   tenantId: number | null
+  rating: number | null
+  dealProbability: number | null
+  expectedDealValue: runtime.Decimal | null
 }
 
 export type CustomerMinAggregateOutputType = {
@@ -69,6 +75,23 @@ export type CustomerMinAggregateOutputType = {
   poolReason: string | null
   businessLineId: number | null
   tenantId: number | null
+  shortName: string | null
+  region: string | null
+  city: string | null
+  postalCode: string | null
+  companySize: string | null
+  rating: number | null
+  stage: string | null
+  purchaseIntent: string | null
+  dealProbability: number | null
+  expectedDealValue: runtime.Decimal | null
+  expectedCloseDate: Date | null
+  lastContactAt: Date | null
+  nextFollowUpAt: Date | null
+  lostReason: string | null
+  isArchived: boolean | null
+  archivedAt: Date | null
+  customCode: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -100,6 +123,23 @@ export type CustomerMaxAggregateOutputType = {
   poolReason: string | null
   businessLineId: number | null
   tenantId: number | null
+  shortName: string | null
+  region: string | null
+  city: string | null
+  postalCode: string | null
+  companySize: string | null
+  rating: number | null
+  stage: string | null
+  purchaseIntent: string | null
+  dealProbability: number | null
+  expectedDealValue: runtime.Decimal | null
+  expectedCloseDate: Date | null
+  lastContactAt: Date | null
+  nextFollowUpAt: Date | null
+  lostReason: string | null
+  isArchived: boolean | null
+  archivedAt: Date | null
+  customCode: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -131,6 +171,24 @@ export type CustomerCountAggregateOutputType = {
   poolReason: number
   businessLineId: number
   tenantId: number
+  shortName: number
+  region: number
+  city: number
+  postalCode: number
+  companySize: number
+  rating: number
+  tags: number
+  stage: number
+  purchaseIntent: number
+  dealProbability: number
+  expectedDealValue: number
+  expectedCloseDate: number
+  lastContactAt: number
+  nextFollowUpAt: number
+  lostReason: number
+  isArchived: number
+  archivedAt: number
+  customCode: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -143,6 +201,9 @@ export type CustomerAvgAggregateInputType = {
   ownerId?: true
   businessLineId?: true
   tenantId?: true
+  rating?: true
+  dealProbability?: true
+  expectedDealValue?: true
 }
 
 export type CustomerSumAggregateInputType = {
@@ -151,6 +212,9 @@ export type CustomerSumAggregateInputType = {
   ownerId?: true
   businessLineId?: true
   tenantId?: true
+  rating?: true
+  dealProbability?: true
+  expectedDealValue?: true
 }
 
 export type CustomerMinAggregateInputType = {
@@ -180,6 +244,23 @@ export type CustomerMinAggregateInputType = {
   poolReason?: true
   businessLineId?: true
   tenantId?: true
+  shortName?: true
+  region?: true
+  city?: true
+  postalCode?: true
+  companySize?: true
+  rating?: true
+  stage?: true
+  purchaseIntent?: true
+  dealProbability?: true
+  expectedDealValue?: true
+  expectedCloseDate?: true
+  lastContactAt?: true
+  nextFollowUpAt?: true
+  lostReason?: true
+  isArchived?: true
+  archivedAt?: true
+  customCode?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -211,6 +292,23 @@ export type CustomerMaxAggregateInputType = {
   poolReason?: true
   businessLineId?: true
   tenantId?: true
+  shortName?: true
+  region?: true
+  city?: true
+  postalCode?: true
+  companySize?: true
+  rating?: true
+  stage?: true
+  purchaseIntent?: true
+  dealProbability?: true
+  expectedDealValue?: true
+  expectedCloseDate?: true
+  lastContactAt?: true
+  nextFollowUpAt?: true
+  lostReason?: true
+  isArchived?: true
+  archivedAt?: true
+  customCode?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -242,6 +340,24 @@ export type CustomerCountAggregateInputType = {
   poolReason?: true
   businessLineId?: true
   tenantId?: true
+  shortName?: true
+  region?: true
+  city?: true
+  postalCode?: true
+  companySize?: true
+  rating?: true
+  tags?: true
+  stage?: true
+  purchaseIntent?: true
+  dealProbability?: true
+  expectedDealValue?: true
+  expectedCloseDate?: true
+  lastContactAt?: true
+  nextFollowUpAt?: true
+  lostReason?: true
+  isArchived?: true
+  archivedAt?: true
+  customCode?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -360,6 +476,24 @@ export type CustomerGroupByOutputType = {
   poolReason: string | null
   businessLineId: number
   tenantId: number | null
+  shortName: string | null
+  region: string | null
+  city: string | null
+  postalCode: string | null
+  companySize: string | null
+  rating: number | null
+  tags: string[]
+  stage: string
+  purchaseIntent: string
+  dealProbability: number | null
+  expectedDealValue: runtime.Decimal | null
+  expectedCloseDate: Date | null
+  lastContactAt: Date | null
+  nextFollowUpAt: Date | null
+  lostReason: string | null
+  isArchived: boolean
+  archivedAt: Date | null
+  customCode: string | null
   createdAt: Date
   updatedAt: Date
   _count: CustomerCountAggregateOutputType | null
@@ -414,6 +548,24 @@ export type CustomerWhereInput = {
   poolReason?: Prisma.StringNullableFilter<"Customer"> | string | null
   businessLineId?: Prisma.IntFilter<"Customer"> | number
   tenantId?: Prisma.IntNullableFilter<"Customer"> | number | null
+  shortName?: Prisma.StringNullableFilter<"Customer"> | string | null
+  region?: Prisma.StringNullableFilter<"Customer"> | string | null
+  city?: Prisma.StringNullableFilter<"Customer"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Customer"> | string | null
+  companySize?: Prisma.StringNullableFilter<"Customer"> | string | null
+  rating?: Prisma.IntNullableFilter<"Customer"> | number | null
+  tags?: Prisma.StringNullableListFilter<"Customer">
+  stage?: Prisma.StringFilter<"Customer"> | string
+  purchaseIntent?: Prisma.StringFilter<"Customer"> | string
+  dealProbability?: Prisma.IntNullableFilter<"Customer"> | number | null
+  expectedDealValue?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lastContactAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  nextFollowUpAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Customer"> | string | null
+  isArchived?: Prisma.BoolFilter<"Customer"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  customCode?: Prisma.StringNullableFilter<"Customer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   businessLine?: Prisma.XOR<Prisma.BusinessLineScalarRelationFilter, Prisma.BusinessLineWhereInput>
@@ -459,6 +611,24 @@ export type CustomerOrderByWithRelationInput = {
   poolReason?: Prisma.SortOrderInput | Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  region?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  companySize?: Prisma.SortOrderInput | Prisma.SortOrder
+  rating?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  purchaseIntent?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrderInput | Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  expectedCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastContactAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextFollowUpAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  customCode?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   businessLine?: Prisma.BusinessLineOrderByWithRelationInput
@@ -507,6 +677,24 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   poolReason?: Prisma.StringNullableFilter<"Customer"> | string | null
   businessLineId?: Prisma.IntFilter<"Customer"> | number
   tenantId?: Prisma.IntNullableFilter<"Customer"> | number | null
+  shortName?: Prisma.StringNullableFilter<"Customer"> | string | null
+  region?: Prisma.StringNullableFilter<"Customer"> | string | null
+  city?: Prisma.StringNullableFilter<"Customer"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Customer"> | string | null
+  companySize?: Prisma.StringNullableFilter<"Customer"> | string | null
+  rating?: Prisma.IntNullableFilter<"Customer"> | number | null
+  tags?: Prisma.StringNullableListFilter<"Customer">
+  stage?: Prisma.StringFilter<"Customer"> | string
+  purchaseIntent?: Prisma.StringFilter<"Customer"> | string
+  dealProbability?: Prisma.IntNullableFilter<"Customer"> | number | null
+  expectedDealValue?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lastContactAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  nextFollowUpAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Customer"> | string | null
+  isArchived?: Prisma.BoolFilter<"Customer"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  customCode?: Prisma.StringNullableFilter<"Customer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   businessLine?: Prisma.XOR<Prisma.BusinessLineScalarRelationFilter, Prisma.BusinessLineWhereInput>
@@ -552,6 +740,24 @@ export type CustomerOrderByWithAggregationInput = {
   poolReason?: Prisma.SortOrderInput | Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  region?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  companySize?: Prisma.SortOrderInput | Prisma.SortOrder
+  rating?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  purchaseIntent?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrderInput | Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  expectedCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastContactAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextFollowUpAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  customCode?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CustomerCountOrderByAggregateInput
@@ -591,6 +797,24 @@ export type CustomerScalarWhereWithAggregatesInput = {
   poolReason?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   businessLineId?: Prisma.IntWithAggregatesFilter<"Customer"> | number
   tenantId?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
+  shortName?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  region?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  companySize?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  rating?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
+  tags?: Prisma.StringNullableListFilter<"Customer">
+  stage?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  purchaseIntent?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  dealProbability?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
+  expectedDealValue?: Prisma.DecimalNullableWithAggregatesFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
+  lastContactAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
+  nextFollowUpAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
+  lostReason?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  isArchived?: Prisma.BoolWithAggregatesFilter<"Customer"> | boolean
+  archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
+  customCode?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Customer"> | Date | string
 }
@@ -619,6 +843,24 @@ export type CustomerCreateInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -664,6 +906,24 @@ export type CustomerUncheckedCreateInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -704,6 +964,24 @@ export type CustomerUpdateInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -749,6 +1027,24 @@ export type CustomerUncheckedUpdateInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -792,6 +1088,24 @@ export type CustomerCreateManyInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -820,6 +1134,24 @@ export type CustomerUpdateManyMutationInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -851,6 +1183,24 @@ export type CustomerUncheckedUpdateManyInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -897,6 +1247,24 @@ export type CustomerCountOrderByAggregateInput = {
   poolReason?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  companySize?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  purchaseIntent?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrder
+  expectedCloseDate?: Prisma.SortOrder
+  lastContactAt?: Prisma.SortOrder
+  nextFollowUpAt?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  customCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -907,6 +1275,9 @@ export type CustomerAvgOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrder
 }
 
 export type CustomerMaxOrderByAggregateInput = {
@@ -936,6 +1307,23 @@ export type CustomerMaxOrderByAggregateInput = {
   poolReason?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  companySize?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  purchaseIntent?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrder
+  expectedCloseDate?: Prisma.SortOrder
+  lastContactAt?: Prisma.SortOrder
+  nextFollowUpAt?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  customCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -967,6 +1355,23 @@ export type CustomerMinOrderByAggregateInput = {
   poolReason?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  shortName?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  companySize?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  purchaseIntent?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrder
+  expectedCloseDate?: Prisma.SortOrder
+  lastContactAt?: Prisma.SortOrder
+  nextFollowUpAt?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  customCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -977,6 +1382,9 @@ export type CustomerSumOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   businessLineId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  dealProbability?: Prisma.SortOrder
+  expectedDealValue?: Prisma.SortOrder
 }
 
 export type CustomerScalarRelationFilter = {
@@ -1084,6 +1492,10 @@ export type CustomerUpdateOneWithoutConvertedFromNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutConvertedFromInput, Prisma.CustomerUpdateWithoutConvertedFromInput>, Prisma.CustomerUncheckedUpdateWithoutConvertedFromInput>
 }
 
+export type CustomerCreatetagsInput = {
+  set: string[]
+}
+
 export type EnumCustomerTypeFieldUpdateOperationsInput = {
   set?: $Enums.CustomerType
 }
@@ -1098,6 +1510,11 @@ export type EnumCustomerLifecycleStageFieldUpdateOperationsInput = {
 
 export type NullableEnumLeadSourceFieldUpdateOperationsInput = {
   set?: $Enums.LeadSource | null
+}
+
+export type CustomerUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type CustomerCreateNestedOneWithoutContactsInput = {
@@ -1290,6 +1707,24 @@ export type CustomerCreateWithoutTenantInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -1333,6 +1768,24 @@ export type CustomerUncheckedCreateWithoutTenantInput = {
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
   businessLineId: number
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -1405,6 +1858,24 @@ export type CustomerScalarWhereInput = {
   poolReason?: Prisma.StringNullableFilter<"Customer"> | string | null
   businessLineId?: Prisma.IntFilter<"Customer"> | number
   tenantId?: Prisma.IntNullableFilter<"Customer"> | number | null
+  shortName?: Prisma.StringNullableFilter<"Customer"> | string | null
+  region?: Prisma.StringNullableFilter<"Customer"> | string | null
+  city?: Prisma.StringNullableFilter<"Customer"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Customer"> | string | null
+  companySize?: Prisma.StringNullableFilter<"Customer"> | string | null
+  rating?: Prisma.IntNullableFilter<"Customer"> | number | null
+  tags?: Prisma.StringNullableListFilter<"Customer">
+  stage?: Prisma.StringFilter<"Customer"> | string
+  purchaseIntent?: Prisma.StringFilter<"Customer"> | string
+  dealProbability?: Prisma.IntNullableFilter<"Customer"> | number | null
+  expectedDealValue?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lastContactAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  nextFollowUpAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Customer"> | string | null
+  isArchived?: Prisma.BoolFilter<"Customer"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  customCode?: Prisma.StringNullableFilter<"Customer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
 }
@@ -1433,6 +1904,24 @@ export type CustomerCreateWithoutBusinessLineInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant?: Prisma.TenantCreateNestedOneWithoutCustomersInput
@@ -1476,6 +1965,24 @@ export type CustomerUncheckedCreateWithoutBusinessLineInput = {
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -1542,6 +2049,24 @@ export type CustomerCreateWithoutConvertedFromInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -1586,6 +2111,24 @@ export type CustomerUncheckedCreateWithoutConvertedFromInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -1641,6 +2184,24 @@ export type CustomerUpdateWithoutConvertedFromInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -1685,6 +2246,24 @@ export type CustomerUncheckedUpdateWithoutConvertedFromInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1724,6 +2303,24 @@ export type CustomerCreateWithoutContactsInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -1768,6 +2365,24 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCustomerInput
@@ -1823,6 +2438,24 @@ export type CustomerUpdateWithoutContactsInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -1867,6 +2500,24 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1906,6 +2557,24 @@ export type CustomerCreateWithoutCustomerActivitiesInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -1950,6 +2619,24 @@ export type CustomerUncheckedCreateWithoutCustomerActivitiesInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2005,6 +2692,24 @@ export type CustomerUpdateWithoutCustomerActivitiesInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2049,6 +2754,24 @@ export type CustomerUncheckedUpdateWithoutCustomerActivitiesInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2088,6 +2811,24 @@ export type CustomerCreateWithoutProjectsInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -2132,6 +2873,24 @@ export type CustomerUncheckedCreateWithoutProjectsInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2187,6 +2946,24 @@ export type CustomerUpdateWithoutProjectsInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2231,6 +3008,24 @@ export type CustomerUncheckedUpdateWithoutProjectsInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2270,6 +3065,24 @@ export type CustomerCreateWithoutFollowUpsInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -2314,6 +3127,24 @@ export type CustomerUncheckedCreateWithoutFollowUpsInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2369,6 +3200,24 @@ export type CustomerUpdateWithoutFollowUpsInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2413,6 +3262,24 @@ export type CustomerUncheckedUpdateWithoutFollowUpsInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2452,6 +3319,24 @@ export type CustomerCreateWithoutQuotesInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -2496,6 +3381,24 @@ export type CustomerUncheckedCreateWithoutQuotesInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2551,6 +3454,24 @@ export type CustomerUpdateWithoutQuotesInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2595,6 +3516,24 @@ export type CustomerUncheckedUpdateWithoutQuotesInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2634,6 +3573,24 @@ export type CustomerCreateWithoutTasksInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -2678,6 +3635,24 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2733,6 +3708,24 @@ export type CustomerUpdateWithoutTasksInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2777,6 +3770,24 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2816,6 +3827,24 @@ export type CustomerCreateWithoutOrdersInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -2860,6 +3889,24 @@ export type CustomerUncheckedCreateWithoutOrdersInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -2915,6 +3962,24 @@ export type CustomerUpdateWithoutOrdersInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -2959,6 +4024,24 @@ export type CustomerUncheckedUpdateWithoutOrdersInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2998,6 +4081,24 @@ export type CustomerCreateWithoutInvoicesInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -3042,6 +4143,24 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -3097,6 +4216,24 @@ export type CustomerUpdateWithoutInvoicesInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -3141,6 +4278,24 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3180,6 +4335,24 @@ export type CustomerCreateWithoutEmailsInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -3224,6 +4397,24 @@ export type CustomerUncheckedCreateWithoutEmailsInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -3279,6 +4470,24 @@ export type CustomerUpdateWithoutEmailsInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -3323,6 +4532,24 @@ export type CustomerUncheckedUpdateWithoutEmailsInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3362,6 +4589,24 @@ export type CustomerCreateWithoutEmailMessagesInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -3406,6 +4651,24 @@ export type CustomerUncheckedCreateWithoutEmailMessagesInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -3461,6 +4724,24 @@ export type CustomerUpdateWithoutEmailMessagesInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -3505,6 +4786,24 @@ export type CustomerUncheckedUpdateWithoutEmailMessagesInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3544,6 +4843,24 @@ export type CustomerCreateWithoutMessagesInput = {
   ownerName?: string | null
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   businessLine: Prisma.BusinessLineCreateNestedOneWithoutCustomersInput
@@ -3588,6 +4905,24 @@ export type CustomerUncheckedCreateWithoutMessagesInput = {
   poolReason?: string | null
   businessLineId: number
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -3643,6 +4978,24 @@ export type CustomerUpdateWithoutMessagesInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -3687,6 +5040,24 @@ export type CustomerUncheckedUpdateWithoutMessagesInput = {
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3728,6 +5099,24 @@ export type CustomerCreateManyTenantInput = {
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
   businessLineId: number
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3756,6 +5145,24 @@ export type CustomerUpdateWithoutTenantInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessLine?: Prisma.BusinessLineUpdateOneRequiredWithoutCustomersNestedInput
@@ -3799,6 +5206,24 @@ export type CustomerUncheckedUpdateWithoutTenantInput = {
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3841,6 +5266,24 @@ export type CustomerUncheckedUpdateManyWithoutTenantInput = {
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   businessLineId?: Prisma.IntFieldUpdateOperationsInput | number
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -3871,6 +5314,24 @@ export type CustomerCreateManyBusinessLineInput = {
   poolEnteredAt?: Date | string | null
   poolReason?: string | null
   tenantId?: number | null
+  shortName?: string | null
+  region?: string | null
+  city?: string | null
+  postalCode?: string | null
+  companySize?: string | null
+  rating?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  stage?: string
+  purchaseIntent?: string
+  dealProbability?: number | null
+  expectedDealValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Date | string | null
+  lastContactAt?: Date | string | null
+  nextFollowUpAt?: Date | string | null
+  lostReason?: string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  customCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3899,6 +5360,24 @@ export type CustomerUpdateWithoutBusinessLineInput = {
   ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneWithoutCustomersNestedInput
@@ -3942,6 +5421,24 @@ export type CustomerUncheckedUpdateWithoutBusinessLineInput = {
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -3984,6 +5481,24 @@ export type CustomerUncheckedUpdateManyWithoutBusinessLineInput = {
   poolEnteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poolReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  stage?: Prisma.StringFieldUpdateOperationsInput | string
+  purchaseIntent?: Prisma.StringFieldUpdateOperationsInput | string
+  dealProbability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedDealValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastContactAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextFollowUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  customCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -4145,6 +5660,24 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   poolReason?: boolean
   businessLineId?: boolean
   tenantId?: boolean
+  shortName?: boolean
+  region?: boolean
+  city?: boolean
+  postalCode?: boolean
+  companySize?: boolean
+  rating?: boolean
+  tags?: boolean
+  stage?: boolean
+  purchaseIntent?: boolean
+  dealProbability?: boolean
+  expectedDealValue?: boolean
+  expectedCloseDate?: boolean
+  lastContactAt?: boolean
+  nextFollowUpAt?: boolean
+  lostReason?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
+  customCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
@@ -4191,6 +5724,24 @@ export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   poolReason?: boolean
   businessLineId?: boolean
   tenantId?: boolean
+  shortName?: boolean
+  region?: boolean
+  city?: boolean
+  postalCode?: boolean
+  companySize?: boolean
+  rating?: boolean
+  tags?: boolean
+  stage?: boolean
+  purchaseIntent?: boolean
+  dealProbability?: boolean
+  expectedDealValue?: boolean
+  expectedCloseDate?: boolean
+  lastContactAt?: boolean
+  nextFollowUpAt?: boolean
+  lostReason?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
+  customCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
@@ -4224,6 +5775,24 @@ export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   poolReason?: boolean
   businessLineId?: boolean
   tenantId?: boolean
+  shortName?: boolean
+  region?: boolean
+  city?: boolean
+  postalCode?: boolean
+  companySize?: boolean
+  rating?: boolean
+  tags?: boolean
+  stage?: boolean
+  purchaseIntent?: boolean
+  dealProbability?: boolean
+  expectedDealValue?: boolean
+  expectedCloseDate?: boolean
+  lastContactAt?: boolean
+  nextFollowUpAt?: boolean
+  lostReason?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
+  customCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
@@ -4257,11 +5826,29 @@ export type CustomerSelectScalar = {
   poolReason?: boolean
   businessLineId?: boolean
   tenantId?: boolean
+  shortName?: boolean
+  region?: boolean
+  city?: boolean
+  postalCode?: boolean
+  companySize?: boolean
+  rating?: boolean
+  tags?: boolean
+  stage?: boolean
+  purchaseIntent?: boolean
+  dealProbability?: boolean
+  expectedDealValue?: boolean
+  expectedCloseDate?: boolean
+  lastContactAt?: boolean
+  nextFollowUpAt?: boolean
+  lostReason?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
+  customCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "lifecycleStage" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "aiScore" | "aiIntentLevel" | "lastAiActionAt" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company" | "contactName" | "country" | "phone" | "email" | "whatsapp" | "website" | "address" | "industry" | "customerType" | "customerStatus" | "lifecycleStage" | "leadGrade" | "source" | "sourceWebsite" | "remark" | "aiScore" | "aiIntentLevel" | "lastAiActionAt" | "ownerId" | "ownerName" | "poolEnteredAt" | "poolReason" | "businessLineId" | "tenantId" | "shortName" | "region" | "city" | "postalCode" | "companySize" | "rating" | "tags" | "stage" | "purchaseIntent" | "dealProbability" | "expectedDealValue" | "expectedCloseDate" | "lastContactAt" | "nextFollowUpAt" | "lostReason" | "isArchived" | "archivedAt" | "customCode" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   businessLine?: boolean | Prisma.BusinessLineDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.Customer$tenantArgs<ExtArgs>
@@ -4333,6 +5920,24 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     poolReason: string | null
     businessLineId: number
     tenantId: number | null
+    shortName: string | null
+    region: string | null
+    city: string | null
+    postalCode: string | null
+    companySize: string | null
+    rating: number | null
+    tags: string[]
+    stage: string
+    purchaseIntent: string
+    dealProbability: number | null
+    expectedDealValue: runtime.Decimal | null
+    expectedCloseDate: Date | null
+    lastContactAt: Date | null
+    nextFollowUpAt: Date | null
+    lostReason: string | null
+    isArchived: boolean
+    archivedAt: Date | null
+    customCode: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["customer"]>
@@ -4798,6 +6403,24 @@ export interface CustomerFieldRefs {
   readonly poolReason: Prisma.FieldRef<"Customer", 'String'>
   readonly businessLineId: Prisma.FieldRef<"Customer", 'Int'>
   readonly tenantId: Prisma.FieldRef<"Customer", 'Int'>
+  readonly shortName: Prisma.FieldRef<"Customer", 'String'>
+  readonly region: Prisma.FieldRef<"Customer", 'String'>
+  readonly city: Prisma.FieldRef<"Customer", 'String'>
+  readonly postalCode: Prisma.FieldRef<"Customer", 'String'>
+  readonly companySize: Prisma.FieldRef<"Customer", 'String'>
+  readonly rating: Prisma.FieldRef<"Customer", 'Int'>
+  readonly tags: Prisma.FieldRef<"Customer", 'String[]'>
+  readonly stage: Prisma.FieldRef<"Customer", 'String'>
+  readonly purchaseIntent: Prisma.FieldRef<"Customer", 'String'>
+  readonly dealProbability: Prisma.FieldRef<"Customer", 'Int'>
+  readonly expectedDealValue: Prisma.FieldRef<"Customer", 'Decimal'>
+  readonly expectedCloseDate: Prisma.FieldRef<"Customer", 'DateTime'>
+  readonly lastContactAt: Prisma.FieldRef<"Customer", 'DateTime'>
+  readonly nextFollowUpAt: Prisma.FieldRef<"Customer", 'DateTime'>
+  readonly lostReason: Prisma.FieldRef<"Customer", 'String'>
+  readonly isArchived: Prisma.FieldRef<"Customer", 'Boolean'>
+  readonly archivedAt: Prisma.FieldRef<"Customer", 'DateTime'>
+  readonly customCode: Prisma.FieldRef<"Customer", 'String'>
   readonly createdAt: Prisma.FieldRef<"Customer", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Customer", 'DateTime'>
 }

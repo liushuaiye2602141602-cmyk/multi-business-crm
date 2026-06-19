@@ -547,6 +547,28 @@ Best regards`,
     }
   }
   console.log("✅ 任务数据已创建（5条）");
+
+  // ==================== Custom Fields ====================
+  console.log("\n📦 创建自定义字段...");
+
+  const customFields = [
+    { entityType: "CUSTOMER", key: "annual_revenue", label: "年营收", fieldType: "CURRENCY", description: "客户年营收（美元）" },
+    { entityType: "CUSTOMER", key: "employee_count", label: "员工人数", fieldType: "NUMBER", description: "客户公司员工数量" },
+    { entityType: "CUSTOMER", key: "founded_year", label: "成立年份", fieldType: "NUMBER", description: "客户公司成立年份" },
+    { entityType: "CUSTOMER", key: "preferred_currency", label: "偏好币种", fieldType: "SELECT", options: JSON.stringify(["USD", "EUR", "CNY", "GBP", "JPY"]) },
+    { entityType: "CONTACT", key: "linkedin_profile", label: "LinkedIn 主页", fieldType: "URL" },
+    { entityType: "CONTACT", key: "birthday", label: "生日", fieldType: "DATE" },
+  ];
+
+  for (const cf of customFields) {
+    const existing = await prisma.customFieldDefinition.findFirst({
+      where: { entityType: cf.entityType, key: cf.key },
+    });
+    if (!existing) {
+      await prisma.customFieldDefinition.create({ data: cf });
+    }
+  }
+  console.log("✅ 自定义字段已创建");
 }
 
 main()

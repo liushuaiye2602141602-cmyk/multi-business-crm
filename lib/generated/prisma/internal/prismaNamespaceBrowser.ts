@@ -86,6 +86,9 @@ export const ModelName = {
   IMPlatform: 'IMPlatform',
   IMUser: 'IMUser',
   IMMessage: 'IMMessage',
+  ContactSocialProfile: 'ContactSocialProfile',
+  CustomFieldDefinition: 'CustomFieldDefinition',
+  CustomFieldValue: 'CustomFieldValue',
   AILog: 'AILog',
   Message: 'Message',
   AIControlSettings: 'AIControlSettings',
@@ -224,6 +227,24 @@ export const CustomerScalarFieldEnum = {
   poolReason: 'poolReason',
   businessLineId: 'businessLineId',
   tenantId: 'tenantId',
+  shortName: 'shortName',
+  region: 'region',
+  city: 'city',
+  postalCode: 'postalCode',
+  companySize: 'companySize',
+  rating: 'rating',
+  tags: 'tags',
+  stage: 'stage',
+  purchaseIntent: 'purchaseIntent',
+  dealProbability: 'dealProbability',
+  expectedDealValue: 'expectedDealValue',
+  expectedCloseDate: 'expectedCloseDate',
+  lastContactAt: 'lastContactAt',
+  nextFollowUpAt: 'nextFollowUpAt',
+  lostReason: 'lostReason',
+  isArchived: 'isArchived',
+  archivedAt: 'archivedAt',
+  customCode: 'customCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -244,7 +265,19 @@ export const ContactScalarFieldEnum = {
   isPrimary: 'isPrimary',
   notes: 'notes',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  nickname: 'nickname',
+  jobTitle: 'jobTitle',
+  department: 'department',
+  secondaryEmail: 'secondaryEmail',
+  mobile: 'mobile',
+  phoneCountryCode: 'phoneCountryCode',
+  preferredContactMethod: 'preferredContactMethod',
+  preferredLanguage: 'preferredLanguage',
+  timezone: 'timezone'
 } as const
 
 export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -794,6 +827,56 @@ export const IMMessageScalarFieldEnum = {
 } as const
 
 export type IMMessageScalarFieldEnum = (typeof IMMessageScalarFieldEnum)[keyof typeof IMMessageScalarFieldEnum]
+
+
+export const ContactSocialProfileScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  platform: 'platform',
+  account: 'account',
+  profileUrl: 'profileUrl',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactSocialProfileScalarFieldEnum = (typeof ContactSocialProfileScalarFieldEnum)[keyof typeof ContactSocialProfileScalarFieldEnum]
+
+
+export const CustomFieldDefinitionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  entityType: 'entityType',
+  key: 'key',
+  label: 'label',
+  fieldType: 'fieldType',
+  description: 'description',
+  placeholder: 'placeholder',
+  isRequired: 'isRequired',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  options: 'options',
+  defaultValue: 'defaultValue',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomFieldDefinitionScalarFieldEnum = (typeof CustomFieldDefinitionScalarFieldEnum)[keyof typeof CustomFieldDefinitionScalarFieldEnum]
+
+
+export const CustomFieldValueScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  fieldDefinitionId: 'fieldDefinitionId',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomFieldValueScalarFieldEnum = (typeof CustomFieldValueScalarFieldEnum)[keyof typeof CustomFieldValueScalarFieldEnum]
 
 
 export const AILogScalarFieldEnum = {

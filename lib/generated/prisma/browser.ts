@@ -193,6 +193,21 @@ export type IMUser = Prisma.IMUserModel
  */
 export type IMMessage = Prisma.IMMessageModel
 /**
+ * Model ContactSocialProfile
+ * 
+ */
+export type ContactSocialProfile = Prisma.ContactSocialProfileModel
+/**
+ * Model CustomFieldDefinition
+ * 
+ */
+export type CustomFieldDefinition = Prisma.CustomFieldDefinitionModel
+/**
+ * Model CustomFieldValue
+ * 
+ */
+export type CustomFieldValue = Prisma.CustomFieldValueModel
+/**
  * Model AILog
  * 
  */

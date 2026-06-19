@@ -246,3 +246,143 @@ export async function deleteCustomer(id: number) {
   await prisma.customer.delete({ where: { id } });
   revalidatePath("/customers");
 }
+
+// ==================== 客户归档 ====================
+
+export async function archiveCustomer(customerId: number) {
+  const customer = await prisma.customer.update({
+    where: { id: customerId },
+    data: { isArchived: true, archivedAt: new Date() },
+  });
+  return { success: true, customer };
+}
+
+export async function restoreCustomer(customerId: number) {
+  const customer = await prisma.customer.update({
+    where: { id: customerId },
+    data: { isArchived: false, archivedAt: null },
+  });
+  return { success: true, customer };
+}
+
+// ==================== 联系人主联系人设置 ====================
+
+export async function setPrimaryContact(contactId: number, customerId: number) {
+  // Reset all contacts for this customer
+  await prisma.contact.updateMany({
+    where: { customerId },
+    data: { isPrimary: false },
+  });
+  // Set the target as primary
+  await prisma.contact.update({
+    where: { id: contactId },
+    data: { isPrimary: true },
+  });
+  return { success: true };
+}
+
+// ==================== 社交资料 ====================
+
+export async function addContactSocialProfile(data: {
+  contactId: number;
+  platform: string;
+  account: string;
+  profileUrl?: string;
+  isPrimary?: boolean;
+}) {
+  const profile = await prisma.contactSocialProfile.create({
+    data: {
+      contactId: data.contactId,
+      platform: data.platform,
+      account: data.account,
+      profileUrl: data.profileUrl || null,
+      isPrimary: data.isPrimary || false,
+    },
+  });
+  return { success: true, profile };
+}
+
+export async function deleteContactSocialProfile(profileId: number) {
+  await prisma.contactSocialProfile.delete({ where: { id: profileId } });
+  return { success: true };
+}
+
+// ==================== 自定义字段 ====================
+
+export async function getCustomFieldDefinitions(entityType: string) {
+  return prisma.customFieldDefinition.findMany({
+    where: { entityType, isActive: true },
+    orderBy: { sortOrder: "asc" },
+  });
+}
+
+export async function createCustomFieldDefinition(data: {
+  entityType: string;
+  key: string;
+  label: string;
+  fieldType?: string;
+  description?: string;
+  isRequired?: boolean;
+  options?: any;
+}) {
+  const definition = await prisma.customFieldDefinition.create({
+    data: {
+      entityType: data.entityType,
+      key: data.key,
+      label: data.label,
+      fieldType: data.fieldType || "TEXT",
+      description: data.description || null,
+      isRequired: data.isRequired || false,
+      options: data.options || null,
+    },
+  });
+  return { success: true, definition };
+}
+
+export async function updateCustomFieldDefinition(id: number, data: any) {
+  const definition = await prisma.customFieldDefinition.update({
+    where: { id },
+    data,
+  });
+  return { success: true, definition };
+}
+
+export async function deleteCustomFieldDefinition(id: number) {
+  await prisma.customFieldDefinition.update({
+    where: { id },
+    data: { isActive: false },
+  });
+  return { success: true };
+}
+
+export async function setCustomFieldValue(data: {
+  fieldDefinitionId: number;
+  entityType: string;
+  entityId: number;
+  value: string;
+}) {
+  const fieldValue = await prisma.customFieldValue.upsert({
+    where: {
+      fieldDefinitionId_entityType_entityId: {
+        fieldDefinitionId: data.fieldDefinitionId,
+        entityType: data.entityType,
+        entityId: data.entityId,
+      },
+    },
+    update: { value: data.value },
+    create: {
+      fieldDefinitionId: data.fieldDefinitionId,
+      entityType: data.entityType,
+      entityId: data.entityId,
+      value: data.value,
+    },
+  });
+  return { success: true, fieldValue };
+}
+
+export async function getCustomFieldValues(entityType: string, entityId: number) {
+  return prisma.customFieldValue.findMany({
+    where: { entityType, entityId },
+    include: { fieldDefinition: true },
+  });
+}

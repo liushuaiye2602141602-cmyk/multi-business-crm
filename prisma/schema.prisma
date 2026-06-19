@@ -371,6 +371,24 @@ model Customer {
   poolReason      String?
   businessLineId Int
   tenantId        Int?
+  shortName       String?
+  region          String?
+  city            String?
+  postalCode      String?
+  companySize     String?
+  rating          Int?
+  tags            String[] @default([])
+  stage           String   @default("NEW")
+  purchaseIntent  String   @default("UNKNOWN")
+  dealProbability Int?
+  expectedDealValue Decimal? @db.Decimal(12, 2)
+  expectedCloseDate DateTime?
+  lastContactAt   DateTime?
+  nextFollowUpAt  DateTime?
+  lostReason      String?
+  isArchived      Boolean  @default(false)
+  archivedAt      DateTime?
+  customCode      String?
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
@@ -417,6 +435,19 @@ model Contact {
   emails   Email[]
   emailMessages EmailMessage[]
   messages     Message[]
+  contactSocialProfiles ContactSocialProfile[]
+  tenantId        Int?
+  firstName       String?
+  lastName        String?
+  nickname        String?
+  jobTitle        String?
+  department      String?
+  secondaryEmail  String?
+  mobile          String?
+  phoneCountryCode String?
+  preferredContactMethod String?
+  preferredLanguage String?
+  timezone        String?
 
   @@index([customerId])
 }
@@ -1080,6 +1111,63 @@ model IMMessage {
 
   @@index([createdAt])
   @@index([platformId])
+}
+
+model ContactSocialProfile {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  contactId   Int
+  platform    String
+  account     String
+  profileUrl  String?
+  isPrimary   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@index([contactId])
+  @@index([tenantId])
+}
+
+model CustomFieldDefinition {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  entityType  String
+  key         String
+  label       String
+  fieldType   String   @default("TEXT")
+  description String?
+  placeholder String?
+  isRequired  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  options     Json?
+  defaultValue String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  values    CustomFieldValue[]
+
+  @@unique([tenantId, entityType, key])
+  @@index([tenantId, entityType])
+}
+
+model CustomFieldValue {
+  id               Int      @id @default(autoincrement())
+  tenantId         Int?
+  fieldDefinitionId Int
+  entityType       String
+  entityId         Int
+  value            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  fieldDefinition CustomFieldDefinition @relation(fields: [fieldDefinitionId], references: [id])
+
+  @@unique([fieldDefinitionId, entityType, entityId])
+  @@index([entityType, entityId])
+  @@index([tenantId])
 }
 
 model AILog {
