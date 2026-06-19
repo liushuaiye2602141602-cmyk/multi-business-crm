@@ -44,6 +44,7 @@ export type IMMessageMinAggregateOutputType = {
   imUserId: number | null
   direction: string | null
   content: string | null
+  externalId: string | null
   intent: string | null
   action: string | null
   errorMsg: string | null
@@ -56,6 +57,7 @@ export type IMMessageMaxAggregateOutputType = {
   imUserId: number | null
   direction: string | null
   content: string | null
+  externalId: string | null
   intent: string | null
   action: string | null
   errorMsg: string | null
@@ -68,6 +70,7 @@ export type IMMessageCountAggregateOutputType = {
   imUserId: number
   direction: number
   content: number
+  externalId: number
   intent: number
   action: number
   actionResult: number
@@ -95,6 +98,7 @@ export type IMMessageMinAggregateInputType = {
   imUserId?: true
   direction?: true
   content?: true
+  externalId?: true
   intent?: true
   action?: true
   errorMsg?: true
@@ -107,6 +111,7 @@ export type IMMessageMaxAggregateInputType = {
   imUserId?: true
   direction?: true
   content?: true
+  externalId?: true
   intent?: true
   action?: true
   errorMsg?: true
@@ -119,6 +124,7 @@ export type IMMessageCountAggregateInputType = {
   imUserId?: true
   direction?: true
   content?: true
+  externalId?: true
   intent?: true
   action?: true
   actionResult?: true
@@ -219,6 +225,7 @@ export type IMMessageGroupByOutputType = {
   imUserId: number
   direction: string
   content: string
+  externalId: string | null
   intent: string | null
   action: string | null
   actionResult: runtime.JsonValue | null
@@ -255,6 +262,7 @@ export type IMMessageWhereInput = {
   imUserId?: Prisma.IntFilter<"IMMessage"> | number
   direction?: Prisma.StringFilter<"IMMessage"> | string
   content?: Prisma.StringFilter<"IMMessage"> | string
+  externalId?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   intent?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   action?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   actionResult?: Prisma.JsonNullableFilter<"IMMessage">
@@ -270,6 +278,7 @@ export type IMMessageOrderByWithRelationInput = {
   imUserId?: Prisma.SortOrder
   direction?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   intent?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrderInput | Prisma.SortOrder
   actionResult?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -281,6 +290,7 @@ export type IMMessageOrderByWithRelationInput = {
 
 export type IMMessageWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  IMMessage_platformId_externalId_key?: Prisma.IMMessageIMMessage_platformId_externalId_keyCompoundUniqueInput
   AND?: Prisma.IMMessageWhereInput | Prisma.IMMessageWhereInput[]
   OR?: Prisma.IMMessageWhereInput[]
   NOT?: Prisma.IMMessageWhereInput | Prisma.IMMessageWhereInput[]
@@ -288,6 +298,7 @@ export type IMMessageWhereUniqueInput = Prisma.AtLeast<{
   imUserId?: Prisma.IntFilter<"IMMessage"> | number
   direction?: Prisma.StringFilter<"IMMessage"> | string
   content?: Prisma.StringFilter<"IMMessage"> | string
+  externalId?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   intent?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   action?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   actionResult?: Prisma.JsonNullableFilter<"IMMessage">
@@ -295,7 +306,7 @@ export type IMMessageWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"IMMessage"> | Date | string
   platform?: Prisma.XOR<Prisma.IMPlatformScalarRelationFilter, Prisma.IMPlatformWhereInput>
   imUser?: Prisma.XOR<Prisma.IMUserScalarRelationFilter, Prisma.IMUserWhereInput>
-}, "id">
+}, "id" | "IMMessage_platformId_externalId_key">
 
 export type IMMessageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -303,6 +314,7 @@ export type IMMessageOrderByWithAggregationInput = {
   imUserId?: Prisma.SortOrder
   direction?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   intent?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrderInput | Prisma.SortOrder
   actionResult?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,6 +336,7 @@ export type IMMessageScalarWhereWithAggregatesInput = {
   imUserId?: Prisma.IntWithAggregatesFilter<"IMMessage"> | number
   direction?: Prisma.StringWithAggregatesFilter<"IMMessage"> | string
   content?: Prisma.StringWithAggregatesFilter<"IMMessage"> | string
+  externalId?: Prisma.StringNullableWithAggregatesFilter<"IMMessage"> | string | null
   intent?: Prisma.StringNullableWithAggregatesFilter<"IMMessage"> | string | null
   action?: Prisma.StringNullableWithAggregatesFilter<"IMMessage"> | string | null
   actionResult?: Prisma.JsonNullableWithAggregatesFilter<"IMMessage">
@@ -334,6 +347,7 @@ export type IMMessageScalarWhereWithAggregatesInput = {
 export type IMMessageCreateInput = {
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -349,6 +363,7 @@ export type IMMessageUncheckedCreateInput = {
   imUserId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -359,6 +374,7 @@ export type IMMessageUncheckedCreateInput = {
 export type IMMessageUpdateInput = {
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -374,6 +390,7 @@ export type IMMessageUncheckedUpdateInput = {
   imUserId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -387,6 +404,7 @@ export type IMMessageCreateManyInput = {
   imUserId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -397,6 +415,7 @@ export type IMMessageCreateManyInput = {
 export type IMMessageUpdateManyMutationInput = {
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -410,6 +429,7 @@ export type IMMessageUncheckedUpdateManyInput = {
   imUserId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -427,12 +447,18 @@ export type IMMessageOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type IMMessageIMMessage_platformId_externalId_keyCompoundUniqueInput = {
+  platformId: number
+  externalId: string
+}
+
 export type IMMessageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   platformId?: Prisma.SortOrder
   imUserId?: Prisma.SortOrder
   direction?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   action?: Prisma.SortOrder
   actionResult?: Prisma.SortOrder
@@ -452,6 +478,7 @@ export type IMMessageMaxOrderByAggregateInput = {
   imUserId?: Prisma.SortOrder
   direction?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   action?: Prisma.SortOrder
   errorMsg?: Prisma.SortOrder
@@ -464,6 +491,7 @@ export type IMMessageMinOrderByAggregateInput = {
   imUserId?: Prisma.SortOrder
   direction?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   action?: Prisma.SortOrder
   errorMsg?: Prisma.SortOrder
@@ -563,6 +591,7 @@ export type IMMessageUncheckedUpdateManyWithoutImUserNestedInput = {
 export type IMMessageCreateWithoutPlatformInput = {
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -576,6 +605,7 @@ export type IMMessageUncheckedCreateWithoutPlatformInput = {
   imUserId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -618,6 +648,7 @@ export type IMMessageScalarWhereInput = {
   imUserId?: Prisma.IntFilter<"IMMessage"> | number
   direction?: Prisma.StringFilter<"IMMessage"> | string
   content?: Prisma.StringFilter<"IMMessage"> | string
+  externalId?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   intent?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   action?: Prisma.StringNullableFilter<"IMMessage"> | string | null
   actionResult?: Prisma.JsonNullableFilter<"IMMessage">
@@ -628,6 +659,7 @@ export type IMMessageScalarWhereInput = {
 export type IMMessageCreateWithoutImUserInput = {
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -641,6 +673,7 @@ export type IMMessageUncheckedCreateWithoutImUserInput = {
   platformId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -679,6 +712,7 @@ export type IMMessageCreateManyPlatformInput = {
   imUserId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -689,6 +723,7 @@ export type IMMessageCreateManyPlatformInput = {
 export type IMMessageUpdateWithoutPlatformInput = {
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -702,6 +737,7 @@ export type IMMessageUncheckedUpdateWithoutPlatformInput = {
   imUserId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -714,6 +750,7 @@ export type IMMessageUncheckedUpdateManyWithoutPlatformInput = {
   imUserId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -726,6 +763,7 @@ export type IMMessageCreateManyImUserInput = {
   platformId: number
   direction: string
   content: string
+  externalId?: string | null
   intent?: string | null
   action?: string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -736,6 +774,7 @@ export type IMMessageCreateManyImUserInput = {
 export type IMMessageUpdateWithoutImUserInput = {
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -749,6 +788,7 @@ export type IMMessageUncheckedUpdateWithoutImUserInput = {
   platformId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -761,6 +801,7 @@ export type IMMessageUncheckedUpdateManyWithoutImUserInput = {
   platformId?: Prisma.IntFieldUpdateOperationsInput | number
   direction?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actionResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -776,6 +817,7 @@ export type IMMessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   imUserId?: boolean
   direction?: boolean
   content?: boolean
+  externalId?: boolean
   intent?: boolean
   action?: boolean
   actionResult?: boolean
@@ -791,6 +833,7 @@ export type IMMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   imUserId?: boolean
   direction?: boolean
   content?: boolean
+  externalId?: boolean
   intent?: boolean
   action?: boolean
   actionResult?: boolean
@@ -806,6 +849,7 @@ export type IMMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   imUserId?: boolean
   direction?: boolean
   content?: boolean
+  externalId?: boolean
   intent?: boolean
   action?: boolean
   actionResult?: boolean
@@ -821,6 +865,7 @@ export type IMMessageSelectScalar = {
   imUserId?: boolean
   direction?: boolean
   content?: boolean
+  externalId?: boolean
   intent?: boolean
   action?: boolean
   actionResult?: boolean
@@ -828,7 +873,7 @@ export type IMMessageSelectScalar = {
   createdAt?: boolean
 }
 
-export type IMMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "platformId" | "imUserId" | "direction" | "content" | "intent" | "action" | "actionResult" | "errorMsg" | "createdAt", ExtArgs["result"]["iMMessage"]>
+export type IMMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "platformId" | "imUserId" | "direction" | "content" | "externalId" | "intent" | "action" | "actionResult" | "errorMsg" | "createdAt", ExtArgs["result"]["iMMessage"]>
 export type IMMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   platform?: boolean | Prisma.IMPlatformDefaultArgs<ExtArgs>
   imUser?: boolean | Prisma.IMUserDefaultArgs<ExtArgs>
@@ -854,6 +899,7 @@ export type $IMMessagePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     imUserId: number
     direction: string
     content: string
+    externalId: string | null
     intent: string | null
     action: string | null
     actionResult: runtime.JsonValue | null
@@ -1289,6 +1335,7 @@ export interface IMMessageFieldRefs {
   readonly imUserId: Prisma.FieldRef<"IMMessage", 'Int'>
   readonly direction: Prisma.FieldRef<"IMMessage", 'String'>
   readonly content: Prisma.FieldRef<"IMMessage", 'String'>
+  readonly externalId: Prisma.FieldRef<"IMMessage", 'String'>
   readonly intent: Prisma.FieldRef<"IMMessage", 'String'>
   readonly action: Prisma.FieldRef<"IMMessage", 'String'>
   readonly actionResult: Prisma.FieldRef<"IMMessage", 'Json'>

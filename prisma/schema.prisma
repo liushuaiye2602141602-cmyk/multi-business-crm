@@ -1148,6 +1148,7 @@ model IMMessage {
   imUserId     Int
   direction    String
   content      String
+  externalId   String?
   intent       String?
   action       String?
   actionResult Json?
@@ -1157,8 +1158,10 @@ model IMMessage {
   platform IMPlatform @relation(fields: [platformId], references: [id])
   imUser   IMUser     @relation(fields: [imUserId], references: [id])
 
+  @@unique([platformId, externalId], name: "IMMessage_platformId_externalId_key")
   @@index([createdAt])
   @@index([platformId])
+  @@index([externalId])
 }
 
 model ContactSocialProfile {

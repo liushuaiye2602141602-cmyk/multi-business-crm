@@ -4718,6 +4718,7 @@ export const IMMessageScalarFieldEnum = {
   imUserId: 'imUserId',
   direction: 'direction',
   content: 'content',
+  externalId: 'externalId',
   intent: 'intent',
   action: 'action',
   actionResult: 'actionResult',
