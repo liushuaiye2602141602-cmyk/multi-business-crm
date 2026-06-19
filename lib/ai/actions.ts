@@ -1,6 +1,6 @@
-import { getLocalWorkspaceId } from "@/lib/local-context";
 "use server";
 
+import { getLocalWorkspaceId } from "@/lib/local-context";
 import prisma from "@/lib/prisma";
 import { isAIConfigured } from "./types";
 import { chatCompletion, AIError } from "./client";
