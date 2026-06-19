@@ -1,3 +1,4 @@
+import { getLocalWorkspaceId } from "@/lib/local-context";
 /**
  * 飞书长连接模式 - 独立运行脚本
  * 无需公网域名，SDK 主动连接飞书服务器接收消息
@@ -131,7 +132,7 @@ async function main() {
           if (businessLine && extracted.company !== "未知") {
             const lead = await prisma.lead.create({
               data: {
-                tenantId: 1,
+                tenantId: getLocalWorkspaceId(),
                 company: extracted.company,
                 contactName: extracted.contactName,
                 country: extracted.country || null,
@@ -158,7 +159,7 @@ async function main() {
             // company 为 "未知"，仍创建但提示
             const lead = await prisma.lead.create({
               data: {
-                tenantId: 1,
+                tenantId: getLocalWorkspaceId(),
                 company: extracted.company,
                 contactName: extracted.contactName,
                 remark: extracted.remark || "图片识别，信息不完整",

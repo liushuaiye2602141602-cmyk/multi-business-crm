@@ -1,3 +1,4 @@
+import { getLocalWorkspaceId } from "@/lib/local-context";
 "use server";
 
 import prisma from "@/lib/prisma";
@@ -603,7 +604,7 @@ export async function createTaskFromAI(
 
     await prisma.task.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         title,
         type: "FOLLOW_UP",
         status: "PENDING",

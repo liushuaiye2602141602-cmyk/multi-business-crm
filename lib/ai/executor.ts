@@ -1,3 +1,4 @@
+import { getLocalWorkspaceId } from "@/lib/local-context";
 import prisma from "@/lib/prisma";
 import { createActivityLog } from "@/lib/activity-log";
 import type { IntentResult } from "./intent";
@@ -63,7 +64,7 @@ async function executeCreateLead(args: Record<string, unknown>): Promise<Executi
   try {
     const lead = await prisma.lead.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         company,
         contactName,
         country: (args.country as string) || null,
@@ -110,7 +111,7 @@ async function executeCreateCustomer(args: Record<string, unknown>): Promise<Exe
   try {
     const customer = await prisma.customer.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         company,
         contactName,
         country: (args.country as string) || null,
@@ -161,7 +162,7 @@ async function executeCreateOrder(args: Record<string, unknown>): Promise<Execut
     const currency = (args.currency as string) || "USD";
     const order = await prisma.order.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         orderNo,
         orderTitle: (args.orderTitle as string) || `${customer.company} 订单`,
         customerId: customer.id,
@@ -514,7 +515,7 @@ async function executeCreateQuote(args: Record<string, unknown>): Promise<Execut
     const totalPrice = items.reduce((sum, item) => sum + (item.quantity || 0) * (item.unitPrice || 0), 0);
     const quote = await prisma.quote.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         quoteNo,
         quoteTitle: `${customer.company} 报价`,
         customerId: customer.id,
