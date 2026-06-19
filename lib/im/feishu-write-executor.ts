@@ -93,8 +93,59 @@ export async function executeWriteIntent(
 async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
   const company = parsed.parameters.exactName || parsed.parameters.keyword;
   const contactName = parsed.parameters.contactName;
+  const email = parsed.parameters.email;
+  const phone = parsed.parameters.phone;
+  const country = parsed.parameters.country;
+  const requirement = parsed.parameters.requirement;
+
+  // Validate required fields
   if (!company) {
     return { success: false, message: "请提供公司名称。示例：添加线索，ABC公司，联系人John" };
+  }
+  if (!contactName) {
+    return { success: false, message: "请提供联系人姓名。示例：添加线索，ABC公司，联系人John" };
+  }
+
+  // Validate email format if provided
+  if (email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { success: false, message: `邮箱格式不正确："${email}"。请提供有效的邮箱地址。` };
+    }
+  }
+
+  // ── Duplicate detection ──────────────────────────────────────────
+  // Check duplicate by email
+  if (email) {
+    const existingEmail = await prisma.lead.findFirst({ where: { email } });
+    if (existingEmail) {
+      return {
+        success: false,
+        message: `发现可能重复的线索：公司 ${existingEmail.company}，邮箱 ${existingEmail.email}。请先查看现有线索。`,
+      };
+    }
+  }
+  // Check duplicate by phone
+  if (phone) {
+    const existingPhone = await prisma.lead.findFirst({ where: { phone } });
+    if (existingPhone) {
+      return {
+        success: false,
+        message: `发现可能重复的线索：公司 ${existingPhone.company}，电话 ${existingPhone.phone}。请先查看现有线索。`,
+      };
+    }
+  }
+  // Check duplicate by company
+  if (company) {
+    const existingCompany = await prisma.lead.findFirst({
+      where: { company: { equals: company, mode: "insensitive" } },
+    });
+    if (existingCompany) {
+      return {
+        success: false,
+        message: `发现可能重复的线索：公司 ${existingCompany.company}，联系人 ${existingCompany.contactName}。请先查看现有线索。`,
+      };
+    }
   }
 
   const tenantId = getLocalWorkspaceId();
@@ -106,7 +157,11 @@ async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise
   const lead = await prisma.lead.create({
     data: {
       company,
-      contactName: contactName || "待补充",
+      contactName,
+      email: email || undefined,
+      phone: phone || undefined,
+      country: country || undefined,
+      requirement: requirement || undefined,
       source: "OTHER",
       status: "NEW",
       temperature: "WARM",

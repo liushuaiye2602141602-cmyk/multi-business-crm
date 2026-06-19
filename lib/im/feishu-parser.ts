@@ -54,6 +54,10 @@ export type ParsedIntent = {
     statusScope?: "UNFINISHED" | "COMPLETED" | "ALL";
     fields?: string[];
     confirmationToken?: string;
+    email?: string;
+    phone?: string;
+    country?: string;
+    requirement?: string;
   };
   replyText?: string;
 };
@@ -278,16 +282,7 @@ export function parseFeishuIntent(text: string): ParsedIntent {
     return { intent: "QUERY_LEADS", confidence: 0.9, parameters: params };
   }
 
-  if (trimmed.includes("客户")) {
-    const params = extractQueryParams(trimmed);
-    return { intent: "QUERY_CUSTOMERS", confidence: 0.9, parameters: params };
-  }
-
-  if (trimmed.includes("任务") || trimmed.includes("待办")) {
-    const params = extractQueryParams(trimmed);
-    return { intent: "QUERY_TASKS", confidence: 0.9, parameters: params };
-  }
-
+  // Check 订单 and 报价 before 客户 so specific intents win over generic
   if (trimmed.includes("订单")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_ORDERS", confidence: 0.9, parameters: params };
@@ -296,6 +291,16 @@ export function parseFeishuIntent(text: string): ParsedIntent {
   if (trimmed.includes("报价")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_QUOTES", confidence: 0.9, parameters: params };
+  }
+
+  if (trimmed.includes("客户")) {
+    const params = extractQueryParams(trimmed);
+    return { intent: "QUERY_CUSTOMERS", confidence: 0.9, parameters: params };
+  }
+
+  if (trimmed.includes("任务") || trimmed.includes("待办")) {
+    const params = extractQueryParams(trimmed);
+    return { intent: "QUERY_TASKS", confidence: 0.9, parameters: params };
   }
 
   // Unknown
@@ -352,18 +357,54 @@ function extractWriteParams(text: string): ParsedIntent["parameters"] {
     params.exactName = quotedMatch[1];
   }
 
-  // Extract company name after write action keywords
-  const companyMatch = text.match(
-    /(?:添加|新建|创建|更新|修改|创建报价|新建报价|发送|发出)(?:线索|客户|联系人|任务|项目|商机|报价|报价单|订单|发票)\s*[，,：:]\s*(.+?)(?:[，,：:]|$)/,
+  // ── Extract structured fields using delimiter-based parsing ─────
+  // Handles: "添加线索，公司名，国家，联系人XXX，邮箱xxx@xxx.com，电话+1 xxx，需求是xxx"
+  // Split by Chinese/English comma to get segments, then match labels.
+  const segments = text.split(/[，,]/).map((s) => s.trim()).filter(Boolean);
+
+  // Extract contact name after "联系人"
+  const contactMatch = text.match(/联系人\s*(.+?)(?:[，,：:]|$)/);
+  if (contactMatch) {
+    params.contactName = contactMatch[1].trim();
+  }
+
+  // Extract email after "邮箱"
+  const emailMatch = text.match(/邮箱\s*(.+?)(?:[，,：:]|$)/);
+  if (emailMatch) {
+    params.email = emailMatch[1].trim();
+  }
+
+  // Extract phone after "电话"
+  const phoneMatch = text.match(/电话\s*(.+?)(?:[，,：:]|$)/);
+  if (phoneMatch) {
+    params.phone = phoneMatch[1].trim();
+  }
+
+  // Extract country — look for country-like segment after company, before contact
+  // Common pattern: "添加线索，公司名，美国，联系人XXX"
+  // Or check for known country patterns
+  const countryMatch = text.match(
+    /(?:添加|新建|创建)(?:线索|客户)\s*[，,：:]\s*.+?[，,]\s*([一-龥]{2,4}|[A-Za-z\s]{2,30})[，,]\s*联系人/,
   );
-  if (companyMatch && !quotedMatch) {
-    const parts = companyMatch[1].split(/[，,]/);
-    params.keyword = parts[0].trim();
-    // Extract contact name if present
-    const contactMatch = text.match(/联系人\s*(.+?)(?:[，,：:]|$)/);
-    if (contactMatch) {
-      params.contactName = contactMatch[1].trim();
-    }
+  if (countryMatch) {
+    params.country = countryMatch[1].trim();
+  }
+
+  // Extract requirement after "需求" or "需求是"
+  const reqMatch = text.match(/需求(?:是|=)\s*(.+?)(?:[，,：:]|$)/);
+  if (reqMatch) {
+    params.requirement = reqMatch[1].trim();
+  }
+
+  // ── Extract company name: first segment after "添加线索，" ──────
+  // e.g. "添加线索，ABC公司，美国，联系人John" -> keyword = "ABC公司"
+  const companyAfterAction = text.match(
+    /(?:添加|新建|创建|更新|修改)(?:线索|客户|联系人|任务|项目|商机|报价|报价单|订单|发票)\s*[，,：:]\s*(.+?)(?:[，,：:]|$)/,
+  );
+  if (companyAfterAction && !quotedMatch) {
+    // Only use the first segment as company name, not mixed with other fields
+    const firstSegment = companyAfterAction[1].split(/[，,]/)[0].trim();
+    params.keyword = firstSegment;
   }
 
   // Extract follow-up content: "给XX添加跟进：内容" or "跟进：内容"
