@@ -7,7 +7,6 @@ import SegmentCardClient from "./SegmentCardClient";
 export const dynamic = "force-dynamic";
 
 export default async function SegmentsPage() {
-  // Fetch counts for all segments in parallel
   const { getSegmentCount } = await import("@/lib/customer-segments/segment-query-builder");
 
   const counts = await Promise.all(
@@ -22,6 +21,16 @@ export default async function SegmentsPage() {
   );
 
   const countMap = new Map(counts.map(c => [c.key, c.count]));
+
+  // Strip non-serializable fields (buildWhere) before passing to client
+  const serializableSegments = PRESET_SEGMENTS.map((s) => ({
+    key: s.key,
+    label: s.label,
+    description: s.description,
+    category: s.category,
+    icon: s.icon,
+    settings: s.settings,
+  }));
 
   const categories = [
     { key: "follow_up" as const, title: "跟进管理", description: "管理客户跟进节奏，及时触达" },
@@ -38,7 +47,7 @@ export default async function SegmentsPage() {
       />
 
       {categories.map((cat) => {
-        const segments = PRESET_SEGMENTS.filter(s => s.category === cat.key);
+        const segments = serializableSegments.filter(s => s.category === cat.key);
         if (segments.length === 0) return null;
 
         return (

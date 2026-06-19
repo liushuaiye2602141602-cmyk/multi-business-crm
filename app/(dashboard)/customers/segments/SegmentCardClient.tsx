@@ -1,10 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import type { PresetSegment } from "@/lib/customer-segments/preset-segments";
+
+interface SegmentData {
+  key: string;
+  label: string;
+  description: string;
+  category: string;
+  icon: string;
+  settings: Array<{ key: string; label: string; options: Array<{ value: string; label: string }>; defaultValue: string }>;
+}
 
 interface SegmentCardClientProps {
-  segment: PresetSegment;
+  segment: SegmentData;
   count: number;
 }
 
