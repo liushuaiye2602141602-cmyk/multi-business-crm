@@ -1,0 +1,1483 @@
+openapi: 3.1.0
+info:
+  title: Open CRM System API
+  description: |
+    REST API for the Open CRM System — a modern open-source CRM built with
+    Next.js, Prisma, and PostgreSQL.
+
+    This is a partial reference spec covering the most commonly used endpoints.
+    For the full list of routes, see the [API documentation](../api/).
+  version: 0.1.0
+  contact:
+    name: Open CRM Contributors
+    url: https://github.com/open-crm/open-crm-system
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3003
+    description: Local development server
+
+tags:
+  - name: Auth
+    description: Authentication and session management
+  - name: Leads
+    description: Lead management
+  - name: Customers
+    description: Customer management
+  - name: Contacts
+    description: Customer contact management
+  - name: Quotes
+    description: Quote management
+  - name: Orders
+    description: Order management
+  - name: Products
+    description: Product catalog
+  - name: Finance
+    description: Invoices and payments
+  - name: Email
+    description: Email accounts and messaging
+  - name: AI
+    description: AI-powered features
+  - name: Reports
+    description: Analytics and reports
+  - name: Export
+    description: Data export endpoints
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Lead:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "lead_a1b2c3d4"
+        company:
+          type: string
+          example: "Acme Corporation"
+        contactName:
+          type: string
+          example: "John Smith"
+        country:
+          type: string
+          example: "United States"
+        phone:
+          type: string
+          example: "+1-555-0100"
+        email:
+          type: string
+          format: email
+          example: "john@acme.com"
+        status:
+          type: string
+          enum: [new, contacted, qualified, converted, lost]
+          example: "new"
+        temperature:
+          type: string
+          enum: [hot, warm, cold]
+          example: "warm"
+        source:
+          type: string
+          example: "website"
+        aiScore:
+          type: integer
+          nullable: true
+          example: 85
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "cust_x1y2z3"
+        company:
+          type: string
+          example: "Globex Industries"
+        contactName:
+          type: string
+          example: "Jane Doe"
+        country:
+          type: string
+          example: "United Kingdom"
+        phone:
+          type: string
+          example: "+44-20-7946-0958"
+        email:
+          type: string
+          format: email
+          example: "jane@globex.com"
+        industry:
+          type: string
+          example: "Manufacturing"
+        customerStatus:
+          type: string
+          enum: [active, inactive, churned]
+          example: "active"
+        lifecycleStage:
+          type: string
+          example: "customer"
+        createdAt:
+          type: string
+          format: date-time
+
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "cont_m1n2o3"
+        customerId:
+          type: string
+          example: "cust_x1y2z3"
+        name:
+          type: string
+          example: "Alice Johnson"
+        position:
+          type: string
+          example: "Procurement Manager"
+        email:
+          type: string
+          format: email
+          example: "alice@globex.com"
+        phone:
+          type: string
+          example: "+44-20-7946-1234"
+        isPrimary:
+          type: boolean
+          example: true
+
+    Quote:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "qt_p1q2r3"
+        customerId:
+          type: string
+          example: "cust_x1y2z3"
+        title:
+          type: string
+          example: "Q2 Software License Renewal"
+        status:
+          type: string
+          enum: [draft, sent, accepted, rejected, expired]
+          example: "draft"
+        totalAmount:
+          type: number
+          format: double
+          example: 12500.00
+        currency:
+          type: string
+          example: "USD"
+        validUntil:
+          type: string
+          format: date
+          example: "2026-07-15"
+        createdAt:
+          type: string
+          format: date-time
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "ord_s1t2u3"
+        customerId:
+          type: string
+          example: "cust_x1y2z3"
+        quoteId:
+          type: string
+          nullable: true
+          example: "qt_p1q2r3"
+        status:
+          type: string
+          enum: [draft, confirmed, in_production, shipped, completed, cancelled]
+          example: "confirmed"
+        totalAmount:
+          type: number
+          format: double
+          example: 12500.00
+        currency:
+          type: string
+          example: "USD"
+        createdAt:
+          type: string
+          format: date-time
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "prod_v1w2x3"
+        name:
+          type: string
+          example: "Enterprise License"
+        sku:
+          type: string
+          example: "LIC-ENT-001"
+        price:
+          type: number
+          format: double
+          example: 5000.00
+        currency:
+          type: string
+          example: "USD"
+        unit:
+          type: string
+          example: "license"
+        category:
+          type: string
+          example: "Software"
+        isActive:
+          type: boolean
+          example: true
+
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "inv_y1z2a3"
+        customerId:
+          type: string
+          example: "cust_x1y2z3"
+        orderId:
+          type: string
+          nullable: true
+          example: "ord_s1t2u3"
+        status:
+          type: string
+          enum: [draft, sent, paid, overdue, cancelled]
+          example: "draft"
+        totalAmount:
+          type: number
+          format: double
+          example: 12500.00
+        dueDate:
+          type: string
+          format: date
+          example: "2026-07-30"
+        createdAt:
+          type: string
+          format: date-time
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "pay_b1c2d3"
+        invoiceId:
+          type: string
+          example: "inv_y1z2a3"
+        amount:
+          type: number
+          format: double
+          example: 12500.00
+        method:
+          type: string
+          example: "bank_transfer"
+        paidAt:
+          type: string
+          format: date-time
+
+    EmailAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "email_e1f2g3"
+        provider:
+          type: string
+          enum: [gmail, outlook, alibaba, tencent, custom]
+          example: "gmail"
+        email:
+          type: string
+          format: email
+          example: "user@gmail.com"
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Not found"
+        message:
+          type: string
+          example: "The requested resource was not found"
+        statusCode:
+          type: integer
+          example: 404
+
+    PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items: {}
+        total:
+          type: integer
+          example: 150
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 20
+
+paths:
+  # ── Authentication ──────────────────────────────────────────────
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in
+      description: Authenticate with email and password. Returns a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: admin@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT access token
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      role:
+                        type: string
+                        enum: [admin, manager, user]
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user
+      description: Returns the profile of the currently authenticated user.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  role:
+                    type: string
+        "401":
+          description: Not authenticated
+
+  /api/auth/logout:
+    post:
+      tags: [Auth]
+      summary: Log out
+      description: Invalidate the current session token.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Logged out successfully
+
+  # ── Leads ───────────────────────────────────────────────────────
+  /api/leads:
+    get:
+      tags: [Leads]
+      summary: List leads
+      description: Retrieve a paginated list of leads with optional filters.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search by company or contact name
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [new, contacted, qualified, converted, lost]
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Paginated lead list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Lead"
+    post:
+      tags: [Leads]
+      summary: Create a lead
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [company, contactName]
+              properties:
+                company:
+                  type: string
+                  example: "New Corp"
+                contactName:
+                  type: string
+                  example: "Bob Wilson"
+                country:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                source:
+                  type: string
+                  example: "trade_show"
+                status:
+                  type: string
+                  enum: [new, contacted, qualified, converted, lost]
+                  default: new
+                temperature:
+                  type: string
+                  enum: [hot, warm, cold]
+                  default: warm
+      responses:
+        "201":
+          description: Lead created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /api/leads/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Leads]
+      summary: Get lead details
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lead details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+    put:
+      tags: [Leads]
+      summary: Update a lead
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                temperature:
+                  type: string
+                remark:
+                  type: string
+      responses:
+        "200":
+          description: Lead updated
+    delete:
+      tags: [Leads]
+      summary: Delete a lead
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Lead deleted
+
+  # ── Customers ───────────────────────────────────────────────────
+  /api/customers:
+    get:
+      tags: [Customers]
+      summary: List customers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, inactive, churned]
+      responses:
+        "200":
+          description: Paginated customer list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Customer"
+    post:
+      tags: [Customers]
+      summary: Create a customer
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [company, contactName]
+              properties:
+                company:
+                  type: string
+                  example: "Acme Corp"
+                contactName:
+                  type: string
+                  example: "Jane Doe"
+                country:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                industry:
+                  type: string
+                customerType:
+                  type: string
+                businessLineId:
+                  type: string
+      responses:
+        "201":
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+  /api/customers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Customers]
+      summary: Get customer details
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+    put:
+      tags: [Customers]
+      summary: Update a customer
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                contactName:
+                  type: string
+                customerStatus:
+                  type: string
+      responses:
+        "200":
+          description: Customer updated
+    delete:
+      tags: [Customers]
+      summary: Delete a customer
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Customer deleted
+
+  /api/customers/pool:
+    get:
+      tags: [Customers]
+      summary: List unassigned (pool) customers
+      description: Returns customers that have not been assigned to a sales owner.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: Pool customer list
+
+  /api/customers/dormant:
+    get:
+      tags: [Customers]
+      summary: List dormant customers
+      description: Returns customers with no follow-up activity for 60+ days.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Dormant customer list
+
+  # ── Contacts ────────────────────────────────────────────────────
+  /api/contacts:
+    get:
+      tags: [Contacts]
+      summary: List contacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: customerId
+          in: query
+          schema:
+            type: string
+          description: Filter by parent customer
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        "200":
+          description: Paginated contact list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Contact"
+    post:
+      tags: [Contacts]
+      summary: Create a contact
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, name]
+              properties:
+                customerId:
+                  type: string
+                  example: "cust_x1y2z3"
+                name:
+                  type: string
+                  example: "Alice Johnson"
+                position:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                isPrimary:
+                  type: boolean
+                  default: false
+      responses:
+        "201":
+          description: Contact created
+
+  /api/contacts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Contacts]
+      summary: Get contact details
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Contact details
+    put:
+      tags: [Contacts]
+      summary: Update a contact
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Contact updated
+    delete:
+      tags: [Contacts]
+      summary: Delete a contact
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Contact deleted
+
+  # ── Quotes ──────────────────────────────────────────────────────
+  /api/quotes:
+    get:
+      tags: [Quotes]
+      summary: List quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: customerId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, sent, accepted, rejected, expired]
+      responses:
+        "200":
+          description: Paginated quote list
+    post:
+      tags: [Quotes]
+      summary: Create a quote
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, title]
+              properties:
+                customerId:
+                  type: string
+                title:
+                  type: string
+                  example: "Q2 Software License Renewal"
+                validUntil:
+                  type: string
+                  format: date
+                currency:
+                  type: string
+                  default: USD
+      responses:
+        "201":
+          description: Quote created
+
+  # ── Orders ──────────────────────────────────────────────────────
+  /api/orders:
+    get:
+      tags: [Orders]
+      summary: List orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, confirmed, in_production, shipped, completed, cancelled]
+      responses:
+        "200":
+          description: Paginated order list
+    post:
+      tags: [Orders]
+      summary: Create an order
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId]
+              properties:
+                customerId:
+                  type: string
+                quoteId:
+                  type: string
+                  nullable: true
+                currency:
+                  type: string
+                  default: USD
+      responses:
+        "201":
+          description: Order created
+
+  # ── Products ────────────────────────────────────────────────────
+  /api/products:
+    get:
+      tags: [Products]
+      summary: List products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: category
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+    post:
+      tags: [Products]
+      summary: Create a product
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, price]
+              properties:
+                name:
+                  type: string
+                  example: "Enterprise License"
+                sku:
+                  type: string
+                price:
+                  type: number
+                  format: double
+                currency:
+                  type: string
+                  default: USD
+                unit:
+                  type: string
+                  example: "license"
+                category:
+                  type: string
+      responses:
+        "201":
+          description: Product created
+
+  # ── Finance ─────────────────────────────────────────────────────
+  /api/finance/invoices:
+    get:
+      tags: [Finance]
+      summary: List invoices
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, sent, paid, overdue, cancelled]
+        - name: customerId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Invoice list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Invoice"
+    post:
+      tags: [Finance]
+      summary: Create an invoice
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId]
+              properties:
+                customerId:
+                  type: string
+                orderId:
+                  type: string
+                  nullable: true
+                dueDate:
+                  type: string
+                  format: date
+                currency:
+                  type: string
+                  default: USD
+      responses:
+        "201":
+          description: Invoice created
+
+  /api/finance/invoices/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Finance]
+      summary: Get invoice details
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Invoice details
+    put:
+      tags: [Finance]
+      summary: Update an invoice
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Invoice updated
+
+  /api/finance/payments:
+    get:
+      tags: [Finance]
+      summary: List payments
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: invoiceId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Payment"
+    post:
+      tags: [Finance]
+      summary: Record a payment
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [invoiceId, amount]
+              properties:
+                invoiceId:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                method:
+                  type: string
+                  example: "bank_transfer"
+      responses:
+        "201":
+          description: Payment recorded
+
+  # ── Email ───────────────────────────────────────────────────────
+  /api/email/accounts:
+    get:
+      tags: [Email]
+      summary: List email accounts
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Email account list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmailAccount"
+    post:
+      tags: [Email]
+      summary: Add an email account
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provider, email, password]
+              properties:
+                provider:
+                  type: string
+                  enum: [gmail, outlook, alibaba, tencent, custom]
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  description: App-specific password recommended
+      responses:
+        "201":
+          description: Email account added
+
+  /api/email/send:
+    post:
+      tags: [Email]
+      summary: Send an email
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [to, subject, body]
+              properties:
+                accountId:
+                  type: string
+                to:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                subject:
+                  type: string
+                body:
+                  type: string
+                isHtml:
+                  type: boolean
+                  default: false
+      responses:
+        "200":
+          description: Email sent
+
+  /api/email/inbox:
+    get:
+      tags: [Email]
+      summary: Get inbox
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        "200":
+          description: Inbox messages
+
+  # ── AI ──────────────────────────────────────────────────────────
+  /api/ai/chat:
+    post:
+      tags: [AI]
+      summary: AI chat
+      description: Send a message to the AI assistant within CRM context.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                message:
+                  type: string
+                  example: "Show me the top 5 leads by score"
+                context:
+                  type: string
+                  description: Optional context (e.g., page or module)
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reply:
+                    type: string
+                  action:
+                    type: string
+                    nullable: true
+                    description: If the AI suggests an action
+
+  /api/ai/analyze-lead:
+    post:
+      tags: [AI]
+      summary: Analyze a lead
+      description: Score and analyze a lead using AI.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [leadId]
+              properties:
+                leadId:
+                  type: string
+      responses:
+        "200":
+          description: Lead analysis result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: integer
+                    example: 85
+                  summary:
+                    type: string
+                  tags:
+                    type: array
+                    items:
+                      type: string
+
+  /api/ai/config:
+    get:
+      tags: [AI]
+      summary: Get AI configuration
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current AI settings
+    put:
+      tags: [AI]
+      summary: Update AI configuration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  enum: [openai, deepseek, moonshot, zhipu, custom]
+                model:
+                  type: string
+                apiKey:
+                  type: string
+                  description: Encrypted at rest
+                baseUrl:
+                  type: string
+      responses:
+        "200":
+          description: AI config updated
+
+  /api/ai-control/settings:
+    get:
+      tags: [AI]
+      summary: Get AI control settings
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: AI control panel settings
+    put:
+      tags: [AI]
+      summary: Update AI control settings
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                mode:
+                  type: string
+                  enum: [auto, semi_auto, manual]
+                autoScore:
+                  type: boolean
+                autoSummary:
+                  type: boolean
+      responses:
+        "200":
+          description: Settings updated
+
+  # ── Export ──────────────────────────────────────────────────────
+  /api/export/leads:
+    get:
+      tags: [Export]
+      summary: Export leads to CSV
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+
+  /api/export/customers:
+    get:
+      tags: [Export]
+      summary: Export customers to CSV
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+
+  /api/export/quotes:
+    get:
+      tags: [Export]
+      summary: Export quotes to CSV
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: CSV file download
+
+  # ── Import ──────────────────────────────────────────────────────
+  /api/import/leads:
+    post:
+      tags: [Leads]
+      summary: Import leads from CSV
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file with lead data
+      responses:
+        "200":
+          description: Import result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imported:
+                    type: integer
+                    example: 42
+                  errors:
+                    type: integer
+                    example: 2
+
+  /api/import/customers:
+    post:
+      tags: [Customers]
+      summary: Import customers from CSV
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Import result
+
+  # ── Webhooks ────────────────────────────────────────────────────
+  /api/webhooks/leads:
+    post:
+      tags: [Leads]
+      summary: Create a lead via webhook
+      description: External webhook endpoint for creating leads from integrations.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [company, contactName]
+              properties:
+                company:
+                  type: string
+                contactName:
+                  type: string
+                source:
+                  type: string
+                  example: "webhook_n8n"
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+      responses:
+        "201":
+          description: Lead created via webhook

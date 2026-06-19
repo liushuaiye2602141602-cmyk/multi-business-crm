@@ -1,0 +1,42 @@
+name: Documentation Check
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', '*.md']
+  pull_request:
+    branches: [main]
+    paths: ['docs/**', '*.md']
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for sensitive data
+        run: |
+          echo "Checking for sensitive data in docs..."
+          if grep -rn "tp-snncy\|tp-esf1crh\|sk-proj\|cli_aab9c6f" docs/ *.md 2>/dev/null; then
+            echo "❌ Sensitive data found in documentation!"
+            exit 1
+          fi
+          echo "✅ No sensitive data found"
+
+      - name: Check for local paths
+        run: |
+          echo "Checking for local paths..."
+          if grep -rn "D:\\\web_project\|C:\\\Users" docs/ *.md 2>/dev/null; then
+            echo "❌ Local paths found in documentation!"
+            exit 1
+          fi
+          echo "✅ No local paths found"
+
+      - name: Check for competitor names
+        run: |
+          echo "Checking for competitor names..."
+          if grep -rni "okki\|小满\|xiaoman" docs/ *.md 2>/dev/null; then
+            echo "❌ Competitor names found!"
+            exit 1
+          fi
+          echo "✅ No competitor names found"
