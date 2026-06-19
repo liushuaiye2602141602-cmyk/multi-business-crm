@@ -173,7 +173,7 @@ export function parseFeishuIntent(text: string): ParsedIntent {
 
   // Write: Add Lead Followup
   if ( ( trimmed.includes("添加跟进") || trimmed.includes("添加跟进记录") || trimmed.includes("跟进") ) && !trimmed.includes("查询") && !trimmed.includes("查看") ) {
-    const params = extractWriteParams(trimmed);
+    const params = extractWriteParams(trimmed, true);
     return { intent: "ADD_LEAD_FOLLOWUP", confidence: 0.9, parameters: params };
   }
 
@@ -348,7 +348,7 @@ function extractQueryParams(text: string): ParsedIntent["parameters"] {
   return params;
 }
 
-function extractWriteParams(text: string): ParsedIntent["parameters"] {
+function extractWriteParams(text: string, isFollowup = false): ParsedIntent["parameters"] {
   const params: ParsedIntent["parameters"] = {};
 
   // Extract quoted name
@@ -401,7 +401,7 @@ function extractWriteParams(text: string): ParsedIntent["parameters"] {
   const companyAfterAction = text.match(
     /(?:添加|新建|创建|更新|修改)(?:线索|客户|联系人|任务|项目|商机|报价|报价单|订单|发票)\s*[，,：:]\s*(.+?)(?:[，,：:]|$)/,
   );
-  if (companyAfterAction && !quotedMatch) {
+  if (companyAfterAction && !quotedMatch && !isFollowup) {
     // Only use the first segment as company name, not mixed with other fields
     const firstSegment = companyAfterAction[1].split(/[，,]/)[0].trim();
     params.keyword = firstSegment;

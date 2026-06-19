@@ -181,10 +181,16 @@ async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise
 }
 
 async function handleAddLeadFollowup(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  let targetName = parsed.parameters.exactName || parsed.parameters.keyword;
   const content = parsed.parameters.followUpContent;
   if (!targetName || !content) {
     return { success: false, message: "请提供公司名称和跟进内容。示例：给ABC公司添加跟进：今天电话沟通" };
+  }
+
+  // Safety: strip trailing command words that leaked into company name
+  targetName = targetName.replace(/(?:添加跟进|新增跟进|添加|新增|跟进|记录|一条)$/g, "").trim();
+  if (!targetName) {
+    return { success: false, message: "公司名称解析异常，请确认格式正确。" };
   }
 
   const lead = await prisma.lead.findFirst({
