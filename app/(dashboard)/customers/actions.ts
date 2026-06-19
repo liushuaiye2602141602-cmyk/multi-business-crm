@@ -232,37 +232,55 @@ export async function getDormantCustomers() {
 }
 
 export async function deleteCustomer(id: number) {
-  // 检查是否有关联数据
-  const customer = await prisma.customer.findUnique({
-    where: { id },
-    include: { projects: true, followUps: true, quotes: true, tasks: true },
-  });
+  try {
+    // Check all relations comprehensively before attempting delete
+    const [contacts, quotes, orders, tasks, followUps, emails, projects, customValues] = await Promise.all([
+      prisma.contact.count({ where: { customerId: id } }),
+      prisma.quote.count({ where: { customerId: id } }),
+      prisma.order.count({ where: { customerId: id } }),
+      prisma.task.count({ where: { customerId: id } }),
+      prisma.followUp.count({ where: { customerId: id } }),
+      prisma.emailMessage.count({ where: { customerId: id } }),
+      prisma.project.count({ where: { customerId: id } }),
+      prisma.customFieldValue.count({ where: { entityType: "CUSTOMER", entityId: id } }),
+    ]);
 
-  if (!customer) throw new Error("客户不存在");
+    const hasRelations = contacts + quotes + orders + tasks + followUps + emails + projects + customValues > 0;
 
-  // Auto-tasks for customers: "跟进报价: {quoteNo}" or "跟进生产进度: {orderNo}"
-  const autoTasks = customer.tasks.filter(
-    (t) =>
-      t.type === "FOLLOW_UP" &&
-      (t.title.startsWith("跟进报价:") || t.title.startsWith("跟进生产进度:"))
-  );
-  const manualTasks = customer.tasks.filter(
-    (t) => !autoTasks.some((at) => at.id === t.id)
-  );
+    if (hasRelations) {
+      const parts: string[] = [];
+      if (contacts > 0) parts.push(`${contacts}位联系人`);
+      if (quotes > 0) parts.push(`${quotes}条报价`);
+      if (orders > 0) parts.push(`${orders}个订单`);
+      if (tasks > 0) parts.push(`${tasks}个任务`);
+      if (followUps > 0) parts.push(`${followUps}条跟进记录`);
+      if (emails > 0) parts.push(`${emails}封邮件`);
+      if (projects > 0) parts.push(`${projects}个项目`);
+      if (customValues > 0) parts.push(`${customValues}条自定义字段`);
 
-  if (customer.projects.length > 0 || customer.followUps.length > 0 || customer.quotes.length > 0 || manualTasks.length > 0) {
-    throw new Error("该客户存在关联数据（项目、跟进记录、报价或手动任务），请先处理后再删除");
+      return {
+        success: false,
+        error: `该客户存在${parts.join("、")}，无法删除。请使用归档功能。`,
+        code: "CUSTOMER_HAS_RELATIONS",
+      };
+    }
+
+    // Safe to delete
+    await prisma.customer.delete({ where: { id } });
+    revalidatePath("/customers");
+    return { success: true, message: "客户已删除" };
+  } catch (error) {
+    // Catch Prisma P2003 foreign key constraint
+    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
+      return {
+        success: false,
+        error: "该客户仍存在关联数据，无法删除。请使用归档功能。",
+        code: "CUSTOMER_FOREIGN_KEY_CONSTRAINT",
+      };
+    }
+    console.error("Delete customer error:", error);
+    return { success: false, error: "删除失败，请稍后重试" };
   }
-
-  // Delete auto-tasks along with the customer
-  if (autoTasks.length > 0) {
-    await prisma.task.deleteMany({
-      where: { id: { in: autoTasks.map((t) => t.id) } },
-    });
-  }
-
-  await prisma.customer.delete({ where: { id } });
-  revalidatePath("/customers");
 }
 
 // ==================== 客户归档 ====================

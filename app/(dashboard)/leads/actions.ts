@@ -150,6 +150,9 @@ export async function deleteLead(id: number): Promise<ActionResult> {
     revalidatePath("/leads");
     return success();
   } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
+      return failure("该线索存在关联数据，无法删除");
+    }
     const message = error instanceof Error ? error.message : "删除线索失败，请稍后重试";
     return failure(message);
   }

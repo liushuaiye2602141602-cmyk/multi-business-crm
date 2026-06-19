@@ -59,7 +59,7 @@ interface OrderListClientProps {
   orders: OrderRow[];
   initialColumnConfig: ColumnConfig[];
   customFieldDefs: Array<{ id: number; key: string; label: string; fieldType: string }>;
-  onDelete?: (id: number) => Promise<void>;
+  onDelete?: (id: number) => Promise<any>;
 }
 
 function renderCellValue(field: FieldDefinition, order: OrderRow, currency: string): React.ReactNode {

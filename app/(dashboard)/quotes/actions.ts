@@ -84,8 +84,17 @@ export async function updateQuote(id: number, formData: FormData) {
 }
 
 export async function deleteQuote(id: number) {
-  await prisma.quote.delete({ where: { id } });
-  revalidatePath("/quotes");
+  try {
+    await prisma.quote.delete({ where: { id } });
+    revalidatePath("/quotes");
+    return { success: true };
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
+      return { success: false, error: "该报价存在关联数据，无法删除" };
+    }
+    console.error("Delete quote error:", error);
+    return { success: false, error: "删除失败，请稍后重试" };
+  }
 }
 
 export async function updateQuoteStatus(quoteId: number, status: string) {

@@ -88,20 +88,29 @@ export async function updateOrder(id: number, formData: FormData) {
 }
 
 export async function deleteOrder(id: number) {
-  const order = await prisma.order.findUnique({ where: { id } });
-  if (!order) throw new Error("订单不存在");
+  try {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) return { success: false, error: "订单不存在" };
 
-  await prisma.order.delete({ where: { id } });
+    await prisma.order.delete({ where: { id } });
 
-  await createActivityLog({
-    action: "删除",
-    entityType: "订单",
-    entityId: id,
-    entityName: order.orderNo,
-    description: `删除订单: ${order.orderNo}`,
-  });
+    await createActivityLog({
+      action: "删除",
+      entityType: "订单",
+      entityId: id,
+      entityName: order.orderNo,
+      description: `删除订单: ${order.orderNo}`,
+    });
 
-  revalidatePath("/orders");
+    revalidatePath("/orders");
+    return { success: true };
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
+      return { success: false, error: "该订单存在关联数据，无法删除" };
+    }
+    console.error("Delete order error:", error);
+    return { success: false, error: "删除失败，请稍后重试" };
+  }
 }
 
 export async function updateOrderStatus(orderId: number, status: string) {

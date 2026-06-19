@@ -57,7 +57,7 @@ interface CustomerListClientProps {
   customers: CustomerRow[];
   initialColumnConfig: ColumnConfig[];
   customFieldDefs: Array<{ id: number; key: string; label: string; fieldType: string }>;
-  onDelete?: (id: number) => Promise<void>;
+  onDelete?: (id: number) => Promise<any>;
 }
 
 function getCustomerStageVariant(stage: string): "success" | "warning" | "danger" | "info" | "default" {

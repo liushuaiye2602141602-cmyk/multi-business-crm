@@ -90,7 +90,7 @@ export default async function BusinessLinesPage({
                         </Link>
                         <ConfirmDeleteButton
                           action={async () => { "use server"; await deleteBusinessLine(bl.id); }}
-                          message="确定要删除这条业务线吗？如果该业务线下存在数据，将无法删除。"
+                          confirmMessage="确定要删除这条业务线吗？如果该业务线下存在数据，将无法删除。"
                         />
                       </div>
                     </td>

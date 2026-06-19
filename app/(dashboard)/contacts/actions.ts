@@ -67,19 +67,28 @@ export async function updateContact(id: number, formData: FormData) {
 }
 
 export async function deleteContact(id: number) {
-  const contact = await prisma.contact.findUnique({ where: { id } });
-  if (!contact) throw new Error("联系人不存在");
+  try {
+    const contact = await prisma.contact.findUnique({ where: { id } });
+    if (!contact) return { success: false, error: "联系人不存在" };
 
-  await prisma.contact.delete({ where: { id } });
+    await prisma.contact.delete({ where: { id } });
 
-  await createActivityLog({
-    action: "删除",
-    entityType: "联系人",
-    entityId: id,
-    entityName: contact.name,
-    description: `删除联系人: ${contact.name}`,
-  });
+    await createActivityLog({
+      action: "删除",
+      entityType: "联系人",
+      entityId: id,
+      entityName: contact.name,
+      description: `删除联系人: ${contact.name}`,
+    });
 
-  revalidatePath("/contacts");
-  revalidatePath(`/customers/${contact.customerId}`);
+    revalidatePath("/contacts");
+    revalidatePath(`/customers/${contact.customerId}`);
+    return { success: true };
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
+      return { success: false, error: "该联系人存在关联数据，无法删除" };
+    }
+    console.error("Delete contact error:", error);
+    return { success: false, error: "删除失败，请稍后重试" };
+  }
 }

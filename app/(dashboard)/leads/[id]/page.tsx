@@ -107,7 +107,7 @@ export default async function LeadDetailPage({
                 <ArrowRight size={14} /> 查看客户
               </Link>
             ) : (
-              <form action={async () => { "use server"; const result = await convertLeadToCustomer(lead.id); if (!result.success) throw new Error(result.error); }}>
+              <form action={async () => { "use server"; await convertLeadToCustomer(lead.id); }}>
                 <button type="submit" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors">
                   <ArrowRight size={14} /> 转为客户
                 </button>
