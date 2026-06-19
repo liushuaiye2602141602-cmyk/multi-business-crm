@@ -1382,3 +1382,23 @@ model PresetSegmentPreference {
   @@unique([tenantId, userId, segmentKey])
   @@index([tenantId, userId])
 }
+
+// ==================== Feishu Bot Pending Actions ====================
+
+model PendingAction {
+  id          Int      @id @default(autoincrement())
+  token       String   @unique
+  senderId    String
+  chatId      String
+  intent      String
+  parameters  Json
+  entityType  String?
+  entityId    Int?
+  status      String   @default("PENDING") // PENDING / CONFIRMED / EXPIRED / CANCELLED
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@index([token])
+  @@index([senderId, chatId])
+  @@index([status])
+}

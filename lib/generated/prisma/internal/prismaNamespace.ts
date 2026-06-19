@@ -430,7 +430,8 @@ export const ModelName = {
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog',
-  PresetSegmentPreference: 'PresetSegmentPreference'
+  PresetSegmentPreference: 'PresetSegmentPreference',
+  PendingAction: 'PendingAction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -446,7 +447,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "orderCharge" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "orderListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog" | "presetSegmentPreference"
+    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "orderCharge" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "orderListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog" | "presetSegmentPreference" | "pendingAction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3928,6 +3929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PendingAction: {
+      payload: Prisma.$PendingActionPayload<ExtArgs>
+      fields: Prisma.PendingActionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PendingActionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PendingActionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        findFirst: {
+          args: Prisma.PendingActionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PendingActionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        findMany: {
+          args: Prisma.PendingActionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>[]
+        }
+        create: {
+          args: Prisma.PendingActionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        createMany: {
+          args: Prisma.PendingActionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PendingActionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>[]
+        }
+        delete: {
+          args: Prisma.PendingActionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        update: {
+          args: Prisma.PendingActionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PendingActionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PendingActionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PendingActionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PendingActionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PendingActionPayload>
+        }
+        aggregate: {
+          args: Prisma.PendingActionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePendingAction>
+        }
+        groupBy: {
+          args: Prisma.PendingActionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PendingActionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PendingActionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PendingActionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4922,6 +4997,23 @@ export const PresetSegmentPreferenceScalarFieldEnum = {
 export type PresetSegmentPreferenceScalarFieldEnum = (typeof PresetSegmentPreferenceScalarFieldEnum)[keyof typeof PresetSegmentPreferenceScalarFieldEnum]
 
 
+export const PendingActionScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  senderId: 'senderId',
+  chatId: 'chatId',
+  intent: 'intent',
+  parameters: 'parameters',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PendingActionScalarFieldEnum = (typeof PendingActionScalarFieldEnum)[keyof typeof PendingActionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5559,6 +5651,7 @@ export type GlobalOmitConfig = {
   aIPolicyRule?: Prisma.AIPolicyRuleOmit
   aIExecutionLog?: Prisma.AIExecutionLogOmit
   presetSegmentPreference?: Prisma.PresetSegmentPreferenceOmit
+  pendingAction?: Prisma.PendingActionOmit
 }
 
 /* Types for Logging */

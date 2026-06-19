@@ -97,7 +97,8 @@ export const ModelName = {
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog',
-  PresetSegmentPreference: 'PresetSegmentPreference'
+  PresetSegmentPreference: 'PresetSegmentPreference',
+  PendingAction: 'PendingAction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1069,6 +1070,23 @@ export const PresetSegmentPreferenceScalarFieldEnum = {
 } as const
 
 export type PresetSegmentPreferenceScalarFieldEnum = (typeof PresetSegmentPreferenceScalarFieldEnum)[keyof typeof PresetSegmentPreferenceScalarFieldEnum]
+
+
+export const PendingActionScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  senderId: 'senderId',
+  chatId: 'chatId',
+  intent: 'intent',
+  parameters: 'parameters',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PendingActionScalarFieldEnum = (typeof PendingActionScalarFieldEnum)[keyof typeof PendingActionScalarFieldEnum]
 
 
 export const SortOrder = {

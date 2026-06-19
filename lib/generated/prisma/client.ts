@@ -276,3 +276,8 @@ export type AIExecutionLog = Prisma.AIExecutionLogModel
  * 
  */
 export type PresetSegmentPreference = Prisma.PresetSegmentPreferenceModel
+/**
+ * Model PendingAction
+ * 
+ */
+export type PendingAction = Prisma.PendingActionModel

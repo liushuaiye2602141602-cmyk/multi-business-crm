@@ -8,9 +8,7 @@
 import { Client, EventDispatcher, WSClient, LoggerLevel } from "@larksuiteoapi/node-sdk";
 import { handleIncomingFeishuMessage } from "../lib/im/feishu-handler";
 
-// Read-only mode: the handler only supports queries. Write operations are
-// blocked by architecture — the handler never calls write functions.
-// Set FEISHU_READ_ONLY=false has no effect currently; kept for future use.
+  // Read-only mode: controlled by FEISHU_READ_ONLY env var
 const FEISHU_READ_ONLY = process.env.FEISHU_READ_ONLY !== "false";
 
 export async function startFeishuBot() {
@@ -51,6 +49,47 @@ export async function startFeishuBot() {
   }
 
   console.log(`飞书机器人启动中... App ID: ${platform.appId} | 只读模式: ${FEISHU_READ_ONLY}`);
+
+  // Log all write permissions
+  if (!FEISHU_READ_ONLY) {
+    const writeFlags: Record<string, string> = {
+      CREATE_LEAD: "FEISHU_ALLOW_CREATE_LEAD",
+      UPDATE_LEAD: "FEISHU_ALLOW_UPDATE_LEAD",
+      ADD_FOLLOWUP: "FEISHU_ALLOW_ADD_FOLLOWUP",
+      CREATE_CUSTOMER: "FEISHU_ALLOW_CREATE_CUSTOMER",
+      UPDATE_CUSTOMER: "FEISHU_ALLOW_UPDATE_CUSTOMER",
+      CREATE_CONTACT: "FEISHU_ALLOW_CREATE_CONTACT",
+      UPDATE_CONTACT: "FEISHU_ALLOW_UPDATE_CONTACT",
+      SET_PRIMARY_CONTACT: "FEISHU_ALLOW_SET_PRIMARY_CONTACT",
+      CREATE_TASK: "FEISHU_ALLOW_CREATE_TASK",
+      UPDATE_TASK: "FEISHU_ALLOW_UPDATE_TASK",
+      COMPLETE_TASK: "FEISHU_ALLOW_COMPLETE_TASK",
+      CREATE_PROJECT: "FEISHU_ALLOW_CREATE_PROJECT",
+      UPDATE_PROJECT: "FEISHU_ALLOW_UPDATE_PROJECT",
+      CREATE_QUOTE: "FEISHU_ALLOW_CREATE_QUOTE",
+      UPDATE_QUOTE: "FEISHU_ALLOW_UPDATE_QUOTE",
+      SEND_QUOTE: "FEISHU_ALLOW_SEND_QUOTE",
+      ACCEPT_QUOTE: "FEISHU_ALLOW_ACCEPT_QUOTE",
+      QUOTE_TO_ORDER: "FEISHU_ALLOW_QUOTE_TO_ORDER",
+      CREATE_ORDER: "FEISHU_ALLOW_CREATE_ORDER",
+      UPDATE_ORDER: "FEISHU_ALLOW_UPDATE_ORDER",
+      CREATE_INVOICE: "FEISHU_ALLOW_CREATE_INVOICE",
+      UPDATE_INVOICE: "FEISHU_ALLOW_UPDATE_INVOICE",
+      RECORD_PAYMENT: "FEISHU_ALLOW_RECORD_PAYMENT",
+      CUSTOMER_POOL: "FEISHU_ALLOW_CUSTOMER_POOL",
+      CONVERT_LEAD: "FEISHU_ALLOW_CONVERT_LEAD",
+      DELETE: "FEISHU_ALLOW_DELETE",
+      BATCH_WRITE: "FEISHU_ALLOW_BATCH_WRITE",
+    };
+    const enabled: string[] = [];
+    const disabled: string[] = [];
+    for (const [label, envKey] of Object.entries(writeFlags)) {
+      if (process.env[envKey] === "true") enabled.push(label);
+      else disabled.push(label);
+    }
+    console.log(`写入权限 [已开启]: ${enabled.join(", ") || "无"}`);
+    console.log(`写入权限 [已关闭]: ${disabled.join(", ")}`);
+  }
 
   const client = new Client({
     appId: platform.appId,
