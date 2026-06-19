@@ -74,6 +74,7 @@ export const ModelName = {
   QuoteItem: 'QuoteItem',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  OrderCharge: 'OrderCharge',
   Document: 'Document',
   Invoice: 'Invoice',
   Payment: 'Payment',
@@ -92,6 +93,7 @@ export const ModelName = {
   AILog: 'AILog',
   Message: 'Message',
   CustomerListView: 'CustomerListView',
+  OrderListView: 'OrderListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog',
@@ -583,6 +585,23 @@ export const OrderScalarFieldEnum = {
   deliveryTerm: 'deliveryTerm',
   expectedDeliveryDate: 'expectedDeliveryDate',
   tenantId: 'tenantId',
+  ownerId: 'ownerId',
+  ownerName: 'ownerName',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  taxAmount: 'taxAmount',
+  chargeAmount: 'chargeAmount',
+  paidAmount: 'paidAmount',
+  outstandingAmount: 'outstandingAmount',
+  costAmount: 'costAmount',
+  grossProfitAmount: 'grossProfitAmount',
+  grossProfitRate: 'grossProfitRate',
+  priceTerm: 'priceTerm',
+  paymentMethod: 'paymentMethod',
+  shippingAddress: 'shippingAddress',
+  actualDeliveryDate: 'actualDeliveryDate',
+  isArchived: 'isArchived',
+  archivedAt: 'archivedAt',
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -594,13 +613,21 @@ export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof Or
 export const OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
+  tenantId: 'tenantId',
   productId: 'productId',
   itemName: 'itemName',
   specification: 'specification',
+  productCode: 'productCode',
   quantity: 'quantity',
   unit: 'unit',
   unitPrice: 'unitPrice',
   totalPrice: 'totalPrice',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
+  discountAmount: 'discountAmount',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  costPrice: 'costPrice',
   notes: 'notes',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
@@ -608,6 +635,25 @@ export const OrderItemScalarFieldEnum = {
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const OrderChargeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  orderId: 'orderId',
+  type: 'type',
+  name: 'name',
+  description: 'description',
+  amount: 'amount',
+  taxable: 'taxable',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderChargeScalarFieldEnum = (typeof OrderChargeScalarFieldEnum)[keyof typeof OrderChargeScalarFieldEnum]
 
 
 export const DocumentScalarFieldEnum = {
@@ -935,6 +981,25 @@ export const CustomerListViewScalarFieldEnum = {
 } as const
 
 export type CustomerListViewScalarFieldEnum = (typeof CustomerListViewScalarFieldEnum)[keyof typeof CustomerListViewScalarFieldEnum]
+
+
+export const OrderListViewScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  isShared: 'isShared',
+  columns: 'columns',
+  filters: 'filters',
+  sort: 'sort',
+  pageSize: 'pageSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderListViewScalarFieldEnum = (typeof OrderListViewScalarFieldEnum)[keyof typeof OrderListViewScalarFieldEnum]
 
 
 export const AIControlSettingsScalarFieldEnum = {

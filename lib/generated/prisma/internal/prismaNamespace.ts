@@ -407,6 +407,7 @@ export const ModelName = {
   QuoteItem: 'QuoteItem',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  OrderCharge: 'OrderCharge',
   Document: 'Document',
   Invoice: 'Invoice',
   Payment: 'Payment',
@@ -425,6 +426,7 @@ export const ModelName = {
   AILog: 'AILog',
   Message: 'Message',
   CustomerListView: 'CustomerListView',
+  OrderListView: 'OrderListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog',
@@ -444,7 +446,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog" | "presetSegmentPreference"
+    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "orderCharge" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "orderListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog" | "presetSegmentPreference"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2150,6 +2152,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrderCharge: {
+      payload: Prisma.$OrderChargePayload<ExtArgs>
+      fields: Prisma.OrderChargeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrderChargeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrderChargeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        findFirst: {
+          args: Prisma.OrderChargeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrderChargeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        findMany: {
+          args: Prisma.OrderChargeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>[]
+        }
+        create: {
+          args: Prisma.OrderChargeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        createMany: {
+          args: Prisma.OrderChargeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrderChargeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>[]
+        }
+        delete: {
+          args: Prisma.OrderChargeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        update: {
+          args: Prisma.OrderChargeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrderChargeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrderChargeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrderChargeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrderChargeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderChargePayload>
+        }
+        aggregate: {
+          args: Prisma.OrderChargeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderCharge>
+        }
+        groupBy: {
+          args: Prisma.OrderChargeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderChargeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrderChargeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderChargeCountAggregateOutputType> | number
+        }
+      }
+    }
     Document: {
       payload: Prisma.$DocumentPayload<ExtArgs>
       fields: Prisma.DocumentFieldRefs
@@ -3482,6 +3558,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrderListView: {
+      payload: Prisma.$OrderListViewPayload<ExtArgs>
+      fields: Prisma.OrderListViewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrderListViewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrderListViewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        findFirst: {
+          args: Prisma.OrderListViewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrderListViewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        findMany: {
+          args: Prisma.OrderListViewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>[]
+        }
+        create: {
+          args: Prisma.OrderListViewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        createMany: {
+          args: Prisma.OrderListViewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrderListViewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>[]
+        }
+        delete: {
+          args: Prisma.OrderListViewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        update: {
+          args: Prisma.OrderListViewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrderListViewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrderListViewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrderListViewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrderListViewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderListViewPayload>
+        }
+        aggregate: {
+          args: Prisma.OrderListViewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderListView>
+        }
+        groupBy: {
+          args: Prisma.OrderListViewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderListViewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrderListViewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderListViewCountAggregateOutputType> | number
+        }
+      }
+    }
     AIControlSettings: {
       payload: Prisma.$AIControlSettingsPayload<ExtArgs>
       fields: Prisma.AIControlSettingsFieldRefs
@@ -4286,6 +4436,23 @@ export const OrderScalarFieldEnum = {
   deliveryTerm: 'deliveryTerm',
   expectedDeliveryDate: 'expectedDeliveryDate',
   tenantId: 'tenantId',
+  ownerId: 'ownerId',
+  ownerName: 'ownerName',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  taxAmount: 'taxAmount',
+  chargeAmount: 'chargeAmount',
+  paidAmount: 'paidAmount',
+  outstandingAmount: 'outstandingAmount',
+  costAmount: 'costAmount',
+  grossProfitAmount: 'grossProfitAmount',
+  grossProfitRate: 'grossProfitRate',
+  priceTerm: 'priceTerm',
+  paymentMethod: 'paymentMethod',
+  shippingAddress: 'shippingAddress',
+  actualDeliveryDate: 'actualDeliveryDate',
+  isArchived: 'isArchived',
+  archivedAt: 'archivedAt',
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -4297,13 +4464,21 @@ export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof Or
 export const OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
+  tenantId: 'tenantId',
   productId: 'productId',
   itemName: 'itemName',
   specification: 'specification',
+  productCode: 'productCode',
   quantity: 'quantity',
   unit: 'unit',
   unitPrice: 'unitPrice',
   totalPrice: 'totalPrice',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
+  discountAmount: 'discountAmount',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  costPrice: 'costPrice',
   notes: 'notes',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
@@ -4311,6 +4486,25 @@ export const OrderItemScalarFieldEnum = {
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const OrderChargeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  orderId: 'orderId',
+  type: 'type',
+  name: 'name',
+  description: 'description',
+  amount: 'amount',
+  taxable: 'taxable',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderChargeScalarFieldEnum = (typeof OrderChargeScalarFieldEnum)[keyof typeof OrderChargeScalarFieldEnum]
 
 
 export const DocumentScalarFieldEnum = {
@@ -4638,6 +4832,25 @@ export const CustomerListViewScalarFieldEnum = {
 } as const
 
 export type CustomerListViewScalarFieldEnum = (typeof CustomerListViewScalarFieldEnum)[keyof typeof CustomerListViewScalarFieldEnum]
+
+
+export const OrderListViewScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  isShared: 'isShared',
+  columns: 'columns',
+  filters: 'filters',
+  sort: 'sort',
+  pageSize: 'pageSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderListViewScalarFieldEnum = (typeof OrderListViewScalarFieldEnum)[keyof typeof OrderListViewScalarFieldEnum]
 
 
 export const AIControlSettingsScalarFieldEnum = {
@@ -5321,6 +5534,7 @@ export type GlobalOmitConfig = {
   quoteItem?: Prisma.QuoteItemOmit
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
+  orderCharge?: Prisma.OrderChargeOmit
   document?: Prisma.DocumentOmit
   invoice?: Prisma.InvoiceOmit
   payment?: Prisma.PaymentOmit
@@ -5339,6 +5553,7 @@ export type GlobalOmitConfig = {
   aILog?: Prisma.AILogOmit
   message?: Prisma.MessageOmit
   customerListView?: Prisma.CustomerListViewOmit
+  orderListView?: Prisma.OrderListViewOmit
   aIControlSettings?: Prisma.AIControlSettingsOmit
   aIPolicyRule?: Prisma.AIPolicyRuleOmit
   aIExecutionLog?: Prisma.AIExecutionLogOmit

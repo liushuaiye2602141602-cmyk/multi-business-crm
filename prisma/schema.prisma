@@ -810,6 +810,23 @@ model Order {
   deliveryTerm          String?
   expectedDeliveryDate  DateTime?
   tenantId              Int?
+  ownerId               Int?
+  ownerName             String?
+  subtotal              Decimal?    @db.Decimal(12, 2)
+  discountAmount        Decimal?    @db.Decimal(12, 2)
+  taxAmount             Decimal?    @db.Decimal(12, 2)
+  chargeAmount          Decimal?    @db.Decimal(12, 2)
+  paidAmount            Decimal?    @db.Decimal(12, 2)
+  outstandingAmount     Decimal?    @db.Decimal(12, 2)
+  costAmount            Decimal?    @db.Decimal(12, 2)
+  grossProfitAmount     Decimal?    @db.Decimal(12, 2)
+  grossProfitRate       Decimal?    @db.Decimal(5, 2)
+  priceTerm             String?
+  paymentMethod         String?
+  shippingAddress       String?
+  actualDeliveryDate    DateTime?
+  isArchived            Boolean     @default(false)
+  archivedAt            DateTime?
   notes                 String?
   createdAt             DateTime    @default(now())
   updatedAt             DateTime    @updatedAt
@@ -821,6 +838,7 @@ model Order {
   businessLine BusinessLine? @relation(fields: [businessLineId], references: [id])
   tenant       Tenant?     @relation(fields: [tenantId], references: [id])
   items        OrderItem[]
+  orderCharges OrderCharge[]
   invoices     Invoice[]
   tasks        Task[]
   emailMessages EmailMessage[]
@@ -836,24 +854,53 @@ model Order {
 }
 
 model OrderItem {
-  id          Int      @id @default(autoincrement())
-  orderId     Int
-  productId   Int?
-  itemName    String
+  id            Int       @id @default(autoincrement())
+  orderId       Int
+  tenantId      Int?
+  productId     Int?
+  itemName      String
   specification String?
-  quantity    Decimal? @db.Decimal(12, 2)
-  unit        String?
-  unitPrice   Decimal? @db.Decimal(12, 2)
-  totalPrice  Decimal? @db.Decimal(12, 2)
-  notes       String?
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  productCode   String?
+  quantity      Decimal?  @db.Decimal(12, 2)
+  unit          String?
+  unitPrice     Decimal?  @db.Decimal(12, 2)
+  totalPrice    Decimal?  @db.Decimal(12, 2)
+  discountType  String?
+  discountValue Decimal?  @db.Decimal(12, 2)
+  discountAmount Decimal? @db.Decimal(12, 2)
+  taxRate       Decimal?  @db.Decimal(5, 2)
+  taxAmount     Decimal?  @db.Decimal(12, 2)
+  costPrice     Decimal?  @db.Decimal(12, 2)
+  notes         String?
+  sortOrder     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   order   Order    @relation(fields: [orderId], references: [id])
   product Product? @relation(fields: [productId], references: [id])
 
   @@index([orderId])
+}
+
+model OrderCharge {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  orderId     Int
+  type        String   @default("OTHER")
+  name        String
+  description String?
+  amount      Decimal  @db.Decimal(12, 2)
+  taxable     Boolean  @default(false)
+  taxRate     Decimal? @db.Decimal(5, 2)
+  taxAmount   Decimal? @db.Decimal(12, 2)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([tenantId])
 }
 
 model Document {
@@ -1222,6 +1269,25 @@ model Message {
 // ==================== 视图 ====================
 
 model CustomerListView {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  userId      Int?
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  isShared    Boolean  @default(false)
+  columns     Json     @default("[]")
+  filters     Json     @default("{}")
+  sort        Json     @default("{}")
+  pageSize    Int      @default(20)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tenantId, userId])
+  @@index([tenantId, name])
+}
+
+model OrderListView {
   id          Int      @id @default(autoincrement())
   tenantId    Int?
   userId      Int?

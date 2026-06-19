@@ -36,6 +36,16 @@ export type OrderAvgAggregateOutputType = {
   totalAmount: runtime.Decimal | null
   exchangeRate: runtime.Decimal | null
   tenantId: number | null
+  ownerId: number | null
+  subtotal: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
+  taxAmount: runtime.Decimal | null
+  chargeAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  outstandingAmount: runtime.Decimal | null
+  costAmount: runtime.Decimal | null
+  grossProfitAmount: runtime.Decimal | null
+  grossProfitRate: runtime.Decimal | null
 }
 
 export type OrderSumAggregateOutputType = {
@@ -48,6 +58,16 @@ export type OrderSumAggregateOutputType = {
   totalAmount: runtime.Decimal | null
   exchangeRate: runtime.Decimal | null
   tenantId: number | null
+  ownerId: number | null
+  subtotal: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
+  taxAmount: runtime.Decimal | null
+  chargeAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  outstandingAmount: runtime.Decimal | null
+  costAmount: runtime.Decimal | null
+  grossProfitAmount: runtime.Decimal | null
+  grossProfitRate: runtime.Decimal | null
 }
 
 export type OrderMinAggregateOutputType = {
@@ -67,6 +87,23 @@ export type OrderMinAggregateOutputType = {
   deliveryTerm: string | null
   expectedDeliveryDate: Date | null
   tenantId: number | null
+  ownerId: number | null
+  ownerName: string | null
+  subtotal: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
+  taxAmount: runtime.Decimal | null
+  chargeAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  outstandingAmount: runtime.Decimal | null
+  costAmount: runtime.Decimal | null
+  grossProfitAmount: runtime.Decimal | null
+  grossProfitRate: runtime.Decimal | null
+  priceTerm: string | null
+  paymentMethod: string | null
+  shippingAddress: string | null
+  actualDeliveryDate: Date | null
+  isArchived: boolean | null
+  archivedAt: Date | null
   notes: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -89,6 +126,23 @@ export type OrderMaxAggregateOutputType = {
   deliveryTerm: string | null
   expectedDeliveryDate: Date | null
   tenantId: number | null
+  ownerId: number | null
+  ownerName: string | null
+  subtotal: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
+  taxAmount: runtime.Decimal | null
+  chargeAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  outstandingAmount: runtime.Decimal | null
+  costAmount: runtime.Decimal | null
+  grossProfitAmount: runtime.Decimal | null
+  grossProfitRate: runtime.Decimal | null
+  priceTerm: string | null
+  paymentMethod: string | null
+  shippingAddress: string | null
+  actualDeliveryDate: Date | null
+  isArchived: boolean | null
+  archivedAt: Date | null
   notes: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -111,6 +165,23 @@ export type OrderCountAggregateOutputType = {
   deliveryTerm: number
   expectedDeliveryDate: number
   tenantId: number
+  ownerId: number
+  ownerName: number
+  subtotal: number
+  discountAmount: number
+  taxAmount: number
+  chargeAmount: number
+  paidAmount: number
+  outstandingAmount: number
+  costAmount: number
+  grossProfitAmount: number
+  grossProfitRate: number
+  priceTerm: number
+  paymentMethod: number
+  shippingAddress: number
+  actualDeliveryDate: number
+  isArchived: number
+  archivedAt: number
   notes: number
   createdAt: number
   updatedAt: number
@@ -128,6 +199,16 @@ export type OrderAvgAggregateInputType = {
   totalAmount?: true
   exchangeRate?: true
   tenantId?: true
+  ownerId?: true
+  subtotal?: true
+  discountAmount?: true
+  taxAmount?: true
+  chargeAmount?: true
+  paidAmount?: true
+  outstandingAmount?: true
+  costAmount?: true
+  grossProfitAmount?: true
+  grossProfitRate?: true
 }
 
 export type OrderSumAggregateInputType = {
@@ -140,6 +221,16 @@ export type OrderSumAggregateInputType = {
   totalAmount?: true
   exchangeRate?: true
   tenantId?: true
+  ownerId?: true
+  subtotal?: true
+  discountAmount?: true
+  taxAmount?: true
+  chargeAmount?: true
+  paidAmount?: true
+  outstandingAmount?: true
+  costAmount?: true
+  grossProfitAmount?: true
+  grossProfitRate?: true
 }
 
 export type OrderMinAggregateInputType = {
@@ -159,6 +250,23 @@ export type OrderMinAggregateInputType = {
   deliveryTerm?: true
   expectedDeliveryDate?: true
   tenantId?: true
+  ownerId?: true
+  ownerName?: true
+  subtotal?: true
+  discountAmount?: true
+  taxAmount?: true
+  chargeAmount?: true
+  paidAmount?: true
+  outstandingAmount?: true
+  costAmount?: true
+  grossProfitAmount?: true
+  grossProfitRate?: true
+  priceTerm?: true
+  paymentMethod?: true
+  shippingAddress?: true
+  actualDeliveryDate?: true
+  isArchived?: true
+  archivedAt?: true
   notes?: true
   createdAt?: true
   updatedAt?: true
@@ -181,6 +289,23 @@ export type OrderMaxAggregateInputType = {
   deliveryTerm?: true
   expectedDeliveryDate?: true
   tenantId?: true
+  ownerId?: true
+  ownerName?: true
+  subtotal?: true
+  discountAmount?: true
+  taxAmount?: true
+  chargeAmount?: true
+  paidAmount?: true
+  outstandingAmount?: true
+  costAmount?: true
+  grossProfitAmount?: true
+  grossProfitRate?: true
+  priceTerm?: true
+  paymentMethod?: true
+  shippingAddress?: true
+  actualDeliveryDate?: true
+  isArchived?: true
+  archivedAt?: true
   notes?: true
   createdAt?: true
   updatedAt?: true
@@ -203,6 +328,23 @@ export type OrderCountAggregateInputType = {
   deliveryTerm?: true
   expectedDeliveryDate?: true
   tenantId?: true
+  ownerId?: true
+  ownerName?: true
+  subtotal?: true
+  discountAmount?: true
+  taxAmount?: true
+  chargeAmount?: true
+  paidAmount?: true
+  outstandingAmount?: true
+  costAmount?: true
+  grossProfitAmount?: true
+  grossProfitRate?: true
+  priceTerm?: true
+  paymentMethod?: true
+  shippingAddress?: true
+  actualDeliveryDate?: true
+  isArchived?: true
+  archivedAt?: true
   notes?: true
   createdAt?: true
   updatedAt?: true
@@ -312,6 +454,23 @@ export type OrderGroupByOutputType = {
   deliveryTerm: string | null
   expectedDeliveryDate: Date | null
   tenantId: number | null
+  ownerId: number | null
+  ownerName: string | null
+  subtotal: runtime.Decimal | null
+  discountAmount: runtime.Decimal | null
+  taxAmount: runtime.Decimal | null
+  chargeAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  outstandingAmount: runtime.Decimal | null
+  costAmount: runtime.Decimal | null
+  grossProfitAmount: runtime.Decimal | null
+  grossProfitRate: runtime.Decimal | null
+  priceTerm: string | null
+  paymentMethod: string | null
+  shippingAddress: string | null
+  actualDeliveryDate: Date | null
+  isArchived: boolean
+  archivedAt: Date | null
   notes: string | null
   createdAt: Date
   updatedAt: Date
@@ -357,6 +516,23 @@ export type OrderWhereInput = {
   deliveryTerm?: Prisma.StringNullableFilter<"Order"> | string | null
   expectedDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   tenantId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerName?: Prisma.StringNullableFilter<"Order"> | string | null
+  subtotal?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Order"> | string | null
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  actualDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  isArchived?: Prisma.BoolFilter<"Order"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -367,6 +543,7 @@ export type OrderWhereInput = {
   businessLine?: Prisma.XOR<Prisma.BusinessLineNullableScalarRelationFilter, Prisma.BusinessLineWhereInput> | null
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   items?: Prisma.OrderItemListRelationFilter
+  orderCharges?: Prisma.OrderChargeListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
@@ -390,6 +567,23 @@ export type OrderOrderByWithRelationInput = {
   deliveryTerm?: Prisma.SortOrderInput | Prisma.SortOrder
   expectedDeliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  paidAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  costAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  priceTerm?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  actualDeliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -400,6 +594,7 @@ export type OrderOrderByWithRelationInput = {
   businessLine?: Prisma.BusinessLineOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
   items?: Prisma.OrderItemOrderByRelationAggregateInput
+  orderCharges?: Prisma.OrderChargeOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   emailMessages?: Prisma.EmailMessageOrderByRelationAggregateInput
@@ -426,6 +621,23 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   deliveryTerm?: Prisma.StringNullableFilter<"Order"> | string | null
   expectedDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   tenantId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerName?: Prisma.StringNullableFilter<"Order"> | string | null
+  subtotal?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Order"> | string | null
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  actualDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  isArchived?: Prisma.BoolFilter<"Order"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -436,6 +648,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   businessLine?: Prisma.XOR<Prisma.BusinessLineNullableScalarRelationFilter, Prisma.BusinessLineWhereInput> | null
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   items?: Prisma.OrderItemListRelationFilter
+  orderCharges?: Prisma.OrderChargeListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   emailMessages?: Prisma.EmailMessageListRelationFilter
@@ -459,6 +672,23 @@ export type OrderOrderByWithAggregationInput = {
   deliveryTerm?: Prisma.SortOrderInput | Prisma.SortOrder
   expectedDeliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  paidAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  costAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  priceTerm?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  actualDeliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -489,6 +719,23 @@ export type OrderScalarWhereWithAggregatesInput = {
   deliveryTerm?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   expectedDeliveryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
   tenantId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
+  ownerId?: Prisma.IntNullableWithAggregatesFilter<"Order"> | number | null
+  ownerName?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  subtotal?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.DecimalNullableWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  shippingAddress?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  actualDeliveryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
+  isArchived?: Prisma.BoolWithAggregatesFilter<"Order"> | boolean
+  archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -504,6 +751,23 @@ export type OrderCreateInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -514,6 +778,7 @@ export type OrderCreateInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -537,10 +802,28 @@ export type OrderUncheckedCreateInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -557,6 +840,23 @@ export type OrderUpdateInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -567,6 +867,7 @@ export type OrderUpdateInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -590,10 +891,28 @@ export type OrderUncheckedUpdateInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -617,6 +936,23 @@ export type OrderCreateManyInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -632,6 +968,23 @@ export type OrderUpdateManyMutationInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -654,6 +1007,23 @@ export type OrderUncheckedUpdateManyInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -691,6 +1061,23 @@ export type OrderCountOrderByAggregateInput = {
   deliveryTerm?: Prisma.SortOrder
   expectedDeliveryDate?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  ownerName?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
+  taxAmount?: Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrder
+  priceTerm?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  actualDeliveryDate?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -706,6 +1093,16 @@ export type OrderAvgOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   exchangeRate?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
+  taxAmount?: Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrder
 }
 
 export type OrderMaxOrderByAggregateInput = {
@@ -725,6 +1122,23 @@ export type OrderMaxOrderByAggregateInput = {
   deliveryTerm?: Prisma.SortOrder
   expectedDeliveryDate?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  ownerName?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
+  taxAmount?: Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrder
+  priceTerm?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  actualDeliveryDate?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -747,6 +1161,23 @@ export type OrderMinOrderByAggregateInput = {
   deliveryTerm?: Prisma.SortOrder
   expectedDeliveryDate?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  ownerName?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
+  taxAmount?: Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrder
+  priceTerm?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  actualDeliveryDate?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -762,6 +1193,16 @@ export type OrderSumOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   exchangeRate?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
+  discountAmount?: Prisma.SortOrder
+  taxAmount?: Prisma.SortOrder
+  chargeAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  outstandingAmount?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
+  grossProfitAmount?: Prisma.SortOrder
+  grossProfitRate?: Prisma.SortOrder
 }
 
 export type OrderScalarRelationFilter = {
@@ -1055,6 +1496,20 @@ export type OrderUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutItemsInput, Prisma.OrderUpdateWithoutItemsInput>, Prisma.OrderUncheckedUpdateWithoutItemsInput>
 }
 
+export type OrderCreateNestedOneWithoutOrderChargesInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutOrderChargesInput, Prisma.OrderUncheckedCreateWithoutOrderChargesInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutOrderChargesInput
+  connect?: Prisma.OrderWhereUniqueInput
+}
+
+export type OrderUpdateOneRequiredWithoutOrderChargesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutOrderChargesInput, Prisma.OrderUncheckedCreateWithoutOrderChargesInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutOrderChargesInput
+  upsert?: Prisma.OrderUpsertWithoutOrderChargesInput
+  connect?: Prisma.OrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutOrderChargesInput, Prisma.OrderUpdateWithoutOrderChargesInput>, Prisma.OrderUncheckedUpdateWithoutOrderChargesInput>
+}
+
 export type OrderCreateNestedOneWithoutInvoicesInput = {
   create?: Prisma.XOR<Prisma.OrderCreateWithoutInvoicesInput, Prisma.OrderUncheckedCreateWithoutInvoicesInput>
   connectOrCreate?: Prisma.OrderCreateOrConnectWithoutInvoicesInput
@@ -1113,6 +1568,23 @@ export type OrderCreateWithoutTenantInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1122,6 +1594,7 @@ export type OrderCreateWithoutTenantInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1144,10 +1617,28 @@ export type OrderUncheckedCreateWithoutTenantInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1200,6 +1691,23 @@ export type OrderScalarWhereInput = {
   deliveryTerm?: Prisma.StringNullableFilter<"Order"> | string | null
   expectedDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   tenantId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerId?: Prisma.IntNullableFilter<"Order"> | number | null
+  ownerName?: Prisma.StringNullableFilter<"Order"> | string | null
+  subtotal?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.DecimalNullableFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Order"> | string | null
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  actualDeliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  isArchived?: Prisma.BoolFilter<"Order"> | boolean
+  archivedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -1215,6 +1723,23 @@ export type OrderCreateWithoutBusinessLineInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1224,6 +1749,7 @@ export type OrderCreateWithoutBusinessLineInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1246,10 +1772,28 @@ export type OrderUncheckedCreateWithoutBusinessLineInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1292,6 +1836,23 @@ export type OrderCreateWithoutCustomerInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1301,6 +1862,7 @@ export type OrderCreateWithoutCustomerInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1323,10 +1885,28 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1369,6 +1949,23 @@ export type OrderCreateWithoutContactInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1378,6 +1975,7 @@ export type OrderCreateWithoutContactInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1400,10 +1998,28 @@ export type OrderUncheckedCreateWithoutContactInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1446,6 +2062,23 @@ export type OrderCreateWithoutProjectInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1455,6 +2088,7 @@ export type OrderCreateWithoutProjectInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1477,10 +2111,28 @@ export type OrderUncheckedCreateWithoutProjectInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1523,6 +2175,23 @@ export type OrderCreateWithoutQuoteInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1532,6 +2201,7 @@ export type OrderCreateWithoutQuoteInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1554,10 +2224,28 @@ export type OrderUncheckedCreateWithoutQuoteInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1600,6 +2288,23 @@ export type OrderCreateWithoutTasksInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1610,6 +2315,7 @@ export type OrderCreateWithoutTasksInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageCreateNestedManyWithoutOrderInput
@@ -1632,10 +2338,28 @@ export type OrderUncheckedCreateWithoutTasksInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1667,6 +2391,23 @@ export type OrderUpdateWithoutTasksInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1677,6 +2418,7 @@ export type OrderUpdateWithoutTasksInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUpdateManyWithoutOrderNestedInput
@@ -1699,10 +2441,28 @@ export type OrderUncheckedUpdateWithoutTasksInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -1718,6 +2478,23 @@ export type OrderCreateWithoutItemsInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1727,6 +2504,7 @@ export type OrderCreateWithoutItemsInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -1750,9 +2528,27 @@ export type OrderUncheckedCreateWithoutItemsInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1785,6 +2581,23 @@ export type OrderUpdateWithoutItemsInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1794,6 +2607,7 @@ export type OrderUpdateWithoutItemsInput = {
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -1817,9 +2631,217 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
+  emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderCreateWithoutOrderChargesInput = {
+  orderNo: string
+  orderTitle?: string | null
+  orderStatus?: $Enums.OrderStatus
+  totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  paymentTerm?: string | null
+  deliveryTerm?: string | null
+  expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
+  project?: Prisma.ProjectCreateNestedOneWithoutOrdersInput
+  quote?: Prisma.QuoteCreateNestedOneWithoutOrdersInput
+  contact?: Prisma.ContactCreateNestedOneWithoutOrdersInput
+  businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
+  items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
+  emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
+  messages?: Prisma.MessageCreateNestedManyWithoutOrderInput
+}
+
+export type OrderUncheckedCreateWithoutOrderChargesInput = {
+  id?: number
+  orderNo: string
+  orderTitle?: string | null
+  customerId: number
+  projectId?: number | null
+  quoteId?: number | null
+  contactId?: number | null
+  businessLineId?: number | null
+  orderStatus?: $Enums.OrderStatus
+  totalAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: $Enums.Currency
+  paymentTerm?: string | null
+  deliveryTerm?: string | null
+  expectedDeliveryDate?: Date | string | null
+  tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
+  emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutOrderInput
+}
+
+export type OrderCreateOrConnectWithoutOrderChargesInput = {
+  where: Prisma.OrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderCreateWithoutOrderChargesInput, Prisma.OrderUncheckedCreateWithoutOrderChargesInput>
+}
+
+export type OrderUpsertWithoutOrderChargesInput = {
+  update: Prisma.XOR<Prisma.OrderUpdateWithoutOrderChargesInput, Prisma.OrderUncheckedUpdateWithoutOrderChargesInput>
+  create: Prisma.XOR<Prisma.OrderCreateWithoutOrderChargesInput, Prisma.OrderUncheckedCreateWithoutOrderChargesInput>
+  where?: Prisma.OrderWhereInput
+}
+
+export type OrderUpdateToOneWithWhereWithoutOrderChargesInput = {
+  where?: Prisma.OrderWhereInput
+  data: Prisma.XOR<Prisma.OrderUpdateWithoutOrderChargesInput, Prisma.OrderUncheckedUpdateWithoutOrderChargesInput>
+}
+
+export type OrderUpdateWithoutOrderChargesInput = {
+  orderNo?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutOrdersNestedInput
+  quote?: Prisma.QuoteUpdateOneWithoutOrdersNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
+  businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
+  items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
+  emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderUncheckedUpdateWithoutOrderChargesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNo?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  projectId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quoteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  businessLineId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  totalAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exchangeRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -1836,6 +2858,23 @@ export type OrderCreateWithoutInvoicesInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1846,6 +2885,7 @@ export type OrderCreateWithoutInvoicesInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageCreateNestedManyWithoutOrderInput
@@ -1868,10 +2908,28 @@ export type OrderUncheckedCreateWithoutInvoicesInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutOrderInput
@@ -1903,6 +2961,23 @@ export type OrderUpdateWithoutInvoicesInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1913,6 +2988,7 @@ export type OrderUpdateWithoutInvoicesInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUpdateManyWithoutOrderNestedInput
@@ -1935,10 +3011,28 @@ export type OrderUncheckedUpdateWithoutInvoicesInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -1954,6 +3048,23 @@ export type OrderCreateWithoutEmailMessagesInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1964,6 +3075,7 @@ export type OrderCreateWithoutEmailMessagesInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageCreateNestedManyWithoutOrderInput
@@ -1986,10 +3098,28 @@ export type OrderUncheckedCreateWithoutEmailMessagesInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutOrderInput
@@ -2021,6 +3151,23 @@ export type OrderUpdateWithoutEmailMessagesInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2031,6 +3178,7 @@ export type OrderUpdateWithoutEmailMessagesInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUpdateManyWithoutOrderNestedInput
@@ -2053,10 +3201,28 @@ export type OrderUncheckedUpdateWithoutEmailMessagesInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2072,6 +3238,23 @@ export type OrderCreateWithoutMessagesInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2082,6 +3265,7 @@ export type OrderCreateWithoutMessagesInput = {
   businessLine?: Prisma.BusinessLineCreateNestedOneWithoutOrdersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutOrdersInput
   items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageCreateNestedManyWithoutOrderInput
@@ -2104,10 +3288,28 @@ export type OrderUncheckedCreateWithoutMessagesInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  orderCharges?: Prisma.OrderChargeUncheckedCreateNestedManyWithoutOrderInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutOrderInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrderInput
   emailMessages?: Prisma.EmailMessageUncheckedCreateNestedManyWithoutOrderInput
@@ -2139,6 +3341,23 @@ export type OrderUpdateWithoutMessagesInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2149,6 +3368,7 @@ export type OrderUpdateWithoutMessagesInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2171,10 +3391,28 @@ export type OrderUncheckedUpdateWithoutMessagesInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2196,6 +3434,23 @@ export type OrderCreateManyTenantInput = {
   paymentTerm?: string | null
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2211,6 +3466,23 @@ export type OrderUpdateWithoutTenantInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2220,6 +3492,7 @@ export type OrderUpdateWithoutTenantInput = {
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2242,10 +3515,28 @@ export type OrderUncheckedUpdateWithoutTenantInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2268,6 +3559,23 @@ export type OrderUncheckedUpdateManyWithoutTenantInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2289,6 +3597,23 @@ export type OrderCreateManyBusinessLineInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2304,6 +3629,23 @@ export type OrderUpdateWithoutBusinessLineInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2313,6 +3655,7 @@ export type OrderUpdateWithoutBusinessLineInput = {
   contact?: Prisma.ContactUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2335,10 +3678,28 @@ export type OrderUncheckedUpdateWithoutBusinessLineInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2361,6 +3722,23 @@ export type OrderUncheckedUpdateManyWithoutBusinessLineInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2382,6 +3760,23 @@ export type OrderCreateManyCustomerInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2397,6 +3792,23 @@ export type OrderUpdateWithoutCustomerInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2406,6 +3818,7 @@ export type OrderUpdateWithoutCustomerInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2428,10 +3841,28 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2454,6 +3885,23 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2475,6 +3923,23 @@ export type OrderCreateManyContactInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2490,6 +3955,23 @@ export type OrderUpdateWithoutContactInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2499,6 +3981,7 @@ export type OrderUpdateWithoutContactInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2521,10 +4004,28 @@ export type OrderUncheckedUpdateWithoutContactInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2547,6 +4048,23 @@ export type OrderUncheckedUpdateManyWithoutContactInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2568,6 +4086,23 @@ export type OrderCreateManyProjectInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2583,6 +4118,23 @@ export type OrderUpdateWithoutProjectInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2592,6 +4144,7 @@ export type OrderUpdateWithoutProjectInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2614,10 +4167,28 @@ export type OrderUncheckedUpdateWithoutProjectInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2640,6 +4211,23 @@ export type OrderUncheckedUpdateManyWithoutProjectInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2661,6 +4249,23 @@ export type OrderCreateManyQuoteInput = {
   deliveryTerm?: string | null
   expectedDeliveryDate?: Date | string | null
   tenantId?: number | null
+  ownerId?: number | null
+  ownerName?: string | null
+  subtotal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: string | null
+  paymentMethod?: string | null
+  shippingAddress?: string | null
+  actualDeliveryDate?: Date | string | null
+  isArchived?: boolean
+  archivedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2676,6 +4281,23 @@ export type OrderUpdateWithoutQuoteInput = {
   paymentTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2685,6 +4307,7 @@ export type OrderUpdateWithoutQuoteInput = {
   businessLine?: Prisma.BusinessLineUpdateOneWithoutOrdersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutOrdersNestedInput
   items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUpdateManyWithoutOrderNestedInput
@@ -2707,10 +4330,28 @@ export type OrderUncheckedUpdateWithoutQuoteInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  orderCharges?: Prisma.OrderChargeUncheckedUpdateManyWithoutOrderNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutOrderNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrderNestedInput
   emailMessages?: Prisma.EmailMessageUncheckedUpdateManyWithoutOrderNestedInput
@@ -2733,6 +4374,23 @@ export type OrderUncheckedUpdateManyWithoutQuoteInput = {
   deliveryTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ownerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discountAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  chargeAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paidAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  outstandingAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  costAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grossProfitRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceTerm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualDeliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2745,6 +4403,7 @@ export type OrderUncheckedUpdateManyWithoutQuoteInput = {
 
 export type OrderCountOutputType = {
   items: number
+  orderCharges: number
   invoices: number
   tasks: number
   emailMessages: number
@@ -2753,6 +4412,7 @@ export type OrderCountOutputType = {
 
 export type OrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | OrderCountOutputTypeCountItemsArgs
+  orderCharges?: boolean | OrderCountOutputTypeCountOrderChargesArgs
   invoices?: boolean | OrderCountOutputTypeCountInvoicesArgs
   tasks?: boolean | OrderCountOutputTypeCountTasksArgs
   emailMessages?: boolean | OrderCountOutputTypeCountEmailMessagesArgs
@@ -2774,6 +4434,13 @@ export type OrderCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
  */
 export type OrderCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrderItemWhereInput
+}
+
+/**
+ * OrderCountOutputType without action
+ */
+export type OrderCountOutputTypeCountOrderChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderChargeWhereInput
 }
 
 /**
@@ -2822,6 +4489,23 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   deliveryTerm?: boolean
   expectedDeliveryDate?: boolean
   tenantId?: boolean
+  ownerId?: boolean
+  ownerName?: boolean
+  subtotal?: boolean
+  discountAmount?: boolean
+  taxAmount?: boolean
+  chargeAmount?: boolean
+  paidAmount?: boolean
+  outstandingAmount?: boolean
+  costAmount?: boolean
+  grossProfitAmount?: boolean
+  grossProfitRate?: boolean
+  priceTerm?: boolean
+  paymentMethod?: boolean
+  shippingAddress?: boolean
+  actualDeliveryDate?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2832,6 +4516,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
   tenant?: boolean | Prisma.Order$tenantArgs<ExtArgs>
   items?: boolean | Prisma.Order$itemsArgs<ExtArgs>
+  orderCharges?: boolean | Prisma.Order$orderChargesArgs<ExtArgs>
   invoices?: boolean | Prisma.Order$invoicesArgs<ExtArgs>
   tasks?: boolean | Prisma.Order$tasksArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Order$emailMessagesArgs<ExtArgs>
@@ -2856,6 +4541,23 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   deliveryTerm?: boolean
   expectedDeliveryDate?: boolean
   tenantId?: boolean
+  ownerId?: boolean
+  ownerName?: boolean
+  subtotal?: boolean
+  discountAmount?: boolean
+  taxAmount?: boolean
+  chargeAmount?: boolean
+  paidAmount?: boolean
+  outstandingAmount?: boolean
+  costAmount?: boolean
+  grossProfitAmount?: boolean
+  grossProfitRate?: boolean
+  priceTerm?: boolean
+  paymentMethod?: boolean
+  shippingAddress?: boolean
+  actualDeliveryDate?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2884,6 +4586,23 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   deliveryTerm?: boolean
   expectedDeliveryDate?: boolean
   tenantId?: boolean
+  ownerId?: boolean
+  ownerName?: boolean
+  subtotal?: boolean
+  discountAmount?: boolean
+  taxAmount?: boolean
+  chargeAmount?: boolean
+  paidAmount?: boolean
+  outstandingAmount?: boolean
+  costAmount?: boolean
+  grossProfitAmount?: boolean
+  grossProfitRate?: boolean
+  priceTerm?: boolean
+  paymentMethod?: boolean
+  shippingAddress?: boolean
+  actualDeliveryDate?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2912,12 +4631,29 @@ export type OrderSelectScalar = {
   deliveryTerm?: boolean
   expectedDeliveryDate?: boolean
   tenantId?: boolean
+  ownerId?: boolean
+  ownerName?: boolean
+  subtotal?: boolean
+  discountAmount?: boolean
+  taxAmount?: boolean
+  chargeAmount?: boolean
+  paidAmount?: boolean
+  outstandingAmount?: boolean
+  costAmount?: boolean
+  grossProfitAmount?: boolean
+  grossProfitRate?: boolean
+  priceTerm?: boolean
+  paymentMethod?: boolean
+  shippingAddress?: boolean
+  actualDeliveryDate?: boolean
+  isArchived?: boolean
+  archivedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderNo" | "orderTitle" | "customerId" | "projectId" | "quoteId" | "contactId" | "businessLineId" | "orderStatus" | "totalAmount" | "exchangeRate" | "currency" | "paymentTerm" | "deliveryTerm" | "expectedDeliveryDate" | "tenantId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderNo" | "orderTitle" | "customerId" | "projectId" | "quoteId" | "contactId" | "businessLineId" | "orderStatus" | "totalAmount" | "exchangeRate" | "currency" | "paymentTerm" | "deliveryTerm" | "expectedDeliveryDate" | "tenantId" | "ownerId" | "ownerName" | "subtotal" | "discountAmount" | "taxAmount" | "chargeAmount" | "paidAmount" | "outstandingAmount" | "costAmount" | "grossProfitAmount" | "grossProfitRate" | "priceTerm" | "paymentMethod" | "shippingAddress" | "actualDeliveryDate" | "isArchived" | "archivedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Order$projectArgs<ExtArgs>
@@ -2926,6 +4662,7 @@ export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   businessLine?: boolean | Prisma.Order$businessLineArgs<ExtArgs>
   tenant?: boolean | Prisma.Order$tenantArgs<ExtArgs>
   items?: boolean | Prisma.Order$itemsArgs<ExtArgs>
+  orderCharges?: boolean | Prisma.Order$orderChargesArgs<ExtArgs>
   invoices?: boolean | Prisma.Order$invoicesArgs<ExtArgs>
   tasks?: boolean | Prisma.Order$tasksArgs<ExtArgs>
   emailMessages?: boolean | Prisma.Order$emailMessagesArgs<ExtArgs>
@@ -2959,6 +4696,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     businessLine: Prisma.$BusinessLinePayload<ExtArgs> | null
     tenant: Prisma.$TenantPayload<ExtArgs> | null
     items: Prisma.$OrderItemPayload<ExtArgs>[]
+    orderCharges: Prisma.$OrderChargePayload<ExtArgs>[]
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     emailMessages: Prisma.$EmailMessagePayload<ExtArgs>[]
@@ -2981,6 +4719,23 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     deliveryTerm: string | null
     expectedDeliveryDate: Date | null
     tenantId: number | null
+    ownerId: number | null
+    ownerName: string | null
+    subtotal: runtime.Decimal | null
+    discountAmount: runtime.Decimal | null
+    taxAmount: runtime.Decimal | null
+    chargeAmount: runtime.Decimal | null
+    paidAmount: runtime.Decimal | null
+    outstandingAmount: runtime.Decimal | null
+    costAmount: runtime.Decimal | null
+    grossProfitAmount: runtime.Decimal | null
+    grossProfitRate: runtime.Decimal | null
+    priceTerm: string | null
+    paymentMethod: string | null
+    shippingAddress: string | null
+    actualDeliveryDate: Date | null
+    isArchived: boolean
+    archivedAt: Date | null
     notes: string | null
     createdAt: Date
     updatedAt: Date
@@ -3385,6 +5140,7 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
   businessLine<T extends Prisma.Order$businessLineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$businessLineArgs<ExtArgs>>): Prisma.Prisma__BusinessLineClient<runtime.Types.Result.GetResult<Prisma.$BusinessLinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.Order$tenantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$tenantArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.Order$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderCharges<T extends Prisma.Order$orderChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$orderChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Order$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Order$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailMessages<T extends Prisma.Order$emailMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$emailMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3434,6 +5190,23 @@ export interface OrderFieldRefs {
   readonly deliveryTerm: Prisma.FieldRef<"Order", 'String'>
   readonly expectedDeliveryDate: Prisma.FieldRef<"Order", 'DateTime'>
   readonly tenantId: Prisma.FieldRef<"Order", 'Int'>
+  readonly ownerId: Prisma.FieldRef<"Order", 'Int'>
+  readonly ownerName: Prisma.FieldRef<"Order", 'String'>
+  readonly subtotal: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly discountAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly taxAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly chargeAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly paidAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly outstandingAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly costAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly grossProfitAmount: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly grossProfitRate: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly priceTerm: Prisma.FieldRef<"Order", 'String'>
+  readonly paymentMethod: Prisma.FieldRef<"Order", 'String'>
+  readonly shippingAddress: Prisma.FieldRef<"Order", 'String'>
+  readonly actualDeliveryDate: Prisma.FieldRef<"Order", 'DateTime'>
+  readonly isArchived: Prisma.FieldRef<"Order", 'Boolean'>
+  readonly archivedAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly notes: Prisma.FieldRef<"Order", 'String'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
@@ -3954,6 +5727,30 @@ export type Order$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
+}
+
+/**
+ * Order.orderCharges
+ */
+export type Order$orderChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderCharge
+   */
+  select?: Prisma.OrderChargeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderCharge
+   */
+  omit?: Prisma.OrderChargeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderChargeInclude<ExtArgs> | null
+  where?: Prisma.OrderChargeWhereInput
+  orderBy?: Prisma.OrderChargeOrderByWithRelationInput | Prisma.OrderChargeOrderByWithRelationInput[]
+  cursor?: Prisma.OrderChargeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderChargeScalarFieldEnum | Prisma.OrderChargeScalarFieldEnum[]
 }
 
 /**

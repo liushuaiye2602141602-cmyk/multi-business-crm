@@ -133,6 +133,11 @@ export type Order = Prisma.OrderModel
  */
 export type OrderItem = Prisma.OrderItemModel
 /**
+ * Model OrderCharge
+ * 
+ */
+export type OrderCharge = Prisma.OrderChargeModel
+/**
  * Model Document
  * 
  */
@@ -222,6 +227,11 @@ export type Message = Prisma.MessageModel
  * 
  */
 export type CustomerListView = Prisma.CustomerListViewModel
+/**
+ * Model OrderListView
+ * 
+ */
+export type OrderListView = Prisma.OrderListViewModel
 /**
  * Model AIControlSettings
  * 
