@@ -87,10 +87,17 @@ export async function handleIncomingFeishuMessage(
     },
   });
 
-  // 4. Parse intent using local rule-based parser (no AI call needed)
-  const { parseFeishuIntent, getHelpText } = await import("./feishu-parser");
-  const parsed = parseFeishuIntent(context.text);
+  // 4. Parse intent using local rule-based parser for fast routing,
+  //    then enrich write intents with LLM structured extraction
+  const { parseFeishuIntent, getHelpText, enrichWithLLM, isWriteConfirmationMode } = await import("./feishu-parser");
+  let parsed = parseFeishuIntent(context.text);
   console.log(`意图: ${parsed.intent} (置信度: ${parsed.confidence})`);
+
+  // 4a. Enrich write intents with LLM extraction (if available)
+  if (WRITE_INTENTS.has(parsed.intent)) {
+    parsed = await enrichWithLLM(parsed, context.text);
+    console.log(`参数提取后: ${JSON.stringify(parsed.parameters)}`);
+  }
 
   // 5. Handle confirmation tokens (C-level flow: second message)
   if (parsed.parameters.confirmationToken) {
@@ -154,12 +161,19 @@ async function handleWriteIntent(
   const { getRiskLevel } = await import("./feishu-risk-levels");
   const riskLevel = getRiskLevel(intent);
 
-  // Step 4: C-level (high risk) - require confirmation
+  // Step 4: Write confirmation mode - force confirmation for all writes
+  const { isWriteConfirmationMode } = await import("./feishu-parser");
+  if (isWriteConfirmationMode() && riskLevel !== "C") {
+    // Treat as C-level when write confirmation mode is active
+    return handleHighRiskIntent(intent, parsed, context);
+  }
+
+  // Step 5: C-level (high risk) - require confirmation
   if (riskLevel === "C") {
     return handleHighRiskIntent(intent, parsed, context);
   }
 
-  // Step 5: A/B level - execute directly
+  // Step 6: A/B level - execute directly
   const { executeWriteIntent } = await import("./feishu-write-executor");
   const result = await executeWriteIntent(parsed, context.senderId, context.chatId);
 

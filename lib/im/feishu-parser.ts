@@ -348,6 +348,131 @@ function extractQueryParams(text: string): ParsedIntent["parameters"] {
   return params;
 }
 
+// ══════════════════════════════════════════════════════════════════
+// LLM enrichment for write intents
+// ══════════════════════════════════════════════════════════════════
+
+/**
+ * Intent types that benefit from LLM structured extraction.
+ * For these intents, the keyword-based parameters are replaced with
+ * LLM-extracted + Zod-validated parameters when AI is available.
+ */
+const LLM_ENRICHABLE_INTENTS: ReadonlySet<string> = new Set([
+  "CREATE_LEAD",
+  "ADD_LEAD_FOLLOWUP",
+]);
+
+/**
+ * Shadow mode: when enabled, runs LLM extraction in parallel but uses
+ * the original rule-based result. Logs the LLM result for comparison.
+ */
+function isShadowMode(): boolean {
+  return process.env.FEISHU_NL_SHADOW_MODE === "true";
+}
+
+/**
+ * Write confirmation mode: when enabled, all write intents go through
+ * the confirmation flow regardless of risk level.
+ */
+export function isWriteConfirmationMode(): boolean {
+  return process.env.FEISHU_NL_WRITE_CONFIRMATION_MODE === "true";
+}
+
+/**
+ * Enrich a parsed intent with LLM-structured extraction for write intents.
+ *
+ * - If AI is available and the intent is enrichable, calls LLM extraction
+ * - Falls back to keyword-based extraction if AI fails
+ * - In shadow mode, logs LLM result but returns original
+ * - Returns the original parsed result if the intent is not enrichable
+ */
+export async function enrichWithLLM(
+  parsed: ParsedIntent,
+  originalText: string,
+): Promise<ParsedIntent> {
+  if (!LLM_ENRICHABLE_INTENTS.has(parsed.intent)) {
+    return parsed;
+  }
+
+  const shadowMode = isShadowMode();
+
+  try {
+    const { extractStructuredParameters } = await import("./nlu-extractor");
+    const llmResult = await extractStructuredParameters(originalText);
+
+    if (!llmResult.success || !llmResult.result) {
+      console.log(`LLM extraction failed: ${llmResult.error}, using fallback`);
+      const { fallbackExtract } = await import("./nlu-fallback");
+      const fallback = fallbackExtract(originalText);
+      if (shadowMode) {
+        console.log("[SHADOW] LLM failed, fallback used. Original:", JSON.stringify(parsed.parameters));
+        return parsed;
+      }
+      return mapNLUResultToParsedIntent(fallback, parsed);
+    }
+
+    if (shadowMode) {
+      console.log("[SHADOW] LLM result:", JSON.stringify(llmResult.result));
+      console.log("[SHADOW] Original result:", JSON.stringify(parsed.parameters));
+      return parsed;
+    }
+
+    // Validate intent match: if LLM disagrees with keyword routing on
+    // a high-confidence keyword match (>0.9), prefer keyword routing.
+    if (parsed.confidence >= 0.9 && llmResult.result.intent !== parsed.intent) {
+      console.log(
+        `Intent mismatch: keyword=${parsed.intent}(${parsed.confidence}) vs llm=${llmResult.result.intent}(${llmResult.result.confidence}), using keyword`,
+      );
+    }
+
+    return mapNLUResultToParsedIntent(llmResult.result, parsed);
+  } catch (error) {
+    console.log(`LLM enrichment error: ${error}, using original`);
+    return parsed;
+  }
+}
+
+/**
+ * Map NLU_OUTPUT_SCHEMA result back to the existing ParsedIntent type.
+ * This bridges the new LLM-based extraction with the existing handler
+ * infrastructure that expects ParsedIntent.
+ */
+function mapNLUResultToParsedIntent(
+  nluResult: any,
+  original: ParsedIntent,
+): ParsedIntent {
+  const params: ParsedIntent["parameters"] = {};
+
+  if (original.intent === "CREATE_LEAD") {
+    const p = nluResult.parameters || {};
+    params.keyword = p.companyName || p.keyword || undefined;
+    params.contactName = p.contactName || undefined;
+    params.country = p.country || undefined;
+    params.email = p.email || undefined;
+    params.phone = p.phone || undefined;
+    params.requirement = p.requirement || undefined;
+  } else if (original.intent === "ADD_LEAD_FOLLOWUP") {
+    const p = nluResult.parameters || {};
+    const leadRef = p.leadReference || {};
+    params.exactName =
+      leadRef.companyName || p.exactName || undefined;
+    params.contactName = leadRef.contactName || undefined;
+    params.email = leadRef.email || undefined;
+    params.phone = leadRef.phone || undefined;
+    params.followUpContent = p.content || p.followUpContent || undefined;
+  } else {
+    // For other intents, keep original params
+    return original;
+  }
+
+  return {
+    intent: original.intent,
+    confidence: nluResult.confidence || original.confidence,
+    parameters: params,
+    replyText: original.replyText,
+  };
+}
+
 function extractWriteParams(text: string, isFollowup = false): ParsedIntent["parameters"] {
   const params: ParsedIntent["parameters"] = {};
 
