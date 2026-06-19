@@ -1,3 +1,4 @@
+import { QuoteStatus, OrderStatus } from "../lib/generated/prisma/enums";
 /**
  * Positive test for the "quoted_not_won" customer segment.
  *
@@ -39,10 +40,10 @@ function assert(condition: boolean, label: string) {
 // ---------------------------------------------------------------------------
 
 /** "Won" order statuses as defined in segment-query-builder.ts */
-const WON_ORDER_STATUSES = ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"];
+const WON_ORDER_STATUSES = ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] as OrderStatus[];
 
 /** "Valid" quote statuses as defined in segment-query-builder.ts */
-const VALID_QUOTE_STATUSES = ["SENT", "WAITING_FEEDBACK", "REVISED", "ACCEPTED"];
+const VALID_QUOTE_STATUSES = ["SENT", "WAITING_FEEDBACK", "REVISED", "ACCEPTED"] as QuoteStatus[];
 
 /**
  * Replicate the quoted_not_won segment logic from segment-query-builder.ts
