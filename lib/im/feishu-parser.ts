@@ -274,37 +274,89 @@ export function parseFeishuIntent(text: string): ParsedIntent {
   }
 
   // ════════════════════════════════════════════════════════════════
-  // QUERY INTENTS (must come AFTER write intents so write keywords win)
+  // BROAD WRITE DETECTION — catch natural language writes
+  // that don't match specific patterns above but are clearly writes
   // ════════════════════════════════════════════════════════════════
 
-  if (trimmed.includes("线索")) {
+  const isLikelyWrite = detectWriteLikelihood(trimmed);
+  if (isLikelyWrite) {
+    // Route to LLM extraction - will be handled by enrichWithLLM in handler
+    // For now, use a broad intent that the handler will intercept
+    if (trimmed.match(/跟进|联系|沟通|电话|邮件|回复|再联系/)) {
+      return { intent: "ADD_LEAD_FOLLOWUP", confidence: 0.8, parameters: {} };
+    }
+    // Default write intent for new entities
+    return { intent: "CREATE_LEAD", confidence: 0.8, parameters: {} };
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // QUERY INTENTS — require explicit query verbs
+  // ════════════════════════════════════════════════════════════════
+
+  const hasQueryVerb = /查询|查一下|找一下|显示|列出|看看|最近有哪些|告诉我|帮我查/.test(trimmed);
+
+  if (hasQueryVerb && trimmed.includes("线索")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_LEADS", confidence: 0.9, parameters: params };
   }
 
-  // Check 订单 and 报价 before 客户 so specific intents win over generic
-  if (trimmed.includes("订单")) {
+  if (hasQueryVerb && trimmed.includes("订单")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_ORDERS", confidence: 0.9, parameters: params };
   }
 
-  if (trimmed.includes("报价")) {
+  if (hasQueryVerb && trimmed.includes("报价")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_QUOTES", confidence: 0.9, parameters: params };
   }
 
-  if (trimmed.includes("客户")) {
+  if (hasQueryVerb && trimmed.includes("客户")) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_CUSTOMERS", confidence: 0.9, parameters: params };
   }
 
-  if (trimmed.includes("任务") || trimmed.includes("待办")) {
+  if (hasQueryVerb && (trimmed.includes("任务") || trimmed.includes("待办"))) {
     const params = extractQueryParams(trimmed);
     return { intent: "QUERY_TASKS", confidence: 0.9, parameters: params };
   }
 
   // Unknown
   return { intent: "UNKNOWN", confidence: 0.3, parameters: {} };
+}
+
+function detectWriteLikelihood(text: string): boolean {
+  // Broad patterns that indicate a write intent even without matching specific keywords
+  const writePatterns = [
+    /帮我新增/,
+    /帮我录入/,
+    /帮我创建/,
+    /帮我添加/,
+    /新增.*线索/,
+    /添加.*线索/,
+    /录入.*询盘/,
+    /录入.*新询盘/,
+    /新.*客户/,
+    /新.*线索/,
+    /新.*询盘/,
+    /有个客户/,
+    /来了.*询盘/,
+    /公司想采购/,
+    /客户想采购/,
+    /我刚联系了/,
+    /我刚给.+打了电话/,
+    /我给.+发了邮件/,
+    /我通过.+联系了/,
+    /记录一下/,
+    /记录跟进/,
+    /添加跟进/,
+    /新增跟进/,
+    /我刚.*联系/,
+    /客户回复了/,
+    /明天再联系/,
+    /下次跟进/,
+    /录入/,
+  ];
+  return writePatterns.some(p => p.test(text));
 }
 
 function extractQueryParams(text: string): ParsedIntent["parameters"] {
