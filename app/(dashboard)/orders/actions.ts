@@ -126,15 +126,16 @@ export async function updateOrderStatus(orderId: number, status: string) {
     data: { orderStatus: status as any },
   });
 
-  // Emit event — all AI processing goes through Event Bus
-  if (status === "CONFIRMED") {
-    try {
-      const { emit } = await import("@/lib/events/bus");
-      await emit({ type: "order.confirmed", entityId: orderId, entityType: "Order" });
-    } catch {}
-  }
-
   return { success: true };
+}
+
+export async function confirmOrderEvent(orderId: number) {
+  try {
+    const { emit } = await import("@/lib/events/bus");
+    await emit({ type: "order.confirmed", entityId: orderId, entityType: "Order" });
+  } catch (err) {
+    console.error("order.confirmed event emit failed:", err);
+  }
 }
 
 export async function recalculateOrderTotals(orderId: number) {

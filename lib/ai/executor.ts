@@ -410,6 +410,17 @@ async function executeUpdateOrderStatus(args: Record<string, unknown>): Promise<
       entityName: order.orderNo,
       description: `通过 IM 更新订单状态: ${order.orderNo} ${oldStatus} → ${status}`,
     });
+
+    // Emit order.confirmed event AFTER DB commit (never inside a transaction)
+    if (status === "CONFIRMED") {
+      try {
+        const { emit } = await import("@/lib/events/bus");
+        await emit({ type: "order.confirmed", entityId: order.id, entityType: "Order" });
+      } catch (err) {
+        console.error("order.confirmed event emit failed:", err);
+      }
+    }
+
     return {
       success: true,
       message: `✅ 订单状态已更新\n单号：${order.orderNo}\n客户：${order.customer.company}\n状态：${oldStatus} → ${status}`,
