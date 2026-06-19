@@ -126,16 +126,17 @@ export async function updateOrderStatus(orderId: number, status: string) {
     data: { orderStatus: status as any },
   });
 
-  return { success: true };
-}
-
-export async function confirmOrderEvent(orderId: number) {
-  try {
-    const { emit } = await import("@/lib/events/bus");
-    await emit({ type: "order.confirmed", entityId: orderId, entityType: "Order" });
-  } catch (err) {
-    console.error("order.confirmed event emit failed:", err);
+  // Emit event AFTER DB commit (never inside a transaction)
+  if (status === "CONFIRMED") {
+    try {
+      const { emit } = await import("@/lib/events/bus");
+      await emit({ type: "order.confirmed", entityId: orderId, entityType: "Order" });
+    } catch (err) {
+      console.error("order.confirmed event emit failed:", err);
+    }
   }
+
+  return { success: true };
 }
 
 export async function recalculateOrderTotals(orderId: number) {

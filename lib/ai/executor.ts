@@ -399,10 +399,14 @@ async function executeUpdateOrderStatus(args: Record<string, unknown>): Promise<
       return { success: false, message: `未找到订单「${orderNo}」。` };
     }
     const oldStatus = order.orderStatus;
-    const updatedOrder = await prisma.order.update({
-      where: { id: order.id },
-      data: { orderStatus: status as any },
-    });
+
+    // Delegate to canonical business action (single emit path for order.confirmed)
+    const { updateOrderStatus } = await import("@/app/(dashboard)/orders/actions");
+    const result = await updateOrderStatus(order.id, status);
+    if (!result.success) {
+      return { success: false, message: `更新订单状态失败：${result.error}` };
+    }
+
     await createActivityLog({
       action: "IM 更新",
       entityType: "订单",
@@ -411,20 +415,9 @@ async function executeUpdateOrderStatus(args: Record<string, unknown>): Promise<
       description: `通过 IM 更新订单状态: ${order.orderNo} ${oldStatus} → ${status}`,
     });
 
-    // Emit order.confirmed event AFTER DB commit (never inside a transaction)
-    if (status === "CONFIRMED") {
-      try {
-        const { emit } = await import("@/lib/events/bus");
-        await emit({ type: "order.confirmed", entityId: order.id, entityType: "Order" });
-      } catch (err) {
-        console.error("order.confirmed event emit failed:", err);
-      }
-    }
-
     return {
       success: true,
       message: `✅ 订单状态已更新\n单号：${order.orderNo}\n客户：${order.customer.company}\n状态：${oldStatus} → ${status}`,
-      data: updatedOrder,
     };
   } catch (error) {
     return { success: false, message: `更新订单状态失败：${error instanceof Error ? error.message : "未知错误"}` };
