@@ -34,6 +34,7 @@ export function getLeadStatusVariant(status: string): "info" | "purple" | "succe
     QUOTING: "info",
     NEGOTIATING: "purple",
     QUALIFIED: "success",
+    CONVERTED: "success",
     WON: "success",
     LOST: "danger",
     DORMANT: "default",

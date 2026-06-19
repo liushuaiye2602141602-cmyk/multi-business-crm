@@ -39,6 +39,7 @@ export const LeadStatusLabel: Record<string, string> = {
   QUOTING: "报价中",
   NEGOTIATING: "谈判中",
   QUALIFIED: "已确认",
+  CONVERTED: "已转换",
   WON: "已成交",
   LOST: "已流失",
   DORMANT: "休眠",

@@ -102,7 +102,7 @@ export default async function LeadDetailPage({
             <Link href={`/leads/${lead.id}/edit`} className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
               <Pencil size={14} /> 编辑
             </Link>
-            {lead.convertedCustomerId ? (
+            {lead.status === "CONVERTED" || lead.convertedCustomerId ? (
               <Link href={`/customers/${lead.convertedCustomerId}`} className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors">
                 <ArrowRight size={14} /> 查看客户
               </Link>
@@ -165,6 +165,23 @@ export default async function LeadDetailPage({
           ))}
         </div>
       </Card>
+
+      {/* 转化信息 */}
+      {lead.status === "CONVERTED" && lead.convertedCustomer && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle size={18} className="text-green-600" />
+            <h3 className="font-semibold text-green-800">已转化为客户</h3>
+          </div>
+          <div className="text-sm text-green-700">
+            <p>客户：{lead.convertedCustomer.company}</p>
+            <p>联系人：{lead.convertedCustomer.contactName}</p>
+          </div>
+          <Link href={`/customers/${lead.convertedCustomerId}`} className="inline-flex items-center gap-1 mt-2 text-sm text-green-600 hover:underline">
+            查看客户详情 <ArrowRight size={14} />
+          </Link>
+        </div>
+      )}
 
       {/* 线索处理建议 */}
       {suggestions.length > 0 && (

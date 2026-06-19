@@ -44,6 +44,12 @@ export default async function LeadsPage({
   if (grade) where.grade = grade;
   if (status) where.status = status;
 
+  // Default: exclude converted leads unless explicitly filtering for them
+  const hasFilters = search || businessLineId || source || grade || status;
+  if (!hasFilters) {
+    where.status = { notIn: ["CONVERTED"] };
+  }
+
   const [leads, businessLines] = await Promise.all([
     prisma.lead.findMany({
       where,
@@ -52,8 +58,6 @@ export default async function LeadsPage({
     }),
     prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
   ]);
-
-  const hasFilters = search || businessLineId || source || grade || status;
 
   return (
     <div>
