@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { OrderStatus, Currency } from "@/lib/generated/prisma/enums";
 import { createActivityLog } from "@/lib/activity-log";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 function generateOrderNo(): string {
   const now = new Date();
@@ -37,7 +38,7 @@ export async function createOrder(formData: FormData) {
 
   if (!data.customerId) throw new Error("客户不能为空");
 
-  const order = await prisma.order.create({ data: { ...data, tenantId: 1 } });
+  const order = await prisma.order.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
 
   await createActivityLog({
     action: "创建",

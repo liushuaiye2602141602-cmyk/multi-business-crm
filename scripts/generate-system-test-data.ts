@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { PrismaClient } from "../lib/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-import bcrypt from "bcryptjs";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
@@ -20,7 +19,7 @@ async function main() {
   console.log(`[OK] Test tenant created: ID=${tenant.id}`);
 
   // 2. Create test users
-  const password = await bcrypt.hash("test1234", 10);
+  const password = "test1234";
   const users = [];
   const userData = [
     ["test.admin@example.invalid", "Test Admin", "ADMIN"],

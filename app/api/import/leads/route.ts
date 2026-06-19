@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { createActivityLog } from "@/lib/activity-log";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function POST(request: NextRequest) {
   try {
@@ -83,7 +84,7 @@ export async function POST(request: NextRequest) {
 
         await prisma.lead.create({
           data: {
-            tenantId: 1,
+            tenantId: getLocalWorkspaceId(),
             company: companyName,
             contactName: row.contactName || row.name || companyName,
             country: row.country || null,

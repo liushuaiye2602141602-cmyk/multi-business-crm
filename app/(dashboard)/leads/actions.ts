@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { LeadSource, LeadStatus, LeadTemperature, LeadGrade, Currency } from "@/lib/generated/prisma/enums";
 import { createActivityLog } from "@/lib/activity-log";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function createLead(formData: FormData) {
   const data = {
@@ -38,7 +39,7 @@ export async function createLead(formData: FormData) {
     throw new Error("公司名称和联系人姓名不能为空");
   }
 
-  const lead = await prisma.lead.create({ data: { ...data, tenantId: 1 } });
+  const lead = await prisma.lead.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
 
   await createActivityLog({
     action: "创建",

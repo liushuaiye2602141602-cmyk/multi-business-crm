@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { extractCustomerFromImage } from "@/lib/ai/vision";
 import prisma from "@/lib/prisma";
 import { createActivityLog } from "@/lib/activity-log";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,7 +29,7 @@ export async function POST(request: NextRequest) {
       if (businessLine) {
         createdLead = await prisma.lead.create({
           data: {
-            tenantId: 1,
+            tenantId: getLocalWorkspaceId(),
             company: extracted.company,
             contactName: extracted.contactName,
             country: extracted.country || null,

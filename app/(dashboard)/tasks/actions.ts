@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { TaskType, TaskStatus, TaskPriority } from "@/lib/generated/prisma/enums";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function createTask(formData: FormData) {
   const data = {
@@ -21,7 +22,7 @@ export async function createTask(formData: FormData) {
   if (!data.title) throw new Error("任务标题不能为空");
   if (!data.dueDate) throw new Error("截止日期不能为空");
 
-  const task = await prisma.task.create({ data: { ...data, tenantId: 1 } });
+  const task = await prisma.task.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
   revalidatePath("/tasks");
   redirect(`/tasks`);
 }

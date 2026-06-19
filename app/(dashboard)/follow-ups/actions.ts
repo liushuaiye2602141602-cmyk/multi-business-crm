@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { FollowUpMethod } from "@/lib/generated/prisma/enums";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function createFollowUp(formData: FormData) {
   const data = {
@@ -55,7 +56,7 @@ export async function createFollowUp(formData: FormData) {
         leadId: data.leadId,
         customerId: data.customerId,
         projectId: data.projectId,
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
       },
     });
   }

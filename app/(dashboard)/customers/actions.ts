@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { CustomerType, CustomerStatus, LeadGrade, LeadSource } from "@/lib/generated/prisma/enums";
+import { getLocalWorkspaceId, getLocalUserId } from "@/lib/local-context";
 
 export async function createCustomer(formData: FormData) {
   const data = {
@@ -29,7 +30,7 @@ export async function createCustomer(formData: FormData) {
     throw new Error("公司名称和联系人姓名不能为空");
   }
 
-  const customer = await prisma.customer.create({ data: { ...data, tenantId: 1 } });
+  const customer = await prisma.customer.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
   revalidatePath("/customers");
   redirect(`/customers/${customer.id}`);
 }
@@ -81,7 +82,7 @@ export async function claimCustomer(customerId: number, ownerName: string) {
   await prisma.customer.update({
     where: { id: customerId },
     data: {
-      ownerId: 1, // 默认用户ID，待接入认证后替换
+      ownerId: getLocalUserId(), // Local single-user mode
       ownerName,
       poolEnteredAt: null,
       poolReason: null,

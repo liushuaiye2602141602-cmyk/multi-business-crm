@@ -19,10 +19,10 @@ services:
     container_name: crm-app
     restart: unless-stopped
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3003:3003"
     environment:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-crm_password_change_me}@db:5432/open_crm?schema=public
-      - APP_URL=${APP_URL:-http://localhost:3000}
+      - APP_URL=${APP_URL:-http://localhost:3003}
     depends_on:
       db:
         condition: service_healthy

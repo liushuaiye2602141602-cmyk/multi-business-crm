@@ -4,6 +4,7 @@ import { verifyApiKey } from "@/lib/webhook";
 import { createActivityLog } from "@/lib/activity-log";
 import { analyzeLead } from "@/lib/ai/actions";
 import { isAIConfigured } from "@/lib/ai/types";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 interface WebhookRequestBody {
   companyName: string;
@@ -166,7 +167,7 @@ export async function POST(request: NextRequest) {
   try {
     const lead = await prisma.lead.create({
       data: {
-        tenantId: 1,
+        tenantId: getLocalWorkspaceId(),
         company: body.companyName,
         contactName: body.name || body.companyName,
         country: body.country || null,

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { QuoteStatus, Currency } from "@/lib/generated/prisma/enums";
 import { generateQuoteNo } from "@/lib/format";
+import { getLocalWorkspaceId } from "@/lib/local-context";
 
 export async function createQuote(formData: FormData) {
   const unitPrice = formData.get("unitPrice") ? parseFloat(formData.get("unitPrice") as string) : null;
@@ -39,7 +40,7 @@ export async function createQuote(formData: FormData) {
 
   if (!data.quoteNo) throw new Error("报价编号不能为空");
 
-  const quote = await prisma.quote.create({ data: { ...data, tenantId: 1 } });
+  const quote = await prisma.quote.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
   revalidatePath("/quotes");
   redirect(`/quotes/${quote.id}`);
 }
