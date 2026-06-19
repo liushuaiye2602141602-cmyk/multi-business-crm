@@ -11,7 +11,10 @@
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "db:seed": "prisma db seed",
-    "feishu:bot": "tsx scripts/feishu-bot.ts"
+    "feishu:bot": "tsx scripts/feishu-bot.ts",
+    "test:data:generate": "tsx scripts/generate-system-test-data.ts",
+    "test:data:cleanup": "tsx scripts/cleanup-system-test-data.ts --confirm",
+    "test:data:cleanup:dry-run": "tsx scripts/cleanup-system-test-data.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
