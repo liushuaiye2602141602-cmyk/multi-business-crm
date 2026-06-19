@@ -40,6 +40,7 @@ import {
   BarChart2,
   Inbox,
   Shield,
+  UsersRound,
 } from "lucide-react";
 
 interface NavItem {
@@ -75,6 +76,7 @@ const navGroups: NavGroup[] = [
       { href: "/projects", label: "商机项目", icon: FolderKanban },
       { href: "/follow-ups", label: "跟进记录", icon: MessageSquare },
       { href: "/customers/dormant", label: "沉睡客户", icon: Moon },
+      { href: "/customers/segments", label: "客户客群", icon: UsersRound },
       { href: "/tasks", label: "今日任务", icon: CheckSquare },
     ],
   },

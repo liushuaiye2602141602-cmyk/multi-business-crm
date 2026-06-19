@@ -261,3 +261,8 @@ export type AIPolicyRule = Prisma.AIPolicyRuleModel
  * 
  */
 export type AIExecutionLog = Prisma.AIExecutionLogModel
+/**
+ * Model PresetSegmentPreference
+ * 
+ */
+export type PresetSegmentPreference = Prisma.PresetSegmentPreferenceModel

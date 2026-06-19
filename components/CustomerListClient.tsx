@@ -57,7 +57,7 @@ interface CustomerListClientProps {
   customers: CustomerRow[];
   initialColumnConfig: ColumnConfig[];
   customFieldDefs: Array<{ id: number; key: string; label: string; fieldType: string }>;
-  onDelete: (id: number) => Promise<void>;
+  onDelete?: (id: number) => Promise<void>;
 }
 
 function getCustomerStageVariant(stage: string): "success" | "warning" | "danger" | "info" | "default" {
@@ -274,7 +274,7 @@ export default function CustomerListClient({
                     <Link href={`/customers/${customer.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
                       <Pencil size={16} />
                     </Link>
-                    <ConfirmDeleteButton action={() => onDelete(customer.id)} />
+                    {onDelete && <ConfirmDeleteButton action={() => onDelete(customer.id)} />}
                   </div>
                 </td>
               </tr>

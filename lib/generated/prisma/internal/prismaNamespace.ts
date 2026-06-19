@@ -427,7 +427,8 @@ export const ModelName = {
   CustomerListView: 'CustomerListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
-  AIExecutionLog: 'AIExecutionLog'
+  AIExecutionLog: 'AIExecutionLog',
+  PresetSegmentPreference: 'PresetSegmentPreference'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -443,7 +444,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog"
+    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog" | "presetSegmentPreference"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3703,6 +3704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PresetSegmentPreference: {
+      payload: Prisma.$PresetSegmentPreferencePayload<ExtArgs>
+      fields: Prisma.PresetSegmentPreferenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PresetSegmentPreferenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PresetSegmentPreferenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        findFirst: {
+          args: Prisma.PresetSegmentPreferenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PresetSegmentPreferenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        findMany: {
+          args: Prisma.PresetSegmentPreferenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>[]
+        }
+        create: {
+          args: Prisma.PresetSegmentPreferenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        createMany: {
+          args: Prisma.PresetSegmentPreferenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PresetSegmentPreferenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>[]
+        }
+        delete: {
+          args: Prisma.PresetSegmentPreferenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        update: {
+          args: Prisma.PresetSegmentPreferenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        deleteMany: {
+          args: Prisma.PresetSegmentPreferenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PresetSegmentPreferenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PresetSegmentPreferenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>[]
+        }
+        upsert: {
+          args: Prisma.PresetSegmentPreferenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresetSegmentPreferencePayload>
+        }
+        aggregate: {
+          args: Prisma.PresetSegmentPreferenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePresetSegmentPreference>
+        }
+        groupBy: {
+          args: Prisma.PresetSegmentPreferenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresetSegmentPreferenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PresetSegmentPreferenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresetSegmentPreferenceCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4616,6 +4691,23 @@ export const AIExecutionLogScalarFieldEnum = {
 export type AIExecutionLogScalarFieldEnum = (typeof AIExecutionLogScalarFieldEnum)[keyof typeof AIExecutionLogScalarFieldEnum]
 
 
+export const PresetSegmentPreferenceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  segmentKey: 'segmentKey',
+  displayName: 'displayName',
+  isVisible: 'isVisible',
+  sortOrder: 'sortOrder',
+  showOnDashboard: 'showOnDashboard',
+  settings: 'settings',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PresetSegmentPreferenceScalarFieldEnum = (typeof PresetSegmentPreferenceScalarFieldEnum)[keyof typeof PresetSegmentPreferenceScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5250,6 +5342,7 @@ export type GlobalOmitConfig = {
   aIControlSettings?: Prisma.AIControlSettingsOmit
   aIPolicyRule?: Prisma.AIPolicyRuleOmit
   aIExecutionLog?: Prisma.AIExecutionLogOmit
+  presetSegmentPreference?: Prisma.PresetSegmentPreferenceOmit
 }
 
 /* Types for Logging */

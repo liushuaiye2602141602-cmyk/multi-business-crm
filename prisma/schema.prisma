@@ -1293,3 +1293,22 @@ model AIExecutionLog {
   @@index([allowed])
   @@index([createdAt])
 }
+
+// ==================== Customer Segments ====================
+
+model PresetSegmentPreference {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  userId      Int?
+  segmentKey  String
+  displayName String?
+  isVisible   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  showOnDashboard Boolean @default(false)
+  settings    Json     @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([tenantId, userId, segmentKey])
+  @@index([tenantId, userId])
+}

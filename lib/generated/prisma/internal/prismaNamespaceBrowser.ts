@@ -94,7 +94,8 @@ export const ModelName = {
   CustomerListView: 'CustomerListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
-  AIExecutionLog: 'AIExecutionLog'
+  AIExecutionLog: 'AIExecutionLog',
+  PresetSegmentPreference: 'PresetSegmentPreference'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -985,6 +986,23 @@ export const AIExecutionLogScalarFieldEnum = {
 } as const
 
 export type AIExecutionLogScalarFieldEnum = (typeof AIExecutionLogScalarFieldEnum)[keyof typeof AIExecutionLogScalarFieldEnum]
+
+
+export const PresetSegmentPreferenceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  segmentKey: 'segmentKey',
+  displayName: 'displayName',
+  isVisible: 'isVisible',
+  sortOrder: 'sortOrder',
+  showOnDashboard: 'showOnDashboard',
+  settings: 'settings',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PresetSegmentPreferenceScalarFieldEnum = (typeof PresetSegmentPreferenceScalarFieldEnum)[keyof typeof PresetSegmentPreferenceScalarFieldEnum]
 
 
 export const SortOrder = {
