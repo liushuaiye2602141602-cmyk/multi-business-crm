@@ -240,8 +240,25 @@ export async function deleteCustomer(id: number) {
 
   if (!customer) throw new Error("客户不存在");
 
-  if (customer.projects.length > 0 || customer.followUps.length > 0 || customer.quotes.length > 0 || customer.tasks.length > 0) {
-    throw new Error("该客户存在关联数据，请先处理关联项目、跟进、报价或任务后再删除");
+  // Auto-tasks for customers: "跟进报价: {quoteNo}" or "跟进生产进度: {orderNo}"
+  const autoTasks = customer.tasks.filter(
+    (t) =>
+      t.type === "FOLLOW_UP" &&
+      (t.title.startsWith("跟进报价:") || t.title.startsWith("跟进生产进度:"))
+  );
+  const manualTasks = customer.tasks.filter(
+    (t) => !autoTasks.some((at) => at.id === t.id)
+  );
+
+  if (customer.projects.length > 0 || customer.followUps.length > 0 || customer.quotes.length > 0 || manualTasks.length > 0) {
+    throw new Error("该客户存在关联数据（项目、跟进记录、报价或手动任务），请先处理后再删除");
+  }
+
+  // Delete auto-tasks along with the customer
+  if (autoTasks.length > 0) {
+    await prisma.task.deleteMany({
+      where: { id: { in: autoTasks.map((t) => t.id) } },
+    });
   }
 
   await prisma.customer.delete({ where: { id } });

@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   Users, UserCheck, FolderKanban, Award, TrendingUp,
   FileText, Package, FileEdit, Sparkles, Webhook, ArrowRight,
-  CircleDollarSign, Clock, CheckCircle2, AlertTriangle,
+  CircleDollarSign, Clock, CheckCircle2, AlertTriangle, CheckSquare,
   ShoppingCart, ArrowUpRight,
 } from "lucide-react";
 import { LeadSourceLabel, LeadStatusLabel, ProjectStatusLabel, QuoteStatusLabel, OrderStatusLabel } from "@/lib/enums";
@@ -31,7 +31,7 @@ export default async function DashboardPage() {
     // Order stats
     totalOrders, completedOrders, revenueResult,
     // Task stats
-    pendingTasks, overdueTasks, completedTasks,
+    todayTasks, overdueTasks, completedTasks, allUnfinishedTasks,
     // Recent activities
     recentLeads, recentQuotes, recentOrders,
     // AI insights
@@ -72,9 +72,10 @@ export default async function DashboardPage() {
     prisma.order.count({ where: { orderStatus: "COMPLETED" } }),
     prisma.order.aggregate({ _sum: { totalAmount: true }, where: { orderStatus: { in: ["SHIPPED", "COMPLETED"] } } }),
     // Task stats
-    prisma.task.count({ where: { status: "PENDING" } }),
-    prisma.task.count({ where: { status: "PENDING", dueDate: { lt: new Date() } } }),
+    prisma.task.count({ where: { status: { in: ["PENDING", "IN_PROGRESS"] }, dueDate: { gte: todayStart, lte: todayEnd } } }),
+    prisma.task.count({ where: { status: { in: ["PENDING", "IN_PROGRESS"] }, dueDate: { lt: todayStart } } }),
     prisma.task.count({ where: { status: "COMPLETED" } }),
+    prisma.task.count({ where: { status: { in: ["PENDING", "IN_PROGRESS"] } } }),
     // Recent activities
     prisma.lead.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, company: true, status: true, createdAt: true } }),
     prisma.quote.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, quoteNo: true, status: true, totalPrice: true, createdAt: true } }),
@@ -280,13 +281,18 @@ export default async function DashboardPage() {
         {/* 任务面板 */}
         <Card>
           <h2 className="text-base font-semibold text-gray-900 mb-4">任务概览</h2>
-          <div className="grid grid-cols-3 gap-3">
-            <Link href="/tasks?status=PENDING" className="bg-yellow-50 rounded-lg p-3 text-center border border-yellow-200 hover:shadow-md transition-shadow">
-              <Clock size={20} className="mx-auto text-yellow-600 mb-1" />
-              <p className="text-2xl font-bold text-yellow-700">{pendingTasks}</p>
-              <p className="text-[11px] text-yellow-600">待处理</p>
+          <div className="grid grid-cols-4 gap-3">
+            <Link href="/tasks?filter=today" className="bg-orange-50 rounded-lg p-3 text-center border border-orange-200 hover:shadow-md transition-shadow">
+              <Clock size={20} className="mx-auto text-orange-600 mb-1" />
+              <p className="text-2xl font-bold text-orange-700">{todayTasks}</p>
+              <p className="text-[11px] text-orange-600">今日任务</p>
             </Link>
-            <Link href="/tasks?status=PENDING&overdue=true" className="bg-red-50 rounded-lg p-3 text-center border border-red-200 hover:shadow-md transition-shadow">
+            <Link href="/tasks?status=PENDING" className="bg-yellow-50 rounded-lg p-3 text-center border border-yellow-200 hover:shadow-md transition-shadow">
+              <CheckSquare size={20} className="mx-auto text-yellow-600 mb-1" />
+              <p className="text-2xl font-bold text-yellow-700">{allUnfinishedTasks}</p>
+              <p className="text-[11px] text-yellow-600">全部未完成</p>
+            </Link>
+            <Link href="/tasks?filter=overdue" className="bg-red-50 rounded-lg p-3 text-center border border-red-200 hover:shadow-md transition-shadow">
               <AlertTriangle size={20} className="mx-auto text-red-600 mb-1" />
               <p className="text-2xl font-bold text-red-700">{overdueTasks}</p>
               <p className="text-[11px] text-red-600">已逾期</p>

@@ -149,7 +149,7 @@ export default async function LeadsPage({
                         <Link href={`/leads/${lead.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
                           <Pencil size={16} />
                         </Link>
-                        <ConfirmDeleteButton action={async () => { "use server"; await deleteLead(lead.id); }} />
+                        <ConfirmDeleteButton action={async () => { "use server"; const result = await deleteLead(lead.id); if (!result.success) throw new Error(result.error); }} />
                       </div>
                     </td>
                   </tr>

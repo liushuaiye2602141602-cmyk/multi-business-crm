@@ -47,6 +47,8 @@ interface NavItem {
   href: string;
   label: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
+  /** When set, only these sub-paths will highlight this item (beyond exact match). */
+  allowedSubPaths?: string[];
 }
 
 interface NavGroup {
@@ -70,7 +72,7 @@ const navGroups: NavGroup[] = [
     title: "客户增长",
     items: [
       { href: "/leads", label: "线索池", icon: Users },
-      { href: "/customers", label: "客户库", icon: UserCheck },
+      { href: "/customers", label: "客户库", icon: UserCheck, allowedSubPaths: ["new"] },
       { href: "/customers/pool", label: "客户公海", icon: Anchor },
       { href: "/contacts", label: "联系人", icon: UserCog },
       { href: "/projects", label: "商机项目", icon: FolderKanban },
@@ -152,7 +154,13 @@ export default function Sidebar() {
             <div className="space-y-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                const isActive =
+                  pathname === item.href ||
+                  (item.allowedSubPaths
+                    ? item.allowedSubPaths.some(
+                        (sub) => pathname === `${item.href}/${sub}`
+                      )
+                    : pathname.startsWith(item.href + "/"));
                 return (
                   <Link
                     key={item.href}

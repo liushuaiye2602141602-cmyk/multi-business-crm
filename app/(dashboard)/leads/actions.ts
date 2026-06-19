@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { LeadSource, LeadStatus, LeadTemperature, LeadGrade, Currency } from "@/lib/generated/prisma/enums";
 import { createActivityLog } from "@/lib/activity-log";
 import { getLocalWorkspaceId } from "@/lib/local-context";
+import { success, failure, ActionResult } from "@/lib/action-result";
 
 export async function createLead(formData: FormData) {
   const data = {
@@ -106,96 +107,125 @@ export async function updateLead(id: number, formData: FormData) {
   redirect(`/leads/${id}`);
 }
 
-export async function deleteLead(id: number) {
-  // 检查是否有关联数据
-  const lead = await prisma.lead.findUnique({
-    where: { id },
-    include: { followUps: true, quotes: true, tasks: true, projects: true },
-  });
+export async function deleteLead(id: number): Promise<ActionResult> {
+  try {
+    // 检查是否有关联数据
+    const lead = await prisma.lead.findUnique({
+      where: { id },
+      include: { followUps: true, quotes: true, tasks: true, projects: true },
+    });
 
-  if (!lead) throw new Error("线索不存在");
+    if (!lead) return failure("线索不存在");
 
-  if (lead.followUps.length > 0 || lead.quotes.length > 0 || lead.tasks.length > 0 || lead.projects.length > 0) {
-    throw new Error("该线索存在关联数据，请先处理关联跟进、报价、任务或项目后再删除");
-  }
+    // Determine which tasks are system auto-tasks (created by event bus).
+    // Auto-tasks for leads follow the title pattern: "跟进新线索: {company}"
+    const autoTasks = lead.tasks.filter(
+      (t) => t.type === "FOLLOW_UP" && t.title.startsWith("跟进新线索:")
+    );
+    const manualTasks = lead.tasks.filter(
+      (t) => !autoTasks.some((at) => at.id === t.id)
+    );
 
-  await prisma.lead.delete({ where: { id } });
-
-  await createActivityLog({
-    action: "删除",
-    entityType: "线索",
-    entityId: id,
-    entityName: lead.company,
-    description: `删除线索: ${lead.company}`,
-  });
-
-  revalidatePath("/leads");
-}
-
-export async function convertLeadToCustomer(leadId: number) {
-  return await prisma.$transaction(async (tx) => {
-    // 1. Find lead
-    const lead = await tx.lead.findUnique({ where: { id: leadId } });
-    if (!lead) throw new Error("线索不存在");
-
-    // 2. Check not already converted
-    if (lead.convertedCustomerId || lead.status === "CONVERTED") {
-      throw new Error("该线索已转化为客户，不能重复转化");
+    if (lead.followUps.length > 0 || lead.quotes.length > 0 || manualTasks.length > 0 || lead.projects.length > 0) {
+      return failure("该线索存在关联数据（跟进记录、报价、手动任务或项目），请先处理后再删除");
     }
 
-    // 3. Create customer
-    const customer = await tx.customer.create({
-      data: {
-        company: lead.company,
-        contactName: lead.contactName,
-        country: lead.country,
-        phone: lead.phone,
-        email: lead.email,
-        whatsapp: lead.whatsapp,
-        source: lead.source,
-        sourceWebsite: lead.sourceWebsite,
-        leadGrade: lead.grade,
-        remark: lead.remark,
-        businessLineId: lead.businessLineId,
-        customerStatus: "POTENTIAL",
-        customerType: "UNKNOWN",
-        tenantId: lead.tenantId,
-      },
-    });
+    // Delete auto-tasks along with the lead
+    if (autoTasks.length > 0) {
+      await prisma.task.deleteMany({
+        where: { id: { in: autoTasks.map((t) => t.id) } },
+      });
+    }
 
-    // 4. Create primary contact
-    const contact = await tx.contact.create({
-      data: {
-        customerId: customer.id,
-        name: lead.contactName,
-        email: lead.email,
-        phone: lead.phone,
-        whatsapp: lead.whatsapp,
-        isPrimary: true,
-        notes: `由线索 ${lead.company} 转化`,
-      },
-    });
+    await prisma.lead.delete({ where: { id } });
 
-    // 5. Update lead
-    await tx.lead.update({
-      where: { id: leadId },
-      data: {
-        status: "CONVERTED",
-        convertedCustomerId: customer.id,
-      },
-    });
-
-    // 6. Activity log
     await createActivityLog({
-      action: "转化",
+      action: "删除",
       entityType: "线索",
-      entityId: leadId,
+      entityId: id,
       entityName: lead.company,
-      description: `线索 ${lead.company} 转为客户 ${customer.company}，联系人 ${contact.name}`,
+      description: `删除线索: ${lead.company}${autoTasks.length > 0 ? ` (含 ${autoTasks.length} 个自动任务)` : ""}`,
     });
 
-    return { success: true, customerId: customer.id, contactId: contact.id };
-  });
+    revalidatePath("/leads");
+    return success();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "删除线索失败，请稍后重试";
+    return failure(message);
+  }
+}
+
+export async function convertLeadToCustomer(leadId: number): Promise<ActionResult<{ customerId: number }>> {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Find lead
+      const lead = await tx.lead.findUnique({ where: { id: leadId } });
+      if (!lead) throw new Error("线索不存在");
+
+      // 2. Check not already converted
+      if (lead.convertedCustomerId || lead.status === "CONVERTED") {
+        throw new Error("该线索已转化为客户，不能重复转化");
+      }
+
+      // 3. Create customer
+      const customer = await tx.customer.create({
+        data: {
+          company: lead.company,
+          contactName: lead.contactName,
+          country: lead.country,
+          phone: lead.phone,
+          email: lead.email,
+          whatsapp: lead.whatsapp,
+          source: lead.source,
+          sourceWebsite: lead.sourceWebsite,
+          leadGrade: lead.grade,
+          remark: lead.remark,
+          businessLineId: lead.businessLineId,
+          customerStatus: "POTENTIAL",
+          customerType: "UNKNOWN",
+          tenantId: lead.tenantId,
+        },
+      });
+
+      // 4. Create primary contact
+      const contact = await tx.contact.create({
+        data: {
+          customerId: customer.id,
+          name: lead.contactName,
+          email: lead.email,
+          phone: lead.phone,
+          whatsapp: lead.whatsapp,
+          isPrimary: true,
+          notes: `由线索 ${lead.company} 转化`,
+        },
+      });
+
+      // 5. Update lead
+      await tx.lead.update({
+        where: { id: leadId },
+        data: {
+          status: "CONVERTED",
+          convertedCustomerId: customer.id,
+        },
+      });
+
+      // 6. Activity log
+      await createActivityLog({
+        action: "转化",
+        entityType: "线索",
+        entityId: leadId,
+        entityName: lead.company,
+        description: `线索 ${lead.company} 转为客户 ${customer.company}，联系人 ${contact.name}`,
+      });
+
+      return { customerId: customer.id };
+    });
+
+    return success(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "转化失败，请稍后重试";
+    return failure(message);
+  }
 }
 
 export async function addLeadActivity(leadId: number, formData: FormData) {
