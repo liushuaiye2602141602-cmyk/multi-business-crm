@@ -4,7 +4,10 @@ import LeadForm from "@/components/LeadForm";
 import { createLead } from "../actions";
 
 export default async function NewLeadPage() {
-  const businessLines = await prisma.businessLine.findMany({ orderBy: { name: "asc" } });
+  const businessLines = await prisma.businessLine.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
+  });
 
   return (
     <div className="max-w-4xl">

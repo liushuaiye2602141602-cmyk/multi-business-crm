@@ -1,13 +1,12 @@
 "use client";
 
-import { Lead, Customer, Project } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { FollowUpMethodOptions } from "@/lib/enums";
 
 interface FollowUpFormProps {
-  leads?: Lead[];
-  customers?: Customer[];
-  projects?: Project[];
+  leads?: Array<{ id: number; company: string; contactName: string | null }>;
+  customers?: Array<{ id: number; company: string }>;
+  projects?: Array<{ id: number; name: string }>;
   followUp?: {
     id?: number;
     method: string;

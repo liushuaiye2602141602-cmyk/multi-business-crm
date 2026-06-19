@@ -17,10 +17,32 @@ export default async function EditTaskPage({
   if (!task) return notFound();
 
   const [leads, customers, projects] = await Promise.all([
-    prisma.lead.findMany({ orderBy: { company: "asc" } }),
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.project.findMany({ orderBy: { name: "asc" } }),
+    prisma.lead.findMany({
+      select: { id: true, company: true, contactName: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.project.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
+
+  const taskData = {
+    id: task.id,
+    title: task.title,
+    description: task.description || "",
+    type: task.type,
+    status: task.status,
+    priority: task.priority,
+    dueDate: task.dueDate ? task.dueDate.toISOString().slice(0, 10) : "",
+    leadId: task.leadId,
+    customerId: task.customerId,
+    projectId: task.projectId,
+  };
 
   return (
     <div className="max-w-4xl">
@@ -29,7 +51,7 @@ export default async function EditTaskPage({
         leads={leads}
         customers={customers}
         projects={projects}
-        task={task}
+        task={taskData}
         action={async (formData: FormData) => {
           "use server";
           await updateTask(task.id, formData);

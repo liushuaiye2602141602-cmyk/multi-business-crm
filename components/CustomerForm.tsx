@@ -1,6 +1,5 @@
 "use client";
 
-import { BusinessLine } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import {
   CustomerTypeOptions,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/enums";
 
 interface CustomerFormProps {
-  businessLines: BusinessLine[];
+  businessLines: Array<{ id: number; name: string }>;
   customer?: {
     id?: number;
     company: string;

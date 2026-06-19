@@ -1,13 +1,12 @@
 "use client";
 
-import { Product } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import FormField from "./ui/FormField";
 import { Input, Textarea, Select } from "./ui/FormField";
 
 interface OrderItemFormProps {
   orderId: number;
-  products: Product[];
+  products: Array<{ id: number; name: string }>;
   item?: {
     id?: number;
     productId: number | null;

@@ -14,9 +14,18 @@ export default async function NewTaskPage({
   const defaultProjectId = typeof params.projectId === "string" ? parseInt(params.projectId) : undefined;
 
   const [leads, customers, projects] = await Promise.all([
-    prisma.lead.findMany({ orderBy: { company: "asc" } }),
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.project.findMany({ orderBy: { name: "asc" } }),
+    prisma.lead.findMany({
+      select: { id: true, company: true, contactName: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.project.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   return (

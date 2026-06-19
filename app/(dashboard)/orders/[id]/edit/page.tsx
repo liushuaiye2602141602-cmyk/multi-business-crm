@@ -16,11 +16,26 @@ export default async function EditOrderPage({
   if (!order) return notFound();
 
   const [customers, projects, quotes, contacts, businessLines] = await Promise.all([
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.project.findMany({ orderBy: { name: "asc" } }),
-    prisma.quote.findMany({ orderBy: { quoteNo: "asc" } }),
-    prisma.contact.findMany({ orderBy: { name: "asc" } }),
-    prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.project.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.quote.findMany({
+      select: { id: true, quoteNo: true },
+      orderBy: { quoteNo: "asc" },
+    }),
+    prisma.contact.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.businessLine.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   return (
@@ -33,8 +48,21 @@ export default async function EditOrderPage({
         contacts={contacts}
         businessLines={businessLines}
         order={{
-          ...order,
+          id: order.id,
+          orderNo: order.orderNo,
+          orderTitle: order.orderTitle,
+          customerId: order.customerId,
+          projectId: order.projectId,
+          quoteId: order.quoteId,
+          contactId: order.contactId,
+          businessLineId: order.businessLineId,
+          orderStatus: order.orderStatus,
           totalAmount: order.totalAmount ? Number(order.totalAmount) : null,
+          currency: order.currency,
+          paymentTerm: order.paymentTerm,
+          deliveryTerm: order.deliveryTerm,
+          expectedDeliveryDate: order.expectedDeliveryDate,
+          notes: order.notes,
         }}
         action={async (formData: FormData) => {
           "use server";

@@ -1,17 +1,16 @@
 "use client";
 
-import { Customer, Project, Quote, Contact, BusinessLine } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { OrderStatusOptions, CurrencyOptions } from "@/lib/enums";
 import FormField from "./ui/FormField";
 import { Input, Textarea, Select } from "./ui/FormField";
 
 interface OrderFormProps {
-  customers: Customer[];
-  projects: Project[];
-  quotes: Quote[];
-  contacts: Contact[];
-  businessLines: BusinessLine[];
+  customers: Array<{ id: number; company: string }>;
+  projects: Array<{ id: number; name: string }>;
+  quotes: Array<{ id: number; quoteNo: string }>;
+  contacts: Array<{ id: number; name: string }>;
+  businessLines: Array<{ id: number; name: string }>;
   order?: {
     id?: number;
     orderNo?: string;

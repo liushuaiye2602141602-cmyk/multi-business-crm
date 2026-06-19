@@ -17,9 +17,18 @@ export default async function EditProjectPage({
   if (!project) return notFound();
 
   const [businessLines, customers, leads] = await Promise.all([
-    prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.lead.findMany({ orderBy: { company: "asc" } }),
+    prisma.businessLine.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.lead.findMany({
+      select: { id: true, company: true, contactName: true },
+      orderBy: { company: "asc" },
+    }),
   ]);
 
   return (
@@ -30,8 +39,25 @@ export default async function EditProjectPage({
         customers={customers}
         leads={leads}
         project={{
-          ...project,
+          id: project.id,
+          name: project.name,
+          description: project.description,
+          status: project.status,
+          productCategory: project.productCategory,
+          productName: project.productName,
+          specs: project.specs,
+          quantity: project.quantity,
+          usage: project.usage,
+          targetMarket: project.targetMarket,
+          specialRequirements: project.specialRequirements,
           amount: project.amount ? Number(project.amount) : null,
+          currency: project.currency,
+          startDate: project.startDate,
+          endDate: project.endDate,
+          remark: project.remark,
+          businessLineId: project.businessLineId,
+          customerId: project.customerId,
+          leadId: project.leadId,
         }}
         action={async (formData: FormData) => {
           "use server";

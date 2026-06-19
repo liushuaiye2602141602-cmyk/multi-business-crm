@@ -12,11 +12,26 @@ export default async function NewOrderPage({
   const defaultQuoteId = typeof params.quoteId === "string" ? parseInt(params.quoteId) : undefined;
 
   const [customers, projects, quotes, contacts, businessLines] = await Promise.all([
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.project.findMany({ orderBy: { name: "asc" } }),
-    prisma.quote.findMany({ orderBy: { quoteNo: "asc" } }),
-    prisma.contact.findMany({ orderBy: { name: "asc" } }),
-    prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.project.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.quote.findMany({
+      select: { id: true, quoteNo: true },
+      orderBy: { quoteNo: "asc" },
+    }),
+    prisma.contact.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.businessLine.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   return (

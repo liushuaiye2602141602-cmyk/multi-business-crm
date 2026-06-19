@@ -1,12 +1,11 @@
 "use client";
 
-import { Customer } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import FormField from "./ui/FormField";
 import { Input, Textarea, Select } from "./ui/FormField";
 
 interface ContactFormProps {
-  customers: Customer[];
+  customers: Array<{ id: number; company: string }>;
   contact?: {
     id?: number;
     customerId: number;

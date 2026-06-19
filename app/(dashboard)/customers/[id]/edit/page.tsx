@@ -16,14 +16,35 @@ export default async function EditCustomerPage({
 
   if (!customer) return notFound();
 
-  const businessLines = await prisma.businessLine.findMany({ orderBy: { name: "asc" } });
+  const businessLines = await prisma.businessLine.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
+  });
 
   return (
     <div className="max-w-4xl">
       <h1 className="text-2xl font-bold mb-6">编辑客户</h1>
       <CustomerForm
         businessLines={businessLines}
-        customer={customer}
+        customer={{
+          id: customer.id,
+          company: customer.company,
+          contactName: customer.contactName,
+          country: customer.country,
+          phone: customer.phone,
+          email: customer.email,
+          whatsapp: customer.whatsapp,
+          website: customer.website,
+          address: customer.address,
+          industry: customer.industry,
+          customerType: customer.customerType,
+          customerStatus: customer.customerStatus,
+          leadGrade: customer.leadGrade,
+          source: customer.source,
+          sourceWebsite: customer.sourceWebsite,
+          remark: customer.remark,
+          businessLineId: customer.businessLineId,
+        }}
         action={async (formData: FormData) => {
           "use server";
           await updateCustomer(customer.id, formData);

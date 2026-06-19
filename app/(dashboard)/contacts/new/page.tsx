@@ -10,7 +10,10 @@ export default async function NewContactPage({
   const params = await searchParams;
   const defaultCustomerId = typeof params.customerId === "string" ? parseInt(params.customerId) : undefined;
 
-  const customers = await prisma.customer.findMany({ orderBy: { company: "asc" } });
+  const customers = await prisma.customer.findMany({
+    select: { id: true, company: true },
+    orderBy: { company: "asc" },
+  });
 
   return (
     <div className="max-w-4xl">

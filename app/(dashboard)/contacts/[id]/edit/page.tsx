@@ -15,7 +15,10 @@ export default async function EditContactPage({
 
   if (!contact) return notFound();
 
-  const customers = await prisma.customer.findMany({ orderBy: { company: "asc" } });
+  const customers = await prisma.customer.findMany({
+    select: { id: true, company: true },
+    orderBy: { company: "asc" },
+  });
 
   return (
     <div className="max-w-4xl">

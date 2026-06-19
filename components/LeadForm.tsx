@@ -1,6 +1,5 @@
 "use client";
 
-import { BusinessLine } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import {
   LeadSourceOptions,
@@ -11,7 +10,7 @@ import {
 } from "@/lib/enums";
 
 interface LeadFormProps {
-  businessLines: BusinessLine[];
+  businessLines: Array<{ id: number; name: string }>;
   lead?: {
     id?: number;
     company: string;

@@ -4,7 +4,10 @@ import CustomerForm from "@/components/CustomerForm";
 import { createCustomer } from "../actions";
 
 export default async function NewCustomerPage() {
-  const businessLines = await prisma.businessLine.findMany({ orderBy: { name: "asc" } });
+  const businessLines = await prisma.businessLine.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
+  });
 
   return (
     <div className="max-w-4xl">

@@ -17,9 +17,18 @@ export default async function EditQuotePage({
   if (!quote) return notFound();
 
   const [leads, customers, projects] = await Promise.all([
-    prisma.lead.findMany({ orderBy: { company: "asc" } }),
-    prisma.customer.findMany({ orderBy: { company: "asc" } }),
-    prisma.project.findMany({ orderBy: { name: "asc" } }),
+    prisma.lead.findMany({
+      select: { id: true, company: true, contactName: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.customer.findMany({
+      select: { id: true, company: true },
+      orderBy: { company: "asc" },
+    }),
+    prisma.project.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   return (
@@ -30,9 +39,22 @@ export default async function EditQuotePage({
         customers={customers}
         projects={projects}
         quote={{
-          ...quote,
+          id: quote.id,
+          quoteNo: quote.quoteNo,
+          productName: quote.productName,
+          specs: quote.specs,
+          quantity: quote.quantity,
           unitPrice: quote.unitPrice ? Number(quote.unitPrice) : null,
           totalPrice: quote.totalPrice ? Number(quote.totalPrice) : null,
+          currency: quote.currency,
+          paymentTerms: quote.paymentTerms,
+          deliveryTime: quote.deliveryTime,
+          validUntil: quote.validUntil,
+          content: quote.content,
+          status: quote.status,
+          leadId: quote.leadId,
+          customerId: quote.customerId,
+          projectId: quote.projectId,
         }}
         action={async (formData: FormData) => {
           "use server";

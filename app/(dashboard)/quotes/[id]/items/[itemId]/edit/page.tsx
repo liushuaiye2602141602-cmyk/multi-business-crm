@@ -14,7 +14,11 @@ export default async function EditQuoteItemPage({
 
   const [item, products] = await Promise.all([
     prisma.quoteItem.findUnique({ where: { id: itemIdNum } }),
-    prisma.product.findMany({ where: { isActive: true }, orderBy: { name: "asc" } }),
+    prisma.product.findMany({
+      where: { isActive: true },
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   if (!item) return notFound();
@@ -26,10 +30,16 @@ export default async function EditQuoteItemPage({
         quoteId={quoteId}
         products={products}
         item={{
-          ...item,
+          id: item.id,
+          productId: item.productId,
+          itemName: item.itemName,
+          specification: item.specification,
           quantity: item.quantity ? Number(item.quantity) : null,
+          unit: item.unit,
           unitPrice: item.unitPrice ? Number(item.unitPrice) : null,
           totalPrice: item.totalPrice ? Number(item.totalPrice) : null,
+          notes: item.notes,
+          sortOrder: item.sortOrder,
         }}
         action={async (formData: FormData) => {
           "use server";

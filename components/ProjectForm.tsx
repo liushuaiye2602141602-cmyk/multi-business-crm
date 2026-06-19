@@ -1,13 +1,12 @@
 "use client";
 
-import { BusinessLine, Customer, Lead } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { ProjectStatusOptions, CurrencyOptions } from "@/lib/enums";
 
 interface ProjectFormProps {
-  businessLines: BusinessLine[];
-  customers: Customer[];
-  leads?: Lead[];
+  businessLines: Array<{ id: number; name: string }>;
+  customers: Array<{ id: number; company: string }>;
+  leads?: Array<{ id: number; company: string; contactName: string | null }>;
   project?: {
     id?: number;
     name: string;

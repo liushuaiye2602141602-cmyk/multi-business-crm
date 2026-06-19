@@ -1,14 +1,13 @@
 "use client";
 
-import { Lead, Customer, Project } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { QuoteStatusOptions, CurrencyOptions } from "@/lib/enums";
 import { generateQuoteNo } from "@/lib/format";
 
 interface QuoteFormProps {
-  leads?: Lead[];
-  customers?: Customer[];
-  projects?: Project[];
+  leads?: Array<{ id: number; company: string; contactName: string | null }>;
+  customers?: Array<{ id: number; company: string }>;
+  projects?: Array<{ id: number; name: string }>;
   quote?: {
     id?: number;
     quoteNo: string;
