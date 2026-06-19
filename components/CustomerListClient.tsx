@@ -274,7 +274,7 @@ export default function CustomerListClient({
                     <Link href={`/customers/${customer.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
                       <Pencil size={16} />
                     </Link>
-                    <ConfirmDeleteButton action={async () => { "use server"; await onDelete(customer.id); }} />
+                    <ConfirmDeleteButton action={() => onDelete(customer.id)} />
                   </div>
                 </td>
               </tr>
