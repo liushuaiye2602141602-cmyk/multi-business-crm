@@ -1,281 +1,220 @@
-<div align="center">
-
 # Open CRM System
 
-**一个现代化的开源 CRM 系统模板**
+一个基于 Next.js + TypeScript + Prisma + PostgreSQL 构建的现代化开源 CRM 系统模板。
 
-A Modern Open-Source CRM System Template
+[English](README.en.md) | 中文
 
----
+## 项目截图
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
-[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748)](https://www.prisma.io/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8)](https://tailwindcss.com/)
+> 截图待补充
 
-**[English](#english)** | **[中文](#中文)**
+## 核心功能
 
-</div>
+### 工作台
+- 日程管理（周/月/列表视图）
+- 目标追踪与完成度
+- 数据看板（转化漏斗、收入统计）
+- 全局搜索
 
----
+### 客户增长
+- 线索管理（状态流转：新建 → 联系 → 合格 → 转化/流失）
+- 客户库（360° 档案）
+- 客户公海（认领/退回）
+- 沉睡客户检测（60天未跟进）
+- 联系人管理
+- 商机项目管理
+- 跟进记录与任务
 
-<a name="中文"></a>
+### 业务管理
+- 报价管理（含明细项、状态流转）
+- 订单管理（草稿 → 确认 → 生产 → 发货 → 完成）
+- 产品目录
+- 文档管理
+- 跟进模板
+- 业务线管理
+- 汇率计算器（40+ 种货币）
 
-## 🇨🇳 中文
+### 财务管理
+- 发票管理（草稿 → 已发 → 已付 → 逾期）
+- 收款记录
+- 财务概览
 
-### 📖 项目简介
+### 数据报表
+- 销售漏斗
+- 订单趋势
+- 客户分布
+- 来源分析
+- 业务线对比
+- 跟进效率
 
-Open CRM System 是一个基于 Next.js + TypeScript + Prisma + PostgreSQL 构建的现代化开源 CRM 系统模板。灵活可定制，适用于任何行业和业务模式。
+### AI 系统
+- AI Core Engine（统一入口）
+- AI Control Guard（执行守卫）
+- 16 种自然语言意图
+- AI 评分与分析
+- 自动任务生成
+- AI 控制面板（开关/模式/策略）
 
-### ✨ 功能模块
+### 邮件系统
+- 多账号支持（Gmail/Outlook/阿里/网易/自定义）
+- SMTP 发送 / IMAP 接收
+- 邮件线程
+- 邮件统计
+- CRM 自动绑定
 
-| 模块 | 功能 |
-|------|------|
-| 📊 **工作台** | 日程管理、目标追踪、数据看板、全局搜索 |
-| 👥 **客户增长** | 线索池、客户库、联系人、商机项目、跟进记录、今日任务 |
-| 🏊 **客户公海** | 公海管理、认领/退回、沉睡客户检测 |
-| 📋 **业务管理** | 报价记录、订单管理、产品目录、跟进模板、文档管理 |
-| 💰 **财务管理** | 发票管理、收款记录、财务概览 |
-| 📈 **数据报表** | 销售漏斗、订单趋势、客户分布、来源分析、业务线对比 |
-| 🤖 **AI 助手** | 16 种自然语言意图、AI 分析、截图识图、自动分析线索 |
-| 📱 **IM 集成** | 飞书机器人（长连接）、自然语言操作、截图识别 |
-| ✉️ **邮件管理** | SMTP 发送、IMAP 接收、邮件统计 |
-| 🔗 **外部接入** | Webhook、n8n 集成、接入指南 |
+### IM 集成
+- 飞书机器人（长连接模式）
+- 自然语言操作
+- 截图识图
+- 统一消息模型
 
-### 🛠️ 技术栈
+### 外部接入
+- Webhook 支持
+- 外部来源管理
+- 接入指南（n8n、独立站）
+
+## 技术栈
 
 | 层 | 技术 |
 |---|------|
 | 前端 | Next.js 16, React 19, Tailwind CSS 4, Recharts |
 | 后端 | Next.js API Routes, Prisma ORM |
-| 数据库 | PostgreSQL (Docker) |
+| 数据库 | PostgreSQL 16 (Docker) |
 | AI | OpenAI 兼容 API |
 | 邮件 | Nodemailer + ImapFlow |
 | IM | 飞书 SDK（长连接模式） |
+| 认证 | JWT + bcryptjs |
+| 部署 | Docker Compose |
 
-### 🚀 快速开始
+## 快速开始
 
-#### 环境要求
+### 环境要求
+
 - Node.js 18+
-- Docker
-- npm
+- Docker 和 Docker Compose
+- npm 或 yarn
 
-#### 安装步骤
+### 安装步骤
+
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/your-username/multi-business-crm.git
+cd multi-business-crm
+npm install
+Copy-Item .env.example .env
+# 编辑 .env，设置数据库密码
+docker run -d --name open-crm-postgres -e POSTGRES_PASSWORD=YOUR_PASSWORD -e POSTGRES_DB=open_crm -p 5433:5432 postgres:16
+npx prisma generate
+npx prisma db push
+npm run dev
+```
+
+**Linux/macOS (Bash):**
 
 ```bash
-# 1. 克隆项目
-git clone https://github.com/liushuaiye2602141602-cmyk/multi-business-crm.git
+git clone https://github.com/your-username/multi-business-crm.git
 cd multi-business-crm
-
-# 2. 安装依赖
 npm install
-
-# 3. 配置环境变量
 cp .env.example .env
-# 编辑 .env，填入数据库密码
-
-# 4. 启动 PostgreSQL
-docker run -d \
-  --name open-crm-postgres \
-  -e POSTGRES_PASSWORD=你的密码 \
-  -e POSTGRES_DB=open_crm \
-  -p 5433:5432 \
-  postgres:16
-
-# 5. 初始化数据库
-npx prisma db push
+# 编辑 .env，设置数据库密码
+docker run -d --name open-crm-postgres -e POSTGRES_PASSWORD=YOUR_PASSWORD -e POSTGRES_DB=open_crm -p 5433:5432 postgres:16
 npx prisma generate
-
-# 6. 导入示例数据（可选）
-npm run db:seed
-
-# 7. 启动项目
+npx prisma db push
 npm run dev
 ```
 
 访问 http://localhost:3003
 
-#### Windows 一键启动
+### 默认测试账号
 
-双击 `start-crm.bat` 即可。
+| 邮箱 | 密码 | 角色 |
+|------|------|------|
+| admin@example.com | password123 | 管理员 |
 
-### 📁 项目结构
+> 生产环境必须修改默认密码
+
+### Docker 快速启动
+
+```bash
+cp .env.example .env
+docker compose up -d
+docker compose exec app npx prisma migrate deploy
+```
+
+## 项目结构
 
 ```
-├── app/                    # Next.js 页面和 API 路由
-│   ├── (dashboard)/        # 仪表盘路由组
-│   │   ├── calendar/       # 日程管理
-│   │   ├── customers/      # 客户管理（含公海、沉睡客户）
-│   │   ├── orders/         # 订单管理
-│   │   ├── finance/        # 财务管理
-│   │   ├── email/          # 邮件管理
-│   │   ├── reports/        # 数据报表
-│   │   ├── goals/          # 目标追踪
-│   │   └── ...
-│   └── api/                # API 路由
-├── components/             # React 组件
-├── lib/                    # 工具库（AI、IM、邮件、Prisma）
-├── prisma/                 # 数据库 Schema 和迁移
+├── app/                    # Next.js 页面和 API
+│   ├── (dashboard)/        # 仪表盘路由组（100+ 页面）
+│   ├── api/                # API 路由（47 个端点）
+│   └── login/              # 登录页
+├── components/             # React 组件（46 个）
+├── lib/                    # 工具库
+│   ├── ai/                 # AI Core Engine + Agents + Control
+│   ├── communication/      # 统一通信服务
+│   ├── email/              # 邮件服务
+│   ├── im/                 # 飞书集成
+│   ├── events/             # Event Bus
+│   └── generated/prisma/   # Prisma 生成代码（可重新生成）
+├── prisma/                 # 数据库 Schema + 迁移
 ├── scripts/                # 工具脚本
+├── docs/                   # 文档
 └── public/                 # 静态资源
 ```
 
-### 🤖 AI 指令（飞书）
+## 环境变量
 
-| 指令示例 | 功能 |
-|---------|------|
-| `添加线索，ABC公司，美国，john@abc.com` | 创建线索 |
-| `添加客户，XYZ集团，英国` | 创建客户 |
-| `建个订单，客户ABC，产品XX，数量100` | 创建订单 |
-| `给ABC加跟进：今天电话沟通了价格` | 添加跟进 |
-| `把订单ORD-000001改成已确认` | 更新订单状态 |
-| `查看公海客户` | 查询公海 |
-| `帮助` | 查看所有功能 |
+复制 `.env.example` 为 `.env` 并配置：
 
-### 📄 文档
+| 变量 | 必填 | 说明 |
+|------|------|------|
+| DATABASE_URL | 是 | PostgreSQL 连接字符串 |
+| JWT_SECRET | 是 | JWT 签名密钥 |
+| APP_URL | 否 | 应用地址（默认 http://localhost:3003） |
 
-- [贡献指南](CONTRIBUTING.md)
-- [路线图](ROADMAP.md)
-- [版本策略](docs/architecture/versioning-strategy.md)
-- [v0.1.0 Release Notes](docs/releases/v0.1.0.md)
+## AI 配置
 
-### 📄 许可证
+访问 http://localhost:3003/ai-settings 配置 AI 模型（可选）。
 
-[MIT License](LICENSE)
+支持 OpenAI、DeepSeek、Moonshot、MiMo、智谱、通义千问等。
 
----
+## 邮箱配置
 
-<a name="english"></a>
+访问 http://localhost:3003/email/accounts 添加邮箱账号。
 
-## 🇬🇧 English
+支持 Gmail、Outlook、阿里企业邮箱、腾讯企业邮箱等。
 
-### 📖 About
-
-Open CRM System is a modern, open-source CRM template built with Next.js, TypeScript, Prisma, and PostgreSQL. Designed for flexibility — customize it for any industry or business model.
-
-### ✨ Features
-
-| Module | Description |
-|--------|-------------|
-| 📊 **Dashboard** | Calendar, goal tracking, data overview, global search |
-| 👥 **Lead & Customer** | Lead pipeline, customer profiles, contacts, opportunities, follow-ups, tasks |
-| 🏊 **Customer Pool** | Public pool, claim/return, dormant customer detection |
-| 📋 **Sales** | Quotes, orders, product catalog, templates, documents |
-| 💰 **Finance** | Invoices, payment tracking, financial overview |
-| 📈 **Reports** | Sales funnel, order trends, customer distribution, source analysis |
-| 🤖 **AI Assistant** | 16 natural language intents, AI analysis, vision OCR, auto-analysis |
-| 📱 **IM Integration** | Feishu bot (long connection), natural language commands, screenshot recognition |
-| ✉️ **Email** | SMTP sending, IMAP receiving, email statistics |
-| 🔗 **External** | Webhook, n8n integration, integration guides |
-
-### 🛠️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Next.js 16, React 19, Tailwind CSS 4, Recharts |
-| Backend | Next.js API Routes, Prisma ORM |
-| Database | PostgreSQL (Docker) |
-| AI | OpenAI-compatible API |
-| Email | Nodemailer + ImapFlow |
-| IM | Feishu SDK (Long Connection) |
-
-### 🚀 Quick Start
-
-#### Prerequisites
-- Node.js 18+
-- Docker
-- npm
-
-#### Installation
+## 飞书机器人
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/liushuaiye2602141602-cmyk/multi-business-crm.git
-cd multi-business-crm
-
-# 2. Install dependencies
-npm install
-
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your database password
-
-# 4. Start PostgreSQL
-docker run -d \
-  --name open-crm-postgres \
-  -e POSTGRES_PASSWORD=your_password \
-  -e POSTGRES_DB=open_crm \
-  -p 5433:5432 \
-  postgres:16
-
-# 5. Initialize database
-npx prisma db push
-npx prisma generate
-
-# 6. (Optional) Seed demo data
-npm run db:seed
-
-# 7. Start development server
-npm run dev
+npm run feishu:bot
 ```
 
-Visit http://localhost:3003
+## 数据存储
 
-#### Windows Quick Start
+- **业务数据**：PostgreSQL（Docker Volume）
+- **文件上传**：当前未实现（需接入对象存储）
+- **缓存**：`.next/`（可删除重建）
+- **依赖**：`node_modules/`（可重新安装）
 
-Double-click `start-crm.bat`.
+## 安全
 
-### 📁 Project Structure
+- `.env` 不提交到 GitHub
+- 生产环境必须更换默认密码
+- 邮箱密码建议使用应用专用密码
+- API Key 建议使用环境变量
 
-```
-├── app/                    # Next.js pages and API routes
-│   ├── (dashboard)/        # Dashboard route group
-│   │   ├── calendar/       # Calendar management
-│   │   ├── customers/      # Customer management + pool + dormant
-│   │   ├── orders/         # Order management
-│   │   ├── finance/        # Invoice & payment management
-│   │   ├── email/          # Email center + stats
-│   │   ├── reports/        # Data reports with charts
-│   │   ├── goals/          # Sales goal tracking
-│   │   └── ...
-│   └── api/                # API routes
-├── components/             # React components
-├── lib/                    # Utilities (AI, IM, email, Prisma)
-├── prisma/                 # Database schema and migrations
-├── scripts/                # Utility scripts
-└── public/                 # Static assets
-```
+## 文档
 
-### 🤖 AI Commands (Feishu)
+- [完整文档](docs/README.md)
+- [快速开始](docs/getting-started/)
+- [用户手册](docs/user-guide/)
+- [API 文档](docs/api/)
+- [部署指南](docs/deployment/)
+- [贡献指南](CONTRIBUTING.md)
+- [路线图](ROADMAP.md)
 
-| Command Example | Action |
-|----------------|--------|
-| `Add lead, ABC Corp, USA, john@abc.com` | Create lead |
-| `Add customer, XYZ Group, UK` | Create customer |
-| `Create order for ABC, product XX, qty 100` | Create order |
-| `Add follow-up for ABC: called about pricing` | Add follow-up |
-| `Mark order ORD-000001 as confirmed` | Update order status |
-| `Show pool customers` | Query customer pool |
-| `Help` | Show all commands |
+## 许可证
 
-### 📄 Documentation
-
-- [Contributing Guide](CONTRIBUTING.md)
-- [Roadmap](ROADMAP.md)
-- [Versioning Strategy](docs/architecture/versioning-strategy.md)
-- [v0.1.0 Release Notes](docs/releases/v0.1.0.md)
-
-### 📄 License
-
-[MIT License](LICENSE)
-
----
-
-<div align="center">
-
-**[↑ 回到顶部 Back to Top](#open-crm-system)**
-
-Made with ❤️ by the Open CRM Community
-
-</div>
+MIT License
