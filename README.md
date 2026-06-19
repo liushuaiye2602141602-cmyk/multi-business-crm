@@ -1,5 +1,7 @@
 # Open CRM System
 
+> **NOTICE: This project is for local personal use only. No login required. Do not expose to public networks. Access only via http://localhost:3003**
+
 一个基于 Next.js + TypeScript + Prisma + PostgreSQL 构建的现代化开源 CRM 系统模板。
 
 [English](README.en.md) | 中文
@@ -83,7 +85,7 @@
 | AI | OpenAI 兼容 API |
 | 邮件 | Nodemailer + ImapFlow |
 | IM | 飞书 SDK（长连接模式） |
-| 认证 | JWT + bcryptjs |
+| 认证 | 单用户模式，无需登录 |
 | 部署 | Docker Compose |
 
 ## 快速开始
@@ -124,15 +126,7 @@ npx prisma db push
 npm run dev
 ```
 
-访问 http://localhost:3003
-
-### 默认测试账号
-
-| 邮箱 | 密码 | 角色 |
-|------|------|------|
-| admin@example.com | password123 | 管理员 |
-
-> 生产环境必须修改默认密码
+访问 http://localhost:3003（无需登录）
 
 ### Docker 快速启动
 
@@ -170,7 +164,6 @@ docker compose exec app npx prisma migrate deploy
 | 变量 | 必填 | 说明 |
 |------|------|------|
 | DATABASE_URL | 是 | PostgreSQL 连接字符串 |
-| JWT_SECRET | 是 | JWT 签名密钥 |
 | APP_URL | 否 | 应用地址（默认 http://localhost:3003） |
 
 ## AI 配置

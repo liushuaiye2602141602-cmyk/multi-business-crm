@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Search, Settings, HelpCircle } from "lucide-react";
 import { isAIConfigured } from "@/lib/ai/types";
 import CurrencyPopup from "./CurrencyPopup";
-import LogoutButton from "./LogoutButton";
 
 function LiveClock() {
   const now = new Date();
@@ -54,7 +53,6 @@ export default function Header() {
             <HelpCircle size={16} />
           </Link>
 
-          <LogoutButton />
         </div>
       </div>
     </header>

@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crm_password_change_me}
       POSTGRES_DB: open_crm
     ports:
-      - "5433:5432"
+      - "127.0.0.1:5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -19,10 +19,9 @@ services:
     container_name: crm-app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-crm_password_change_me}@db:5432/open_crm?schema=public
-      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
       - APP_URL=${APP_URL:-http://localhost:3000}
     depends_on:
       db:
