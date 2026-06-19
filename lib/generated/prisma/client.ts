@@ -242,6 +242,11 @@ export type AILog = Prisma.AILogModel
  */
 export type Message = Prisma.MessageModel
 /**
+ * Model CustomerListView
+ * 
+ */
+export type CustomerListView = Prisma.CustomerListViewModel
+/**
  * Model AIControlSettings
  * 
  */

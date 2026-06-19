@@ -91,6 +91,7 @@ export const ModelName = {
   CustomFieldValue: 'CustomFieldValue',
   AILog: 'AILog',
   Message: 'Message',
+  CustomerListView: 'CustomerListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog'
@@ -916,6 +917,25 @@ export const MessageScalarFieldEnum = {
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
+export const CustomerListViewScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  isShared: 'isShared',
+  columns: 'columns',
+  filters: 'filters',
+  sort: 'sort',
+  pageSize: 'pageSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomerListViewScalarFieldEnum = (typeof CustomerListViewScalarFieldEnum)[keyof typeof CustomerListViewScalarFieldEnum]
+
+
 export const AIControlSettingsScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -981,6 +1001,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

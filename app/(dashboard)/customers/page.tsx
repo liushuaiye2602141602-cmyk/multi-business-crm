@@ -1,17 +1,16 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { Eye, Pencil, Plus, Download, Anchor, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Download, Anchor } from "lucide-react";
 import { deleteCustomer } from "./actions";
-import { CustomerStatusLabel, CustomerTypeLabel, LeadSourceLabel, LeadGradeLabel, CustomerStageLabel, PurchaseIntentLabel } from "@/lib/enums";
-import { formatDate } from "@/lib/format";
-import { getCustomerStatusVariant, getLeadGradeVariant } from "@/components/ui/StatusBadge";
-import StatusBadge from "@/components/ui/StatusBadge";
+import { CustomerStatusLabel, CustomerTypeLabel, LeadSourceLabel, CustomerStageLabel, PurchaseIntentLabel } from "@/lib/enums";
 import PageHeader from "@/components/PageHeader";
 import Card from "@/components/ui/Card";
 import EmptyState from "@/components/ui/EmptyState";
-import ConfirmDeleteButton from "@/components/ConfirmDeleteButton";
-import SearchFilterBar from "@/components/SearchFilterBar";
 import CsvImportButton from "@/components/CsvImportButton";
+import SearchFilterBar from "@/components/SearchFilterBar";
+import CustomerListClient from "@/components/CustomerListClient";
+import { getDefaultColumnConfig } from "@/lib/customer-list/field-registry";
+import type { ColumnConfig } from "@/lib/customer-list/field-registry";
 
 export const dynamic = "force-dynamic";
 
@@ -65,13 +64,35 @@ export default async function CustomersPage({
   const allowedSortFields = ["createdAt", "updatedAt", "company", "contactName", "country", "stage", "purchaseIntent", "rating", "dealProbability", "lastContactAt", "nextFollowUpAt"];
   const finalSortBy = allowedSortFields.includes(sortBy) ? sortBy : "updatedAt";
 
+  // Fetch default view for column config
+  const defaultView = await prisma.customerListView.findFirst({
+    where: { isDefault: true },
+    orderBy: { createdAt: "asc" },
+  });
+
+  const columnConfig: ColumnConfig[] = (defaultView?.columns as any as ColumnConfig[]) || getDefaultColumnConfig();
+
+  // Fetch custom field definitions
+  const customFieldDefs = await prisma.customFieldDefinition.findMany({
+    where: { entityType: "CUSTOMER", isActive: true },
+    orderBy: { sortOrder: "asc" },
+    select: { id: true, key: true, label: true, fieldType: true },
+  });
+
   const [customers, businessLines, totalCount] = await Promise.all([
     prisma.customer.findMany({
       where,
       orderBy: { [finalSortBy]: sortOrder },
       skip: (page - 1) * pageSize,
       take: pageSize,
-      include: { businessLine: true, _count: { select: { projects: true, contacts: true } } },
+      include: {
+        businessLine: true,
+        _count: { select: { projects: true, contacts: true } },
+        contacts: {
+          where: { isPrimary: true },
+          take: 1,
+        },
+      },
     }),
     prisma.businessLine.findMany({ orderBy: { name: "asc" } }),
     prisma.customer.count({ where }),
@@ -160,69 +181,12 @@ export default async function CustomersPage({
             actionHref={hasFilters ? undefined : "/customers/new"}
           />
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 border-b border-gray-200">
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">公司</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">联系人</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">国家</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">业务线</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">负责人</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">销售阶段</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">购买意向</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">项目数</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">联系人</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">更新时间</th>
-                  <th className="text-right py-3 px-4 font-medium text-gray-600 text-xs uppercase tracking-wider">操作</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {customers.map((customer) => (
-                  <tr key={customer.id} className={`hover:bg-gray-50 transition-colors ${customer.isArchived ? "opacity-50" : ""}`}>
-                    <td className="py-3 px-4">
-                      <Link href={`/customers/${customer.id}`} className="font-medium text-gray-900 hover:text-blue-600">
-                        {customer.company}
-                      </Link>
-                      {customer.tags && customer.tags.length > 0 && (
-                        <div className="flex gap-1 mt-1 flex-wrap">
-                          {customer.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} className="inline-block px-1.5 py-0.5 text-[10px] bg-gray-100 text-gray-600 rounded">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-gray-600">{customer.contactName}</td>
-                    <td className="py-3 px-4 text-gray-600">{customer.country || "-"}</td>
-                    <td className="py-3 px-4 text-gray-600">{customer.businessLine.name}</td>
-                    <td className="py-3 px-4 text-gray-600">{customer.ownerName || <span className="text-gray-400">未分配</span>}</td>
-                    <td className="py-3 px-4">
-                      <StatusBadge label={CustomerStageLabel[customer.stage] || customer.stage} variant={getCustomerStageVariant(customer.stage)} />
-                    </td>
-                    <td className="py-3 px-4">
-                      <StatusBadge label={PurchaseIntentLabel[customer.purchaseIntent] || customer.purchaseIntent} variant={getPurchaseIntentVariant(customer.purchaseIntent)} />
-                    </td>
-                    <td className="py-3 px-4 text-gray-600">{customer._count.projects}</td>
-                    <td className="py-3 px-4 text-gray-600">{customer._count.contacts}</td>
-                    <td className="py-3 px-4 text-gray-500">{formatDate(customer.updatedAt)}</td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center justify-end gap-1">
-                        <Link href={`/customers/${customer.id}`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
-                          <Eye size={16} />
-                        </Link>
-                        <Link href={`/customers/${customer.id}/edit`} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
-                          <Pencil size={16} />
-                        </Link>
-                        <ConfirmDeleteButton action={async () => { "use server"; await deleteCustomer(customer.id); }} />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <CustomerListClient
+            customers={customers as any}
+            initialColumnConfig={columnConfig}
+            customFieldDefs={customFieldDefs}
+            onDelete={deleteCustomer}
+          />
         )}
 
         {/* Pagination */}
@@ -235,7 +199,7 @@ export default async function CustomersPage({
                   page <= 1 ? "border-gray-200 text-gray-300 cursor-not-allowed" : "border-gray-300 text-gray-700 hover:bg-gray-50"
                 }`}
               >
-                <ChevronLeft size={14} /> 上一页
+                上一页
               </Link>
               <Link
                 href={page < totalPages ? buildPageUrl(page + 1) : "#"}
@@ -243,7 +207,7 @@ export default async function CustomersPage({
                   page >= totalPages ? "border-gray-200 text-gray-300 cursor-not-allowed" : "border-gray-300 text-gray-700 hover:bg-gray-50"
                 }`}
               >
-                下一页 <ChevronRight size={14} />
+                下一页
               </Link>
             </div>
             <div className="flex items-center gap-1">
@@ -276,25 +240,4 @@ export default async function CustomersPage({
       </Card>
     </div>
   );
-}
-
-function getCustomerStageVariant(stage: string): "success" | "warning" | "danger" | "info" | "default" {
-  switch (stage) {
-    case "WON": return "success";
-    case "NEGOTIATION":
-    case "PROPOSAL": return "warning";
-    case "LOST": return "danger";
-    case "QUALIFIED":
-    case "CONTACTED": return "info";
-    default: return "default";
-  }
-}
-
-function getPurchaseIntentVariant(intent: string): "success" | "warning" | "danger" | "info" | "default" {
-  switch (intent) {
-    case "HIGH": return "success";
-    case "MEDIUM": return "warning";
-    case "LOW": return "danger";
-    default: return "default";
-  }
 }

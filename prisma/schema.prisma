@@ -1219,6 +1219,27 @@ model Message {
   @@index([createdAt])
 }
 
+// ==================== 视图 ====================
+
+model CustomerListView {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int?
+  userId      Int?
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  isShared    Boolean  @default(false)
+  columns     Json     @default("[]")
+  filters     Json     @default("{}")
+  sort        Json     @default("{}")
+  pageSize    Int      @default(20)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tenantId, userId])
+  @@index([tenantId, name])
+}
+
 // ==================== AI Control System ====================
 
 model AIControlSettings {

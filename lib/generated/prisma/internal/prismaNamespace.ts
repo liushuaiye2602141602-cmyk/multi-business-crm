@@ -424,6 +424,7 @@ export const ModelName = {
   CustomFieldValue: 'CustomFieldValue',
   AILog: 'AILog',
   Message: 'Message',
+  CustomerListView: 'CustomerListView',
   AIControlSettings: 'AIControlSettings',
   AIPolicyRule: 'AIPolicyRule',
   AIExecutionLog: 'AIExecutionLog'
@@ -442,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog"
+    modelProps: "tenant" | "user" | "businessLine" | "lead" | "leadActivity" | "customer" | "contact" | "customerActivity" | "project" | "followUp" | "quote" | "task" | "product" | "followUpTemplate" | "activityLog" | "calendarEvent" | "salesGoal" | "aIAnalysis" | "externalSource" | "webhookLog" | "quoteItem" | "order" | "orderItem" | "document" | "invoice" | "payment" | "emailConfig" | "email" | "emailAccount" | "emailMessage" | "emailThread" | "aIConfig" | "iMPlatform" | "iMUser" | "iMMessage" | "contactSocialProfile" | "customFieldDefinition" | "customFieldValue" | "aILog" | "message" | "customerListView" | "aIControlSettings" | "aIPolicyRule" | "aIExecutionLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3406,6 +3407,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CustomerListView: {
+      payload: Prisma.$CustomerListViewPayload<ExtArgs>
+      fields: Prisma.CustomerListViewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomerListViewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomerListViewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        findFirst: {
+          args: Prisma.CustomerListViewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomerListViewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        findMany: {
+          args: Prisma.CustomerListViewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>[]
+        }
+        create: {
+          args: Prisma.CustomerListViewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        createMany: {
+          args: Prisma.CustomerListViewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomerListViewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>[]
+        }
+        delete: {
+          args: Prisma.CustomerListViewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        update: {
+          args: Prisma.CustomerListViewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomerListViewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomerListViewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomerListViewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomerListViewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerListViewPayload>
+        }
+        aggregate: {
+          args: Prisma.CustomerListViewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomerListView>
+        }
+        groupBy: {
+          args: Prisma.CustomerListViewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomerListViewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomerListViewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomerListViewCountAggregateOutputType> | number
+        }
+      }
+    }
     AIControlSettings: {
       payload: Prisma.$AIControlSettingsPayload<ExtArgs>
       fields: Prisma.AIControlSettingsFieldRefs
@@ -4471,6 +4546,25 @@ export const MessageScalarFieldEnum = {
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
+export const CustomerListViewScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  isShared: 'isShared',
+  columns: 'columns',
+  filters: 'filters',
+  sort: 'sort',
+  pageSize: 'pageSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomerListViewScalarFieldEnum = (typeof CustomerListViewScalarFieldEnum)[keyof typeof CustomerListViewScalarFieldEnum]
+
+
 export const AIControlSettingsScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -4536,6 +4630,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -5145,6 +5246,7 @@ export type GlobalOmitConfig = {
   customFieldValue?: Prisma.CustomFieldValueOmit
   aILog?: Prisma.AILogOmit
   message?: Prisma.MessageOmit
+  customerListView?: Prisma.CustomerListViewOmit
   aIControlSettings?: Prisma.AIControlSettingsOmit
   aIPolicyRule?: Prisma.AIPolicyRuleOmit
   aIExecutionLog?: Prisma.AIExecutionLogOmit
