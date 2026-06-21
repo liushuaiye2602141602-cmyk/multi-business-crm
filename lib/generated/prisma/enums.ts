@@ -159,6 +159,7 @@ export const QuoteStatus = {
   WAITING_FEEDBACK: 'WAITING_FEEDBACK',
   REVISED: 'REVISED',
   ACCEPTED: 'ACCEPTED',
+  CONVERTED: 'CONVERTED',
   REJECTED: 'REJECTED',
   EXPIRED: 'EXPIRED'
 } as const
@@ -235,9 +236,9 @@ export type WebhookStatus = (typeof WebhookStatus)[keyof typeof WebhookStatus]
 
 
 export const OrderStatus = {
-  DRAFT: 'DRAFT',
+  PENDING_CONFIRMATION: 'PENDING_CONFIRMATION',
   CONFIRMED: 'CONFIRMED',
-  PRODUCTION: 'PRODUCTION',
+  IN_PRODUCTION: 'IN_PRODUCTION',
   READY_TO_SHIP: 'READY_TO_SHIP',
   SHIPPED: 'SHIPPED',
   COMPLETED: 'COMPLETED',

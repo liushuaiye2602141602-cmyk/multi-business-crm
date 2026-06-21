@@ -535,7 +535,7 @@ Best regards`,
   const tasksData = [
     { title: "联系 Acme Corp 首次沟通", type: "CALL", status: "PENDING", priority: "HIGH", dueDate: nextWeek, leadId: leadsForTasks[0]?.id },
     { title: "跟进 European Imports 报价反馈", type: "FOLLOW_UP", status: "PENDING", priority: "MEDIUM", dueDate: nextWeek, customerId: customersForTasks[1]?.id },
-    { title: "发送产品目录给 Pacific Rim", type: "EMAIL", status: "COMPLETED", priority: "LOW", dueDate: yesterday, completedAt: new Date(), customerId: customersForTasks[0]?.id },
+    { title: "发送产品目录给 Pacific Rim", type: "OTHER", status: "COMPLETED", priority: "LOW", dueDate: yesterday, completedAt: new Date(), customerId: customersForTasks[0]?.id },
     { title: "检查订单 ORD-2026-001 生产进度", type: "FOLLOW_UP", status: "PENDING", priority: "HIGH", dueDate: nextWeek, orderId: ordersForTasks[0]?.id },
     { title: "已过期：回电 Middle East Supplies", type: "CALL", status: "PENDING", priority: "URGENT", dueDate: yesterday, customerId: customersForTasks[2]?.id || customersForTasks[0]?.id },
   ];

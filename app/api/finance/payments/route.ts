@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,41 +14,42 @@ export async function POST(request: NextRequest) {
 
     const invoice = await prisma.invoice.findUnique({
       where: { id: body.invoiceId },
-      include: { payments: true, customer: true },
+      include: { customer: true },
     });
     if (!invoice) {
       return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
     }
 
-    const payment = await prisma.payment.create({
-      data: {
-        invoiceId: body.invoiceId,
-        amount: body.amount,
-        method: body.method || "TT",
-        receivedAt: body.receivedAt ? new Date(body.receivedAt) : new Date(),
-        notes: body.notes || null,
+    const kernelResult = await executionKernel.execute({
+      intent: "RECORD_PAYMENT",
+      parameters: {
+        data: {
+          invoiceId: body.invoiceId,
+          amount: body.amount,
+          method: body.method || "TT",
+          receivedAt: body.receivedAt ? new Date(body.receivedAt) : new Date(),
+          notes: body.notes || null,
+        },
       },
     });
 
-    // 检查是否全额支付
-    const totalPaid =
-      Number(
-        invoice.payments.reduce((sum, p) => sum + Number(p.amount), 0)
-      ) + Number(body.amount);
-    if (totalPaid >= Number(invoice.amount)) {
-      await prisma.invoice.update({
-        where: { id: body.invoiceId },
-        data: { status: "PAID", paidAt: new Date() },
-      });
+    if (!kernelResult.success || !kernelResult.entityId) {
+      return NextResponse.json(
+        { error: kernelResult.message || "Failed to create payment" },
+        { status: 400 }
+      );
     }
 
-    await createActivityLog({
-      action: "收款记录",
-      entityType: "发票",
-      entityId: body.invoiceId,
-      entityName: invoice.invoiceNo,
-      description: `记录收款 ${invoice.currency} ${body.amount} (发票: ${invoice.invoiceNo})`,
+    const payment = await prisma.payment.findUnique({
+      where: { id: kernelResult.entityId },
     });
+
+    if (!payment) {
+      return NextResponse.json(
+        { error: "Payment was created but could not be loaded" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(payment, { status: 201 });
   } catch (error) {

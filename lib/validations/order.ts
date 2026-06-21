@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const ORDER_STATUS_VALUES = ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"] as const;
+const ORDER_STATUS_VALUES = ["PENDING_CONFIRMATION", "CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"] as const;
 const CURRENCY_VALUES = ["USD", "EUR", "CNY"] as const;
 
 export const orderItemSchema = z.object({
@@ -43,7 +43,7 @@ export const createOrderSchema = z.object({
   quoteId: z.number().int().positive().optional().nullable(),
   contactId: z.number().int().positive().optional().nullable(),
   businessLineId: z.number().int().positive().optional().nullable(),
-  orderStatus: z.enum(ORDER_STATUS_VALUES).default("DRAFT"),
+  orderStatus: z.enum(ORDER_STATUS_VALUES).default("PENDING_CONFIRMATION"),
   totalAmount: z.number().optional().nullable(),
   exchangeRate: z.number().min(0).optional().nullable(),
   currency: z.enum(CURRENCY_VALUES).default("USD"),

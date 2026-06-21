@@ -49,6 +49,7 @@ export async function startFeishuBot() {
   }
 
   console.log(`飞书机器人启动中... App ID: ${platform.appId} | 只读模式: ${FEISHU_READ_ONLY}`);
+  logFeishuRuntimeSummary();
 
   // Log all write permissions
   if (!FEISHU_READ_ONLY) {
@@ -157,4 +158,56 @@ export async function startFeishuBot() {
 
   console.log("飞书长连接启动中...");
   console.log("按 Ctrl+C 停止");
+}
+
+function logFeishuRuntimeSummary() {
+  const envFile = process.env.__NEXT_PROCESSED_ENV ? ".env" : ".env";
+  const flag = (key: string) => process.env[key] === "true";
+  const enabledItems = [
+    ["FEISHU_ALLOW_CREATE_LEAD", "创建线索"],
+    ["FEISHU_ALLOW_UPDATE_LEAD", "更新线索"],
+    ["FEISHU_ALLOW_ADD_FOLLOWUP", "添加跟进"],
+    ["FEISHU_ALLOW_CONVERT_LEAD", "线索转客户"],
+    ["FEISHU_ALLOW_CREATE_CUSTOMER", "创建客户"],
+    ["FEISHU_ALLOW_UPDATE_CUSTOMER", "更新客户"],
+    ["FEISHU_ALLOW_CREATE_CONTACT", "创建联系人"],
+    ["FEISHU_ALLOW_UPDATE_CONTACT", "更新联系人"],
+    ["FEISHU_ALLOW_SET_PRIMARY_CONTACT", "设置主联系人"],
+    ["FEISHU_ALLOW_CREATE_TASK", "创建任务"],
+    ["FEISHU_ALLOW_UPDATE_TASK", "更新任务"],
+    ["FEISHU_ALLOW_COMPLETE_TASK", "完成任务"],
+    ["FEISHU_ALLOW_CREATE_PROJECT", "创建商机项目"],
+    ["FEISHU_ALLOW_UPDATE_PROJECT", "更新商机项目"],
+    ["FEISHU_ALLOW_CREATE_QUOTE", "报价创建"],
+    ["FEISHU_ALLOW_UPDATE_QUOTE", "报价更新"],
+    ["FEISHU_ALLOW_SEND_QUOTE", "报价发送"],
+    ["FEISHU_ALLOW_ACCEPT_QUOTE", "报价接受"],
+    ["FEISHU_ALLOW_QUOTE_TO_ORDER", "报价转订单"],
+    ["FEISHU_ALLOW_CREATE_ORDER", "订单创建"],
+    ["FEISHU_ALLOW_UPDATE_ORDER", "订单更新"],
+  ] as const;
+  const disabledItems = [
+    ["FEISHU_ALLOW_CREATE_INVOICE", "发票写入"],
+    ["FEISHU_ALLOW_UPDATE_INVOICE", "发票更新"],
+    ["FEISHU_ALLOW_RECORD_PAYMENT", "付款写入"],
+    ["FEISHU_ALLOW_REFUND", "退款"],
+    ["FEISHU_ALLOW_DELETE", "删除"],
+    ["FEISHU_ALLOW_BATCH_WRITE", "批量写入"],
+    ["FEISHU_ALLOW_PERMANENT_DELETE", "永久删除"],
+    ["FEISHU_ALLOW_RAW_SQL", "原始SQL"],
+  ] as const;
+
+  console.log(`自然语言影子模式：${flag("FEISHU_NL_SHADOW_MODE") ? "是" : "否"}`);
+  console.log(`自然语言写入确认模式：${process.env.FEISHU_NL_WRITE_CONFIRMATION_MODE || "未设置"}`);
+  console.log("当前开放：");
+  for (const [key, label] of enabledItems) {
+    if (flag(key)) console.log(`* ${label}`);
+  }
+  console.log("当前关闭：");
+  for (const [key, label] of disabledItems) {
+    if (!flag(key)) console.log(`* ${label}`);
+  }
+  console.log("NLU处理器路径：lib/im/feishu-parser.ts + lib/im/nlu-extractor.ts");
+  console.log("实际handler路径：lib/im/feishu-handler.ts");
+  console.log(`实际环境文件：${envFile}`);
 }

@@ -156,7 +156,7 @@ async function testQuoteToOrderRollback() {
           customerId: quoteBefore!.customerId!,
           quoteId: quoteId,
           tenantId: 9999,
-          orderStatus: "DRAFT",
+          orderStatus: "PENDING_CONFIRMATION",
         },
       });
       orderIdCreated = order.id;

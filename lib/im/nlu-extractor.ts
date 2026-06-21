@@ -17,7 +17,7 @@ const SYSTEM_PROMPT = `你是一个CRM系统的自然语言理解引擎。你的
 ## 输出格式（严格JSON）
 
 {
-  "intent": "CREATE_LEAD | ADD_LEAD_FOLLOWUP | QUERY_LEADS | QUERY_CUSTOMERS | QUERY_TASKS | QUERY_ORDERS | QUERY_QUOTES | HELP | CHAT | UNKNOWN",
+  "intent": "CREATE_LEAD | ADD_LEAD_FOLLOWUP | UPDATE_LEAD | QUERY_LEADS | QUERY_LEAD_DETAIL | QUERY_CUSTOMERS | QUERY_CUSTOMER_DETAIL | QUERY_TASKS | QUERY_TASK_DETAIL | QUERY_ORDERS | QUERY_ORDER_DETAIL | QUERY_QUOTES | QUERY_QUOTE_DETAIL | HELP | CHAT | UNKNOWN",
   "confidence": 0.0-1.0,
   "language": "zh-CN",
   "parameters": { ... },
@@ -30,11 +30,17 @@ const SYSTEM_PROMPT = `你是一个CRM系统的自然语言理解引擎。你的
 
 - 包含"线索"+"添加/创建/新建" → CREATE_LEAD
 - 包含"跟进"+"给XX/为XX" → ADD_LEAD_FOLLOWUP
+- 包含"改为/改成/更新为/修改/换成/设为/调整为"并指向线索字段 → UPDATE_LEAD
 - 包含"查询"+"线索" → QUERY_LEADS
+- 指定某一条线索并询问字段（状态/预算/下次跟进/联系人等） → QUERY_LEAD_DETAIL
 - 包含"查询"+"客户" → QUERY_CUSTOMERS
+- 指定某一客户并询问字段（阶段/主联系人/订单数量等） → QUERY_CUSTOMER_DETAIL
 - 包含"查询"+"任务/待办" → QUERY_TASKS
+- 指定某一任务并询问字段（状态/优先级/截止时间等） → QUERY_TASK_DETAIL
 - 包含"查询"+"订单" → QUERY_ORDERS
+- 指定某一订单或某客户最近订单并询问字段 → QUERY_ORDER_DETAIL
 - 包含"查询"+"报价" → QUERY_QUOTES
+- 指定某一报价或某客户最近报价并询问字段 → QUERY_QUOTE_DETAIL
 - 包含"帮助" → HELP
 - 其他 → CHAT 或 UNKNOWN
 
@@ -56,6 +62,25 @@ const SYSTEM_PROMPT = `你是一个CRM系统的自然语言理解引擎。你的
 - content: 跟进内容（去除命令词后的主体内容）
 - occurredAt: 发生时间
 - nextFollowUpAt: 下次跟进时间
+
+## UPDATE_LEAD参数提取
+
+输出 parameters:
+- leadReference: { id, companyName, contactName, email, phone }
+- changes: 只包含用户明确要求修改的字段，不得为未提及字段输出 null
+- status 使用系统代码：NEW, CONTACTED, REQUIREMENT_CONFIRMING, QUOTING, NEGOTIATING, QUALIFIED, CONVERTED, WON, LOST, DORMANT
+- grade 使用 A/B/C/D
+- temperature 使用 HOT/WARM/COLD
+- budget 为数字，currency 使用 USD/CNY/EUR
+- 不得虚构 lead id
+
+## 单实体详情查询参数提取
+
+输出 parameters:
+- entityReference: { id, name, email, phone, number }
+- requestedFields: 用户明确要查看的字段，如 status, budget, currency, nextFollowUpAt, contactName, phone
+- 查询类不得输出 changes，不得创建确认动作，不得检查写入权限
+- "预算多少/状态是什么/什么时候跟进" 是查询，不是更新
 
 ## 关键约束
 

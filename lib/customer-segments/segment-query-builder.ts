@@ -16,7 +16,7 @@ export async function getSegmentCount(segment: PresetSegment, settings: Record<s
     });
 
     const wonOrderCustomerIds = await prisma.order.findMany({
-      where: { orderStatus: { in: ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
+      where: { orderStatus: { in: ["CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
       select: { customerId: true },
       distinct: ["customerId"],
     });
@@ -29,7 +29,7 @@ export async function getSegmentCount(segment: PresetSegment, settings: Record<s
   if (segment.requiresOrderFilter) {
     // won_customers: stage=WON or has valid orders
     const orderCustomerIds = await prisma.order.findMany({
-      where: { orderStatus: { in: ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
+      where: { orderStatus: { in: ["CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
       select: { customerId: true },
       distinct: ["customerId"],
     });
@@ -66,7 +66,7 @@ export async function getSegmentCustomers(
     });
 
     const wonOrderCustomerIds = await prisma.order.findMany({
-      where: { orderStatus: { in: ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
+      where: { orderStatus: { in: ["CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
       select: { customerId: true },
       distinct: ["customerId"],
     });
@@ -91,7 +91,7 @@ export async function getSegmentCustomers(
 
   if (segment.requiresOrderFilter) {
     const orderCustomerIds = await prisma.order.findMany({
-      where: { orderStatus: { in: ["CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
+      where: { orderStatus: { in: ["CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED"] } },
       select: { customerId: true },
       distinct: ["customerId"],
     });

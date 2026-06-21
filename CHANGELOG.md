@@ -1,85 +1,68 @@
-# Changelog
+# Changelog | 更新日志
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+---
 
-## [0.1.0] - 2026-06-18
+## [1.0.0] - 2026-06-21
 
-### Added
+### Added | 新增
 
-#### Core CRM Features
-- Lead management with full lifecycle (New → Contacted → Quoting → Won/Lost)
-- Customer management with 360° profiles
-- Contact management per customer
-- Business line segmentation and management
-- Project/Opportunity tracking with status flow
-- Follow-up records and templates
-- Task management with priorities and due dates
+#### Core CRM | 核心 CRM
+- Lead Management (线索管理)
+- Customer Management (客户管理)
+- Project Management (项目管理)
+- Follow-up Tracking (跟进记录)
+- Quote Management (报价管理)
+- Task Management (任务管理)
 
-#### Sales Pipeline
-- Quote management with line items and status tracking
-- Order management with full status flow (Draft → Confirmed → Production → Shipped → Completed)
-- Product catalog management
+#### OKKI-style Workbench | OKKI 风格工作台
+- Today's Workbench (今日工作台)
+- Data Dashboard (数据看板)
+- Customer 360 Profile (客户 360 档案)
+- Project Pipeline (商机漏斗)
+- Lead Processing Station (线索处理台)
 
-#### Finance
-- Invoice management (Draft → Sent → Paid → Overdue)
-- Payment tracking with auto-complete on full payment
-- Financial overview with statistics
+#### AI Assistant | AI 助手
+- AI Analysis (AI 分析)
+- AI Test (AI 测试)
+- AI Settings (AI 设置)
+- AI Analysis Records (AI 分析记录)
 
-#### AI Integration
-- OpenAI-compatible API support with configurable presets
-- 16 natural language intents for IM operations
-- AI analysis for leads, customers, projects, and follow-ups
-- Vision AI for screenshot-to-customer extraction
-- Auto-analyze new leads from webhooks
+#### External Integration | 外部接入
+- Webhook Integration (Webhook 接入)
+- External Source Management (外部来源管理)
+- n8n Integration Guide (n8n 接入指南)
+- Website Form Guide (独立站表单接入指南)
+- AI Marketing System Guide (AI 营销系统接入指南)
 
-#### IM Integration (Feishu)
-- Long connection mode (no public domain needed)
-- Natural language commands via Feishu chat
-- Screenshot recognition for customer data entry
-- IM message logging and history
+#### Data Management | 数据管理
+- Global Search (全局搜索)
+- CSV Import/Export (CSV 导入导出)
+- Product Catalog (产品目录)
+- Follow-up Templates (跟进模板)
+- Activity Logs (操作日志)
 
-#### Email
-- SMTP email sending
-- IMAP email receiving
-- Email statistics and tracking
-- Email configuration management
+#### Business Enhancement | 业务增强
+- Contact Management (联系人管理)
+- Order Management (订单管理)
+- Document Management (文档管理)
+- Quote Items (报价明细)
+- Order Items (订单明细)
 
-#### Reports & Analytics
-- Sales funnel visualization
-- Order trends (12-month chart)
-- Customer distribution by country
-- Lead source analysis
-- Business line comparison
-- Follow-up efficiency metrics
+#### System | 系统
+- System Health Check (系统健康检查)
+- Maintenance Guide (维护指南)
+- Database Backup/Restore Scripts (数据库备份恢复脚本)
 
-#### Dashboard
-- Calendar/Schedule management
-- Sales goal tracking with progress
-- Data overview with key metrics
-- Global search
+---
 
-#### Customer Pool
-- Public pool for unassigned customers
-- Claim and return functionality
-- Dormant customer detection (60+ days no follow-up)
+## [1.1.0] - Planned | 计划中
 
-#### External Integration
-- Webhook for external lead sources
-- Integration guides for n8n, website forms
+### Planned Features | 计划功能
 
-#### System
-- Dark sidebar UI with modern design
-- Currency converter (8 currencies)
-- CSV import/export
-- Activity logging
-- System health check
-
-### Tech Stack
-- Next.js 16, React 19, TypeScript
-- Prisma 7, PostgreSQL
-- Tailwind CSS 4, Recharts
-- Nodemailer + ImapFlow
-- Feishu SDK
+- Advanced Data Reports (高级数据报表)
+- Multi-user Permissions (多用户权限)
+- Email Integration (邮件集成)
+- Mobile Optimization (移动端适配)
+- Data Backup/Recovery (数据备份恢复)

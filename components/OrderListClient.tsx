@@ -16,44 +16,9 @@ import {
 import { OrderStatusLabel } from "@/lib/enums";
 import { formatDate, formatDateTime, formatMoney } from "@/lib/format";
 import { getOrderStatusVariant } from "@/components/ui/StatusBadge";
+import type { OrderListItemDto } from "@/lib/dto/order-dto";
 
-interface OrderRow {
-  id: number;
-  orderNo: string;
-  orderTitle: string | null;
-  orderStatus: string;
-  totalAmount: any;
-  currency: string;
-  subtotal: any;
-  discountAmount: any;
-  taxAmount: any;
-  chargeAmount: any;
-  paidAmount: any;
-  outstandingAmount: any;
-  costAmount: any;
-  grossProfitAmount: any;
-  grossProfitRate: any;
-  paymentTerm: string | null;
-  paymentMethod: string | null;
-  deliveryTerm: string | null;
-  priceTerm: string | null;
-  shippingAddress: string | null;
-  expectedDeliveryDate: Date | string | null;
-  actualDeliveryDate: Date | string | null;
-  ownerName: string | null;
-  exchangeRate: any;
-  isArchived: boolean;
-  notes: string | null;
-  updatedAt: Date | string | null;
-  createdAt: Date | string | null;
-  customerId: number;
-  customer?: { id: number; company: string };
-  businessLine?: { id: number; name: string } | null;
-  project?: { id: number; name: string } | null;
-  quote?: { id: number; quoteNo: string } | null;
-  contact?: { id: number; name: string } | null;
-  [key: string]: any;
-}
+type OrderRow = OrderListItemDto;
 
 interface OrderListClientProps {
   orders: OrderRow[];
@@ -64,7 +29,7 @@ interface OrderListClientProps {
 
 function renderCellValue(field: FieldDefinition, order: OrderRow, currency: string): React.ReactNode {
   if (field.key === "customerName") {
-    return order.customer?.company || "-";
+    return order.customer?.companyName || "-";
   }
   if (field.key === "businessLineName") {
     return order.businessLine?.name || "-";
@@ -79,16 +44,16 @@ function renderCellValue(field: FieldDefinition, order: OrderRow, currency: stri
     return order.contact?.name || "-";
   }
 
-  const val = order[field.key];
+  const val: unknown = order[field.key as keyof OrderRow];
   if (val === null || val === undefined) return "-";
 
   switch (field.dataType) {
     case "datetime":
-      return formatDateTime(val);
+      return typeof val === "string" ? formatDateTime(val) : "-";
     case "date":
-      return formatDate(val);
+      return typeof val === "string" ? formatDate(val) : "-";
     case "currency":
-      return formatMoney(val, currency);
+      return typeof val === "string" || typeof val === "number" ? formatMoney(val, currency) : "-";
     case "checkbox":
       return val ? "是" : "否";
     case "number":
@@ -198,7 +163,7 @@ export default function OrderListClient({
                       ) : field.key === "customerName" ? (
                         order.customer ? (
                           <Link href={`/customers/${order.customer.id}`} className="text-gray-600 hover:text-blue-600">
-                            {order.customer.company}
+                            {order.customer.companyName}
                           </Link>
                         ) : "-"
                       ) : field.key === "orderStatus" ? (

@@ -134,6 +134,7 @@ export const QuoteStatusLabel: Record<string, string> = {
   WAITING_FEEDBACK: "等待反馈",
   REVISED: "已修改",
   ACCEPTED: "已接受",
+  CONVERTED: "已转订单",
   REJECTED: "已拒绝",
   EXPIRED: "已过期",
 };
@@ -220,9 +221,9 @@ export const PaymentMethodLabel: Record<string, string> = {
 };
 
 export const OrderStatusLabel: Record<string, string> = {
-  DRAFT: "草稿",
+  PENDING_CONFIRMATION: "待确认",
   CONFIRMED: "已确认",
-  PRODUCTION: "生产中",
+  IN_PRODUCTION: "生产中",
   READY_TO_SHIP: "待发货",
   SHIPPED: "已发货",
   COMPLETED: "已完成",

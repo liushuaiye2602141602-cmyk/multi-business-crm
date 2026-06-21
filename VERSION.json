@@ -1,0 +1,56 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-21",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "基础 CRM",
+      "status": "completed",
+      "features": ["线索管理", "客户管理", "项目管理", "跟进记录", "报价管理", "任务管理"]
+    },
+    {
+      "stage": 2,
+      "name": "OKKI 风格工作台",
+      "status": "completed",
+      "features": ["今日工作台", "数据看板", "客户 360", "商机漏斗", "线索处理台"]
+    },
+    {
+      "stage": 3,
+      "name": "AI 辅助功能",
+      "status": "completed",
+      "features": ["AI 分析", "AI 测试", "AI 设置", "AI 分析记录"]
+    },
+    {
+      "stage": 4,
+      "name": "外部接入",
+      "status": "completed",
+      "features": ["Webhook 接入", "外部来源管理", "n8n 接入指南"]
+    },
+    {
+      "stage": 5,
+      "name": "数据管理",
+      "status": "completed",
+      "features": ["全局搜索", "CSV 导入导出", "产品目录", "跟进模板", "操作日志"]
+    },
+    {
+      "stage": 6,
+      "name": "业务增强",
+      "status": "completed",
+      "features": ["联系人管理", "订单管理", "文档管理", "报价明细", "订单明细"]
+    },
+    {
+      "stage": 7,
+      "name": "执行内核",
+      "status": "completed",
+      "features": ["Mimo 风格执行内核", "严格 Intent 枚举", "确定性实体解析"]
+    }
+  ],
+  "nextVersion": "1.1.0",
+  "plannedFeatures": [
+    "高级数据报表",
+    "多用户权限",
+    "邮件集成",
+    "移动端适配",
+    "数据备份恢复"
+  ]
+}

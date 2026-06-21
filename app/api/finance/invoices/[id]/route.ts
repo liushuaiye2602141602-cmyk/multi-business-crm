@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
 export async function GET(
   request: NextRequest,
@@ -34,32 +34,45 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
+    const invoiceId = parseInt(id);
     const body = await request.json();
-    const invoice = await prisma.invoice.update({
-      where: { id: parseInt(id) },
-      data: {
-        ...(body.status !== undefined && { status: body.status }),
-        ...(body.issuedAt !== undefined && {
-          issuedAt: body.issuedAt ? new Date(body.issuedAt) : null,
-        }),
-        ...(body.dueDate !== undefined && {
-          dueDate: body.dueDate ? new Date(body.dueDate) : null,
-        }),
-        ...(body.paidAt !== undefined && {
-          paidAt: body.paidAt ? new Date(body.paidAt) : null,
-        }),
-        ...(body.notes !== undefined && { notes: body.notes }),
+    const data = {
+      ...(body.status !== undefined && { status: body.status }),
+      ...(body.issuedAt !== undefined && {
+        issuedAt: body.issuedAt ? new Date(body.issuedAt) : null,
+      }),
+      ...(body.dueDate !== undefined && {
+        dueDate: body.dueDate ? new Date(body.dueDate) : null,
+      }),
+      ...(body.paidAt !== undefined && {
+        paidAt: body.paidAt ? new Date(body.paidAt) : null,
+      }),
+      ...(body.notes !== undefined && { notes: body.notes }),
+    };
+
+    const kernelResult = await executionKernel.execute({
+      intent: "UPDATE_INVOICE",
+      parameters: {
+        invoiceId,
+        data,
       },
+    });
+
+    if (!kernelResult.success) {
+      return NextResponse.json(
+        { error: kernelResult.message || "Failed to update invoice" },
+        { status: 400 }
+      );
+    }
+
+    const invoice = await prisma.invoice.findUnique({
+      where: { id: invoiceId },
       include: { customer: true, payments: true },
     });
 
-    await createActivityLog({
-      action: "更新发票",
-      entityType: "发票",
-      entityId: invoice.id,
-      entityName: invoice.invoiceNo,
-      description: `更新发票 ${invoice.invoiceNo}`,
-    });
+    if (!invoice) {
+      return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
+    }
 
     return NextResponse.json(invoice);
   } catch (error) {
@@ -84,16 +97,17 @@ export async function DELETE(
       return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
     }
 
-    await prisma.payment.deleteMany({ where: { invoiceId } });
-    await prisma.invoice.delete({ where: { id: invoiceId } });
-
-    await createActivityLog({
-      action: "删除发票",
-      entityType: "发票",
-      entityId: invoiceId,
-      entityName: invoice.invoiceNo,
-      description: `删除发票 ${invoice.invoiceNo}`,
+    const kernelResult = await executionKernel.execute({
+      intent: "DELETE_INVOICE",
+      parameters: { invoiceId },
     });
+
+    if (!kernelResult.success) {
+      return NextResponse.json(
+        { error: kernelResult.message || "Failed to delete invoice" },
+        { status: 400 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

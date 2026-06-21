@@ -166,7 +166,7 @@ async function executeCreateOrder(args: Record<string, unknown>): Promise<Execut
         orderNo,
         orderTitle: (args.orderTitle as string) || `${customer.company} 订单`,
         customerId: customer.id,
-        orderStatus: "DRAFT",
+        orderStatus: "PENDING_CONFIRMATION",
         currency: currency as any,
         notes: (args.notes as string) || null,
         totalAmount: items.reduce((sum, item) => sum + (item.quantity || 0) * (item.unitPrice || 0), 0) || null,
@@ -326,7 +326,7 @@ async function executeQueryOrders(args: Record<string, unknown>): Promise<Execut
       return { success: true, message: "📋 暂无订单记录。" };
     }
     const statusMap: Record<string, string> = {
-      DRAFT: "草稿", CONFIRMED: "已确认", PRODUCTION: "生产中",
+      PENDING_CONFIRMATION: "待确认", CONFIRMED: "已确认", IN_PRODUCTION: "生产中",
       READY_TO_SHIP: "待发货", SHIPPED: "已发货", COMPLETED: "已完成", CANCELLED: "已取消",
     };
     const lines = orders.map(
@@ -386,7 +386,7 @@ async function executeUpdateOrderStatus(args: Record<string, unknown>): Promise<
   if (!orderNo || !status) {
     return { success: false, message: "更新订单状态需要订单编号和新状态。示例：把 ORD-000001 标记为已发货" };
   }
-  const validStatuses = ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"];
+  const validStatuses = ["PENDING_CONFIRMATION", "CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"];
   if (!validStatuses.includes(status)) {
     return { success: false, message: `无效的状态「${status}」，有效状态：${validStatuses.join(", ")}` };
   }

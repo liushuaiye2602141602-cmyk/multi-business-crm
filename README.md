@@ -1,213 +1,223 @@
-# Open CRM System
+# Multi Business CRM | 多业务外贸 CRM
 
-> **NOTICE: This project is for local personal use only. No login required. Do not expose to public networks. Access only via http://localhost:3003**
+> **English** | **中文**
 
-一个基于 Next.js + TypeScript + Prisma + PostgreSQL 构建的现代化开源 CRM 系统模板。
+---
 
-[English](README.en.md) | 中文
+## English
 
-## 项目截图
+A personal multi-business foreign trade CRM workstation, inspired by OKKI/小满 foreign trade CRM design.
 
-> 截图待补充
+### Features
 
-## 核心功能
+- **Lead Management** - Import, track, and convert leads
+- **Customer 360** - Complete customer profile with history
+- **Project Pipeline** - Visual project stage management
+- **Quote Management** - Create and track quotes
+- **Order Management** - From quote to order
+- **Follow-up Tracking** - Schedule and track follow-ups
+- **Task Management** - Daily tasks and reminders
+- **AI Analysis** - AI-powered lead analysis and suggestions
+- **Webhook Integration** - Receive leads from external systems
+- **Product Catalog** - Manage product information
+- **Document Management** - Track related documents
+- **CSV Import/Export** - Bulk data operations
+- **Global Search** - Search across all data
 
-### 工作台
-- 日程管理（周/月/列表视图）
-- 目标追踪与完成度
-- 数据看板（转化漏斗、收入统计）
-- 全局搜索
+### Quick Start
 
-### 客户增长
-- 线索管理（状态流转：新建 → 联系 → 合格 → 转化/流失）
-- 客户库（360° 档案）
-- 客户公海（认领/退回）
-- 沉睡客户检测（60天未跟进）
-- 联系人管理
-- 商机项目管理
-- 跟进记录与任务
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/multi-business-crm.git
+   cd multi-business-crm
+   ```
 
-### 业务管理
-- 报价管理（含明细项、状态流转）
-- 订单管理（草稿 → 确认 → 生产 → 发货 → 完成）
-- 产品目录
-- 文档管理
-- 跟进模板
-- 业务线管理
-- 汇率计算器（40+ 种货币）
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### 财务管理
-- 发票管理（草稿 → 已发 → 已付 → 逾期）
-- 收款记录
-- 财务概览
+3. Set up environment:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database URL and optional AI config
+   ```
 
-### 数据报表
-- 销售漏斗
-- 订单趋势
-- 客户分布
-- 来源分析
-- 业务线对比
-- 跟进效率
+4. Start Docker PostgreSQL:
+   ```bash
+   docker start multi-business-crm-postgres
+   ```
 
-### AI 系统
-- AI Core Engine（统一入口）
-- AI Control Guard（执行守卫）
-- 16 种自然语言意图
-- AI 评分与分析
-- 自动任务生成
-- AI 控制面板（开关/模式/策略）
+5. Initialize database:
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   npx prisma db seed
+   ```
 
-### 邮件系统
-- 多账号支持（Gmail/Outlook/阿里/网易/自定义）
-- SMTP 发送 / IMAP 接收
-- 邮件线程
-- 邮件统计
-- CRM 自动绑定
+6. Start the application:
+   ```bash
+   npm run dev
+   ```
 
-### IM 集成
-- 飞书机器人（长连接模式）
-- 自然语言操作
-- 截图识图
-- 统一消息模型
+7. Open http://localhost:3003
 
-### 外部接入
-- Webhook 支持
-- 外部来源管理
-- 接入指南（n8n、独立站）
+### Tech Stack
 
-## 技术栈
+- **Frontend**: Next.js 15, React 19, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: PostgreSQL (Docker)
+- **AI**: OpenAI Compatible API
 
-| 层 | 技术 |
-|---|------|
-| 前端 | Next.js 16, React 19, Tailwind CSS 4, Recharts |
-| 后端 | Next.js API Routes, Prisma ORM |
-| 数据库 | PostgreSQL 16 (Docker) |
-| AI | OpenAI 兼容 API |
-| 邮件 | Nodemailer + ImapFlow |
-| IM | 飞书 SDK（长连接模式） |
-| 认证 | 单用户模式，无需登录 |
-| 部署 | Docker Compose |
+### Environment Variables
 
-## 快速开始
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5433/multi_business_crm?schema=public"
 
-### 环境要求
-
-- Node.js 18+
-- Docker 和 Docker Compose
-- npm 或 yarn
-
-### 安装步骤
-
-**Windows (PowerShell):**
-
-```powershell
-git clone https://github.com/your-username/multi-business-crm.git
-cd multi-business-crm
-npm install
-Copy-Item .env.example .env
-# 编辑 .env，设置数据库密码
-docker run -d --name open-crm-postgres -e POSTGRES_PASSWORD=YOUR_PASSWORD -e POSTGRES_DB=open_crm -p 5433:5432 postgres:16
-npx prisma generate
-npx prisma db push
-npm run dev
+# Optional AI Configuration
+AI_PROVIDER="OPENAI_COMPATIBLE"
+AI_BASE_URL="https://your-api-url.com/v1"
+AI_API_KEY="your-api-key"
+AI_MODEL="your-model-name"
 ```
 
-**Linux/macOS (Bash):**
-
-```bash
-git clone https://github.com/your-username/multi-business-crm.git
-cd multi-business-crm
-npm install
-cp .env.example .env
-# 编辑 .env，设置数据库密码
-docker run -d --name open-crm-postgres -e POSTGRES_PASSWORD=YOUR_PASSWORD -e POSTGRES_DB=open_crm -p 5433:5432 postgres:16
-npx prisma generate
-npx prisma db push
-npm run dev
-```
-
-访问 http://localhost:3003（无需登录）
-
-### Docker 快速启动
-
-```bash
-cp .env.example .env
-docker compose up -d
-docker compose exec app npx prisma migrate deploy
-```
-
-## 项目结构
+### Project Structure
 
 ```
-├── app/                    # Next.js 页面和 API
-│   ├── (dashboard)/        # 仪表盘路由组（100+ 页面）
-│   ├── api/                # API 路由（47 个端点）
-│   └── login/              # 登录页
-├── components/             # React 组件（46 个）
-├── lib/                    # 工具库
-│   ├── ai/                 # AI Core Engine + Agents + Control
-│   ├── communication/      # 统一通信服务
-│   ├── email/              # 邮件服务
-│   ├── im/                 # 飞书集成
-│   ├── events/             # Event Bus
-│   └── generated/prisma/   # Prisma 生成代码（可重新生成）
-├── prisma/                 # 数据库 Schema + 迁移
-├── scripts/                # 工具脚本
-├── docs/                   # 文档
-└── public/                 # 静态资源
+multi-business-crm/
+├── app/                    # Next.js App Router
+│   └── (dashboard)/        # Dashboard layout
+│       ├── workbench/      # Today's workbench
+│       ├── dashboard/      # Data dashboard
+│       ├── leads/          # Lead management
+│       ├── customers/      # Customer management
+│       ├── projects/       # Project pipeline
+│       ├── follow-ups/     # Follow-up tracking
+│       ├── quotes/         # Quote management
+│       ├── orders/         # Order management
+│       ├── tasks/          # Task management
+│       ├── products/       # Product catalog
+│       ├── templates/      # Follow-up templates
+│       └── ...             # Other modules
+├── components/             # UI components
+├── lib/                    # Utilities and services
+│   ├── ai/                 # AI integration
+│   ├── kernel/             # Execution kernel
+│   └── im/                 # IM integration
+├── prisma/                 # Database schema and migrations
+└── scripts/                # Utility scripts
 ```
 
-## 环境变量
+### License
 
-复制 `.env.example` 为 `.env` 并配置：
+MIT
 
-| 变量 | 必填 | 说明 |
-|------|------|------|
-| DATABASE_URL | 是 | PostgreSQL 连接字符串 |
-| APP_URL | 否 | 应用地址（默认 http://localhost:3003） |
+---
 
-## AI 配置
+## 中文
 
-访问 http://localhost:3003/ai-settings 配置 AI 模型（可选）。
+个人多业务外贸 CRM 工作台，参考 OKKI/小满 外贸 CRM 设计理念。
 
-支持 OpenAI、DeepSeek、Moonshot、MiMo、智谱、通义千问等。
+### 功能特性
 
-## 邮箱配置
+- **线索管理** - 导入、跟踪、转化线索
+- **客户 360** - 完整客户档案和历史
+- **项目漏斗** - 可视化项目阶段管理
+- **报价管理** - 创建和跟踪报价
+- **订单管理** - 从报价到订单
+- **跟进跟踪** - 安排和跟踪客户跟进
+- **任务管理** - 每日任务和提醒
+- **AI 分析** - AI 驱动的线索分析和建议
+- **Webhook 集成** - 从外部系统接收线索
+- **产品目录** - 管理产品信息
+- **文档管理** - 跟踪相关文档
+- **CSV 导入导出** - 批量数据操作
+- **全局搜索** - 跨所有数据搜索
 
-访问 http://localhost:3003/email/accounts 添加邮箱账号。
+### 快速开始
 
-支持 Gmail、Outlook、阿里企业邮箱、腾讯企业邮箱等。
+1. 克隆仓库：
+   ```bash
+   git clone https://github.com/yourusername/multi-business-crm.git
+   cd multi-business-crm
+   ```
 
-## 飞书机器人
+2. 安装依赖：
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run feishu:bot
+3. 设置环境：
+   ```bash
+   cp .env.example .env
+   # 编辑 .env 设置数据库连接和可选 AI 配置
+   ```
+
+4. 启动 Docker PostgreSQL：
+   ```bash
+   docker start multi-business-crm-postgres
+   ```
+
+5. 初始化数据库：
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   npx prisma db seed
+   ```
+
+6. 启动应用：
+   ```bash
+   npm run dev
+   ```
+
+7. 打开 http://localhost:3003
+
+### 技术栈
+
+- **前端**: Next.js 15, React 19, Tailwind CSS
+- **后端**: Next.js API Routes, Prisma ORM
+- **数据库**: PostgreSQL (Docker)
+- **AI**: OpenAI Compatible API
+
+### 环境变量
+
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5433/multi_business_crm?schema=public"
+
+# 可选 AI 配置
+AI_PROVIDER="OPENAI_COMPATIBLE"
+AI_BASE_URL="https://your-api-url.com/v1"
+AI_API_KEY="your-api-key"
+AI_MODEL="your-model-name"
 ```
 
-## 数据存储
+### 项目结构
 
-- **业务数据**：PostgreSQL（Docker Volume）
-- **文件上传**：当前未实现（需接入对象存储）
-- **缓存**：`.next/`（可删除重建）
-- **依赖**：`node_modules/`（可重新安装）
+```
+multi-business-crm/
+├── app/                    # Next.js App Router
+│   └── (dashboard)/        # 仪表盘布局
+│       ├── workbench/      # 今日工作台
+│       ├── dashboard/      # 数据看板
+│       ├── leads/          # 线索管理
+│       ├── customers/      # 客户管理
+│       ├── projects/       # 项目漏斗
+│       ├── follow-ups/     # 跟进记录
+│       ├── quotes/         # 报价管理
+│       ├── orders/         # 订单管理
+│       ├── tasks/          # 任务管理
+│       ├── products/       # 产品目录
+│       ├── templates/      # 跟进模板
+│       └── ...             # 其他模块
+├── components/             # UI 组件
+├── lib/                    # 工具和服务
+│   ├── ai/                 # AI 集成
+│   ├── kernel/             # 执行内核
+│   └── im/                 # IM 集成
+├── prisma/                 # 数据库模型和迁移
+└── scripts/                # 工具脚本
+```
 
-## 安全
+### 许可证
 
-- `.env` 不提交到 GitHub
-- 生产环境必须更换默认密码
-- 邮箱密码建议使用应用专用密码
-- API Key 建议使用环境变量
-
-## 文档
-
-- [完整文档](docs/README.md)
-- [快速开始](docs/getting-started/)
-- [用户手册](docs/user-guide/)
-- [API 文档](docs/api/)
-- [部署指南](docs/deployment/)
-- [贡献指南](CONTRIBUTING.md)
-- [路线图](ROADMAP.md)
-
-## 许可证
-
-MIT License
+MIT

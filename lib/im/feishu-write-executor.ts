@@ -1,12 +1,22 @@
 import prisma from "@/lib/prisma";
 import { getLocalWorkspaceId } from "@/lib/local-context";
 import type { ParsedIntent } from "./feishu-parser";
+import { recordIntent } from "@/lib/memory/intentStore";
 
 export interface WriteResult {
   success: boolean;
   message: string;
   entityType?: string;
   entityId?: number;
+}
+
+function getEntityHint(parsed: ParsedIntent): NonNullable<ParsedIntent["entityHint"]> {
+  return parsed.entityHint || ((parsed.parameters as any).entityHint as any) || {};
+}
+
+function getCompanyHint(parsed: ParsedIntent): string | undefined {
+  const p: any = parsed.parameters || {};
+  return getEntityHint(parsed).company || p.company || p.companyName || p.customerName || p.exactName;
 }
 
 /**
@@ -21,57 +31,58 @@ export async function executeWriteIntent(
   switch (parsed.intent) {
     // ── A-level: Low risk ──────────────────────────────────────────
     case "CREATE_LEAD":
-      return handleCreateLead(parsed, senderId);
+      return handleCreateLead(parsed, senderId, chatId);
     case "ADD_LEAD_FOLLOWUP":
       return handleAddLeadFollowup(parsed, senderId);
     case "UPDATE_LEAD":
-      return handleUpdateLead(parsed);
+      return executeUpdateLeadDirect(parsed, senderId);
     case "CREATE_CONTACT":
-      return handleCreateContact(parsed);
+      return handleCreateContactViaService(parsed, senderId);
     case "ADD_CUSTOMER_FOLLOWUP":
       return handleAddCustomerFollowup(parsed);
     case "CREATE_TASK":
-      return handleCreateTask(parsed);
+      return handleCreateTaskViaService(parsed, senderId);
 
     // ── B-level: Medium risk ───────────────────────────────────────
     case "CREATE_CUSTOMER":
-      return handleCreateCustomer(parsed, senderId);
+      return handleCreateCustomerViaService(parsed, senderId);
     case "UPDATE_CUSTOMER":
-      return handleUpdateCustomer(parsed);
+      return handleUpdateCustomerViaService(parsed, senderId);
     case "UPDATE_CONTACT":
-      return handleUpdateContact(parsed);
+      return handleUpdateContactViaService(parsed, senderId);
     case "SET_PRIMARY_CONTACT":
-      return handleSetPrimaryContact(parsed);
+      return handleSetPrimaryContactViaService(parsed, senderId);
     case "CREATE_PROJECT":
-      return handleCreateProject(parsed, senderId);
+      return handleCreateProjectViaService(parsed, senderId);
     case "UPDATE_PROJECT":
-      return handleUpdateProject(parsed);
+      return handleUpdateProjectViaService(parsed, senderId);
     case "CREATE_QUOTE":
-      return handleCreateQuote(parsed, senderId);
+      return handleCreateQuoteViaService(parsed, senderId);
     case "UPDATE_QUOTE":
-      return handleUpdateQuote(parsed);
+      return handleUpdateQuoteViaService(parsed, senderId);
     case "CREATE_ORDER":
-      return handleCreateOrder(parsed, senderId);
+      return handleCreateOrderViaService(parsed, senderId);
     case "UPDATE_ORDER":
-      return handleUpdateOrder(parsed);
+      return handleUpdateOrderViaService(parsed, senderId);
     case "CREATE_INVOICE":
       return handleCreateInvoice(parsed);
     case "UPDATE_INVOICE":
       return handleUpdateInvoice(parsed);
     case "UPDATE_TASK":
-      return handleUpdateTask(parsed);
+      return handleUpdateTaskViaService(parsed, senderId);
     case "COMPLETE_TASK":
-      return handleCompleteTask(parsed);
+      return handleCompleteTaskViaService(parsed, senderId);
 
     // ── C-level: High risk ─────────────────────────────────────────
     case "CONVERT_LEAD_TO_CUSTOMER":
-      return handleConvertLeadToCustomer(parsed);
+      return handleConvertLeadToCustomerViaService(parsed, senderId, chatId);
     case "SEND_QUOTE":
-      return handleSendQuote(parsed);
+      return handleSendQuoteViaService(parsed, senderId);
     case "ACCEPT_QUOTE":
-      return handleAcceptQuote(parsed);
+      return handleAcceptQuoteViaService(parsed, senderId);
     case "CONVERT_QUOTE_TO_ORDER":
-      return handleConvertQuoteToOrder(parsed);
+    case "QUOTE_TO_ORDER":
+      return handleQuoteToOrderViaService(parsed, senderId);
     case "UPDATE_ORDER_STATUS":
       return handleUpdateOrderStatus(parsed);
     case "RECORD_PAYMENT":
@@ -90,8 +101,8 @@ export async function executeWriteIntent(
 // A-level handlers (Low risk - execute directly)
 // ══════════════════════════════════════════════════════════════════
 
-async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const company = parsed.parameters.exactName || parsed.parameters.keyword;
+async function handleCreateLead(parsed: ParsedIntent, senderId: string, chatId: string): Promise<WriteResult> {
+  const company = getCompanyHint(parsed);
   const contactName = parsed.parameters.contactName;
   const email = parsed.parameters.email;
   const phone = parsed.parameters.phone;
@@ -172,6 +183,20 @@ async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise
     },
   });
 
+  const service = await import("@/lib/services/customer-flow-service");
+  service.rememberLeadContext(
+    { senderId, chatId, messageId: String((parsed.parameters as any).originalMessageId || "") },
+    { id: lead.id, company: lead.company },
+  );
+  recordIntent({
+    context: { senderId, chatId, messageId: String((parsed.parameters as any).originalMessageId || "") },
+    type: "LEAD",
+    stage: "CREATED",
+    activeEntityId: lead.id,
+    activeEntityType: "Lead",
+    action: "createLead",
+  });
+
   return {
     success: true,
     message: `线索已创建\n公司：${lead.company}\n联系人：${lead.contactName}\n状态：新线索\nID：${lead.id}`,
@@ -181,7 +206,7 @@ async function handleCreateLead(parsed: ParsedIntent, senderId: string): Promise
 }
 
 async function handleAddLeadFollowup(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  let targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  let targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   const content = parsed.parameters.followUpContent;
   if (!targetName || !content) {
     return { success: false, message: "请提供公司名称和跟进内容。示例：给ABC公司添加跟进：今天电话沟通" };
@@ -206,6 +231,13 @@ async function handleAddLeadFollowup(parsed: ParsedIntent, senderId: string): Pr
     return { success: false, message: `未找到包含"${targetName}"的线索。` };
   }
 
+  const existingFollowUp = await prisma.followUp.findFirst({
+    where: { leadId: lead.id, content },
+  });
+  if (existingFollowUp) {
+    return { success: false, message: `发现重复跟进记录：${content}` };
+  }
+
   await prisma.followUp.create({
     data: {
       leadId: lead.id,
@@ -223,15 +255,179 @@ async function handleAddLeadFollowup(parsed: ParsedIntent, senderId: string): Pr
 }
 
 async function handleUpdateLead(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要更新的线索公司名称。示例：更新线索「ABC公司」" };
   }
   return { success: false, message: `功能开发中：更新线索"${targetName}"。请通过CRM网页操作。` };
 }
 
+async function executeUpdateLeadDirect(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const { executeUpdateLead } = await import("./feishu-lead-update");
+  return executeUpdateLead(parsed, senderId);
+}
+
+function getStoredPlan(parsed: ParsedIntent): any | null {
+  return (parsed.parameters as any).customerFlowPlan || null;
+}
+
+async function handleConvertLeadToCustomerViaService(parsed: ParsedIntent, senderId: string, chatId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的转客户计划，请重新发起操作。" };
+  const result = await service.convertLeadToCustomerService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+  if (result.success && result.entityId) {
+    service.rememberConvertedCustomerContext(
+      { senderId, chatId, messageId: String((plan.validatedParameters || {}).originalMessageId || "") },
+      { id: result.entityId },
+    );
+    recordIntent({
+      context: { senderId, chatId, messageId: String((plan.validatedParameters || {}).originalMessageId || "") },
+      type: "CUSTOMER",
+      stage: "CONVERTED",
+      activeEntityId: result.entityId,
+      activeEntityType: "Customer",
+      action: "convertLeadToCustomer",
+    });
+    const quoteOrder = await import("@/lib/services/quote-order-flow-service");
+    quoteOrder.rememberCustomerContext(
+      { senderId, chatId, messageId: String((plan.validatedParameters || {}).originalMessageId || "") },
+      { id: result.entityId, company: result.entityName || undefined },
+      { converted: true },
+    );
+  }
+  return result;
+}
+
+async function handleCreateCustomerViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建客户计划，请重新发起操作。" };
+  return service.createCustomerService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+}
+
+async function handleUpdateCustomerViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新客户计划，请重新发起操作。" };
+  return service.updateCustomerService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+}
+
+async function handleCreateContactViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建联系人计划，请重新发起操作。" };
+  return service.createContactService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+}
+
+async function handleUpdateContactViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新联系人计划，请重新发起操作。" };
+  return service.updateContactService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+}
+
+async function handleSetPrimaryContactViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/customer-flow-service");
+  const plan = getStoredPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的设置主联系人计划，请重新发起操作。" };
+  return service.setPrimaryContactService(plan, senderId, (plan.validatedParameters || {}).originalMessageId);
+}
+
+function getTaskProjectPlan(parsed: ParsedIntent): any | null {
+  return (parsed.parameters as any).taskProjectPlan || null;
+}
+
+function getQuoteOrderPlan(parsed: ParsedIntent): any | null {
+  return (parsed.parameters as any).quoteOrderPlan || null;
+}
+
+async function handleCreateTaskViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/task-project-flow-service");
+  const plan = getTaskProjectPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建任务计划，请重新发起操作。" };
+  return service.createTaskService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleUpdateTaskViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/task-project-flow-service");
+  const plan = getTaskProjectPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新任务计划，请重新发起操作。" };
+  return service.updateTaskService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleCompleteTaskViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/task-project-flow-service");
+  const plan = getTaskProjectPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的完成任务计划，请重新发起操作。" };
+  return service.completeTaskService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleCreateProjectViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/task-project-flow-service");
+  const plan = getTaskProjectPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建项目计划，请重新发起操作。" };
+  return service.createProjectService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleUpdateProjectViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/task-project-flow-service");
+  const plan = getTaskProjectPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新项目计划，请重新发起操作。" };
+  return service.updateProjectService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleCreateQuoteViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建报价计划，请重新发起操作。" };
+  return service.createQuoteService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleUpdateQuoteViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新报价计划，请重新发起操作。" };
+  return service.updateQuoteService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleSendQuoteViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的发送报价计划，请重新发起操作。" };
+  return service.sendQuoteService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleAcceptQuoteViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的接受报价计划，请重新发起操作。" };
+  return service.acceptQuoteService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleQuoteToOrderViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的报价转订单计划，请重新发起操作。" };
+  return service.quoteToOrderService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleCreateOrderViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的创建订单计划，请重新发起操作。" };
+  return service.createOrderService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
+async function handleUpdateOrderViaService(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
+  const service = await import("@/lib/services/quote-order-flow-service");
+  const plan = getQuoteOrderPlan(parsed);
+  if (!plan) return { success: false, message: "缺少已验证的更新订单计划，请重新发起操作。" };
+  return service.updateOrderService(plan, senderId, (plan.validatedParameters || {}).originalMessageId, (plan.validatedParameters || {}).context?.chatId);
+}
+
 async function handleCreateContact(parsed: ParsedIntent): Promise<WriteResult> {
-  const customerName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const customerName = parsed.parameters.exactName || getCompanyHint(parsed);
   const contactName = parsed.parameters.contactName;
   if (!customerName || !contactName) {
     return { success: false, message: "请提供客户名称和联系人姓名。示例：创建联系人，ABC公司，联系人张三" };
@@ -260,7 +456,7 @@ async function handleCreateContact(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleAddCustomerFollowup(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   const content = parsed.parameters.followUpContent;
   if (!targetName || !content) {
     return { success: false, message: "请提供客户名称和跟进内容。示例：给ABC公司添加跟进：今天电话沟通" };
@@ -290,7 +486,7 @@ async function handleAddCustomerFollowup(parsed: ParsedIntent): Promise<WriteRes
 }
 
 async function handleCreateTask(parsed: ParsedIntent): Promise<WriteResult> {
-  const title = parsed.parameters.followUpContent || parsed.parameters.exactName || parsed.parameters.keyword;
+  const title = parsed.parameters.followUpContent || parsed.parameters.exactName || getCompanyHint(parsed);
   if (!title) {
     return { success: false, message: "请提供任务标题。示例：创建任务：明天跟进报价" };
   }
@@ -319,7 +515,7 @@ async function handleCreateTask(parsed: ParsedIntent): Promise<WriteResult> {
 // ══════════════════════════════════════════════════════════════════
 
 async function handleCreateCustomer(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const company = parsed.parameters.exactName || parsed.parameters.keyword;
+  const company = getCompanyHint(parsed);
   const contactName = parsed.parameters.contactName;
   if (!company) {
     return { success: false, message: "请提供公司名称。示例：创建客户，ABC公司，联系人张三" };
@@ -352,7 +548,7 @@ async function handleCreateCustomer(parsed: ParsedIntent, senderId: string): Pro
 }
 
 async function handleUpdateCustomer(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要更新的客户名称。示例：更新客户「ABC公司」" };
   }
@@ -368,7 +564,7 @@ async function handleSetPrimaryContact(parsed: ParsedIntent): Promise<WriteResul
 }
 
 async function handleCreateProject(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const name = parsed.parameters.exactName || parsed.parameters.keyword;
+  const name = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!name) {
     return { success: false, message: "请提供项目/商机名称。示例：创建项目ABC" };
   }
@@ -407,7 +603,7 @@ async function handleUpdateProject(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleCreateQuote(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const title = parsed.parameters.exactName || parsed.parameters.keyword;
+  const title = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!title) {
     return { success: false, message: "请提供报价标题。示例：创建报价ABC产品" };
   }
@@ -445,7 +641,7 @@ async function handleUpdateQuote(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleCreateOrder(parsed: ParsedIntent, senderId: string): Promise<WriteResult> {
-  const title = parsed.parameters.exactName || parsed.parameters.keyword;
+  const title = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!title) {
     return { success: false, message: "请提供订单标题。示例：创建订单ABC产品" };
   }
@@ -466,7 +662,7 @@ async function handleCreateOrder(parsed: ParsedIntent, senderId: string): Promis
       orderNo,
       orderTitle: title,
       customerId: customer.id,
-      orderStatus: "DRAFT",
+      orderStatus: "PENDING_CONFIRMATION",
       tenantId,
     },
   });
@@ -484,7 +680,7 @@ async function handleUpdateOrder(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleCreateInvoice(parsed: ParsedIntent): Promise<WriteResult> {
-  const title = parsed.parameters.exactName || parsed.parameters.keyword;
+  const title = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!title) {
     return { success: false, message: "请提供发票相关信息。示例：创建发票ORD-0001" };
   }
@@ -525,7 +721,7 @@ async function handleUpdateTask(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleCompleteTask(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要完成的任务标题。示例：完成任务：跟进报价" };
   }
@@ -558,7 +754,7 @@ async function handleCompleteTask(parsed: ParsedIntent): Promise<WriteResult> {
 // ══════════════════════════════════════════════════════════════════
 
 async function handleConvertLeadToCustomer(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要转化的线索公司名称。示例：线索转客户「ABC公司」" };
   }
@@ -615,7 +811,7 @@ async function handleConvertLeadToCustomer(parsed: ParsedIntent): Promise<WriteR
 }
 
 async function handleSendQuote(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供报价号。示例：发送报价QT-20260101-0001" };
   }
@@ -648,7 +844,7 @@ async function handleSendQuote(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleAcceptQuote(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供报价号。示例：接受报价QT-20260101-0001" };
   }
@@ -681,7 +877,7 @@ async function handleAcceptQuote(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleConvertQuoteToOrder(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供报价号。示例：报价转订单QT-20260101-0001" };
   }
@@ -720,7 +916,7 @@ async function handleConvertQuoteToOrder(parsed: ParsedIntent): Promise<WriteRes
       businessLineId: quote.projectId
         ? (await prisma.project.findUnique({ where: { id: quote.projectId } }))?.businessLineId
         : undefined,
-      orderStatus: "DRAFT",
+      orderStatus: "PENDING_CONFIRMATION",
       totalAmount: quote.totalPrice,
       currency: quote.currency,
       tenantId: quote.tenantId,
@@ -736,7 +932,7 @@ async function handleConvertQuoteToOrder(parsed: ParsedIntent): Promise<WriteRes
 }
 
 async function handleUpdateOrderStatus(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供订单号。示例：确认订单ORD-20260101-0001" };
   }
@@ -754,8 +950,8 @@ async function handleUpdateOrderStatus(parsed: ParsedIntent): Promise<WriteResul
     return { success: false, message: `未找到订单"${targetName}"。` };
   }
 
-  // Simple status progression: DRAFT -> CONFIRMED
-  const nextStatus = order.orderStatus === "DRAFT" ? "CONFIRMED" : order.orderStatus;
+  // Simple status progression: PENDING_CONFIRMATION -> CONFIRMED
+  const nextStatus = order.orderStatus === "PENDING_CONFIRMATION" ? "CONFIRMED" : order.orderStatus;
   if (nextStatus === order.orderStatus) {
     return { success: false, message: `订单${order.orderNo}当前状态为"${order.orderStatus}"，无法自动推进。` };
   }
@@ -774,7 +970,7 @@ async function handleUpdateOrderStatus(parsed: ParsedIntent): Promise<WriteResul
 }
 
 async function handleRecordPayment(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供发票号和金额。示例：记录付款INV-20260101-0001 金额5000" };
   }
@@ -827,7 +1023,7 @@ async function handleRecordPayment(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleClaimCustomer(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要认领的客户名称。示例：认领客户「ABC公司」" };
   }
@@ -863,7 +1059,7 @@ async function handleClaimCustomer(parsed: ParsedIntent): Promise<WriteResult> {
 }
 
 async function handleReleaseCustomer(parsed: ParsedIntent): Promise<WriteResult> {
-  const targetName = parsed.parameters.exactName || parsed.parameters.keyword;
+  const targetName = parsed.parameters.exactName || getCompanyHint(parsed);
   if (!targetName) {
     return { success: false, message: "请提供要退回公海的客户名称。示例：退回公海「ABC公司」" };
   }

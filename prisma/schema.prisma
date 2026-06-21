@@ -123,6 +123,7 @@ enum QuoteStatus {
   WAITING_FEEDBACK
   REVISED
   ACCEPTED
+  CONVERTED
   REJECTED
   EXPIRED
 }
@@ -178,9 +179,9 @@ enum WebhookStatus {
 }
 
 enum OrderStatus {
-  DRAFT
+  PENDING_CONFIRMATION
   CONFIRMED
-  PRODUCTION
+  IN_PRODUCTION
   READY_TO_SHIP
   SHIPPED
   COMPLETED
@@ -554,6 +555,7 @@ model Quote {
   customerId         Int?
   projectId          Int?
   customerContactId  Int?
+  convertedOrderId   Int?
   tenantId           Int?
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
@@ -574,6 +576,7 @@ model Quote {
   @@index([projectId])
   @@index([status])
   @@index([quoteNo])
+  @@index([convertedOrderId])
   @@index([tenantId])
 }
 
@@ -803,7 +806,7 @@ model Order {
   quoteId               Int?
   contactId             Int?
   businessLineId        Int?
-  orderStatus           OrderStatus @default(DRAFT)
+  orderStatus           OrderStatus @default(PENDING_CONFIRMATION)
   totalAmount           Decimal?    @db.Decimal(12, 2)
   exchangeRate          Decimal?    @db.Decimal(12, 6)
   currency              Currency    @default(USD)

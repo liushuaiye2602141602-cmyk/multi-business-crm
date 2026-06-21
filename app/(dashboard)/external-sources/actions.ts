@@ -5,12 +5,14 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ExternalSourceType, LeadSource, LeadGrade, TaskPriority } from "@/lib/generated/prisma/enums";
 import { generateApiKey, hashApiKey } from "@/lib/webhook";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
-export async function createExternalSource(formData: FormData) {
-  const data = {
+const SESSION = "dashboard:external-sources";
+
+function sourceData(formData: FormData, includeCode = false) {
+  return {
     name: formData.get("name") as string,
-    code: formData.get("code") as string,
+    ...(includeCode ? { code: formData.get("code") as string } : {}),
     sourceType: formData.get("sourceType") as ExternalSourceType,
     businessLineId: formData.get("businessLineId") ? parseInt(formData.get("businessLineId") as string) : null,
     defaultSource: (formData.get("defaultSource") as LeadSource) || "WEBSITE",
@@ -19,99 +21,37 @@ export async function createExternalSource(formData: FormData) {
     autoAnalyze: formData.get("autoAnalyze") === "on",
     notes: (formData.get("notes") as string) || null,
   };
+}
 
-  if (!data.name || !data.code) {
-    throw new Error("名称和代码不能为空");
-  }
-
-  // 检查 code 唯一性
-  const existing = await prisma.externalSource.findUnique({
-    where: { code: data.code },
-  });
-  if (existing) {
-    throw new Error("代码已存在，请使用不同的代码");
-  }
-
-  const source = await prisma.externalSource.create({ data });
-
-  await createActivityLog({
-    action: "创建",
-    entityType: "外部来源",
-    entityId: source.id,
-    entityName: source.name,
-    description: `创建外部来源: ${source.name} (${source.code})`,
-  });
-
+export async function createExternalSource(formData: FormData) {
+  const data = sourceData(formData, true);
+  if (!data.name || !(data as any).code) throw new Error("名称和代码不能为空");
+  const existing = await prisma.externalSource.findUnique({ where: { code: (data as any).code } });
+  if (existing) throw new Error("代码已存在，请使用不同的代码");
+  const result = await executionKernel.execute({ intent: "CREATE_EXTERNAL_SOURCE", parameters: { data } }, { sessionId: SESSION, actorId: "web-action" });
+  if (!result.success || !result.entityId) throw new Error(result.message);
   revalidatePath("/external-sources");
-  redirect(`/external-sources/${source.id}`);
+  redirect(`/external-sources/${result.entityId}`);
 }
 
 export async function updateExternalSource(id: number, formData: FormData) {
-  const data = {
-    name: formData.get("name") as string,
-    sourceType: formData.get("sourceType") as ExternalSourceType,
-    businessLineId: formData.get("businessLineId") ? parseInt(formData.get("businessLineId") as string) : null,
-    defaultSource: (formData.get("defaultSource") as LeadSource) || "WEBSITE",
-    defaultLeadGrade: (formData.get("defaultLeadGrade") as LeadGrade) || "C",
-    defaultPriority: (formData.get("defaultPriority") as TaskPriority) || "MEDIUM",
-    autoAnalyze: formData.get("autoAnalyze") === "on",
-    notes: (formData.get("notes") as string) || null,
-  };
-
-  if (!data.name) {
-    throw new Error("名称不能为空");
-  }
-
-  await prisma.externalSource.update({ where: { id }, data });
-
-  await createActivityLog({
-    action: "更新",
-    entityType: "外部来源",
-    entityId: id,
-    entityName: data.name,
-    description: `更新外部来源: ${data.name}`,
-  });
-
+  const data = sourceData(formData);
+  if (!data.name) throw new Error("名称不能为空");
+  await executionKernel.execute({ intent: "UPDATE_EXTERNAL_SOURCE", parameters: { externalSourceId: id, data } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/external-sources");
   revalidatePath(`/external-sources/${id}`);
   redirect(`/external-sources/${id}`);
 }
 
 export async function deleteExternalSource(id: number) {
-  const source = await prisma.externalSource.findUnique({ where: { id } });
-  if (!source) throw new Error("外部来源不存在");
-
-  await prisma.externalSource.delete({ where: { id } });
-
-  await createActivityLog({
-    action: "删除",
-    entityType: "外部来源",
-    entityId: id,
-    entityName: source.name,
-    description: `删除外部来源: ${source.name}`,
-  });
-
+  await executionKernel.execute({ intent: "DELETE_EXTERNAL_SOURCE", parameters: { externalSourceId: id } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/external-sources");
 }
 
 export async function toggleExternalSource(id: number) {
   const source = await prisma.externalSource.findUnique({ where: { id } });
   if (!source) throw new Error("外部来源不存在");
-
-  const newIsActive = !source.isActive;
-  await prisma.externalSource.update({
-    where: { id },
-    data: { isActive: newIsActive },
-  });
-
-  await createActivityLog({
-    action: newIsActive ? "启用" : "停用",
-    entityType: "外部来源",
-    entityId: id,
-    entityName: source.name,
-    description: `${newIsActive ? "启用" : "停用"}外部来源: ${source.name}`,
-  });
-
+  await executionKernel.execute({ intent: "TOGGLE_EXTERNAL_SOURCE_ACTIVE", parameters: { externalSourceId: id, isActive: !source.isActive } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/external-sources");
   revalidatePath(`/external-sources/${id}`);
 }
@@ -119,26 +59,10 @@ export async function toggleExternalSource(id: number) {
 export async function generateApiKeyForSource(id: number) {
   const source = await prisma.externalSource.findUnique({ where: { id } });
   if (!source) throw new Error("外部来源不存在");
-
   const apiKey = generateApiKey();
-  const hash = hashApiKey(apiKey);
-
-  await prisma.externalSource.update({
-    where: { id },
-    data: { apiKeyHash: hash },
-  });
-
-  await createActivityLog({
-    action: "生成API Key",
-    entityType: "外部来源",
-    entityId: id,
-    entityName: source.name,
-    description: `生成 API Key: ${source.name}`,
-  });
-
+  const apiKeyHash = hashApiKey(apiKey);
+  await executionKernel.execute({ intent: "REGENERATE_EXTERNAL_SOURCE_API_KEY", parameters: { externalSourceId: id, apiKeyHash } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/external-sources");
   revalidatePath(`/external-sources/${id}`);
-
-  // 只在生成时返回明文 Key
   return { apiKey };
 }

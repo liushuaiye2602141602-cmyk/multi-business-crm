@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import { Search, Users, UserCheck, FolderKanban, FileText, CheckSquare, MessageSquare, Package, Sparkles, Webhook, ExternalLink } from "lucide-react";
-import { LeadStatusLabel, LeadGradeLabel, ProjectStatusLabel, QuoteStatusLabel, TaskStatusLabel, TaskPriorityLabel, WebhookStatusLabel } from "@/lib/enums";
+import { Search, Users, UserCheck, FolderKanban, FileText, CheckSquare, MessageSquare, Package, Sparkles, Webhook, ExternalLink, UserCog, ShoppingCart, FolderOpen } from "lucide-react";
+import { LeadStatusLabel, LeadGradeLabel, ProjectStatusLabel, QuoteStatusLabel, TaskStatusLabel, TaskPriorityLabel, WebhookStatusLabel, OrderStatusLabel } from "@/lib/enums";
 import { formatDate, formatMoney, formatEnumLabel } from "@/lib/format";
-import { getLeadStatusVariant, getLeadGradeVariant, getProjectStatusVariant, getQuoteStatusVariant, getTaskStatusVariant, getTaskPriorityVariant, getWebhookStatusVariant } from "@/components/ui/StatusBadge";
+import { getLeadStatusVariant, getLeadGradeVariant, getProjectStatusVariant, getQuoteStatusVariant, getTaskStatusVariant, getTaskPriorityVariant, getWebhookStatusVariant, getOrderStatusVariant } from "@/components/ui/StatusBadge";
 import StatusBadge from "@/components/ui/StatusBadge";
 import Card from "@/components/ui/Card";
 import EmptyState from "@/components/ui/EmptyState";
@@ -35,7 +35,7 @@ export default async function SearchPage({
 
   const searchQuery = { contains: query, mode: "insensitive" as const };
 
-  const [leads, customers, projects, quotes, followUps, tasks, products, analyses, webhookLogs, externalSources] = await Promise.all([
+  const [leads, customers, projects, quotes, followUps, tasks, products, analyses, webhookLogs, externalSources, contacts, orders, documents] = await Promise.all([
     prisma.lead.findMany({
       where: {
         OR: [
@@ -150,9 +150,44 @@ export default async function SearchPage({
       },
       take: 10,
     }),
+    prisma.contact.findMany({
+      where: {
+        OR: [
+          { name: searchQuery },
+          { email: searchQuery },
+          { whatsapp: searchQuery },
+          { phone: searchQuery },
+          { customer: { company: searchQuery } },
+        ],
+      },
+      take: 10,
+      include: { customer: true },
+    }),
+    prisma.order.findMany({
+      where: {
+        OR: [
+          { orderNo: searchQuery },
+          { orderTitle: searchQuery },
+          { notes: searchQuery },
+          { customer: { company: searchQuery } },
+        ],
+      },
+      take: 10,
+      include: { customer: true },
+    }),
+    prisma.document.findMany({
+      where: {
+        OR: [
+          { title: searchQuery },
+          { fileName: searchQuery },
+          { notes: searchQuery },
+        ],
+      },
+      take: 10,
+    }),
   ]);
 
-  const totalResults = leads.length + customers.length + projects.length + quotes.length + followUps.length + tasks.length + products.length + analyses.length + webhookLogs.length + externalSources.length;
+  const totalResults = leads.length + customers.length + projects.length + quotes.length + followUps.length + tasks.length + products.length + analyses.length + webhookLogs.length + externalSources.length + contacts.length + orders.length + documents.length;
 
   return (
     <div>
@@ -410,6 +445,79 @@ export default async function SearchPage({
                       {source.name}
                     </Link>
                     <StatusBadge label={source.isActive ? "启用" : "停用"} variant={source.isActive ? "success" : "default"} />
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* Contacts */}
+          {contacts.length > 0 && (
+            <Card>
+              <div className="flex items-center gap-2 mb-4">
+                <UserCog size={18} className="text-cyan-500" />
+                <h2 className="text-base font-semibold">联系人 ({contacts.length})</h2>
+              </div>
+              <div className="space-y-2">
+                {contacts.map((contact) => (
+                  <div key={contact.id} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100">
+                    <div className="flex-1 min-w-0">
+                      <Link href={`/contacts/${contact.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-600 block truncate">
+                        {contact.name}
+                      </Link>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {contact.customer.company} · {contact.position || "-"} · {contact.email || contact.whatsapp || "-"}
+                      </p>
+                    </div>
+                    {contact.isPrimary && <StatusBadge label="主联系人" variant="success" />}
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* Orders */}
+          {orders.length > 0 && (
+            <Card>
+              <div className="flex items-center gap-2 mb-4">
+                <ShoppingCart size={18} className="text-emerald-500" />
+                <h2 className="text-base font-semibold">订单 ({orders.length})</h2>
+              </div>
+              <div className="space-y-2">
+                {orders.map((order) => (
+                  <div key={order.id} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100">
+                    <div className="flex-1 min-w-0">
+                      <Link href={`/orders/${order.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-600 block truncate">
+                        {order.orderNo}
+                      </Link>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {order.customer.company} · {order.orderTitle || "-"}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 ml-4">
+                      {order.totalAmount && <span className="text-sm font-medium">{formatMoney(Number(order.totalAmount), order.currency)}</span>}
+                      <StatusBadge label={OrderStatusLabel[order.orderStatus] || order.orderStatus} variant={getOrderStatusVariant(order.orderStatus)} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* Documents */}
+          {documents.length > 0 && (
+            <Card>
+              <div className="flex items-center gap-2 mb-4">
+                <FolderOpen size={18} className="text-amber-500" />
+                <h2 className="text-base font-semibold">文档 ({documents.length})</h2>
+              </div>
+              <div className="space-y-2">
+                {documents.map((doc) => (
+                  <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100">
+                    <Link href={`/documents/${doc.id}`} className="text-sm font-medium text-gray-900 hover:text-blue-600">
+                      {doc.title}
+                    </Link>
+                    <span className="text-xs text-gray-500">{formatDate(doc.createdAt)}</span>
                   </div>
                 ))}
               </div>

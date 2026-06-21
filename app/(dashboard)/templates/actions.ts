@@ -1,13 +1,14 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { TemplateScene, TemplateLanguage } from "@/lib/generated/prisma/enums";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
-export async function createTemplate(formData: FormData) {
-  const data = {
+const SESSION = "dashboard:templates";
+
+function templateData(formData: FormData) {
+  return {
     title: formData.get("title") as string,
     scene: formData.get("scene") as TemplateScene,
     subject: (formData.get("subject") as string) || null,
@@ -17,67 +18,30 @@ export async function createTemplate(formData: FormData) {
     businessLineId: formData.get("businessLineId") ? parseInt(formData.get("businessLineId") as string) : null,
     isActive: formData.get("isActive") === "on",
   };
+}
 
+export async function createTemplate(formData: FormData) {
+  const data = templateData(formData);
   if (!data.title) throw new Error("模板标题不能为空");
   if (!data.content) throw new Error("模板内容不能为空");
-
-  const template = await prisma.followUpTemplate.create({ data });
-
-  await createActivityLog({
-    action: "创建",
-    entityType: "跟进模板",
-    entityId: template.id,
-    entityName: template.title,
-    description: `创建跟进模板: ${template.title}`,
-  });
-
+  const result = await executionKernel.execute({ intent: "CREATE_TEMPLATE", parameters: { data } }, { sessionId: SESSION, actorId: "web-action" });
+  if (!result.success || !result.entityId) throw new Error(result.message);
   revalidatePath("/templates");
-  redirect(`/templates/${template.id}`);
+  redirect(`/templates/${result.entityId}`);
 }
 
 export async function updateTemplate(id: number, formData: FormData) {
-  const data = {
-    title: formData.get("title") as string,
-    scene: formData.get("scene") as TemplateScene,
-    subject: (formData.get("subject") as string) || null,
-    content: formData.get("content") as string,
-    language: formData.get("language") as TemplateLanguage,
-    notes: (formData.get("notes") as string) || null,
-    businessLineId: formData.get("businessLineId") ? parseInt(formData.get("businessLineId") as string) : null,
-    isActive: formData.get("isActive") === "on",
-  };
-
+  const data = templateData(formData);
   if (!data.title) throw new Error("模板标题不能为空");
   if (!data.content) throw new Error("模板内容不能为空");
-
-  await prisma.followUpTemplate.update({ where: { id }, data });
-
-  await createActivityLog({
-    action: "更新",
-    entityType: "跟进模板",
-    entityId: id,
-    entityName: data.title,
-    description: `更新跟进模板: ${data.title}`,
-  });
-
+  const result = await executionKernel.execute({ intent: "UPDATE_TEMPLATE", parameters: { templateId: id, data } }, { sessionId: SESSION, actorId: "web-action" });
+  if (!result.success) throw new Error(result.message);
   revalidatePath("/templates");
   revalidatePath(`/templates/${id}`);
   redirect(`/templates/${id}`);
 }
 
 export async function deleteTemplate(id: number) {
-  const template = await prisma.followUpTemplate.findUnique({ where: { id } });
-  if (!template) throw new Error("模板不存在");
-
-  await prisma.followUpTemplate.delete({ where: { id } });
-
-  await createActivityLog({
-    action: "删除",
-    entityType: "跟进模板",
-    entityId: id,
-    entityName: template.title,
-    description: `删除跟进模板: ${template.title}`,
-  });
-
+  await executionKernel.execute({ intent: "DELETE_TEMPLATE", parameters: { templateId: id } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/templates");
 }

@@ -1,7 +1,9 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
+
+const SESSION = "dashboard:goals";
 
 export async function upsertSalesGoal(data: {
   year: number;
@@ -11,35 +13,11 @@ export async function upsertSalesGoal(data: {
   currentValue?: number;
   currency?: string;
 }) {
-  await prisma.salesGoal.upsert({
-    where: {
-      year_month_metricType: {
-        year: data.year,
-        month: data.month,
-        metricType: data.metricType,
-      },
-    },
-    update: {
-      targetValue: data.targetValue,
-      currentValue: data.currentValue ?? 0,
-      currency: (data.currency as "USD" | "EUR" | "CNY") ?? "USD",
-    },
-    create: {
-      year: data.year,
-      month: data.month,
-      metricType: data.metricType,
-      targetValue: data.targetValue,
-      currentValue: data.currentValue ?? 0,
-      currency: (data.currency as "USD" | "EUR" | "CNY") ?? "USD",
-    },
-  });
+  await executionKernel.execute({ intent: "UPSERT_SALES_GOAL", parameters: { data: { ...data, currentValue: data.currentValue ?? 0, currency: data.currency ?? "USD" } } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/goals");
 }
 
 export async function updateGoalValue(id: number, currentValue: number) {
-  await prisma.salesGoal.update({
-    where: { id },
-    data: { currentValue },
-  });
+  await executionKernel.execute({ intent: "UPDATE_SALES_GOAL", parameters: { salesGoalId: id, data: { currentValue } } }, { sessionId: SESSION, actorId: "web-action" });
   revalidatePath("/goals");
 }

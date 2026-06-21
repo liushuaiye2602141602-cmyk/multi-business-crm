@@ -18,8 +18,6 @@ export const RISK_LEVELS: Record<string, RiskLevel> = {
   UPDATE_PROJECT: "B",
   CREATE_QUOTE: "B",
   UPDATE_QUOTE: "B",
-  CREATE_ORDER: "B",
-  UPDATE_ORDER: "B",
   CREATE_INVOICE: "B",
   UPDATE_INVOICE: "B",
 
@@ -28,6 +26,9 @@ export const RISK_LEVELS: Record<string, RiskLevel> = {
   SEND_QUOTE: "C",
   ACCEPT_QUOTE: "C",
   CONVERT_QUOTE_TO_ORDER: "C",
+  QUOTE_TO_ORDER: "C",
+  CREATE_ORDER: "C",
+  UPDATE_ORDER: "C",
   UPDATE_ORDER_STATUS: "C",
   RECORD_PAYMENT: "C",
   CLAIM_CUSTOMER: "C",

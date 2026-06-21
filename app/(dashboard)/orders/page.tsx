@@ -9,6 +9,7 @@ import EmptyState from "@/components/ui/EmptyState";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import OrderListClient from "@/components/OrderListClient";
 import { getDefaultColumnConfig } from "@/lib/order-list/field-registry";
+import { toOrderListItemDto } from "@/lib/dto/order-dto";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,7 @@ export default async function OrdersPage({
   const hasFilters = search || status || businessLineId || customerId;
 
   const defaultColumnConfig = getDefaultColumnConfig();
+  const orderDtos = orders.map(toOrderListItemDto);
 
   const handleDelete = async (id: number) => {
     "use server";
@@ -95,7 +97,7 @@ export default async function OrdersPage({
           />
         ) : (
           <OrderListClient
-            orders={orders as any}
+            orders={orderDtos}
             initialColumnConfig={defaultColumnConfig}
             customFieldDefs={[]}
             onDelete={handleDelete}

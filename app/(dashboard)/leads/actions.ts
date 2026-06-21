@@ -1,15 +1,15 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { LeadSource, LeadStatus, LeadTemperature, LeadGrade, Currency } from "@/lib/generated/prisma/enums";
-import { createActivityLog } from "@/lib/activity-log";
-import { getLocalWorkspaceId } from "@/lib/local-context";
 import { success, failure, ActionResult } from "@/lib/action-result";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
-export async function createLead(formData: FormData) {
-  const data = {
+const DASHBOARD_SESSION = "dashboard:leads";
+
+function leadDataFromForm(formData: FormData) {
+  return {
     company: formData.get("company") as string,
     contactName: formData.get("contactName") as string,
     country: (formData.get("country") as string) || null,
@@ -26,81 +26,36 @@ export async function createLead(formData: FormData) {
     inquiryContent: (formData.get("inquiryContent") as string) || null,
     budget: formData.get("budget") ? parseFloat(formData.get("budget") as string) : null,
     currency: (formData.get("currency") as Currency) || "USD",
-    expectedClosing: formData.get("expectedClosing")
-      ? new Date(formData.get("expectedClosing") as string)
-      : null,
-    nextFollowUp: formData.get("nextFollowUp")
-      ? new Date(formData.get("nextFollowUp") as string)
-      : null,
+    expectedClosing: formData.get("expectedClosing") ? new Date(formData.get("expectedClosing") as string) : null,
+    nextFollowUp: formData.get("nextFollowUp") ? new Date(formData.get("nextFollowUp") as string) : null,
     remark: (formData.get("remark") as string) || null,
     businessLineId: parseInt(formData.get("businessLineId") as string),
   };
+}
 
-  if (!data.company || !data.contactName) {
-    throw new Error("公司名称和联系人姓名不能为空");
-  }
+export async function createLead(formData: FormData) {
+  const data = leadDataFromForm(formData);
+  if (!data.company || !data.contactName) throw new Error("公司名称和联系人姓名不能为空");
 
-  const lead = await prisma.lead.create({ data: { ...data, tenantId: getLocalWorkspaceId() } });
-
-  await createActivityLog({
-    action: "创建",
-    entityType: "线索",
-    entityId: lead.id,
-    entityName: lead.company,
-    description: `创建线索: ${lead.company} - ${lead.contactName}`,
-  });
-
-  // Emit event — all AI processing goes through Event Bus
-  try {
-    const { emit } = await import("@/lib/events/bus");
-    await emit({ type: "lead.created", entityId: lead.id, entityType: "Lead" });
-  } catch {}
+  const result = await executionKernel.execute(
+    { intent: "CREATE_LEAD", parameters: { data } },
+    { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
+  );
+  if (!result.success || !result.entityId) throw new Error(result.message);
 
   revalidatePath("/leads");
-  redirect(`/leads/${lead.id}`);
+  redirect(`/leads/${result.entityId}`);
 }
 
 export async function updateLead(id: number, formData: FormData) {
-  const data = {
-    company: formData.get("company") as string,
-    contactName: formData.get("contactName") as string,
-    country: (formData.get("country") as string) || null,
-    phone: (formData.get("phone") as string) || null,
-    email: (formData.get("email") as string) || null,
-    whatsapp: (formData.get("whatsapp") as string) || null,
-    source: formData.get("source") as LeadSource,
-    sourceWebsite: (formData.get("sourceWebsite") as string) || null,
-    status: formData.get("status") as LeadStatus,
-    temperature: formData.get("temperature") as LeadTemperature,
-    grade: formData.get("grade") as LeadGrade,
-    requirement: (formData.get("requirement") as string) || null,
-    interestProducts: (formData.get("interestProducts") as string) || null,
-    inquiryContent: (formData.get("inquiryContent") as string) || null,
-    budget: formData.get("budget") ? parseFloat(formData.get("budget") as string) : null,
-    currency: formData.get("currency") as Currency,
-    expectedClosing: formData.get("expectedClosing")
-      ? new Date(formData.get("expectedClosing") as string)
-      : null,
-    nextFollowUp: formData.get("nextFollowUp")
-      ? new Date(formData.get("nextFollowUp") as string)
-      : null,
-    remark: (formData.get("remark") as string) || null,
-    businessLineId: parseInt(formData.get("businessLineId") as string),
-  };
+  const data = leadDataFromForm(formData);
+  if (!data.company || !data.contactName) throw new Error("公司名称和联系人姓名不能为空");
 
-  if (!data.company || !data.contactName) {
-    throw new Error("公司名称和联系人姓名不能为空");
-  }
-
-  await prisma.lead.update({ where: { id }, data });
-
-  await createActivityLog({
-    action: "更新",
-    entityType: "线索",
-    entityId: id,
-    entityName: data.company,
-    description: `更新线索: ${data.company}`,
-  });
+  const result = await executionKernel.execute(
+    { intent: "UPDATE_LEAD", parameters: { leadId: id, data } },
+    { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
+  );
+  if (!result.success) throw new Error(result.message);
 
   revalidatePath("/leads");
   revalidatePath(`/leads/${id}`);
@@ -109,43 +64,11 @@ export async function updateLead(id: number, formData: FormData) {
 
 export async function deleteLead(id: number): Promise<ActionResult> {
   try {
-    // 检查是否有关联数据
-    const lead = await prisma.lead.findUnique({
-      where: { id },
-      include: { followUps: true, quotes: true, tasks: true, projects: true },
-    });
-
-    if (!lead) return failure("线索不存在");
-
-    // Determine which tasks are system auto-tasks (created by event bus).
-    // Auto-tasks for leads follow the title pattern: "跟进新线索: {company}"
-    const autoTasks = lead.tasks.filter(
-      (t) => t.type === "FOLLOW_UP" && t.title.startsWith("跟进新线索:")
+    const result = await executionKernel.execute(
+      { intent: "DELETE_LEAD", parameters: { leadId: id } },
+      { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
     );
-    const manualTasks = lead.tasks.filter(
-      (t) => !autoTasks.some((at) => at.id === t.id)
-    );
-
-    if (lead.followUps.length > 0 || lead.quotes.length > 0 || manualTasks.length > 0 || lead.projects.length > 0) {
-      return failure("该线索存在关联数据（跟进记录、报价、手动任务或项目），请先处理后再删除");
-    }
-
-    // Delete auto-tasks along with the lead
-    if (autoTasks.length > 0) {
-      await prisma.task.deleteMany({
-        where: { id: { in: autoTasks.map((t) => t.id) } },
-      });
-    }
-
-    await prisma.lead.delete({ where: { id } });
-
-    await createActivityLog({
-      action: "删除",
-      entityType: "线索",
-      entityId: id,
-      entityName: lead.company,
-      description: `删除线索: ${lead.company}${autoTasks.length > 0 ? ` (含 ${autoTasks.length} 个自动任务)` : ""}`,
-    });
+    if (!result.success) return failure(result.message);
 
     revalidatePath("/leads");
     return success();
@@ -160,71 +83,12 @@ export async function deleteLead(id: number): Promise<ActionResult> {
 
 export async function convertLeadToCustomer(leadId: number): Promise<ActionResult<{ customerId: number }>> {
   try {
-    const result = await prisma.$transaction(async (tx) => {
-      // 1. Find lead
-      const lead = await tx.lead.findUnique({ where: { id: leadId } });
-      if (!lead) throw new Error("线索不存在");
-
-      // 2. Check not already converted
-      if (lead.convertedCustomerId || lead.status === "CONVERTED") {
-        throw new Error("该线索已转化为客户，不能重复转化");
-      }
-
-      // 3. Create customer
-      const customer = await tx.customer.create({
-        data: {
-          company: lead.company,
-          contactName: lead.contactName,
-          country: lead.country,
-          phone: lead.phone,
-          email: lead.email,
-          whatsapp: lead.whatsapp,
-          source: lead.source,
-          sourceWebsite: lead.sourceWebsite,
-          leadGrade: lead.grade,
-          remark: lead.remark,
-          businessLineId: lead.businessLineId,
-          customerStatus: "POTENTIAL",
-          customerType: "UNKNOWN",
-          tenantId: lead.tenantId,
-        },
-      });
-
-      // 4. Create primary contact
-      const contact = await tx.contact.create({
-        data: {
-          customerId: customer.id,
-          name: lead.contactName,
-          email: lead.email,
-          phone: lead.phone,
-          whatsapp: lead.whatsapp,
-          isPrimary: true,
-          notes: `由线索 ${lead.company} 转化`,
-        },
-      });
-
-      // 5. Update lead
-      await tx.lead.update({
-        where: { id: leadId },
-        data: {
-          status: "CONVERTED",
-          convertedCustomerId: customer.id,
-        },
-      });
-
-      // 6. Activity log
-      await createActivityLog({
-        action: "转化",
-        entityType: "线索",
-        entityId: leadId,
-        entityName: lead.company,
-        description: `线索 ${lead.company} 转为客户 ${customer.company}，联系人 ${contact.name}`,
-      });
-
-      return { customerId: customer.id };
-    });
-
-    return success(result);
+    const result = await executionKernel.execute(
+      { intent: "CONVERT_LEAD_TO_CUSTOMER", parameters: { leadId } },
+      { sessionId: DASHBOARD_SESSION, actorId: "web-action", messageId: "web-action" },
+    );
+    if (!result.success || !result.entityId) return failure(result.message);
+    return success({ customerId: result.entityId });
   } catch (error) {
     const message = error instanceof Error ? error.message : "转化失败，请稍后重试";
     return failure(message);
@@ -235,42 +99,33 @@ export async function addLeadActivity(leadId: number, formData: FormData) {
   const type = (formData.get("type") as string) || "note";
   const content = formData.get("content") as string;
 
-  if (!content) {
-    return { success: false, error: "跟进内容不能为空" };
-  }
-
-  const activity = await prisma.leadActivity.create({
-    data: {
-      leadId,
-      type,
-      content,
-    },
-  });
+  const result = await executionKernel.execute(
+    { intent: "ADD_LEAD_ACTIVITY", parameters: { leadId, type, content } },
+    { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
+  );
+  if (!result.success) return { success: false, error: result.message };
 
   revalidatePath(`/leads/${leadId}`);
-  return { success: true, activity };
+  return { success: true, activity: result.data?.activity };
 }
 
 export async function updateLeadStatus(leadId: number, status: string) {
-  const validStatuses = ["NEW", "CONTACTED", "REQUIREMENT_CONFIRMING", "QUOTING", "NEGOTIATING", "QUALIFIED", "CONVERTED", "WON", "LOST", "DORMANT"];
-  if (!validStatuses.includes(status)) {
-    return { success: false, error: "无效的状态" };
-  }
-
-  await prisma.lead.update({
-    where: { id: leadId },
-    data: { status: status as any },
-  });
+  const result = await executionKernel.execute(
+    { intent: "UPDATE_LEAD_STATUS", parameters: { leadId, status } },
+    { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
+  );
+  if (!result.success) return { success: false, error: result.message };
 
   revalidatePath(`/leads/${leadId}`);
   return { success: true };
 }
 
 export async function updateLeadOwner(leadId: number, ownerName: string) {
-  await prisma.lead.update({
-    where: { id: leadId },
-    data: { ownerName: ownerName || null },
-  });
+  const result = await executionKernel.execute(
+    { intent: "UPDATE_LEAD_OWNER", parameters: { leadId, ownerName } },
+    { sessionId: DASHBOARD_SESSION, actorId: "web-action" },
+  );
+  if (!result.success) return { success: false, error: result.message };
 
   revalidatePath(`/leads/${leadId}`);
   return { success: true };

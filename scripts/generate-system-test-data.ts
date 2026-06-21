@@ -276,9 +276,9 @@ async function main() {
   console.log(`[OK] Test quotes created: ${quotes.length}`);
 
   // 9. Create 12 orders with items and charges
-  const orderStatuses: Array<"DRAFT" | "CONFIRMED" | "PRODUCTION" | "READY_TO_SHIP" | "SHIPPED" | "COMPLETED" | "CANCELLED"> = [
-    "DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED",
-    "CANCELLED", "DRAFT", "CONFIRMED", "PRODUCTION", "SHIPPED", "COMPLETED",
+  const orderStatuses: Array<"PENDING_CONFIRMATION" | "CONFIRMED" | "IN_PRODUCTION" | "READY_TO_SHIP" | "SHIPPED" | "COMPLETED" | "CANCELLED"> = [
+    "PENDING_CONFIRMATION", "CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED",
+    "CANCELLED", "PENDING_CONFIRMATION", "CONFIRMED", "IN_PRODUCTION", "SHIPPED", "COMPLETED",
   ];
   const orders = [];
   for (let i = 0; i < 12; i++) {

@@ -1,14 +1,15 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
-export async function createContact(formData: FormData) {
-  const data = {
+const SESSION = "dashboard:contacts";
+
+function contactData(formData: FormData) {
+  return {
     name: formData.get("name") as string,
-    customerId: parseInt(formData.get("customerId") as string),
+    customerId: formData.get("customerId") ? parseInt(formData.get("customerId") as string) : undefined,
     position: (formData.get("position") as string) || null,
     email: (formData.get("email") as string) || null,
     whatsapp: (formData.get("whatsapp") as string) || null,
@@ -18,49 +19,23 @@ export async function createContact(formData: FormData) {
     isPrimary: formData.get("isPrimary") === "on",
     notes: (formData.get("notes") as string) || null,
   };
+}
 
+export async function createContact(formData: FormData) {
+  const data = contactData(formData);
   if (!data.name) throw new Error("联系人姓名不能为空");
-
-  const contact = await prisma.contact.create({ data });
-
-  await createActivityLog({
-    action: "创建",
-    entityType: "联系人",
-    entityId: contact.id,
-    entityName: contact.name,
-    description: `创建联系人: ${contact.name}`,
-  });
-
+  const result = await executionKernel.execute({ intent: "CREATE_CONTACT", parameters: { data } }, { sessionId: SESSION, actorId: "web-action" });
+  if (!result.success || !result.entityId) throw new Error(result.message);
   revalidatePath("/contacts");
-  revalidatePath(`/customers/${data.customerId}`);
-  redirect(`/contacts/${contact.id}`);
+  if (data.customerId) revalidatePath(`/customers/${data.customerId}`);
+  redirect(`/contacts/${result.entityId}`);
 }
 
 export async function updateContact(id: number, formData: FormData) {
-  const data = {
-    name: formData.get("name") as string,
-    position: (formData.get("position") as string) || null,
-    email: (formData.get("email") as string) || null,
-    whatsapp: (formData.get("whatsapp") as string) || null,
-    phone: (formData.get("phone") as string) || null,
-    wechat: (formData.get("wechat") as string) || null,
-    linkedin: (formData.get("linkedin") as string) || null,
-    isPrimary: formData.get("isPrimary") === "on",
-    notes: (formData.get("notes") as string) || null,
-  };
-
+  const data = contactData(formData);
   if (!data.name) throw new Error("联系人姓名不能为空");
-
-  const contact = await prisma.contact.update({ where: { id }, data });
-
-  await createActivityLog({
-    action: "更新",
-    entityType: "联系人",
-    entityId: id,
-    entityName: contact.name,
-    description: `更新联系人: ${contact.name}`,
-  });
-
+  const result = await executionKernel.execute({ intent: "UPDATE_CONTACT", parameters: { contactId: id, data } }, { sessionId: SESSION, actorId: "web-action" });
+  if (!result.success) throw new Error(result.message);
   revalidatePath("/contacts");
   revalidatePath(`/contacts/${id}`);
   redirect(`/contacts/${id}`);
@@ -68,27 +43,11 @@ export async function updateContact(id: number, formData: FormData) {
 
 export async function deleteContact(id: number) {
   try {
-    const contact = await prisma.contact.findUnique({ where: { id } });
-    if (!contact) return { success: false, error: "联系人不存在" };
-
-    await prisma.contact.delete({ where: { id } });
-
-    await createActivityLog({
-      action: "删除",
-      entityType: "联系人",
-      entityId: id,
-      entityName: contact.name,
-      description: `删除联系人: ${contact.name}`,
-    });
-
+    const result = await executionKernel.execute({ intent: "DELETE_CONTACT", parameters: { contactId: id } }, { sessionId: SESSION, actorId: "web-action" });
+    if (!result.success) return { success: false, error: result.message };
     revalidatePath("/contacts");
-    revalidatePath(`/customers/${contact.customerId}`);
     return { success: true };
   } catch (error) {
-    if (error && typeof error === "object" && "code" in error && error.code === "P2003") {
-      return { success: false, error: "该联系人存在关联数据，无法删除" };
-    }
-    console.error("Delete contact error:", error);
-    return { success: false, error: "删除失败，请稍后重试" };
+    return { success: false, error: error instanceof Error ? error.message : "删除失败，请稍后重试" };
   }
 }

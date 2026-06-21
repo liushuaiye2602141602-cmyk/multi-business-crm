@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { createActivityLog } from "@/lib/activity-log";
+import { executionKernel } from "@/lib/kernel/execution-kernel";
 
 export async function GET(request: NextRequest) {
   try {
@@ -57,28 +57,41 @@ export async function POST(request: NextRequest) {
     const invoiceCount = await prisma.invoice.count();
     const invoiceNo = `INV-${String(invoiceCount + 1).padStart(6, "0")}`;
 
-    const invoice = await prisma.invoice.create({
-      data: {
-        invoiceNo,
-        orderId: body.orderId || null,
-        customerId: body.customerId,
-        amount: body.amount,
-        currency: body.currency || "USD",
-        status: "DRAFT",
-        issuedAt: body.issuedAt ? new Date(body.issuedAt) : null,
-        dueDate: body.dueDate ? new Date(body.dueDate) : null,
-        notes: body.notes || null,
+    const kernelResult = await executionKernel.execute({
+      intent: "CREATE_INVOICE",
+      parameters: {
+        data: {
+          invoiceNo,
+          orderId: body.orderId || null,
+          customerId: body.customerId,
+          amount: body.amount,
+          currency: body.currency || "USD",
+          status: "DRAFT",
+          issuedAt: body.issuedAt ? new Date(body.issuedAt) : null,
+          dueDate: body.dueDate ? new Date(body.dueDate) : null,
+          notes: body.notes || null,
+        },
       },
+    });
+
+    if (!kernelResult.success || !kernelResult.entityId) {
+      return NextResponse.json(
+        { error: kernelResult.message || "Failed to create invoice" },
+        { status: 400 }
+      );
+    }
+
+    const invoice = await prisma.invoice.findUnique({
+      where: { id: kernelResult.entityId },
       include: { customer: true },
     });
 
-    await createActivityLog({
-      action: "创建发票",
-      entityType: "发票",
-      entityId: invoice.id,
-      entityName: invoice.invoiceNo,
-      description: `创建发票 ${invoice.invoiceNo} (客户: ${invoice.customer.company}, 金额: ${invoice.currency} ${invoice.amount})`,
-    });
+    if (!invoice) {
+      return NextResponse.json(
+        { error: "Invoice was created but could not be loaded" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(invoice, { status: 201 });
   } catch (error) {

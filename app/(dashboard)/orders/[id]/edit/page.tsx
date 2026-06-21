@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import OrderForm from "@/components/OrderForm";
 import { updateOrder } from "../../actions";

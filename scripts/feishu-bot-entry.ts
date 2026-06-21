@@ -1,26 +1,40 @@
 /**
- * 飞书机器人启动入口
- * 确保环境变量在所有模块初始化前加载
+ * Feishu bot startup entry.
+ * Loads runtime env before importing modules that initialize Prisma or Feishu clients.
  */
 import { loadEnvConfig } from "@next/env";
+import fs from "node:fs";
 
-// 必须在所有其他 import 之前加载环境变量
+function loadRuntimeEnvOverrides() {
+  const envPath = `${process.cwd()}\\.env`;
+  if (!fs.existsSync(envPath)) return;
+  const allowed = /^(DATABASE_URL|FEISHU_)/;
+  for (const line of fs.readFileSync(envPath, "utf8").split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const index = trimmed.indexOf("=");
+    if (index <= 0) continue;
+    const key = trimmed.slice(0, index);
+    if (!allowed.test(key)) continue;
+    const value = trimmed.slice(index + 1).trim().replace(/^"|"$/g, "");
+    process.env[key] = value;
+  }
+}
+
 loadEnvConfig(process.cwd());
+loadRuntimeEnvOverrides();
 
-// 验证关键配置
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl || typeof dbUrl !== "string" || dbUrl.length === 0) {
-  console.error("❌ 飞书机器人启动失败：未读取到数据库连接配置");
-  console.error("   请检查 .env 文件中 DATABASE_URL 是否已配置");
+  console.error("Feishu bot startup failed: DATABASE_URL is not configured.");
   process.exit(1);
 }
 
-console.log("✅ 环境变量已加载");
+console.log("Environment variables loaded.");
 
-// 动态导入真正的机器人模块
 import("./feishu-bot").then(({ startFeishuBot }) => {
   startFeishuBot().catch((err) => {
-    console.error("❌ 飞书机器人启动失败:", err);
+    console.error("Feishu bot startup failed", err);
     process.exit(1);
   });
 });

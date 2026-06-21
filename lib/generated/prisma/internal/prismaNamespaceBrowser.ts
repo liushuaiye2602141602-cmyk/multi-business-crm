@@ -371,6 +371,7 @@ export const QuoteScalarFieldEnum = {
   customerId: 'customerId',
   projectId: 'projectId',
   customerContactId: 'customerContactId',
+  convertedOrderId: 'convertedOrderId',
   tenantId: 'tenantId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

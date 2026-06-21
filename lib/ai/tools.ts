@@ -181,7 +181,7 @@ export const IM_TOOLS = [
           orderNo: { type: "string", description: "订单编号" },
           status: {
             type: "string",
-            enum: ["DRAFT", "CONFIRMED", "PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"],
+            enum: ["PENDING_CONFIRMATION", "CONFIRMED", "IN_PRODUCTION", "READY_TO_SHIP", "SHIPPED", "COMPLETED", "CANCELLED"],
             description: "新状态"
           },
         },
